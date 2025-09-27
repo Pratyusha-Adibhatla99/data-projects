@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+
+# Environment files
+.env
+*.env
+
+# Data files (ignore large datasets, keep only sample CSVs)
+data/*.csv
+data/*.json
+
+# VSCode settings
+.vscode/
