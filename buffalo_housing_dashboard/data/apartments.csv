@@ -1,12 +1,11 @@
 Title,Price,Address,Beds,URL
 Kaymar Duplexes,"$1,645 - $1,745","301 Kaymar Dr, Buffalo, NY 14228",No beds info,https://www.apartments.com/kaymar-duplexes-buffalo-ny/0bb23b2/
-The Grid,"$1,239 - $2,200","1155 Main St, Buffalo, NY 14209",No beds info,https://www.apartments.com/the-grid-buffalo-ny/px3dlet/
 The Rails,"$1,435 - $2,079","2939 Main St, Buffalo, NY 14214",No beds info,https://www.apartments.com/the-rails-buffalo-ny/cj4pdzf/
 Trico Building Apartments,"$1,575 - $3,470","628 Ellicott St, Buffalo, NY 14203",No beds info,https://www.apartments.com/trico-building-apartments-buffalo-ny/k9hb7vb/
 Park75,"$1,049 - $1,999","1175 Delaware Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/park75-buffalo-ny/78ht01y/
 Springs at West Seneca,"$1,787 - $2,409","2852 Transit Rd, Buffalo, NY 14224",No beds info,https://www.apartments.com/springs-at-west-seneca-buffalo-ny/nxrm92n/
+The Grid,"$1,239 - $2,200","1155 Main St, Buffalo, NY 14209",No beds info,https://www.apartments.com/the-grid-buffalo-ny/px3dlet/
 The John Kam Malt House,"$1,067 - $2,629","356 Hertel Ave, Buffalo, NY 14207",No beds info,https://www.apartments.com/the-john-kam-malt-house-buffalo-ny/m5vdmjh/
-Windsong Place Apartments,"$1,496 - $2,486","25 Spring Meadow Dr, Buffalo, NY 14221",No beds info,https://www.apartments.com/windsong-place-apartments-buffalo-ny/vrscs8g/
 The Lofts at Elk Terminal,"$1,625 - $1,995","230 Scott St, Buffalo, NY 14204",No beds info,https://www.apartments.com/the-lofts-at-elk-terminal-buffalo-ny/82xkg32/
 201 Ellicott,"$1,138 - $1,700","201 Ellicott St, Buffalo, NY 14203",No beds info,https://www.apartments.com/201-ellicott-buffalo-ny/4rwgfjj/
 Park Lane Villas North,"$2,295 - $2,525","965 Center Rd, Buffalo, NY 14224",No beds info,https://www.apartments.com/park-lane-villas-north-buffalo-ny/rm678z3/
@@ -14,6 +13,7 @@ The Police Apartments,"$1,178 - $2,000","74 Franklin St, Buffalo, NY 14202",No b
 Michigan Place Apartments,"$1,239 - $1,999","1145 Michigan Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/michigan-place-apartments-buffalo-ny/cxvrc5d/
 Playter Gardens at the Market,Call for Rent,"107-229 Playter St, Buffalo, NY 14212",No beds info,https://www.apartments.com/playter-gardens-at-the-market-buffalo-ny/ttmlqzc/
 Peace Bridge Place,"$1,045 - $1,320","111 Porter Ave, Buffalo, NY 14201",No beds info,https://www.apartments.com/peace-bridge-place-buffalo-ny/4leqjrk/
+Windsong Place Apartments,"$1,496 - $2,486","25 Spring Meadow Dr, Buffalo, NY 14221",No beds info,https://www.apartments.com/windsong-place-apartments-buffalo-ny/vrscs8g/
 Vistas at Avant,"$2,130 - $3,820","200 Delaware Ave, Buffalo, NY 14202",No beds info,https://www.apartments.com/vistas-at-avant-buffalo-ny/hjg6yr0/
 Theater Place Apartments,"$1,675 - $4,200","622 Main St, Buffalo, NY 14202",No beds info,https://www.apartments.com/theater-place-apartments-buffalo-ny/mdyxz5l/
 Asher Crossing,"$1,970 - $2,811","121 California Dr, Buffalo, NY 14221",No beds info,https://www.apartments.com/asher-crossing-buffalo-ny/dhb555l/
@@ -30,35 +30,35 @@ Nickel City Lofts,"$1,795 - $3,215","31 Barker St, Buffalo, NY 14209",No beds in
 The Ingleside Apartments,"$1,499 - $2,398","70 Harvard Pl, Buffalo, NY 14209",No beds info,https://www.apartments.com/the-ingleside-apartments-buffalo-ny/4zc5s2j/
 Bosche Lofts and 910 Main Street.,"$1,395 - $1,825","916-918 Main St, Buffalo, NY 14202",No beds info,https://www.apartments.com/bosche-lofts-and-910-main-street-buffalo-ny/jqwjh37/
 Parkside Place Apartments,"$1,200 - $1,400","229-245 Parkside Ave, Buffalo, NY 14214",No beds info,https://www.apartments.com/parkside-place-apartments-buffalo-ny/btpyx5c/
-East Morris Avenue Apartments,"$1,392 - $1,672","35 E Morris Ave, Buffalo, NY 14214",No beds info,https://www.apartments.com/east-morris-avenue-apartments-buffalo-ny/bfqxq1b/
 The Phoenix Brewery Apartments,"$1,650","835 Washington St, Buffalo, NY 14203",No beds info,https://www.apartments.com/the-phoenix-brewery-apartments-buffalo-ny/vbvmc9g/
-Mid City Apartments,"$1,500 - $1,675","1665 Main St, Buffalo, NY 14209",No beds info,https://www.apartments.com/mid-city-apartments-buffalo-ny/nf0c72m/
+East Morris Avenue Apartments,"$1,392 - $1,672","35 E Morris Ave, Buffalo, NY 14214",No beds info,https://www.apartments.com/east-morris-avenue-apartments-buffalo-ny/bfqxq1b/
 Avia Lofts at Maple Road,"$1,352 - $1,817","100 Maple Rd, Buffalo, NY 14221",No beds info,https://www.apartments.com/avia-lofts-at-maple-road-buffalo-ny/hd0s8t0/
+Mid City Apartments,"$1,500 - $1,675","1665 Main St, Buffalo, NY 14209",No beds info,https://www.apartments.com/mid-city-apartments-buffalo-ny/nf0c72m/
 Campus Walk One,"$755 - $1,050","639 Grant St, Buffalo, NY 14213",No beds info,https://www.apartments.com/campus-walk-one-buffalo-ny/c6x4ytf/
-Collegiate Village,"$680 - $1,958","6 Affinity Ln, Buffalo, NY 14215",No beds info,https://www.apartments.com/collegiate-village-buffalo-ny/92w7q24/
 Garden Village,"$1,175 - $1,405","70 Garden Village Dr, Buffalo, NY 14227",No beds info,https://www.apartments.com/garden-village-buffalo-ny/340fhle/
+Collegiate Village,"$680 - $1,958","6 Affinity Ln, Buffalo, NY 14215",No beds info,https://www.apartments.com/collegiate-village-buffalo-ny/92w7q24/
 Pierce Arrow Lofts,"$1,100 - $3,200","1695 Elmwood Ave, Buffalo, NY 14207",No beds info,https://www.apartments.com/pierce-arrow-lofts-buffalo-ny/egh6tzp/
-Idylwood Resort Apartment Homes,"$970 - $2,306","101 Slate Creek Dr, Buffalo, NY 14227",No beds info,https://www.apartments.com/idylwood-resort-apartment-homes-buffalo-ny/q5czecw/
+Idylwood Resort Apartment Homes,"$990 - $2,166","101 Slate Creek Dr, Buffalo, NY 14227",No beds info,https://www.apartments.com/idylwood-resort-apartment-homes-buffalo-ny/q5czecw/
 Kensington Village Apartments,"$1,025 - $1,120","1 Oaks Ln, Buffalo, NY 14215",No beds info,https://www.apartments.com/kensington-village-apartments-buffalo-ny/m01t3tl/
 334-346 Bryant St,"$2,257 - $2,332","334-346 Bryant St, Buffalo, NY 14222",No beds info,https://www.apartments.com/334-346-bryant-st-buffalo-ny/cmrkvld/
 211 Summer St,"$1,124 - $3,092","211 Summer St, Buffalo, NY 14222",No beds info,https://www.apartments.com/211-summer-st-buffalo-ny/qhez94z/
 Princeton Court Apartments,"$1,032 - $1,229","165 Princeton Ave, Amherst, NY 14226",No beds info,https://www.apartments.com/princeton-court-apartments-amherst-ny/hzbzxz2/
 The Mentholatum,"$1,400 - $2,000","1360 Niagara St, Buffalo, NY 14213",No beds info,https://www.apartments.com/the-mentholatum-buffalo-ny/l19mfjg/
-Kelsey Building,Call for Rent,"264-266 Bryant St, Buffalo, NY 14222",No beds info,https://www.apartments.com/kelsey-building-buffalo-ny/4n1p67j/
 The Residences at 471 Elmwood,"$2,095 - $2,295","471 Elmwood Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/the-residences-at-471-elmwood-buffalo-ny/vsqp82g/
+Kelsey Building,Call for Rent,"264-266 Bryant St, Buffalo, NY 14222",No beds info,https://www.apartments.com/kelsey-building-buffalo-ny/4n1p67j/
 Barton Apartments,"$2,586","140 Hodge Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/barton-apartments-buffalo-ny/t14gkr9/
 494-498 Elmwood Ave,Call for Rent,"494-498 Elmwood Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/494-498-elmwood-ave-buffalo-ny/qq8zwwy/
-The Sinclair,"$1,000 - $2,200","465 Washington St, Buffalo, NY 14203",No beds info,https://www.apartments.com/the-sinclair-buffalo-ny/v8v7tkd/
-The Annex Apartments,"$1,814 - $2,692","245 Bryant St, Buffalo, NY 14222",No beds info,https://www.apartments.com/the-annex-apartments-buffalo-ny/0fft821/
+Annex Apartments,"$1,814 - $2,692","245 Bryant St, Buffalo, NY 14222",No beds info,https://www.apartments.com/annex-apartments-buffalo-ny/0fft821/
 Spaulding Building I,Call for Rent,"763-771 Main St, Buffalo, NY 14203",No beds info,https://www.apartments.com/spaulding-building-i-buffalo-ny/cc1ewhf/
+The Sinclair,"$1,000 - $2,200","465 Washington St, Buffalo, NY 14203",No beds info,https://www.apartments.com/the-sinclair-buffalo-ny/v8v7tkd/
 Barcalo Living,"$1,015 - $3,070","225 Louisiana St, Buffalo, NY 14204",No beds info,https://www.apartments.com/barcalo-living-buffalo-ny/vhq442f/
-Meidenbauer House,"$1,750 - $2,900","204 High St, Buffalo, NY 14204",No beds info,https://www.apartments.com/meidenbauer-house-buffalo-ny/dlxjn7l/
 Walcot Apartments at 257 Elmwood,"$1,699","257 Elmwood Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/walcot-apartments-at-257-elmwood-buffalo-ny/phy8hjr/
+Meidenbauer House,"$1,750 - $2,900","204 High St, Buffalo, NY 14204",No beds info,https://www.apartments.com/meidenbauer-house-buffalo-ny/dlxjn7l/
+Colonial Court Apartments,Call for Rent,"5045 Berg Rd, Buffalo, NY 14218",No beds info,https://www.apartments.com/colonial-court-apartments-buffalo-ny/nfgf1sn/
+10 Lafayette Sq,"$1,750 - $1,900","10 Lafayette Sq, Buffalo, NY 14203",No beds info,https://www.apartments.com/10-lafayette-sq-buffalo-ny/kme0mf9/
 Pine Point Luxury Apartments,"$1,895 - $2,050","1560-1590 Southwestern Blvd, Buffalo, NY 14224",No beds info,https://www.apartments.com/pine-point-luxury-apartments-buffalo-ny/94n6p94/
 25-47 Old Lyme Dr,"$1,500","25-47 Old Lyme Dr, Buffalo, NY 14221",No beds info,https://www.apartments.com/25-47-old-lyme-dr-buffalo-ny/ebrn2xn/
-Colonial Court Apartments,Call for Rent,"5045 Berg Rd, Buffalo, NY 14218",No beds info,https://www.apartments.com/colonial-court-apartments-buffalo-ny/nfgf1sn/
 669 Potomac Ave,"$1,100 - $1,200","669 Potomac Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/669-potomac-ave-buffalo-ny/b45n7c9/
-10 Lafayette Sq,"$1,750 - $1,900","10 Lafayette Sq, Buffalo, NY 14203",No beds info,https://www.apartments.com/10-lafayette-sq-buffalo-ny/kme0mf9/
 220 Lexington Avenue Apartments,"$1,040 - $1,350","220 Lexington Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/220-lexington-avenue-apartments-buffalo-ny/48nn88j/
 Delaware Franklin,"$1,090 - $1,540","567 Delaware Ave, Buffalo, NY 14202",No beds info,https://www.apartments.com/delaware-franklin-buffalo-ny/5ledhvp/
 Antrim Apartments,"$1,075 - $1,200","6 Yale Pl, Buffalo, NY 14210",No beds info,https://www.apartments.com/antrim-apartments-buffalo-ny/gpyndzw/
@@ -67,28 +67,28 @@ Willow Grove Apartments,"$850 - $1,100","225 Elmwood Ave, Buffalo, NY 14222",No 
 Amherst Townhomes,"$1,649 - $1,974","4035-4055 Harlem, Amherst, NY 14226",No beds info,https://www.apartments.com/amherst-townhomes-amherst-ny/szjx4x6/
 945 Kenmore Avenue,Call for Rent,"945 Kenmore Ave, Kenmore, NY 14223",No beds info,https://www.apartments.com/945-kenmore-avenue-kenmore-ny/03xzzp1/
 The Granite Works,"$1,865 - $2,075","846 Main St, Buffalo, NY 14202",No beds info,https://www.apartments.com/the-granite-works-buffalo-ny/zdmgmsx/
+Berkley Manor Apartments,Call for Rent,"872 Englewood Ave, Buffalo, NY 14223",No beds info,https://www.apartments.com/berkley-manor-apartments-buffalo-ny/7b23qjz/
 448 Elmwood Ave,"$1,900 - $2,075","448 Elmwood Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/448-elmwood-ave-buffalo-ny/8zwmem2/
 Sidway Apartments & Lofts,"$1,600 - $1,850","775-779 Main St, Buffalo, NY 14203",No beds info,https://www.apartments.com/sidway-apartments-lofts-buffalo-ny/2kfpye8/
 The Dorian,Call for Rent,"1485 Niagara St, Buffalo, NY 14213",No beds info,https://www.apartments.com/the-dorian-buffalo-ny/8qsbm43/
-Berkley Manor Apartments,Call for Rent,"872 Englewood Ave, Buffalo, NY 14223",No beds info,https://www.apartments.com/berkley-manor-apartments-buffalo-ny/7b23qjz/
 Copley Court Apartments,"$1,375 - $1,425","1335-1357 Millersport Hwy, Buffalo, NY 14221",No beds info,https://www.apartments.com/copley-court-apartments-buffalo-ny/vq3nhqf/
-1040 Delaware,"$1,295 - $1,425","1040 Delaware Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/1040-delaware-buffalo-ny/78zlldy/
 Windsor Apartments,"$1,460 - $1,825","703 W Ferry St, Buffalo, NY 14222",No beds info,https://www.apartments.com/windsor-apartments-buffalo-ny/8rms8e1/
-273 Richmond Ave,"$1,399 - $1,699","273 Richmond Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/273-richmond-ave-buffalo-ny/rfxkk11/
+1040 Delaware,"$1,325 - $1,475","1040 Delaware Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/1040-delaware-buffalo-ny/78zlldy/
+Jersey Apartments,"$1,100 - $1,200","416-422 Jersey St, Buffalo, NY 14213",No beds info,https://www.apartments.com/jersey-apartments-buffalo-ny/k9gd67b/
 Days Park Commons,"$1,250 - $1,600","68-74 Days Park, Buffalo, NY 14201",No beds info,https://www.apartments.com/days-park-commons-buffalo-ny/fxqcd9r/
 St John Tower Apartments,"$1,495","865 Michigan Ave, Buffalo, NY 14203",No beds info,https://www.apartments.com/st-john-tower-apartments-buffalo-ny/fckzs1s/
-Jersey Apartments,"$1,100 - $1,200","416-422 Jersey St, Buffalo, NY 14213",No beds info,https://www.apartments.com/jersey-apartments-buffalo-ny/k9gd67b/
+273 Richmond Ave,"$1,399 - $1,699","273 Richmond Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/273-richmond-ave-buffalo-ny/rfxkk11/
 Cathedral Place,"$1,850 - $5,000","298 Main St, Buffalo, NY 14202",No beds info,https://www.apartments.com/cathedral-place-buffalo-ny/t69clm8/
-The Ambassador,"$1,100 - $1,395","175 North St, Buffalo, NY 14201",No beds info,https://www.apartments.com/the-ambassador-buffalo-ny/5rqfhcn/
 Twain Tower,"$1,300 - $1,525","468 Delaware Ave, Buffalo, NY 14202",No beds info,https://www.apartments.com/twain-tower-buffalo-ny/z5x92sz/
-Ansonia Center,"$1,300","712-716 Main St, Buffalo, NY 14202",No beds info,https://www.apartments.com/ansonia-center-buffalo-ny/fmb5w3s/
-The Westbrook Apartments,"$975 - $2,075","675 Delaware Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/the-westbrook-apartments-buffalo-ny/sht9py4/
-Steeple Bay Estates,"$1,200","119 Arbour Ln, Buffalo, NY 14220",No beds info,https://www.apartments.com/steeple-bay-estates-buffalo-ny/e9mrgeq/
 1217 The Delaware,"$1,325 - $2,025","1217 Delaware Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/1217-the-delaware-buffalo-ny/hrfng43/
+Ansonia Center,"$1,300","712-716 Main St, Buffalo, NY 14202",No beds info,https://www.apartments.com/ansonia-center-buffalo-ny/fmb5w3s/
+The Ambassador,"$1,100 - $1,395","175 North St, Buffalo, NY 14201",No beds info,https://www.apartments.com/the-ambassador-buffalo-ny/5rqfhcn/
+Steeple Bay Estates,"$1,200","119 Arbour Ln, Buffalo, NY 14220",No beds info,https://www.apartments.com/steeple-bay-estates-buffalo-ny/e9mrgeq/
+The Westbrook Apartments,"$975 - $2,075","675 Delaware Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/the-westbrook-apartments-buffalo-ny/sht9py4/
 300 Ellicott St,"$2,400","300 Ellicott St, Buffalo, NY 14203",No beds info,https://www.apartments.com/300-ellicott-st-buffalo-ny/y92rhsr/
 Fairmount Apartments,"$948 - $1,078","23 Allen St, Buffalo, NY 14202",No beds info,https://www.apartments.com/fairmount-apartments-buffalo-ny/ppsclfr/
-2803 Main St,"$1,195","2803 Main St, Buffalo, NY 14214",No beds info,https://www.apartments.com/2803-main-st-buffalo-ny/wq4d1nl/
 Sheldon Apartments,"$950 - $1,199","950 Delaware Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/sheldon-apartments-buffalo-ny/tsq3jn8/
+2803 Main St,"$1,195","2803 Main St, Buffalo, NY 14214",No beds info,https://www.apartments.com/2803-main-st-buffalo-ny/wq4d1nl/
 Gates Circle,"$1,025 - $1,295","1290-1310 Delaware Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/gates-circle-buffalo-ny/36qcgve/
 The Residence on North Senior Apartments 55+,"$799 - $1,243","245 North St, Buffalo, NY 14201",No beds info,https://www.apartments.com/the-residence-on-north-senior-apartments-55-buffalo-ny/beh2glc/
 U-Crest & Belvedere Manor Apartments,"$1,115","1175 George Urban Blvd, Buffalo, NY 14225",No beds info,https://www.apartments.com/u-crest-belvedere-manor-apartments-buffalo-ny/w701ptj/
@@ -98,37 +98,36 @@ AP Lofts,"$1,000 - $1,624","545 Swan St, Buffalo, NY 14204",No beds info,https:/
 Orchard Place Senior Apartments,"$1,265 - $1,540","133 Orchard Pl, Lackawanna, NY 14218",No beds info,https://www.apartments.com/orchard-place-senior-apartments-lackawanna-ny/qlcp9xw/
 Windwood Place Apartments,"$875 - $1,025","40 Windwood Ct, Cheektowaga, NY 14225",No beds info,https://www.apartments.com/windwood-place-apartments-cheektowaga-ny/trm2dk9/
 Furnished Studio-Buffalo - Amherst,"$2,009","125 Inn Keepers Ln, Buffalo, NY 14228",No beds info,https://www.apartments.com/furnished-studio-buffalo-amherst-buffalo-ny/bmsz3zb/
-Furnished Studio-Buffalo - Airport,"$2,399","901 Dick Rd, Buffalo, NY 14225",No beds info,https://www.apartments.com/furnished-studio-buffalo-airport-buffalo-ny/y6830pt/
 460 Prospect Ave,No price,"460 Prospect Ave, Buffalo, NY 14201",No beds info,https://www.apartments.com/460-prospect-ave-buffalo-ny/h75bb92/
 Trinity Tower,No price,"33 Linwood Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/trinity-tower-buffalo-ny/r8wvqm1/
 Vintage Flats,No price,"293 Grote St, Buffalo, NY 14207",No beds info,https://www.apartments.com/vintage-flats-buffalo-ny/nc67n2n/
 Black Rock Village,No price,"1067-1073 Grant St, Buffalo, NY 14207",No beds info,https://www.apartments.com/black-rock-village-buffalo-ny/ybnw51s/
 130 Pearl,No price,"130 Pearl St, Buffalo, NY 14202",No beds info,https://www.apartments.com/130-pearl-buffalo-ny/w9tdh1k/
-No title,No price,No address,No beds info,https://www.apartments.com/the-grid-buffalo-ny/px3dlet/
 Parksite,No price,"2096-2100 Delaware Ave, Buffalo, NY 14216",No beds info,https://www.apartments.com/parksite-buffalo-ny/ml0m96l/
 Seneca One,No price,"1 Seneca Dr, Buffalo, NY 14203",No beds info,https://www.apartments.com/seneca-one-buffalo-ny/kv1ql09/
 Mercer Commons,No price,"2825 Main St, Buffalo, NY 14214",No beds info,https://www.apartments.com/mercer-commons-buffalo-ny/2nlk6bc/
 Elmwood-Anderson Place Apartments,No price,"570-572 Elmwood Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/elmwood-anderson-place-apartments-buffalo-ny/y67hxht/
 Arbor Meadows,No price,"61 S Fisher Rd, Buffalo, NY 14218",No beds info,https://www.apartments.com/arbor-meadows-buffalo-ny/nstvcbq/
+No title,No price,No address,No beds info,https://www.apartments.com/trico-building-apartments-buffalo-ny/k9hb7vb/
 Piano Factory Lofts,No price,"82 Pearl St, Buffalo, NY 14202",No beds info,https://www.apartments.com/piano-factory-lofts-buffalo-ny/wz2pq3l/
 Edge Park Apartments,No price,"1016 Amherst St, Buffalo, NY 14216",No beds info,https://www.apartments.com/edge-park-apartments-buffalo-ny/9nplj47/
 844 Richmond Ave,No price,"844 Richmond Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/844-richmond-ave-buffalo-ny/rg6vyl2/
 The Roosevelt,No price,"923-925 Main St, Buffalo, NY 14203",No beds info,https://www.apartments.com/the-roosevelt-buffalo-ny/ls6clkf/
-South City Apartments,No price,"323 Southside Pky, Buffalo, NY 14220",No beds info,https://www.apartments.com/south-city-apartments-buffalo-ny/zmytygx/
-No title,No price,No address,No beds info,https://www.apartments.com/trico-building-apartments-buffalo-ny/k9hb7vb/
-Virginia Apartments,No price,"2 N Pearl St, Buffalo, NY 14202",No beds info,https://www.apartments.com/virginia-apartments-buffalo-ny/j8eyj35/
 Lin-Nor Apartments,No price,"3 Linwood Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/lin-nor-apartments-buffalo-ny/xxzqy8p/
 Amherst Gardens,No price,"86 E Amherst St, Buffalo, NY 14214",No beds info,https://www.apartments.com/amherst-gardens-buffalo-ny/h7wgn60/
+South City Apartments,No price,"323 Southside Pky, Buffalo, NY 14220",No beds info,https://www.apartments.com/south-city-apartments-buffalo-ny/zmytygx/
 Delaware / West Ferry Apartments,No price,"1165 Delaware Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/delaware-west-ferry-apartments-buffalo-ny/nkh73gp/
+Virginia Apartments,No price,"2 N Pearl St, Buffalo, NY 14202",No beds info,https://www.apartments.com/virginia-apartments-buffalo-ny/j8eyj35/
 Lafayette Apartments,No price,"870 Lafayette Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/lafayette-apartments-buffalo-ny/5tqyldq/
 Campion Hall,No price,"2136 Main St, Buffalo, NY 14214",No beds info,https://www.apartments.com/campion-hall-buffalo-ny/5h01hxn/
-277 Linwood Ave,No price,"277 Linwood Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/277-linwood-ave-buffalo-ny/ecwk04p/
 Parkview Senior Apartments,No price,"2911 William St, Buffalo, NY 14227",No beds info,https://www.apartments.com/parkview-senior-apartments-buffalo-ny/g142cfx/
+277 Linwood Ave,No price,"277 Linwood Ave, Buffalo, NY 14209",No beds info,https://www.apartments.com/277-linwood-ave-buffalo-ny/ecwk04p/
 Bennett Village Apartments,No price,"19-29 Benwood Ave, Buffalo, NY 14214",No beds info,https://www.apartments.com/bennett-village-apartments-buffalo-ny/3qdjt2g/
 Pine Harbor Apartments,No price,"10 7th St, Buffalo, NY 14201",No beds info,https://www.apartments.com/pine-harbor-apartments-buffalo-ny/t4v9hx9/
+No title,No price,No address,No beds info,https://www.apartments.com/the-grid-buffalo-ny/px3dlet/
+Elmwood Square Apartments,No price,"505-515 Elmwood Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/elmwood-square-apartments-buffalo-ny/rjpem02/
 Marina Vista (Income Qualifications Apply),No price,"12 Hertel Ave, Buffalo, NY 14207",No beds info,https://www.apartments.com/marina-vista-income-qualifications-apply-buffalo-ny/rlf3j73/
 Manhattan Square,No price,"190 Manhattan Ave, Buffalo, NY 14215",No beds info,https://www.apartments.com/manhattan-square-buffalo-ny/tp29fnc/
-Elmwood Square Apartments,No price,"505-515 Elmwood Ave, Buffalo, NY 14222",No beds info,https://www.apartments.com/elmwood-square-apartments-buffalo-ny/rjpem02/
 Kenmore Tudors,No price,"771-791 Kenmore Ave, Buffalo, NY 14223",No beds info,https://www.apartments.com/kenmore-tudors-buffalo-ny/qtpxt0y/
 Hertel Park Senior Residences,No price,"1625-1643 Hertel Ave, Buffalo, NY 14216",No beds info,https://www.apartments.com/hertel-park-senior-residences-buffalo-ny/kwf1b59/
 Jill Joseph Tower Seniors 55+,No price,"66 Custer St, Buffalo, NY 14214",No beds info,https://www.apartments.com/jill-joseph-tower-seniors-55-buffalo-ny/f5zcqgs/
@@ -136,66 +135,67 @@ Lincoln Park Duplexes,No price,"965 Highland Ave, Buffalo, NY 14223",No beds inf
 Camelot Court Apartments,No price,"9 Camelot Ct, Buffalo, NY 14214",No beds info,https://www.apartments.com/camelot-court-apartments-buffalo-ny/0mg5jf1/
 Ellicott Town Center,No price,"233 E Eagle St, Buffalo, NY 14204",No beds info,https://www.apartments.com/ellicott-town-center-buffalo-ny/b2fr6lc/
 Ellicott Homes,No price,"424 Swan St, Buffalo, NY 14204",No beds info,https://www.apartments.com/ellicott-homes-buffalo-ny/4q5qdyk/
-No title,No price,No address,No beds info,https://www.apartments.com/windsong-place-apartments-buffalo-ny/vrscs8g/
 Oxford Village Townhomes,No price,"42 Oxford Ave, Amherst, NY 14226",No beds info,https://www.apartments.com/oxford-village-townhomes-amherst-ny/en8jl0q/
-"1357-1357 Millersport Hwy, Buffalo, NY 14221",No price,No address,No beds info,javascript:void(0);
-"17 Sunshine Dr, Buffalo, NY 14228",No price,No address,No beds info,javascript:void(0);
+"2 Niagara Fls Blvd, Buffalo, NY 14214",No price,No address,No beds info,javascript:void(0);
 "359 S Ogden St, Buffalo, NY 14206",No price,No address,No beds info,javascript:void(0);
 "2371 Niagara St, Buffalo, NY 14207",No price,No address,No beds info,javascript:void(0);
 "246 Whitney Pl, Buffalo, NY 14201",No price,No address,No beds info,javascript:void(0);
+"1357-1357 Millersport Hwy, Buffalo, NY 14221",No price,No address,No beds info,javascript:void(0);
 "378 Florida St, Buffalo, NY 14208",No price,No address,No beds info,javascript:void(0);
 "93 Baynes St, Buffalo, NY 14213",No price,No address,No beds info,javascript:void(0);
 "305 Bird Ave, Buffalo, NY 14213",No price,No address,No beds info,javascript:void(0);
 "184 14th St, Buffalo, NY 14213",No price,No address,No beds info,javascript:void(0);
+No title,No price,No address,No beds info,https://www.apartments.com/park-lane-villas-north-buffalo-ny/rm678z3/
 "4865 Main St, Buffalo, NY 14226",No price,No address,No beds info,javascript:void(0);
 "237 W Girard Blvd, Buffalo, NY 14217",No price,No address,No beds info,javascript:void(0);
 "1540 Abbott Rd, Buffalo, NY 14218",No price,No address,No beds info,javascript:void(0);
+"901 Dick Rd, Buffalo, NY 14225",No price,No address,No beds info,javascript:void(0);
 "4865 Main St, Buffalo, NY 14226",No price,No address,No beds info,javascript:void(0);
+No title,No price,No address,No beds info,https://www.apartments.com/the-police-apartments-buffalo-ny/4z0sx8h/
 "237 W Girard Blvd, Buffalo, NY 14217",No price,No address,No beds info,javascript:void(0);
-No title,No price,No address,No beds info,https://www.apartments.com/park-lane-villas-north-buffalo-ny/rm678z3/
 "1560 Delaware Ave, Buffalo, NY 14209",No price,No address,No beds info,javascript:void(0);
 "305 Bird Ave, Buffalo, NY 14213",No price,No address,No beds info,javascript:void(0);
 "1540 Abbott Rd, Buffalo, NY 14218",No price,No address,No beds info,javascript:void(0);
-"2 Niagara Fls Blvd, Buffalo, NY 14214",No price,No address,No beds info,javascript:void(0);
 "2668 Elmwood Ave, Buffalo, NY 14217",No price,No address,No beds info,javascript:void(0);
-No title,No price,No address,No beds info,https://www.apartments.com/the-police-apartments-buffalo-ny/4z0sx8h/
-"4250 E Allen St, Buffalo, NY 14219",No price,No address,No beds info,javascript:void(0);
+"4250 E Allen St Unit 4, Buffalo, NY 14219",No price,No address,No beds info,javascript:void(0);
 "140 Commonwealth Ave, Buffalo, NY 14216",No price,No address,No beds info,javascript:void(0);
 "871 Delaware Ave, Buffalo, NY 14209",No price,No address,No beds info,javascript:void(0);
 "66 Woodside Ave, Buffalo, NY 14220",No price,No address,No beds info,javascript:void(0);
+"46 Blum Ave, Buffalo, NY 14216",No price,No address,No beds info,javascript:void(0);
 "51 Audet Dr, Buffalo, NY 14227",No price,No address,No beds info,javascript:void(0);
 "95 19th St, Buffalo, NY 14213",No price,No address,No beds info,javascript:void(0);
 "1431 Hertel Ave Unit 1, Buffalo, NY 14216",No price,No address,No beds info,javascript:void(0);
 "367 Connecticut St, Buffalo, NY 14213",No price,No address,No beds info,javascript:void(0);
 "368 Cumberland Ave, Buffalo, NY 14220",No price,No address,No beds info,javascript:void(0);
-"869 Delaware Ave, Buffalo, NY 14209",No price,No address,No beds info,javascript:void(0);
+"869 Delaware Ave Unit Apt. 5, Buffalo, NY 14209",No price,No address,No beds info,javascript:void(0);
 "178 Ridgewood Rd, Buffalo, NY 14220",No price,No address,No beds info,javascript:void(0);
 "244 Virginia St, Buffalo, NY 14201",No price,No address,No beds info,javascript:void(0);
 "244 Virginia St, Buffalo, NY 14201",No price,No address,No beds info,javascript:void(0);
 "171 Richmond Ave, Buffalo, NY 14222",No price,No address,No beds info,javascript:void(0);
+No title,No price,No address,No beds info,https://www.apartments.com/windsong-place-apartments-buffalo-ny/vrscs8g/
 "10 Bristol Dr, Buffalo, NY 14228",No price,No address,No beds info,javascript:void(0);
 "249 Tacoma Ave, Buffalo, NY 14216",No price,No address,No beds info,javascript:void(0);
 "20 South St, Buffalo, NY 14204",No price,No address,No beds info,javascript:void(0);
 "114 Commonwealth Ave, Buffalo, NY 14216",No price,No address,No beds info,javascript:void(0);
 "179 Florida St, Buffalo, NY 14208",No price,No address,No beds info,javascript:void(0);
 "383 Washington Ave, Buffalo, NY 14217",No price,No address,No beds info,javascript:void(0);
-"65 Avery Ave Unit 1, Buffalo, NY 14216",No price,No address,No beds info,javascript:void(0);
 "638 Hertel Ave, Buffalo, NY 14207",No price,No address,No beds info,javascript:void(0);
 "238 Schiller St, Buffalo, NY 14206",No price,No address,No beds info,javascript:void(0);
 "137 Lockwood Ave, Buffalo, NY 14220",No price,No address,No beds info,javascript:void(0);
 "292 Virginia St, Buffalo, NY 14201",No price,No address,No beds info,javascript:void(0);
+"17 Sunshine Dr, Buffalo, NY 14228",No price,No address,No beds info,javascript:void(0);
+"46 Allen St, Buffalo, NY 14202",No price,No address,No beds info,javascript:void(0);
 "2660 Elmwood Ave, Tonawanda Town, NY 14217",No price,No address,No beds info,javascript:void(0);
-"501 Forest Ave Unit 3, Buffalo, NY 14222",No price,No address,No beds info,javascript:void(0);
-"402 W Ferry St Unit 2, Buffalo, NY 14213",No price,No address,No beds info,javascript:void(0);
-"146 Wanda Ave, Buffalo, NY 14211",No price,No address,No beds info,javascript:void(0);
-"4266 Greenfield Pkwy Unit 4266 Greenfield Duplex, Buffalo, NY 14219",No price,No address,No beds info,javascript:void(0);
-"49 Crestwood Ave Unit Lower, Buffalo, NY 14216",No price,No address,No beds info,javascript:void(0);
-"510 Bird Ave Unit 4, Buffalo, NY 14222",No price,No address,No beds info,javascript:void(0);
-"50 Ideal St, Buffalo, NY 14206",No price,No address,No beds info,javascript:void(0);
+"19 Sand St, Buffalo, NY 14218",No price,No address,No beds info,javascript:void(0);
+"64 Cunard Rd Unit upper, Buffalo, NY 14216",No price,No address,No beds info,javascript:void(0);
 "110 Bidwell Pkwy Unit 3, Buffalo, NY 14222",No price,No address,No beds info,javascript:void(0);
 "112 Bidwell Pkwy Unit 2, Buffalo, NY 14222",No price,No address,No beds info,javascript:void(0);
 "236 Crabapple Ln Unit Right, Buffalo, NY 14227",No price,No address,No beds info,javascript:void(0);
+"510 Bird Ave Unit 4, Buffalo, NY 14222",No price,No address,No beds info,javascript:void(0);
 "109 Plymouth Ave Unit 2, Buffalo, NY 14201",No price,No address,No beds info,javascript:void(0);
 "114 Woodside Ave Unit UPPER APARTMENT, Buffalo, NY 14220",No price,No address,No beds info,javascript:void(0);
+"50 Ideal St, Buffalo, NY 14206",No price,No address,No beds info,javascript:void(0);
+"501 Forest Ave Unit 3, Buffalo, NY 14222",No price,No address,No beds info,javascript:void(0);
 "586 Martin Rd Unit upper, Buffalo, NY 14218",No price,No address,No beds info,javascript:void(0);
-"84 Fargo Ave Unit 4, Buffalo, NY 14201",No price,No address,No beds info,javascript:void(0);
+"198 Columbus Ave Unit Lower, Buffalo, NY 14220",No price,No address,No beds info,javascript:void(0);
+"2338 Elmwood Ave Unit Upstairs studio, Buffalo, NY 14217",No price,No address,No beds info,javascript:void(0);

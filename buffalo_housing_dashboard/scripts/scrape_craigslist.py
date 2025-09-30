@@ -42,10 +42,6 @@ def scrape_craigslist(url="https://buffalo.craigslist.org/search/apa", output_fi
     all_data = []
     for listing in listings:
         try:
-            title = listing.find_element(By.CSS_SELECTOR, "a.posting-title .label").text
-        except:
-            title = None
-        try:
             url = listing.find_element(By.CSS_SELECTOR, "a.posting-title").get_attribute("href")
         except:
             url = None
@@ -58,11 +54,17 @@ def scrape_craigslist(url="https://buffalo.craigslist.org/search/apa", output_fi
         except:
             bedrooms = None
         try:
-            location = listing.find_element(By.CSS_SELECTOR, ".meta").text
+            location_text = listing.find_element(By.CSS_SELECTOR, ".meta").text
+            # Use last word as area name
+            area_name = location_text.split()[-1] if location_text else None
         except:
-            location = None
+            location_text = None
+            area_name = None
 
-        all_data.append([title, price, bedrooms, location, url])
+        # Set Title to area name
+        title = area_name if area_name else "Apartment"
+
+        all_data.append([title, price, bedrooms, location_text, url])
 
     driver.quit()
 
