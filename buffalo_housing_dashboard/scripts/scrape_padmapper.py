@@ -9,9 +9,11 @@ import time
 import csv
 import os
 
+
 def scrape_padmapper(url, max_listings=200, max_wait=20):
     options = Options()
     options.add_argument("--window-size=1920,1080")
+    # options.add_argument("--headless")  # Uncomment to run headless
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     wait = WebDriverWait(driver, max_wait)
 
@@ -35,31 +37,31 @@ def scrape_padmapper(url, max_listings=200, max_wait=20):
         for l in listings:
             try:
                 addr_elem = l.find_element(By.XPATH, ".//div[contains(@class,'ListItemFull_address')]//a")
-                address = addr_elem.text
-                link = addr_elem.get_attribute("href")
+                address = addr_elem.text.strip()
+                link = addr_elem.get_attribute("href").strip()
             except:
                 address = ""
                 link = ""
 
             try:
-                price = l.find_element(By.XPATH, ".//div[contains(@class,'ListItemFull_price')]//span").text
+                price = l.find_element(By.XPATH, ".//div[contains(@class,'ListItemFull_price')]//span").text.strip()
             except:
                 price = ""
 
             try:
-                details = l.find_element(By.XPATH, ".//div[contains(@class,'ListItemFull_info__phfgd')]").text
+                details = l.find_element(By.XPATH, ".//div[contains(@class,'ListItemFull_info__phfgd')]").text.strip()
+                # Parse bedrooms and area
+                bedrooms = ""
+                area = ""
+                if "Bedrooms" in details:
+                    parts = details.split("Bedrooms")
+                    bedrooms = parts[0].strip() + " Bedrooms"
+                    area = parts[1].replace("·", "").strip()
+                else:
+                    area = details.strip()
             except:
-                details = ""
-
-            # Split details into bedrooms and area/title
-            bedrooms = ""
-            area = ""
-            if details:
-                parts = details.split("•")
-                if len(parts) > 0:
-                    bedrooms = parts[0].strip()  # e.g., "2 Bed"
-                if len(parts) > 1:
-                    area = parts[1].strip()      # e.g., "900 sqft" or other info
+                bedrooms = ""
+                area = ""
 
             if address and address not in seen_addresses:
                 seen_addresses.add(address)
@@ -76,7 +78,7 @@ def scrape_padmapper(url, max_listings=200, max_wait=20):
         if len(results) >= max_listings:
             break
 
-        page += 1  # go to next page
+        page += 1
 
     driver.quit()
     return results[:max_listings]
@@ -87,7 +89,6 @@ if __name__ == "__main__":
     data = scrape_padmapper(url, max_listings=200)
     print(f"✅ Scraped {len(data)} listings")
 
-    # ensure data folder exists
     os.makedirs("./data", exist_ok=True)
 
     output_file = "./data/padmapper.csv"
