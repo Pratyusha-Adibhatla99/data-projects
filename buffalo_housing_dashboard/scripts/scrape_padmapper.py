@@ -9,7 +9,6 @@ import time
 import csv
 import os
 
-
 def scrape_padmapper(url, max_listings=200, max_wait=20):
     options = Options()
     options.add_argument("--window-size=1920,1080")
@@ -52,12 +51,23 @@ def scrape_padmapper(url, max_listings=200, max_wait=20):
             except:
                 details = ""
 
+            # Split details into bedrooms and area/title
+            bedrooms = ""
+            area = ""
+            if details:
+                parts = details.split("•")
+                if len(parts) > 0:
+                    bedrooms = parts[0].strip()  # e.g., "2 Bed"
+                if len(parts) > 1:
+                    area = parts[1].strip()      # e.g., "900 sqft" or other info
+
             if address and address not in seen_addresses:
                 seen_addresses.add(address)
                 results.append({
                     "address": address,
                     "price": price,
-                    "details": details,
+                    "bedrooms": bedrooms,
+                    "area": area,
                     "url": link
                 })
 
@@ -82,7 +92,7 @@ if __name__ == "__main__":
 
     output_file = "./data/padmapper.csv"
     with open(output_file, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["address", "price", "details", "url"])
+        writer = csv.DictWriter(f, fieldnames=["address", "price", "bedrooms", "area", "url"])
         writer.writeheader()
         writer.writerows(data)
 
