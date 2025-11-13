@@ -1,0 +1,766 @@
+Source,Title,Address,URL,Price,Beds,price_min,price_max,beds_min,beds_max
+apartments.com,Trico Building Apartments,"628 Ellicott St, Buffalo, NY 14203",https://www.apartments.com/trico-building-apartments-buffalo-ny/k9hb7vb/,"$1,575 - $3,470",Studio - 3 Beds,1575.0,3470.0,0.0,3.0
+apartments.com,Park75,"1175 Delaware Ave, Buffalo, NY 14209",https://www.apartments.com/park75-buffalo-ny/78ht01y/,"$1,049 - $1,999",Studio - 2 Beds,1049.0,1999.0,0.0,2.0
+apartments.com,The Grid,"1155 Main St, Buffalo, NY 14209",https://www.apartments.com/the-grid-buffalo-ny/px3dlet/,"$1,239 - $2,200",Studio - 2 Beds,1239.0,2200.0,0.0,2.0
+apartments.com,The Rails,"2939 Main St, Buffalo, NY 14214",https://www.apartments.com/the-rails-buffalo-ny/cj4pdzf/,"$1,435 - $2,079",1-2 Beds,1435.0,2079.0,1.0,2.0
+apartments.com,The John Kam Malt House,"356 Hertel Ave, Buffalo, NY 14207",https://www.apartments.com/the-john-kam-malt-house-buffalo-ny/m5vdmjh/,"$1,450 - $2,629",1-2 Beds,1450.0,2629.0,1.0,2.0
+apartments.com,Michigan Place Apartments,"1145 Michigan Ave, Buffalo, NY 14209",https://www.apartments.com/michigan-place-apartments-buffalo-ny/cxvrc5d/,"$1,239 - $1,999",Studio - 2 Beds,1239.0,1999.0,0.0,2.0
+apartments.com,Kaymar Duplexes,"301 Kaymar Dr, Buffalo, NY 14228",https://www.apartments.com/kaymar-duplexes-buffalo-ny/0bb23b2/,"$1,645 - $1,745",3 Beds,1645.0,1745.0,3.0,3.0
+apartments.com,Playter Gardens at the Market,"107-229 Playter St, Buffalo, NY 14212",https://www.apartments.com/playter-gardens-at-the-market-buffalo-ny/ttmlqzc/,Call for Rent,2 Beds,1460.0,1460.0,2.0,2.0
+apartments.com,Peace Bridge Place,"111 Porter Ave, Buffalo, NY 14201",https://www.apartments.com/peace-bridge-place-buffalo-ny/4leqjrk/,"$1,045 - $1,320",Studio - 1 Bed,1045.0,1320.0,0.0,1.0
+apartments.com,Windsong Place Apartments,"25 Spring Meadow Dr, Buffalo, NY 14221",https://www.apartments.com/windsong-place-apartments-buffalo-ny/vrscs8g/,"$1,496 - $2,486",1-3 Beds,1496.0,2486.0,1.0,3.0
+apartments.com,The Lofts at Elk Terminal,"230 Scott St, Buffalo, NY 14204",https://www.apartments.com/the-lofts-at-elk-terminal-buffalo-ny/82xkg32/,"$1,625 - $1,995",1-2 Beds,1625.0,1995.0,1.0,2.0
+apartments.com,201 Ellicott,"201 Ellicott St, Buffalo, NY 14203",https://www.apartments.com/201-ellicott-buffalo-ny/4rwgfjj/,"$1,138 - $1,700",1-2 Beds,1138.0,1700.0,1.0,2.0
+apartments.com,Park Lane Villas North,"965 Center Rd, Buffalo, NY 14224",https://www.apartments.com/park-lane-villas-north-buffalo-ny/rm678z3/,"$2,295 - $2,525",2 Beds,2295.0,2525.0,2.0,2.0
+apartments.com,The Police Apartments,"74 Franklin St, Buffalo, NY 14202",https://www.apartments.com/the-police-apartments-buffalo-ny/4z0sx8h/,"$1,200 - $1,900",Studio - 1 Bed,1200.0,1900.0,0.0,1.0
+apartments.com,Vistas at Avant,"200 Delaware Ave, Buffalo, NY 14202",https://www.apartments.com/vistas-at-avant-buffalo-ny/hjg6yr0/,"$2,130 - $3,820",Studio - 1 Bed,2130.0,3820.0,0.0,1.0
+apartments.com,Theater Place Apartments,"622 Main St, Buffalo, NY 14202",https://www.apartments.com/theater-place-apartments-buffalo-ny/mdyxz5l/,"$1,975 - $4,200",1-4 Beds,1975.0,4200.0,1.0,4.0
+apartments.com,Asher Crossing,"121 California Dr, Buffalo, NY 14221",https://www.apartments.com/asher-crossing-buffalo-ny/dhb555l/,"$1,969 - $2,811",1-2 Beds,1969.0,2811.0,1.0,2.0
+apartments.com,Olde Towne Village Apartments,"1950 Sheridan Dr, Buffalo, NY 14223",https://www.apartments.com/olde-towne-village-apartments-buffalo-ny/21y1mcc/,"$1,440",1-2 Beds,1440.0,1440.0,1.0,2.0
+apartments.com,Axis 360,"89 Lasalle Ave, Buffalo, NY 14214",https://www.apartments.com/axis-360-buffalo-ny/b36mf6b/,"$854 - $3,416",Studio - 4 Beds,854.0,3416.0,0.0,4.0
+apartments.com,Monarch 716 Student Living,"100 Forest Ave, Buffalo, NY 14213",https://www.apartments.com/monarch-716-student-living-buffalo-ny/2jrkdvc/,$575 - $850,2-4 Beds,575.0,850.0,2.0,4.0
+apartments.com,University Court Apartment,"3442 Main St, Buffalo, NY 14214",https://www.apartments.com/university-court-apartment-buffalo-ny/fbbzs1r/,"$995 - $1,095",1 Bed,995.0,1095.0,1.0,1.0
+apartments.com,499 Franklin,"499 Franklin St, Buffalo, NY 14202",https://www.apartments.com/499-franklin-buffalo-ny/e6kd63n/,"$1,985 - $2,815",1 Bed,1985.0,2815.0,1.0,1.0
+apartments.com,Nineteen North,"19 North St, Buffalo, NY 14202",https://www.apartments.com/nineteen-north-buffalo-ny/ss7pw85/,"$2,225 - $3,225",1-2 Beds,2225.0,3225.0,1.0,2.0
+apartments.com,Nickel City Lofts,"31 Barker St, Buffalo, NY 14209",https://www.apartments.com/nickel-city-lofts-buffalo-ny/89vplh0/,"$1,695 - $3,215",1-3 Beds,1695.0,3215.0,1.0,3.0
+apartments.com,585 W Ferry St,"585 W Ferry St, Buffalo, NY 14222",https://www.apartments.com/585-w-ferry-st-buffalo-ny/cpzs28d/,"$1,500 - $1,900",1-2 Beds,1500.0,1900.0,1.0,2.0
+apartments.com,62 North Townhomes,"3980 Bailey Ave, Buffalo, NY 14226",https://www.apartments.com/62-north-townhomes-buffalo-ny/lz1j62d/,"$1,945 - $1,995",2 Beds,1945.0,1995.0,2.0,2.0
+apartments.com,Parkside Place Apartments,"229-245 Parkside Ave, Buffalo, NY 14214",https://www.apartments.com/parkside-place-apartments-buffalo-ny/btpyx5c/,"$1,200 - $1,400",1-2 Beds,1200.0,1400.0,1.0,2.0
+apartments.com,Bosche Lofts and 910 Main Street.,"916-918 Main St, Buffalo, NY 14202",https://www.apartments.com/bosche-lofts-and-910-main-street-buffalo-ny/jqwjh37/,"$1,365 - $1,825",1-2 Beds,1365.0,1825.0,1.0,2.0
+apartments.com,The Ingleside Apartments,"70 Harvard Pl, Buffalo, NY 14209",https://www.apartments.com/the-ingleside-apartments-buffalo-ny/4zc5s2j/,"$1,350 - $2,398",1-2 Beds,1350.0,2398.0,1.0,2.0
+apartments.com,East Morris Avenue Apartments,"35 E Morris Ave, Buffalo, NY 14214",https://www.apartments.com/east-morris-avenue-apartments-buffalo-ny/bfqxq1b/,"$1,392 - $1,672",1-2 Beds,1392.0,1672.0,1.0,2.0
+apartments.com,The Phoenix Brewery Apartments,"835 Washington St, Buffalo, NY 14203",https://www.apartments.com/the-phoenix-brewery-apartments-buffalo-ny/vbvmc9g/,"$1,650",1-2 Beds,1650.0,1650.0,1.0,2.0
+apartments.com,Avia Lofts at Maple Road,"100 Maple Rd, Buffalo, NY 14221",https://www.apartments.com/avia-lofts-at-maple-road-buffalo-ny/hd0s8t0/,"$1,352 - $1,817",Studio - 2 Beds,1352.0,1817.0,0.0,2.0
+apartments.com,Mid City Apartments,"1665 Main St, Buffalo, NY 14209",https://www.apartments.com/mid-city-apartments-buffalo-ny/nf0c72m/,"$1,675",1-2 Beds,1675.0,1675.0,1.0,2.0
+apartments.com,Campus Walk One,"639 Grant St, Buffalo, NY 14213",https://www.apartments.com/campus-walk-one-buffalo-ny/c6x4ytf/,"$755 - $1,050",2-4 Beds,755.0,1050.0,2.0,4.0
+apartments.com,Collegiate Village,"6 Affinity Ln, Buffalo, NY 14215",https://www.apartments.com/collegiate-village-buffalo-ny/92w7q24/,"$680 - $1,958",Studio - 4 Beds,680.0,1958.0,0.0,4.0
+apartments.com,Garden Village,"70 Garden Village Dr, Buffalo, NY 14227",https://www.apartments.com/garden-village-buffalo-ny/340fhle/,"$1,175 - $1,405",2 Beds,1175.0,1405.0,2.0,2.0
+apartments.com,Pierce Arrow Lofts,"1695 Elmwood Ave, Buffalo, NY 14207",https://www.apartments.com/pierce-arrow-lofts-buffalo-ny/egh6tzp/,"$1,100 - $3,200",Studio - 4 Beds,1100.0,3200.0,0.0,4.0
+apartments.com,Idylwood Resort Apartment Homes,"101 Slate Creek Dr, Buffalo, NY 14227",https://www.apartments.com/idylwood-resort-apartment-homes-buffalo-ny/q5czecw/,"$975 - $2,218",1-2 Beds,975.0,2218.0,1.0,2.0
+apartments.com,Kensington Village Apartments,"1 Oaks Ln, Buffalo, NY 14215",https://www.apartments.com/kensington-village-apartments-buffalo-ny/m01t3tl/,"$1,025 - $1,120",1-3 Beds,1025.0,1120.0,1.0,3.0
+apartments.com,334-346 Bryant St,"334-346 Bryant St, Buffalo, NY 14222",https://www.apartments.com/334-346-bryant-st-buffalo-ny/cmrkvld/,"$2,257 - $2,332",2 Beds,2257.0,2332.0,2.0,2.0
+apartments.com,211 Summer St,"211 Summer St, Buffalo, NY 14222",https://www.apartments.com/211-summer-st-buffalo-ny/qhez94z/,"$1,124 - $3,092",Studio - 2 Beds,1124.0,3092.0,0.0,2.0
+apartments.com,Princeton Court Apartments,"165 Princeton Ave, Amherst, NY 14226",https://www.apartments.com/princeton-court-apartments-amherst-ny/hzbzxz2/,"$963 - $1,229",Studio - 2 Beds,963.0,1229.0,0.0,2.0
+apartments.com,The Mentholatum,"1360 Niagara St, Buffalo, NY 14213",https://www.apartments.com/the-mentholatum-buffalo-ny/l19mfjg/,"$1,400 - $2,000",1-2 Beds,1400.0,2000.0,1.0,2.0
+apartments.com,Kelsey Building,"262-266 Bryant St, Buffalo, NY 14222",https://www.apartments.com/kelsey-building-buffalo-ny/4n1p67j/,Call for Rent,1 Bed,1220.0,1220.0,1.0,1.0
+apartments.com,Barton Apartments,"140 Hodge Ave, Buffalo, NY 14222",https://www.apartments.com/barton-apartments-buffalo-ny/t14gkr9/,"$2,586",2 Beds,2586.0,2586.0,2.0,2.0
+apartments.com,494-498 Elmwood Ave,"494-498 Elmwood Ave, Buffalo, NY 14222",https://www.apartments.com/494-498-elmwood-ave-buffalo-ny/qq8zwwy/,Call for Rent,1 Bed,1220.0,1220.0,1.0,1.0
+apartments.com,The Residences at 471 Elmwood,"471 Elmwood Ave, Buffalo, NY 14222",https://www.apartments.com/the-residences-at-471-elmwood-buffalo-ny/vsqp82g/,"$2,095 - $2,295",2 Beds,2095.0,2295.0,2.0,2.0
+apartments.com,Annex Apartments,"245 Bryant St, Buffalo, NY 14222",https://www.apartments.com/annex-apartments-buffalo-ny/0fft821/,"$1,814 - $2,692",1-2 Beds,1814.0,2692.0,1.0,2.0
+apartments.com,Spaulding Building I,"763-771 Main St, Buffalo, NY 14203",https://www.apartments.com/spaulding-building-i-buffalo-ny/cc1ewhf/,Call for Rent,Studio - 1 Bed,1375.0,1375.0,0.0,1.0
+apartments.com,Meidenbauer House,"204 High St, Buffalo, NY 14204",https://www.apartments.com/meidenbauer-house-buffalo-ny/dlxjn7l/,"$1,900 - $2,900",1-2 Beds,1900.0,2900.0,1.0,2.0
+apartments.com,Walcot Apartments at 257 Elmwood,"257 Elmwood Ave, Buffalo, NY 14222",https://www.apartments.com/walcot-apartments-at-257-elmwood-buffalo-ny/phy8hjr/,"$1,699",1 Bed,1699.0,1699.0,1.0,1.0
+apartments.com,The Sinclair,"465 Washington St, Buffalo, NY 14203",https://www.apartments.com/the-sinclair-buffalo-ny/v8v7tkd/,"$1,000 - $2,200",Studio - 2 Beds,1000.0,2200.0,0.0,2.0
+apartments.com,Barcalo Living,"225 Louisiana St, Buffalo, NY 14204",https://www.apartments.com/barcalo-living-buffalo-ny/vhq442f/,"$1,535 - $3,070",1-3 Beds,1535.0,3070.0,1.0,3.0
+apartments.com,25-47 Old Lyme Dr,"25-47 Old Lyme Dr, Buffalo, NY 14221",https://www.apartments.com/25-47-old-lyme-dr-buffalo-ny/ebrn2xn/,"$1,500",2 Beds,1500.0,1500.0,2.0,2.0
+apartments.com,10 Lafayette Sq,"10 Lafayette Sq, Buffalo, NY 14203",https://www.apartments.com/10-lafayette-sq-buffalo-ny/kme0mf9/,"$1,750 - $1,900",1 Bed,1750.0,1900.0,1.0,1.0
+apartments.com,669 Potomac Ave,"669 Potomac Ave, Buffalo, NY 14222",https://www.apartments.com/669-potomac-ave-buffalo-ny/b45n7c9/,"$1,100 - $1,200",1 Bed,1100.0,1200.0,1.0,1.0
+apartments.com,220 Lexington Avenue Apartments,"220 Lexington Ave, Buffalo, NY 14222",https://www.apartments.com/220-lexington-avenue-apartments-buffalo-ny/48nn88j/,"$1,040 - $1,350",1 Bed,1040.0,1350.0,1.0,1.0
+apartments.com,Pine Point Luxury Apartments,"1560-1590 Southwestern Blvd, Buffalo, NY 14224",https://www.apartments.com/pine-point-luxury-apartments-buffalo-ny/94n6p94/,"$1,895 - $2,050",2-3 Beds,1895.0,2050.0,2.0,3.0
+apartments.com,Colonial Court Apartments,"5045 Berg Rd, Buffalo, NY 14218",https://www.apartments.com/colonial-court-apartments-buffalo-ny/nfgf1sn/,"$1,095",1-2 Beds,1095.0,1095.0,1.0,2.0
+apartments.com,Delaware Franklin,"567 Delaware Ave, Buffalo, NY 14202",https://www.apartments.com/delaware-franklin-buffalo-ny/5ledhvp/,"$1,090 - $1,540",Studio - 2 Beds,1090.0,1540.0,0.0,2.0
+apartments.com,Antrim Apartments,"6 Yale Pl, Buffalo, NY 14210",https://www.apartments.com/antrim-apartments-buffalo-ny/gpyndzw/,"$1,075 - $1,200",2 Beds,1075.0,1200.0,2.0,2.0
+apartments.com,Willow Grove Apartments,"225 Elmwood Ave, Buffalo, NY 14222",https://www.apartments.com/willow-grove-apartments-buffalo-ny/lef2nmg/,"$850 - $1,100",Studio - 1 Bed,850.0,1100.0,0.0,1.0
+apartments.com,959 Ridge Rd,"959 Ridge Rd, Lackawanna, NY 14218",https://www.apartments.com/959-ridge-rd-lackawanna-ny/9y8v776/,"$2,000 - $2,200",2 Beds,2000.0,2200.0,2.0,2.0
+apartments.com,945 Kenmore Avenue,"945 Kenmore Ave, Kenmore, NY 14223",https://www.apartments.com/945-kenmore-avenue-kenmore-ny/03xzzp1/,Call for Rent,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,The Granite Works,"846 Main St, Buffalo, NY 14202",https://www.apartments.com/the-granite-works-buffalo-ny/zdmgmsx/,"$1,865 - $2,075",1-2 Beds,1865.0,2075.0,1.0,2.0
+apartments.com,300 Ellicott St,"300 Ellicott St, Buffalo, NY 14203",https://www.apartments.com/300-ellicott-st-buffalo-ny/y92rhsr/,"$2,400",Studio,2400.0,2400.0,0.0,0.0
+apartments.com,Berkley Manor Apartments,"872 Englewood Ave, Buffalo, NY 14223",https://www.apartments.com/berkley-manor-apartments-buffalo-ny/7b23qjz/,Call for Rent,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,The Dorian,"1485 Niagara St, Buffalo, NY 14213",https://www.apartments.com/the-dorian-buffalo-ny/8qsbm43/,Call for Rent,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,448 Elmwood Ave,"448 Elmwood Ave, Buffalo, NY 14222",https://www.apartments.com/448-elmwood-ave-buffalo-ny/8zwmem2/,"$1,900 - $2,075",2 Beds,1900.0,2075.0,2.0,2.0
+apartments.com,Copley Court Apartments,"1335-1357 Millersport Hwy, Buffalo, NY 14221",https://www.apartments.com/copley-court-apartments-buffalo-ny/vq3nhqf/,"$1,375 - $1,425",1-2 Beds,1375.0,1425.0,1.0,2.0
+apartments.com,Sidway Apartments & Lofts,"775-779 Main St, Buffalo, NY 14203",https://www.apartments.com/sidway-apartments-lofts-buffalo-ny/2kfpye8/,"$1,600 - $1,850",1-2 Beds,1600.0,1850.0,1.0,2.0
+apartments.com,1040 Delaware,"1040 Delaware Ave, Buffalo, NY 14209",https://www.apartments.com/1040-delaware-buffalo-ny/78zlldy/,"$1,325 - $1,475",1 Bed,1325.0,1475.0,1.0,1.0
+apartments.com,Jersey Apartments,"416-422 Jersey St, Buffalo, NY 14213",https://www.apartments.com/jersey-apartments-buffalo-ny/k9gd67b/,"$1,100 - $1,200",1 Bed,1100.0,1200.0,1.0,1.0
+apartments.com,Windsor Apartments,"703 W Ferry St, Buffalo, NY 14222",https://www.apartments.com/windsor-apartments-buffalo-ny/8rms8e1/,"$1,460 - $1,825",2 Beds,1460.0,1825.0,2.0,2.0
+apartments.com,Days Park Commons,"68-74 Days Park, Buffalo, NY 14201",https://www.apartments.com/days-park-commons-buffalo-ny/fxqcd9r/,"$1,250 - $1,600",1-2 Beds,1250.0,1600.0,1.0,2.0
+apartments.com,273 Richmond Ave,"273 Richmond Ave, Buffalo, NY 14222",https://www.apartments.com/273-richmond-ave-buffalo-ny/rfxkk11/,"$1,399 - $1,699",1-2 Beds,1399.0,1699.0,1.0,2.0
+apartments.com,St John Tower Apartments,"865 Michigan Ave, Buffalo, NY 14203",https://www.apartments.com/st-john-tower-apartments-buffalo-ny/fckzs1s/,"$1,495",1 Bed,1495.0,1495.0,1.0,1.0
+apartments.com,1217 The Delaware,"1217 Delaware Ave, Buffalo, NY 14209",https://www.apartments.com/1217-the-delaware-buffalo-ny/hrfng43/,"$1,325 - $2,025",1-2 Beds,1325.0,2025.0,1.0,2.0
+apartments.com,Cathedral Place,"298 Main St, Buffalo, NY 14202",https://www.apartments.com/cathedral-place-buffalo-ny/t69clm8/,"$1,850 - $5,000",1-2 Beds,1850.0,5000.0,1.0,2.0
+apartments.com,Twain Tower,"468 Delaware Ave, Buffalo, NY 14202",https://www.apartments.com/twain-tower-buffalo-ny/z5x92sz/,"$1,300 - $1,525",1 Bed,1300.0,1525.0,1.0,1.0
+apartments.com,The Ambassador,"175 North St, Buffalo, NY 14201",https://www.apartments.com/the-ambassador-buffalo-ny/5rqfhcn/,"$1,100 - $1,395",Studio - 2 Beds,1100.0,1395.0,0.0,2.0
+apartments.com,Ansonia Center,"712-716 Main St, Buffalo, NY 14202",https://www.apartments.com/ansonia-center-buffalo-ny/fmb5w3s/,"$1,300",1 Bed,1300.0,1300.0,1.0,1.0
+apartments.com,Steeple Bay Estates,"119 Arbour Ln, Buffalo, NY 14220",https://www.apartments.com/steeple-bay-estates-buffalo-ny/e9mrgeq/,"$1,200",2 Beds,1200.0,1200.0,2.0,2.0
+apartments.com,The Westbrook Apartments,"675 Delaware Ave, Buffalo, NY 14209",https://www.apartments.com/the-westbrook-apartments-buffalo-ny/sht9py4/,"$975 - $2,075",Studio - 3 Beds,975.0,2075.0,0.0,3.0
+apartments.com,Sheldon Apartments,"950 Delaware Ave, Buffalo, NY 14209",https://www.apartments.com/sheldon-apartments-buffalo-ny/tsq3jn8/,"$950 - $1,199",Studio - 1 Bed,950.0,1199.0,0.0,1.0
+apartments.com,2803 Main St,"2803 Main St, Buffalo, NY 14214",https://www.apartments.com/2803-main-st-buffalo-ny/wq4d1nl/,"$1,195",2 Beds,1195.0,1195.0,2.0,2.0
+apartments.com,Fairmount Apartments,"23 Allen St, Buffalo, NY 14202",https://www.apartments.com/fairmount-apartments-buffalo-ny/ppsclfr/,"$948 - $1,078",Studio - 1 Bed,948.0,1078.0,0.0,1.0
+apartments.com,The Residence on North Senior Apartments 55+,"245 North St, Buffalo, NY 14201",https://www.apartments.com/the-residence-on-north-senior-apartments-55-buffalo-ny/beh2glc/,"$799 - $1,243",Studio - 2 Beds,799.0,1243.0,0.0,2.0
+apartments.com,Gates Circle,"1290-1310 Delaware Ave, Buffalo, NY 14209",https://www.apartments.com/gates-circle-buffalo-ny/36qcgve/,"$1,025 - $1,295",Studio - 2 Beds,1025.0,1295.0,0.0,2.0
+apartments.com,U-Crest & Belvedere Manor Apartments,"1175 George Urban Blvd, Buffalo, NY 14225",https://www.apartments.com/u-crest-belvedere-manor-apartments-buffalo-ny/w701ptj/,"$1,115 - $1,120",2 Beds,1115.0,1120.0,2.0,2.0
+apartments.com,Delsan Court Townhomes,"1-124 Delsan Ct, Buffalo, NY 14216",https://www.apartments.com/delsan-court-townhomes-buffalo-ny/dpnyqsl/,"$1,095 - $1,495",1-3 Beds,1095.0,1495.0,1.0,3.0
+apartments.com,Hertel Avenue Townhomes,"527 Hertel Ave, Buffalo, NY 14207",https://www.apartments.com/hertel-avenue-townhomes-buffalo-ny/w5mrbjh/,"$1,150 - $1,475",1-3 Beds,1150.0,1475.0,1.0,3.0
+apartments.com,AP Lofts,"545 Swan St, Buffalo, NY 14204",https://www.apartments.com/ap-lofts-buffalo-ny/k0yqcq8/,"$1,000 - $2,800",1-2 Beds,1000.0,2800.0,1.0,2.0
+apartments.com,Orchard Place Senior Apartments,"133 Orchard Pl, Lackawanna, NY 14218",https://www.apartments.com/orchard-place-senior-apartments-lackawanna-ny/qlcp9xw/,"$1,265 - $1,540",1-2 Beds,1265.0,1540.0,1.0,2.0
+apartments.com,Windwood Place Apartments,"40 Windwood Ct, Cheektowaga, NY 14225",https://www.apartments.com/windwood-place-apartments-cheektowaga-ny/trm2dk9/,"$875 - $1,025",1-3 Beds,875.0,1025.0,1.0,3.0
+apartments.com,453 Abbott Rd Unit Upper,"453 Abbott Rd Unit Upper, Buffalo, NY 14220",https://www.apartments.com/453-abbott-rd-buffalo-ny/m9xyk3j/,"$1,400","3 Beds, 1 Bath, 1,100 sq ft",1400.0,1400.0,1.0,1.0
+apartments.com,Furnished Studio-Buffalo - Amherst,"125 Inn Keepers Ln, Buffalo, NY 14228",https://www.apartments.com/furnished-studio-buffalo-amherst-buffalo-ny/bmsz3zb/,"$2,009","Studio, 1 Bath, 300 sq ft",2009.0,2009.0,1.0,1.0
+apartments.com,No title,No address,No link,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,460 Prospect Ave,"460 Prospect Ave, Buffalo, NY 14201",https://www.apartments.com/460-prospect-ave-buffalo-ny/h75bb92/,No price,3 Beds,1375.0,1375.0,3.0,3.0
+apartments.com,Trinity Tower,"33 Linwood Ave, Buffalo, NY 14209",https://www.apartments.com/trinity-tower-buffalo-ny/r8wvqm1/,No price,Studio - 2 Beds,1375.0,1375.0,0.0,2.0
+apartments.com,Vintage Flats,"293 Grote St, Buffalo, NY 14207",https://www.apartments.com/vintage-flats-buffalo-ny/nc67n2n/,No price,1 Bed,1220.0,1220.0,1.0,1.0
+apartments.com,Black Rock Village,"1067-1073 Grant St, Buffalo, NY 14207",https://www.apartments.com/black-rock-village-buffalo-ny/ybnw51s/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Bellamy Commons,"1490 Jefferson Ave, Buffalo, NY 14208",https://www.apartments.com/bellamy-commons-buffalo-ny/70t58qx/,No price,Studio,1375.0,1375.0,0.0,0.0
+apartments.com,True Bethel Townhomes,"858 E Ferry St, Buffalo, NY 14211",https://www.apartments.com/true-bethel-townhomes-buffalo-ny/dke4k3j/,No price,2-4 Beds,1460.0,1460.0,2.0,4.0
+apartments.com,True Bethel Estates,"907 E Ferry St, Buffalo, NY 14211",https://www.apartments.com/true-bethel-estates-buffalo-ny/hj1x1g3/,No price,1 Bed,1220.0,1220.0,1.0,1.0
+apartments.com,Ellicott Place,"1033 Ellicott St, Buffalo, NY 14209",https://www.apartments.com/ellicott-place-buffalo-ny/6sm6fbr/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,130 Pearl,"130 Pearl St, Buffalo, NY 14202",https://www.apartments.com/130-pearl-buffalo-ny/w9tdh1k/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Julianna Apartments,"505 Abbott Rd, Buffalo, NY 14220",https://www.apartments.com/julianna-apartments-buffalo-ny/bgchflb/,No price,Studio - 1 Bed,1375.0,1375.0,0.0,1.0
+apartments.com,No title,No address,No link,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,Parksite,"2096-2100 Delaware Ave, Buffalo, NY 14216",https://www.apartments.com/parksite-buffalo-ny/ml0m96l/,No price,2 Beds,1460.0,1460.0,2.0,2.0
+apartments.com,Elmwood-Anderson Place Apartments,"570-572 Elmwood Ave, Buffalo, NY 14222",https://www.apartments.com/elmwood-anderson-place-apartments-buffalo-ny/y67hxht/,No price,2-3 Beds,1460.0,1460.0,2.0,3.0
+apartments.com,Seneca One,"1 Seneca Dr, Buffalo, NY 14203",https://www.apartments.com/seneca-one-buffalo-ny/kv1ql09/,No price,Studio - 3 Beds,1375.0,1375.0,0.0,3.0
+apartments.com,Mercer Commons,"2825 Main St, Buffalo, NY 14214",https://www.apartments.com/mercer-commons-buffalo-ny/2nlk6bc/,No price,Studio - 2 Beds,1375.0,1375.0,0.0,2.0
+apartments.com,Arbor Meadows,"61 S Fisher Rd, Buffalo, NY 14218",https://www.apartments.com/arbor-meadows-buffalo-ny/nstvcbq/,No price,2 Beds,1460.0,1460.0,2.0,2.0
+apartments.com,Piano Factory Lofts,"82 Pearl St, Buffalo, NY 14202",https://www.apartments.com/piano-factory-lofts-buffalo-ny/wz2pq3l/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,844 Richmond Ave,"844 Richmond Ave, Buffalo, NY 14222",https://www.apartments.com/844-richmond-ave-buffalo-ny/rg6vyl2/,No price,2 Beds,1460.0,1460.0,2.0,2.0
+apartments.com,Edge Park Apartments,"1016 Amherst St, Buffalo, NY 14216",https://www.apartments.com/edge-park-apartments-buffalo-ny/9nplj47/,No price,Studio - 2 Beds,1375.0,1375.0,0.0,2.0
+apartments.com,The Roosevelt,"923-925 Main St, Buffalo, NY 14203",https://www.apartments.com/the-roosevelt-buffalo-ny/ls6clkf/,No price,1 Bed,1220.0,1220.0,1.0,1.0
+apartments.com,Amherst Gardens,"86 E Amherst St, Buffalo, NY 14214",https://www.apartments.com/amherst-gardens-buffalo-ny/h7wgn60/,No price,2 Beds,1460.0,1460.0,2.0,2.0
+apartments.com,South City Apartments,"323 Southside Pky, Buffalo, NY 14220",https://www.apartments.com/south-city-apartments-buffalo-ny/zmytygx/,No price,2 Beds,1460.0,1460.0,2.0,2.0
+apartments.com,Lin-Nor Apartments,"3 Linwood Ave, Buffalo, NY 14209",https://www.apartments.com/lin-nor-apartments-buffalo-ny/xxzqy8p/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Delaware / West Ferry Apartments,"1165 Delaware Ave, Buffalo, NY 14209",https://www.apartments.com/delaware-west-ferry-apartments-buffalo-ny/nkh73gp/,No price,1 Bed,1220.0,1220.0,1.0,1.0
+apartments.com,Virginia Apartments,"2 N Pearl St, Buffalo, NY 14202",https://www.apartments.com/virginia-apartments-buffalo-ny/j8eyj35/,No price,Studio - 1 Bed,1375.0,1375.0,0.0,1.0
+apartments.com,277 Linwood Ave,"277 Linwood Ave, Buffalo, NY 14209",https://www.apartments.com/277-linwood-ave-buffalo-ny/ecwk04p/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Lafayette Apartments,"870 Lafayette Ave, Buffalo, NY 14209",https://www.apartments.com/lafayette-apartments-buffalo-ny/5tqyldq/,No price,Studio - 1 Bed,1375.0,1375.0,0.0,1.0
+apartments.com,Campion Hall,"2136 Main St, Buffalo, NY 14214",https://www.apartments.com/campion-hall-buffalo-ny/5h01hxn/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Bennett Village Apartments,"19-29 Benwood Ave, Buffalo, NY 14214",https://www.apartments.com/bennett-village-apartments-buffalo-ny/3qdjt2g/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Parkview Senior Apartments,"2911 William St, Buffalo, NY 14227",https://www.apartments.com/parkview-senior-apartments-buffalo-ny/g142cfx/,No price,1 Bed,1220.0,1220.0,1.0,1.0
+apartments.com,Elmwood Square Apartments,"505-515 Elmwood Ave, Buffalo, NY 14222",https://www.apartments.com/elmwood-square-apartments-buffalo-ny/rjpem02/,No price,Studio - 1 Bed,1375.0,1375.0,0.0,1.0
+apartments.com,Pine Harbor Apartments,"10 7th St, Buffalo, NY 14201",https://www.apartments.com/pine-harbor-apartments-buffalo-ny/t4v9hx9/,No price,1-4 Beds,1220.0,1220.0,1.0,4.0
+apartments.com,Marina Vista (Income Qualifications Apply),"12 Hertel Ave, Buffalo, NY 14207",https://www.apartments.com/marina-vista-income-qualifications-apply-buffalo-ny/rlf3j73/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Artspace Buffalo Lofts,"1219 Main St, Buffalo, NY 14209",https://www.apartments.com/artspace-buffalo-lofts-buffalo-ny/ggmcerz/,No price,Studio - 3 Beds,1375.0,1375.0,0.0,3.0
+apartments.com,Manhattan Square,"190 Manhattan Ave, Buffalo, NY 14215",https://www.apartments.com/manhattan-square-buffalo-ny/tp29fnc/,No price,2 Beds,1460.0,1460.0,2.0,2.0
+apartments.com,ELIM Townhouses,"129 Holden Rd, Buffalo, NY 14214",https://www.apartments.com/elim-townhouses-buffalo-ny/20gb7gc/,No price,2-4 Beds,1460.0,1460.0,2.0,4.0
+apartments.com,Hertel Park Senior Residences,"1625-1643 Hertel Ave, Buffalo, NY 14216",https://www.apartments.com/hertel-park-senior-residences-buffalo-ny/kwf1b59/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Kenmore Tudors,"771-791 Kenmore Ave, Buffalo, NY 14223",https://www.apartments.com/kenmore-tudors-buffalo-ny/qtpxt0y/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Jill Joseph Tower Seniors 55+,"66 Custer St, Buffalo, NY 14214",https://www.apartments.com/jill-joseph-tower-seniors-55-buffalo-ny/f5zcqgs/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Lincoln Park Duplexes,"965 Highland Ave, Buffalo, NY 14223",https://www.apartments.com/lincoln-park-duplexes-buffalo-ny/4krvpql/,No price,3 Beds,1375.0,1375.0,3.0,3.0
+apartments.com,Camelot Court Apartments,"9 Camelot Ct, Buffalo, NY 14214",https://www.apartments.com/camelot-court-apartments-buffalo-ny/0mg5jf1/,No price,1-2 Beds,1220.0,1220.0,1.0,2.0
+apartments.com,Ellicott Town Center,"233 E Eagle St, Buffalo, NY 14204",https://www.apartments.com/ellicott-town-center-buffalo-ny/b2fr6lc/,No price,1-4 Beds,1220.0,1220.0,1.0,4.0
+apartments.com,Ellicott Homes,"424 Swan St, Buffalo, NY 14204",https://www.apartments.com/ellicott-homes-buffalo-ny/4q5qdyk/,No price,2-4 Beds,1460.0,1460.0,2.0,4.0
+apartments.com,Oxford Village Townhomes,"42 Oxford Ave, Amherst, NY 14226",https://www.apartments.com/oxford-village-townhomes-amherst-ny/en8jl0q/,No price,2 Beds,1460.0,1460.0,2.0,2.0
+apartments.com,"2371 Niagara St, Buffalo, NY 14207",No address,https://www.apartments.com/2371-niagara-st-buffalo-ny-unit-2/z3llzpy/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"46 MacArthur Dr, Buffalo, NY 14221",No address,https://www.apartments.com/46-macarthur-dr-buffalo-ny/rxmn3e0/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,No title,No address,No link,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"74 Loepere St, Buffalo, NY 14212",No address,https://www.apartments.com/74-loepere-st-buffalo-ny/v9zbxkd/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"38 Goulding Ave, Buffalo, NY 14208",No address,https://www.apartments.com/38-goulding-ave-buffalo-ny/9m8b0r4/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"359 S Ogden St, Buffalo, NY 14206",No address,https://www.apartments.com/359-s-ogden-st-buffalo-ny-unit-upper/x8ywcjp/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"246 Whitney Pl, Buffalo, NY 14201",No address,https://www.apartments.com/246-whitney-pl-buffalo-ny-unit-1st-floor-rear/j367yv7/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1357-1357 Millersport Hwy, Buffalo, NY 14221",No address,https://www.apartments.com/1357-1357-millersport-hwy-buffalo-ny-unit-1357-8/hztb693/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"378 Florida St, Buffalo, NY 14208",No address,https://www.apartments.com/378-florida-st-buffalo-ny/0ycek02/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"93 Baynes St, Buffalo, NY 14213",No address,https://www.apartments.com/93-baynes-st-buffalo-ny-unit-2/8wj60p0/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"305 Bird Ave, Buffalo, NY 14213",No address,https://www.apartments.com/305-bird-ave-buffalo-ny/pjvztdv/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"184 14th St, Buffalo, NY 14213",No address,https://www.apartments.com/184-14th-st-buffalo-ny/5hyp3zn/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"4865 Main St, Buffalo, NY 14226",No address,https://www.apartments.com/4865-main-st-buffalo-ny/70789ew/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"237 W Girard Blvd, Buffalo, NY 14217",No address,https://www.apartments.com/237-w-girard-blvd-buffalo-ny/gx39rhw/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1540 Abbott Rd, Buffalo, NY 14218",No address,https://www.apartments.com/1540-abbott-rd-buffalo-ny-unit-1/rz1b4z3/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"901 Dick Rd, Buffalo, NY 14225",No address,https://www.apartments.com/furnished-studio-buffalo-airport-buffalo-ny/y6830pt/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"4865 Main St, Buffalo, NY 14226",No address,https://www.apartments.com/4865-main-st-buffalo-ny/x857q1p/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"237 W Girard Blvd, Buffalo, NY 14217",No address,https://www.apartments.com/237-w-girard-blvd-buffalo-ny/w2fwxqj/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,No title,No address,No link,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1560 Delaware Ave, Buffalo, NY 14209",No address,https://www.apartments.com/1560-delaware-ave-buffalo-ny-unit-1/ttften9/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"305 Bird Ave, Buffalo, NY 14213",No address,https://www.apartments.com/305-bird-ave-buffalo-ny/g4qn3dx/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1540 Abbott Rd, Buffalo, NY 14218",No address,https://www.apartments.com/1540-abbott-rd-buffalo-ny-unit-2/8ybnzw0/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2 Niagara Fls Blvd, Buffalo, NY 14214",No address,https://www.apartments.com/2-niagara-fls-blvd-buffalo-ny-unit-id1239423p/t6xjpb9/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2668 Elmwood Ave, Buffalo, NY 14217",No address,https://www.apartments.com/2668-elmwood-ave-buffalo-ny-unit-232/vwywdnf/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,No title,No address,No link,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"140 Commonwealth Ave, Buffalo, NY 14216",No address,https://www.apartments.com/140-commonwealth-ave-buffalo-ny/kvrz27b/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"871 Delaware Ave, Buffalo, NY 14209",No address,https://www.apartments.com/871-delaware-ave-buffalo-ny-unit-apt-15/s0r9427/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"46 Blum Ave, Buffalo, NY 14216",No address,https://www.apartments.com/46-blum-ave-buffalo-ny/m0qj41l/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1431 Hertel Ave Unit 1, Buffalo, NY 14216",No address,https://www.apartments.com/1431-hertel-ave-buffalo-ny-unit-1/7xzfqbx/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"66 Woodside Ave, Buffalo, NY 14220",No address,https://www.apartments.com/66-woodside-ave-buffalo-ny/pp1j1qt/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"51 Audet Dr, Buffalo, NY 14227",No address,https://www.apartments.com/51-audet-dr-buffalo-ny/6g4j7xv/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"367 Connecticut St, Buffalo, NY 14213",No address,https://www.apartments.com/367-connecticut-st-buffalo-ny-unit-2/swy5yq7/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"178 Ridgewood Rd Unit 2, Buffalo, NY 14220",No address,https://www.apartments.com/178-ridgewood-rd-buffalo-ny-unit-2/h88rgy2/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"244 Virginia St, Buffalo, NY 14201",No address,https://www.apartments.com/244-virginia-st-buffalo-ny/j0bj1t4/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"244 Virginia St, Buffalo, NY 14201",No address,https://www.apartments.com/244-virginia-st-buffalo-ny/0dvteh1/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"171 Richmond Ave, Buffalo, NY 14222",No address,https://www.apartments.com/171-richmond-ave-buffalo-ny-unit-1/t1zl2xb/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"10 Bristol Dr, Buffalo, NY 14228",No address,https://www.apartments.com/10-bristol-dr-buffalo-ny/jts7157/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"20 South St, Buffalo, NY 14204",No address,https://www.apartments.com/20-south-st-buffalo-ny-unit-2/5t14dlq/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"114 Commonwealth Ave, Buffalo, NY 14216",No address,https://www.apartments.com/114-commonwealth-ave-buffalo-ny-unit-upper/h57vce1/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"179 Florida St, Buffalo, NY 14208",No address,https://www.apartments.com/179-florida-st-buffalo-ny-unit-upper/7v4fg1w/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"383 Washington Ave, Buffalo, NY 14217",No address,https://www.apartments.com/383-washington-ave-buffalo-ny-unit-2/dwtzh8h/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"638 Hertel Ave, Buffalo, NY 14207",No address,https://www.apartments.com/638-hertel-ave-buffalo-ny/mvd2jph/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"137 Lockwood Ave, Buffalo, NY 14220",No address,https://www.apartments.com/137-lockwood-ave-buffalo-ny-unit-lower/lzy08jg/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"37 Holland Pl, Buffalo, NY 14209",No address,https://www.apartments.com/37-holland-pl-buffalo-ny/5wemc0q/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"220 Wagner St, Buffalo, NY 14206",No address,https://www.apartments.com/220-wagner-st-buffalo-ny/vrfje9g/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1317 McKinley Pkwy, Buffalo, NY 14218",No address,https://www.apartments.com/1317-mckinley-pkwy-buffalo-ny/bq89vw8/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2660 Elmwood Ave, Tonawanda Town, NY 14217",No address,https://www.apartments.com/2660-elmwood-ave-tonawanda-town-ny-unit-6/xjhf82p/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"453 Abbott Rd Unit Upper, Buffalo, NY 14220",No address,https://www.apartments.com/453-abbott-rd-buffalo-ny/1pvx717/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"190 Hamilton Dr Unit 190 Hamilton Drive Upper, Buffalo, NY 14226",No address,https://www.apartments.com/190-hamilton-dr-buffalo-ny/mx9sfnk/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"50 Mount Vernon Ave Unit Lower, Buffalo, NY 14210",No address,https://www.apartments.com/50-mount-vernon-ave-buffalo-ny/fkvf2cs/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"735 Amherst St Unit Lower, Buffalo, NY 14216",No address,https://www.apartments.com/735-amherst-st-buffalo-ny/5jywwmm/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"355 Saratoga Rd Unit 2, Buffalo, NY 14226",No address,https://www.apartments.com/355-saratoga-rd-buffalo-ny-unit-2/ywjfbmt/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"228 Woodward Ave Unit #1, Buffalo, NY 14214",No address,https://www.apartments.com/228-woodward-ave-buffalo-ny/clw72mg/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"467 Wyoming Ave Unit #3, Buffalo, NY 14215",No address,https://www.apartments.com/467-wyoming-ave-buffalo-ny/gyg031z/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"110 Bidwell Pkwy Unit 3, Buffalo, NY 14222",No address,https://www.apartments.com/110-bidwell-pkwy-buffalo-ny/9vymt05/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"112 Bidwell Pkwy Unit 2, Buffalo, NY 14222",No address,https://www.apartments.com/112-bidwell-pkwy-buffalo-ny-unit-2/v6y3pzg/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"510 Bird Ave Unit 4, Buffalo, NY 14222",No address,https://www.apartments.com/510-bird-ave-buffalo-ny/8egjdg2/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"256 Bryant St, Buffalo, NY 14222",No address,https://www.apartments.com/256-bryant-st-buffalo-ny/52pks3m/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"109 Plymouth Ave Unit 2, Buffalo, NY 14201",No address,https://www.apartments.com/109-plymouth-ave-buffalo-ny/srq3t87/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"114 Woodside Ave Unit UPPER APARTMENT, Buffalo, NY 14220",No address,https://www.apartments.com/114-woodside-ave-buffalo-ny/gh4hyxw/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"50 Ideal St, Buffalo, NY 14206",No address,https://www.apartments.com/50-ideal-st-buffalo-ny/pck3h5s/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"501 Forest Ave Unit 3, Buffalo, NY 14222",No address,https://www.apartments.com/501-forest-ave-buffalo-ny/seh2g34/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"586 Martin Rd Unit upper, Buffalo, NY 14218",No address,https://www.apartments.com/586-martin-rd-buffalo-ny/e0823bn/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"805 W Ferry St Unit 3rd Floor, Buffalo, NY 14222",No address,https://www.apartments.com/805-w-ferry-st-buffalo-ny/dgfcw4h/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"25 Fernwood Ave Unit Upper, Buffalo, NY 14206",No address,https://www.apartments.com/25-fernwood-ave-buffalo-ny/czbxzyd/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"198 Columbus Ave Unit Lower, Buffalo, NY 14220",No address,https://www.apartments.com/198-columbus-ave-buffalo-ny/m808hfh/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2338 Elmwood Ave Unit Upstairs studio, Buffalo, NY 14217",No address,https://www.apartments.com/2338-elmwood-ave-buffalo-ny/pbs6q6r/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2338 Elmwood Ave Unit Upstairs 1 bedroom, Buffalo, NY 14217",No address,https://www.apartments.com/2338-elmwood-ave-buffalo-ny/chj1xsg/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"124 18th St Unit upper, Buffalo, NY 14213",No address,https://www.apartments.com/124-18th-st-buffalo-ny/z1zfbtw/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"50 Greenfield St Unit 2, Buffalo, NY 14214",No address,https://www.apartments.com/50-greenfield-st-buffalo-ny/jmpnbj4/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"402 W Ferry St Unit 2, Buffalo, NY 14213",No address,https://www.apartments.com/402-w-ferry-st-buffalo-ny/l0t799f/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"64 Cunard Rd Unit upper, Buffalo, NY 14216",No address,https://www.apartments.com/64-cunard-rd-buffalo-ny/7qvswmy/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1899 Hertel Ave Unit Upper Rear, Buffalo, NY 14214",No address,https://www.apartments.com/1899-hertel-ave-buffalo-ny/we6y0bk/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"4821 Harlem Rd Unit Upstairs, Buffalo, NY 14226",No address,https://www.apartments.com/4821-harlem-rd-buffalo-ny/4xxxdfh/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"45 Fairchild Pl Unit Upper, Buffalo, NY 14216",No address,https://www.apartments.com/45-fairchild-pl-buffalo-ny/w5wk1eh/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"116 Bidwell Pky, Buffalo, NY 14222",No address,https://www.apartments.com/116-bidwell-pky-buffalo-ny/g0te63y/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"466 Richmond Ave Unit Apartment 2, Buffalo, NY 14222",No address,https://www.apartments.com/466-richmond-ave-buffalo-ny/4l1efdk/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"43 Williamsburg Sq Unit A, Buffalo, NY 14221",No address,https://www.apartments.com/43-williamsburg-sq-buffalo-ny/5wb3fbn/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1230 Colvin Blvd Unit Endcap, Buffalo, NY 14223",No address,https://www.apartments.com/1230-colvin-blvd-buffalo-ny/p09r8rs/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"620 Grant St, Buffalo, NY 14213",No address,https://www.apartments.com/620-grant-st-buffalo-ny/gqype5y/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"107 Kail St Unit 1, Buffalo, NY 14207",No address,https://www.apartments.com/107-kail-st-buffalo-ny/qf68h8z/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"373 Bryant St Unit 1, Buffalo, NY 14222",No address,https://www.apartments.com/373-bryant-st-buffalo-ny/th65sgb/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"146 Wanda Ave, Buffalo, NY 14211",No address,https://www.apartments.com/146-wanda-ave-buffalo-ny/sp3q6y4/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"281 Crestwood Ave Unit Upper, Buffalo, NY 14216",No address,https://www.apartments.com/281-crestwood-ave-buffalo-ny/4c29jnh/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"4266 Greenfield Pkwy Unit 4266 Greenfield Duplex, Buffalo, NY 14219",No address,https://www.apartments.com/4266-greenfield-pkwy-buffalo-ny/7vcd97y/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"49 Crestwood Ave Unit Lower, Buffalo, NY 14216",No address,https://www.apartments.com/49-crestwood-ave-buffalo-ny/ltq7gke/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"175 Plymouth Ave Unit 175 Plymouth Ave, Apt. 2, Buffalo, NY 14213",No address,https://www.apartments.com/175-plymouth-ave-buffalo-ny/5lk1dwn/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"67 Greenfield St Unit upper rear, Buffalo, NY 14214",No address,https://www.apartments.com/67-greenfield-st-buffalo-ny/phbw7vv/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"159 Laurel St Unit Lower, Buffalo, NY 14208",No address,https://www.apartments.com/159-laurel-st-buffalo-ny/lsfdwyd/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1190 Cleveland Dr Unit Right, Buffalo, NY 14225",No address,https://www.apartments.com/1190-cleveland-dr-buffalo-ny/719kqfz/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"238 Crestwood Ave Unit Lower, Buffalo, NY 14216",No address,https://www.apartments.com/238-crestwood-ave-buffalo-ny-unit-lower/7vvk26w/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"7170 Transit Rd Unit #4, Buffalo, NY 14221",No address,https://www.apartments.com/7170-transit-rd-buffalo-ny/98kz4p4/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"414 Taunton Pl Unit Lower, Buffalo, NY 14216",No address,https://www.apartments.com/414-taunton-pl-buffalo-ny/rmt86x3/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"108 David Ave Unit Home, Buffalo, NY 14225",No address,https://www.apartments.com/108-david-ave-buffalo-ny/yytk43r/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"33 Norwood Ave Unit Lower, Buffalo, NY 14222",No address,https://www.apartments.com/33-norwood-ave-buffalo-ny/hxwr970/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"702 West Ave Unit 1, Buffalo, NY 14213",No address,https://www.apartments.com/702-west-ave-buffalo-ny/jnqgtb6/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2923 River Rd Unit Studio, Buffalo, NY 14207",No address,https://www.apartments.com/2923-river-rd-buffalo-ny/6gz9fes/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"40 Putnam St, Buffalo, NY 14213",No address,https://www.apartments.com/40-putnam-st-buffalo-ny/5g17hzn/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"99 Custer St, Buffalo, NY 14214",No address,https://www.apartments.com/99-custer-st-buffalo-ny/mevv4hl/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"19 Sand St, Buffalo, NY 14218",No address,https://www.apartments.com/19-sand-st-buffalo-ny/2jvpfsb/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"504 Washington St Unit Lower, Buffalo, NY 14203",No address,https://www.apartments.com/504-washington-st-buffalo-ny/h6zcep3/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"61 Manchester Pl Unit 2, Buffalo, NY 14213",No address,https://www.apartments.com/61-manchester-pl-buffalo-ny/zbwn79z/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"3952 Ridge Lea Rd Unit C, Buffalo, NY 14228",No address,https://www.apartments.com/3952-ridge-lea-rd-buffalo-ny/9138m06/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"97 Campus Dr N, Buffalo, NY 14226",No address,https://www.apartments.com/97-campus-dr-n-buffalo-ny/ne8xejn/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"471 S Ogden St Unit Lowet, Buffalo, NY 14206",No address,https://www.apartments.com/471-s-ogden-st-buffalo-ny/9lrzvy7/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"15 Cornwall Ave Unit 1 st floor, Buffalo, NY 14215",No address,https://www.apartments.com/15-cornwall-ave-buffalo-ny/x50kpcq/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"85 Como Ave Unit Lower, Buffalo, NY 14220",No address,https://www.apartments.com/85-como-ave-buffalo-ny/bx9qnl9/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"604 Colvin Ave, Buffalo, NY 14216",No address,https://www.apartments.com/604-colvin-ave-buffalo-ny/s04hmj5/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"17 Sunshine Dr, Buffalo, NY 14228",No address,https://www.apartments.com/17-sunshine-dr-buffalo-ny/pls79jv/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"112 Culver Rd Unit Lower Apartment, Buffalo, NY 14220",No address,https://www.apartments.com/112-culver-rd-buffalo-ny/mepmhgk/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"3920 Ridge Lea Rd Unit C, Buffalo, NY 14228",No address,https://www.apartments.com/3920-ridge-lea-rd-buffalo-ny-unit-c/bq5gh68/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"78 Callodine Ave Unit Upper, Eggertsville, NY 14226",No address,https://www.apartments.com/78-callodine-ave-eggertsville-ny/xh90lrn/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"225 Niagara Falls Blvd, Eggertsville, NY 14226",No address,https://www.apartments.com/225-niagara-falls-blvd-eggertsville-ny/l1vxlbg/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"54 Knowlton Ave Unit 54 Knowlton Ave, Lackawanna, NY 14218",No address,https://www.apartments.com/54-knowlton-ave-lackawanna-ny/45mezwl/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"826 Englewood Ave Unit #3, Town Of Tonawanda, NY 14223",No address,https://www.apartments.com/826-englewood-ave-town-of-tonawanda-ny/brnzrnb/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"46 Kirkwood Dr Unit Kirkwood Upper, West Seneca, NY 14224",No address,https://www.apartments.com/46-kirkwood-dr-west-seneca-ny/26t92f9/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"608 Elmwood Ave Unit 207-D, Buffalo, NY 14222",No address,https://www.apartments.com/608-elmwood-ave-buffalo-ny/cgmn3nd/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1072 Ellicott St Unit 1, Buffalo, NY 14209",No address,https://www.apartments.com/1072-ellicott-st-buffalo-ny/nhz6kdm/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"129 Kensington Ave, Buffalo, NY 14214",No address,https://www.apartments.com/129-kensington-ave-buffalo-ny/pmbyh6v/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"497 Breckenridge St Unit 1, Buffalo, NY 14213",No address,https://www.apartments.com/497-breckenridge-st-buffalo-ny-unit-1/9gvln74/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"430 Colvin Ave Unit 430 Colvin Upper, Buffalo, NY 14216",No address,https://www.apartments.com/430-colvin-ave-buffalo-ny-unit-430-colvin-upper/w26t7xl/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"61 Hirschfield Dr Unit Upper, Buffalo, NY 14221",No address,https://www.apartments.com/61-hirschfield-dr-buffalo-ny-unit-upper/8br9p02/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"5 Gren-Way Aly Unit 6, Buffalo, NY 14222",No address,https://www.apartments.com/5-gren-way-aly-buffalo-ny-unit-6/tdkp0h8/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"390 Linwood Ave Unit 4, Buffalo, NY 14209",No address,https://www.apartments.com/390-linwood-ave-buffalo-ny/yvfe6qv/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1696 Orchard Park Rd, Buffalo, NY 14224",No address,https://www.apartments.com/1696-orchard-park-rd-buffalo-ny/m9mz6pj/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"37 Sandy Ln Unit Upper, Buffalo, NY 14227",No address,https://www.apartments.com/37-sandy-ln-buffalo-ny/nknxz8m/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"100 Belmont Ave Unit 5, Buffalo, NY 14223",No address,https://www.apartments.com/100-belmont-ave-buffalo-ny/cykeshd/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"71 Delham Ave Unit 3 Bedroom Upper, Buffalo, NY 14216",No address,https://www.apartments.com/71-delham-ave-buffalo-ny/8qdj463/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"383 Washington Ave Unit Lower, Buffalo, NY 14217",No address,https://www.apartments.com/383-washington-ave-buffalo-ny/n3vwn7p/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"89 Trinity Pl Unit 89 Trinity Upper, Buffalo, NY 14201",No address,https://www.apartments.com/89-trinity-pl-buffalo-ny/w313dsh/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"36 Glenwood Ct Unit C, Buffalo, NY 14225",No address,https://www.apartments.com/36-glenwood-ct-buffalo-ny/h15y2w2/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"68 Barton St, Buffalo, NY 14213",No address,https://www.apartments.com/68-barton-st-buffalo-ny/vdphmzg/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"473 Colvin Ave, Buffalo, NY 14216",No address,https://www.apartments.com/473-colvin-ave-buffalo-ny/y4ct47v/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"182 Berehaven Dr, Buffalo, NY 14228",No address,https://www.apartments.com/182-berehaven-dr-buffalo-ny/3e5149f/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"76 Cottage St Unit Cottage Upper Apartment, Buffalo, NY 14201",No address,https://www.apartments.com/76-cottage-st-buffalo-ny/teygjt8/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"4256 North St Unit 1, Buffalo, NY 14219",No address,https://www.apartments.com/4256-north-st-buffalo-ny/x3ncl1q/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"388 Wabash Ave Unit 2, Kenmore, NY 14217",No address,https://www.apartments.com/388-wabash-ave-kenmore-ny/lw173rf/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"154 Lincoln Blvd Unit Upper 3 Befroom, Kenmore, NY 14217",No address,https://www.apartments.com/154-lincoln-blvd-kenmore-ny/qyd5f9w/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"156 Lisbon Ave, Buffalo, NY 14214",No address,https://www.apartments.com/156-lisbon-ave-buffalo-ny/1rf9jx6/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"340 Bird Ave, Buffalo, NY 14213",No address,https://www.apartments.com/340-bird-ave-buffalo-ny/5ygr3fm/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"51 Johnson Park, Buffalo, NY 14201",No address,https://www.apartments.com/51-johnson-park-buffalo-ny/h2yqg71/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"264 St Lawrence Ave, Buffalo, NY 14216",No address,https://www.apartments.com/264-st-lawrence-ave-buffalo-ny/6r5xmdv/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"131 Kamper Ave, Buffalo, NY 14210",No address,https://www.apartments.com/131-kamper-ave-buffalo-ny/645v8lv/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1225 Hertel Ave, Buffalo, NY 14216",No address,https://www.apartments.com/1225-hertel-ave-buffalo-ny/fq7vcvr/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"35 Groton Dr, Buffalo, NY 14228",No address,https://www.apartments.com/35-groton-dr-buffalo-ny/2kthcq9/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"600 Main St, Buffalo, NY 14222",No address,https://www.apartments.com/600-main-st-buffalo-ny/f4gb38s/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"291 E North St, Buffalo, NY 14204",No address,https://www.apartments.com/291-e-north-st-buffalo-ny/9p1z5v6/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1115 Delaware Ave, Buffalo, NY 14209",No address,https://www.apartments.com/1115-delaware-ave-buffalo-ny/vhw73mf/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"433 Linwood Ave, Buffalo, NY 14209",No address,https://www.apartments.com/433-linwood-ave-buffalo-ny/qpcl7lx/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"600 Main St, Buffalo, NY 14222",No address,https://www.apartments.com/600-main-st-buffalo-ny/n3m21xm/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"53 Elmwood Ave, Buffalo, NY 14201",No address,https://www.apartments.com/53-elmwood-ave-buffalo-ny/rxzv9z3/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"460 Rhode Island St, Buffalo, NY 14213",No address,https://www.apartments.com/460-rhode-island-st-buffalo-ny/rptfh72/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"70 Humason Ave, Buffalo, NY 14211",No address,https://www.apartments.com/70-humason-ave-buffalo-ny/3snhx4e/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"744 Tacoma Ave, Buffalo, NY 14216",No address,https://www.apartments.com/744-tacoma-ave-buffalo-ny/y85zfvt/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1986 South Park Ave, Buffalo, NY 14220",No address,https://www.apartments.com/1986-south-park-ave-buffalo-ny/lvx2g7d/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"352 Bryant St, Buffalo, NY 14222",No address,https://www.apartments.com/352-bryant-st-buffalo-ny/vw0b89f/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1431 Hertel Ave, Buffalo, NY 14216",No address,https://www.apartments.com/1431-hertel-ave-buffalo-ny/3hzgcre/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"151 Peppertree Dr, Buffalo, NY 14228",No address,https://www.apartments.com/151-peppertree-dr-buffalo-ny/kv574m9/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"146 Lancaster Ave, Buffalo, NY 14222",No address,https://www.apartments.com/146-lancaster-ave-buffalo-ny/7g5x27w/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"8521 Sheridan Dr, Buffalo, NY 14221",No address,https://www.apartments.com/8521-sheridan-dr-buffalo-ny/4zd7knh/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"411 Norwood Ave, Buffalo, NY 14222",No address,https://www.apartments.com/411-norwood-ave-buffalo-ny/plyn6rv/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"42 Frontenac Ave, Buffalo, NY 14216",No address,https://www.apartments.com/42-frontenac-ave-buffalo-ny/0yzexe2/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2547 William St, Buffalo, NY 14206",No address,https://www.apartments.com/2547-william-st-buffalo-ny/t91nte8/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2547 William St, Buffalo, NY 14206",No address,https://www.apartments.com/2547-william-st-buffalo-ny/yyxjx6t/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"44 Magnolia St, Buffalo, NY 14218",No address,https://www.apartments.com/44-magnolia-st-buffalo-ny/zds214y/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"25 Spring Meadow Dr, Buffalo, NY 14221",No address,https://www.apartments.com/25-spring-meadow-dr-buffalo-ny/qyx3b3z/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"89 Johnson Park, Buffalo, NY 14201",No address,https://www.apartments.com/89-johnson-park-buffalo-ny/1fr0g35/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"628 Ellicott St, Buffalo, NY 14203",No address,https://www.apartments.com/628-ellicott-st-buffalo-ny/kctnyy9/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"628 Ellicott St, Buffalo, NY 14203",No address,https://www.apartments.com/628-ellicott-st-buffalo-ny/2cr5yk9/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"1119 Sycamore St, Buffalo, NY 14212",No address,https://www.apartments.com/1119-sycamore-st-buffalo-ny/dq9cbpk/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"23 Sumner Pl, Buffalo, NY 14211",No address,https://www.apartments.com/23-sumner-pl-buffalo-ny/r2t0hj0/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"95 Westminster Ave, Buffalo, NY 14215",No address,https://www.apartments.com/95-westminster-ave-buffalo-ny/0yh3bx2/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"95 Westminster Ave, Buffalo, NY 14215",No address,https://www.apartments.com/95-westminster-ave-buffalo-ny/lwsbh6e/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"167 Fairgreen Dr, Buffalo, NY 14228",No address,https://www.apartments.com/167-fairgreen-dr-buffalo-ny/1kbcsb4/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"262 Summer St, Buffalo, NY 14222",No address,https://www.apartments.com/262-summer-st-buffalo-ny/7d1be1x/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"228 Highgate Ave, Buffalo, NY 14215",No address,https://www.apartments.com/228-highgate-ave-buffalo-ny/k8j7jc8/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2403 Niagara St, Buffalo, NY 14207",No address,https://www.apartments.com/2403-niagara-st-buffalo-ny/rtvlpy2/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"700 Parkside Ave, Buffalo, NY 14216",No address,https://www.apartments.com/700-parkside-ave-buffalo-ny/t7hynv8/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"32 Bernhardt Dr, Buffalo, NY 14226",No address,https://www.apartments.com/32-bernhardt-dr-buffalo-ny/b39w9s8/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"4309 Chestnut Ridge Rd, Buffalo, NY 14228",No address,https://www.apartments.com/4309-chestnut-ridge-rd-buffalo-ny/4j4f49k/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"475 Potters Rd, Buffalo, NY 14220",No address,https://www.apartments.com/475-potters-rd-buffalo-ny/cldnyld/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"451 Franklin St, Buffalo, NY 14202",No address,https://www.apartments.com/451-franklin-st-buffalo-ny/32rdvjg/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"185 Fairgreen Dr, Buffalo, NY 14228",No address,https://www.apartments.com/185-fairgreen-dr-buffalo-ny/hy0hvq2/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"130 Pearl St, Buffalo, NY 14202",No address,https://www.apartments.com/130-pearl-st-buffalo-ny/4nqz4fk/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"67 Harvard Pl, Buffalo, NY 14209",No address,https://www.apartments.com/67-harvard-pl-buffalo-ny/jd5d1j5/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"628 Ellicott St, Buffalo, NY 14203",No address,https://www.apartments.com/628-ellicott-st-buffalo-ny/c1kpm2f/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"79 Commonwealth Ave, Buffalo, NY 14216",No address,https://www.apartments.com/79-commonwealth-ave-buffalo-ny/tq3mzqb/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"216 Newburgh Ave, Buffalo, NY 14215",No address,https://www.apartments.com/216-newburgh-ave-buffalo-ny/rgy4gx3/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"411 Dearborn St, Buffalo, NY 14207",No address,https://www.apartments.com/411-dearborn-st-buffalo-ny/c9w45fd/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"7 Bennett Village Terrace, Buffalo, NY 14214",No address,https://www.apartments.com/7-bennett-village-terrace-buffalo-ny/xtmbe4n/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"786 Kenmore Ave, Buffalo, NY 14216",No address,https://www.apartments.com/786-kenmore-ave-buffalo-ny/s6j9zl7/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"39 Halwill Dr, Buffalo, NY 14226",No address,https://www.apartments.com/39-halwill-dr-buffalo-ny/lfm2ehe/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2287 Niagara St, Buffalo, NY 14207",No address,https://www.apartments.com/2287-niagara-st-buffalo-ny/4f60jzh/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"402 W Ferry St, Buffalo, NY 14213",No address,https://www.apartments.com/402-w-ferry-st-buffalo-ny/fkvqtds/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2140 Kenmore Ave, Buffalo, NY 14207",No address,https://www.apartments.com/2140-kenmore-ave-buffalo-ny/x4zevtn/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"77 Johnson Park, Buffalo, NY 14201",No address,https://www.apartments.com/77-johnson-park-buffalo-ny/ee4yyyq/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"378 Breckenridge St, Buffalo, NY 14213",No address,https://www.apartments.com/378-breckenridge-st-buffalo-ny/mdfn3sh/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"130 Massachusetts Ave, Buffalo, NY 14213",No address,https://www.apartments.com/130-massachusetts-ave-buffalo-ny/mrptfvl/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"41 Ojibwa Cir, Buffalo, NY 14202",No address,https://www.apartments.com/41-ojibwa-cir-buffalo-ny/lj59jee/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"33 Philadelphia St, Buffalo, NY 14207",No address,https://www.apartments.com/33-philadelphia-st-buffalo-ny/fzfylnr/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"33 Philadelphia St, Buffalo, NY 14207",No address,https://www.apartments.com/33-philadelphia-st-buffalo-ny/2ggklh8/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"2917 Main St Unit 202, Buffalo, NY 14214",No address,https://www.apartments.com/2917-main-st-buffalo-ny-unit-202/2jpn0w8/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"328 Summer St, Buffalo, NY 14201",No address,https://www.apartments.com/328-summer-st-buffalo-ny/zqfxh2y/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"325 Box Ave, Buffalo, NY 14211",No address,https://www.apartments.com/325-box-ave-buffalo-ny/gb667cy/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"79 Walden Ave, Buffalo, NY 14211",No address,https://www.apartments.com/79-walden-ave-buffalo-ny/f1n55rv/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"309 North St, Buffalo, NY 14201",No address,https://www.apartments.com/309-north-st-buffalo-ny/sxwmf07/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"28 Ayrault Dr, Buffalo, NY 14228",No address,https://www.apartments.com/28-ayrault-dr-buffalo-ny/cthj7tg/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"35 Ojibwa Cir, Buffalo, NY 14202",No address,https://www.apartments.com/35-ojibwa-cir-buffalo-ny/8kte330/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"142 W Ferry St, Buffalo, NY 14213",No address,https://www.apartments.com/142-w-ferry-st-buffalo-ny/r38t6y3/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"226 Longnecker St, Buffalo, NY 14206",No address,https://www.apartments.com/226-longnecker-st-buffalo-ny/7lvrpjx/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"71 Gerald Ave, Buffalo, NY 14215",No address,https://www.apartments.com/71-gerald-ave-buffalo-ny/zr6e0vz/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"143 Cottage St, Buffalo, NY 14201",No address,https://www.apartments.com/143-cottage-st-buffalo-ny/82xgge1/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"72 Tracy St, Buffalo, NY 14201",No address,https://www.apartments.com/72-tracy-st-buffalo-ny/hbl6v02/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"320 Jewett Ave, Buffalo, NY 14214",No address,https://www.apartments.com/320-jewett-ave-buffalo-ny/yvbtzfr/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"114 Ashland Ave, Buffalo, NY 14222",No address,https://www.apartments.com/114-ashland-ave-buffalo-ny/5jdfxpq/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"58 Trinity Pl, Buffalo, NY 14201",No address,https://www.apartments.com/58-trinity-pl-buffalo-ny/v8l3dff/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"68 Prospect Ave, Buffalo, NY 14201",No address,https://www.apartments.com/68-prospect-ave-buffalo-ny/s6de087/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"526 Capen Blvd, Buffalo, NY 14226",No address,https://www.apartments.com/526-capen-blvd-buffalo-ny/0k9pme1/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"79 Rosemont Dr, Buffalo, NY 14226",No address,https://www.apartments.com/79-rosemont-dr-buffalo-ny/5fsvcgq/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"224 Vermont St, Buffalo, NY 14213",No address,https://www.apartments.com/224-vermont-st-buffalo-ny/qqfxvsy/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"902 Main St, Buffalo, NY 14202",No address,https://www.apartments.com/902-main-st-buffalo-ny/4q83bhk/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"41 Mariner St, Buffalo, NY 14201",No address,https://www.apartments.com/41-mariner-st-buffalo-ny/5rqr5yp/,No price,No beds info,1375.0,1375.0,1.0,1.0
+apartments.com,"186 Bidwell Pkwy, Buffalo, NY 14222",No address,https://www.apartments.com/186-bidwell-pkwy-buffalo-ny/r6ywbm3/,No price,No beds info,1375.0,1375.0,1.0,1.0
+padmapper.com,Wood and Brooks Lofts,"Riverside Park, Buffalo",https://www.padmapper.com/buildings/p1238897/wood-and-brooks-lofts-apartments-at-2075-kenmore-ave-buffalo-ny-14207,"$1,595–$2,200",1–2,1595.0,2200.0,1.0,2.0
+padmapper.com,The Residences at Linwood Manor,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/buildings/p1126416/the-residences-at-linwood-manor-apartments-at-330-linwood-ave-buffalo-ny-14209,"$1,150",Studio,1150.0,1150.0,0.0,0.0
+padmapper.com,128 Pearl Street,"Central Business District, Buffalo",https://www.padmapper.com/buildings/p1385653/apartments-at-128-pearl-st-buffalo-ny-14202,"$1,475–$2,325",1–2,1475.0,2325.0,1.0,2.0
+padmapper.com,210 Ellicott St #304,"Central Business District, Buffalo",https://www.padmapper.com/rentals/12910508p/2-bedroom-2-bath-apartment-at-210-ellicott-st-buffalo-ny-14203,"$2,250",2,2250.0,2250.0,2.0,2.0
+padmapper.com,234 Crescent Ave,"Parkside, Buffalo",https://www.padmapper.com/rentals/23377913p/2-bedroom-1-bath-apartment-at-234-crescent-ave-buffalo-ny-14214,"$1,195",2,1195.0,1195.0,2.0,2.0
+padmapper.com,Griffin House Apartments,"Parkside, Buffalo",https://www.padmapper.com/buildings/p1126417/griffin-house-apartments-at-215-humboldt-pkwy-buffalo-ny-14208,"$1,175–$1,630",1–2,1175.0,1630.0,1.0,2.0
+padmapper.com,Colvin View Apartments,"North Park, Buffalo",https://www.padmapper.com/buildings/p1168892/colvin-view-apartments-at-575-colvin-ave-buffalo-ny-14216,"$1,225",2,1225.0,1225.0,2.0,2.0
+padmapper.com,2 Niagara Falls Blvd,"University, Buffalo",https://www.padmapper.com/rentals/62459107/4-bedroom-1-bath-apartment-at-2-niagara-falls-blvd-buffalo-ny-14214,"$3,544",4,3544.0,3544.0,4.0,4.0
+padmapper.com,110 Bidwell Parkway #2,"Forest, Buffalo",https://www.padmapper.com/rentals/62678776/1-bedroom-1-bath-apartment-at-110-bidwell-parkway-buffalo-ny-14222,"$1,500",1,1500.0,1500.0,1.0,1.0
+padmapper.com,116 Bidwell Parkway,"Forest, Buffalo",https://www.padmapper.com/rentals/26673279p/1-bedroom-1-bath-apartment-at-116-bidwell-parkway-buffalo-ny-14222,"$1,150",1,1150.0,1150.0,1.0,1.0
+padmapper.com,77 Montrose Ave upper,"University, Buffalo",https://www.padmapper.com/buildings/p526360/apartments-at-montrose-ave-evadene-st-buffalo-ny-14214,$385,1,385.0,385.0,1.0,1.0
+padmapper.com,312 Summer Street #1,"Bryant, Buffalo",https://www.padmapper.com/rentals/16518894p/5-bedroom-3-bath-apartment-at-312-summer-street-buffalo-ny-14222,"$6,000",5,6000.0,6000.0,5.0,5.0
+padmapper.com,499 Franklin Street ##4,"Allen, Buffalo",https://www.padmapper.com/rentals/26182814p/1-bedroom-1-bath-apartment-at-499-franklin-street-buffalo-ny-14202,"$2,375",1,2375.0,2375.0,1.0,1.0
+padmapper.com,499 Franklin Street #1,"Allen, Buffalo",https://www.padmapper.com/rentals/26142633p/1-bedroom-1-bath-apartment-at-499-franklin-street-buffalo-ny-14202,"$2,815",1,2815.0,2815.0,1.0,1.0
+padmapper.com,567 Delaware Avenue ##3,"Allen, Buffalo",https://www.padmapper.com/rentals/26143161p/1-bedroom-1-bath-apartment-at-567-delaware-avenue-buffalo-ny-14202,"$1,330",1,1330.0,1330.0,1.0,1.0
+padmapper.com,664 Auburn Ave #1,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/16545467p/4-bedroom-2-bath-apartment-at-664-auburn-ave-buffalo-ny-14222,"$4,900",4,4900.0,4900.0,4.0,4.0
+padmapper.com,36 E Utica St #1C,"Masten Park, Buffalo",https://www.padmapper.com/rentals/25913751p/1-bedroom-1-bath-apartment-at-36-e-utica-st-buffalo-ny-14209,"$2,300",1,2300.0,2300.0,1.0,1.0
+padmapper.com,36 E Utica St #44-3B,"Masten Park, Buffalo",https://www.padmapper.com/rentals/25335902p/2-bedroom-2-bath-apartment-at-36-e-utica-st-buffalo-ny-14209,"$2,500",2,2500.0,2500.0,2.0,2.0
+padmapper.com,57 E Utica St #44-1A,"Masten Park, Buffalo",https://www.padmapper.com/rentals/26681375p/2-bedroom-2-bath-apartment-at-57-e-utica-st-buffalo-ny-14209,"$2,800",2,2800.0,2800.0,2.0,2.0
+padmapper.com,309 Bird Ave #2,"Forest, Buffalo",https://www.padmapper.com/rentals/25014112p/3-bedroom-1-bath-apartment-at-309-bird-ave-buffalo-ny-14213,"$2,500",3,2500.0,2500.0,3.0,3.0
+padmapper.com,57 E Utica St #44-2B,"Masten Park, Buffalo",https://www.padmapper.com/rentals/25006298p/2-bedroom-2-bath-apartment-at-57-e-utica-st-buffalo-ny-14209,"$2,500",2,2500.0,2500.0,2.0,2.0
+padmapper.com,93 Baynes St #1AND,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/25006293p/2-bedroom-1-bath-apartment-at-93-baynes-st-buffalo-ny-14213,"$2,500",2,2500.0,2500.0,2.0,2.0
+padmapper.com,36 E Utica St,"Masten Park, Buffalo",https://www.padmapper.com/rentals/25335803p/2-bedroom-2-bath-apartment-at-36-e-utica-st-buffalo-ny-14209,"$2,300",2,2300.0,2300.0,2.0,2.0
+padmapper.com,508 Prospect Ave #3,"Front Park, Buffalo",https://www.padmapper.com/rentals/24978213p/1-bedroom-1-bath-apartment-at-508-prospect-ave-buffalo-ny-14201,"$1,500",1,1500.0,1500.0,1.0,1.0
+padmapper.com,309 Baynes St #2,"Forest, Buffalo",https://www.padmapper.com/rentals/24978206p/3-bedroom-1-bath-apartment-at-309-baynes-st-buffalo-ny-14213,"$2,200",3,2200.0,2200.0,3.0,3.0
+padmapper.com,309 Bird Ave #1,"Forest, Buffalo",https://www.padmapper.com/rentals/24978200p/3-bedroom-1-bath-apartment-at-309-bird-ave-buffalo-ny-14213,"$2,500",3,2500.0,2500.0,3.0,3.0
+padmapper.com,101 N Pearl St #303,1 Bathroom Apartment,https://www.padmapper.com/rentals/26681100p/studio-1-bath-apartment-at-101-n-pearl-st-buffalo-ny-14202,"$1,650",Studio,1650.0,1650.0,0.0,0.0
+padmapper.com,101 N Pearl St #104,1 Bathroom Apartment,https://www.padmapper.com/rentals/26681097p/studio-1-bath-apartment-at-101-n-pearl-st-buffalo-ny-14202,"$1,600",Studio,1600.0,1600.0,0.0,0.0
+padmapper.com,Windsong Place Apartments,"Buffalo, NY",https://www.padmapper.com/buildings/p573/windsong-place-apartments-at-25-spring-meadow-dr-buffalo-ny-14221,"$1,496–$2,486",1–3,1496.0,2486.0,1.0,3.0
+padmapper.com,1233 Eggert Rd,"Buffalo, NY",https://www.padmapper.com/rentals/18324592p/2-bedroom-1-bath-apartment-at-1233-eggert-rd-buffalo-ny-14226,"$1,200",2,1200.0,1200.0,2.0,2.0
+padmapper.com,185 Potomac Ave Lowr,"Forest, Buffalo",https://www.padmapper.com/rentals/26680923p/2-bedroom-1-bath-apartment-at-185-potomac-ave-lowr-buffalo-ny-14213,"$1,300",2,1300.0,1300.0,2.0,2.0
+padmapper.com,The Fenton Apartments,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/buildings/p1121334/the-fenton-apartments-at-945-w-ferry-st-buffalo-ny-14209,"$1,649–$2,653",1–2,1649.0,2653.0,1.0,2.0
+padmapper.com,Brand New Luxury Apartment Complex in proximity to Buffalo General!,"Masten Park, Buffalo",https://www.padmapper.com/buildings/p803364/brand-new-luxury-apartment-complex-in-proximity-to-buffalo-general-at-1145-michigan-ave-buffalo-ny-14209,"$1,275–$1,999",Studio–2,1275.0,1999.0,0.0,2.0
+padmapper.com,11 Baynes St,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/26322219p/3-bedroom-2-bath-apartment-at-11-baynes-st-buffalo-ny-14213,"$1,995",3,1995.0,1995.0,3.0,3.0
+padmapper.com,Barcalo Living,"First Ward, Buffalo",https://www.padmapper.com/buildings/p868588/barcalo-living-apartments-at-225-louisiana-st-buffalo-ny-14204,"$1,015–$3,070",1–3,1015.0,3070.0,1.0,3.0
+padmapper.com,32 Milford St #2,"Abbott McKinley, Buffalo",https://www.padmapper.com/rentals/20932424p/2-bedroom-1-bath-apartment-at-32-milford-st-buffalo-ny-14220,"$1,050",2,1050.0,1050.0,2.0,2.0
+padmapper.com,50 Ideal St,"Lovejoy, Buffalo",https://www.padmapper.com/rentals/26678080p/4-bedroom-1-bath-apartment-at-50-ideal-st-buffalo-ny-14206,"$1,600",4,1600.0,1600.0,4.0,4.0
+padmapper.com,585 Niagara Street,"Front Park, Buffalo",https://www.padmapper.com/buildings/p276979/apartments-at-585-niagara-st-buffalo-ny-14201,"$1,000",1,1000.0,1000.0,1.0,1.0
+padmapper.com,Annex Apartments,"Bryant, Buffalo",https://www.padmapper.com/buildings/p1223161/annex-apartments-at-245-bryant-st-buffalo-ny-14222,"$1,814–$2,692",1–2,1814.0,2692.0,1.0,2.0
+padmapper.com,508 Prospect Ave #1,"Front Park, Buffalo",https://www.padmapper.com/rentals/25006300p/2-bedroom-1-bath-apartment-at-508-prospect-ave-buffalo-ny-14201,"$2,300",2,2300.0,2300.0,2.0,2.0
+padmapper.com,Crescent Garden Apartments,"Parkside, Buffalo",https://www.padmapper.com/buildings/p335042/crescent-garden-apartments-at-338-crescent-ave-buffalo-ny-14214,"$1,085–$1,125",1,1085.0,1125.0,1.0,1.0
+padmapper.com,157 Saranac,"North Park, Buffalo",https://www.padmapper.com/buildings/p511439/apartments-at-157-saranac-ave-buffalo-ny-14216,"$1,695",3,1695.0,1695.0,3.0,3.0
+padmapper.com,Bryant Apartments,"Bryant, Buffalo",https://www.padmapper.com/buildings/p38054/bryant-apartments-at-916-delaware-ave-buffalo-ny-14209,"$1,350–$1,795",Studio–2,1350.0,1795.0,0.0,2.0
+padmapper.com,EB Green Residence,"Allen, Buffalo",https://www.padmapper.com/buildings/p321621/eb-green-residence-apartments-at-230-north-st-buffalo-ny-14201,"$1,750–$2,650",1–2,1750.0,2650.0,1.0,2.0
+padmapper.com,District West Lofts on Elmwood: Luxury Apartments in the heart of the Elmwood District,"Forest, Buffalo",https://www.padmapper.com/buildings/p969146/district-west-lofts-on-elmwood-luxury-apartments-in-the-heart-of-the-elmwood-district-at-1020-elmwood-ave-buffalo-ny-14222,"$2,450–$2,690",2,2450.0,2690.0,2.0,2.0
+padmapper.com,Amherst Woods Apartments,"Park Meadow, Buffalo",https://www.padmapper.com/buildings/p328811/amherst-woods-apartments-at-1392-amherst-st-buffalo-ny-14216,"$1,025–$1,550",Studio–2,1025.0,1550.0,0.0,2.0
+padmapper.com,553 West Utica Street,"Front Park, Buffalo",https://www.padmapper.com/buildings/p921229/apartments-at-553-w-utica-st-buffalo-ny-14213,"$1,100",2,1100.0,1100.0,2.0,2.0
+padmapper.com,199 199 Fairgreen Drive unit: Right #RIGHT,"Buffalo, NY",https://www.padmapper.com/rentals/25225307p/3-bedroom-1-bath-apartment-at-199-199-fairgreen-drive-unit-right-buffalo-ny-14228,"$1,850",3,1850.0,1850.0,3.0,3.0
+padmapper.com,352 Auburn Ave Apt 1 #1,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/15452546p/3-bedroom-1-bath-apartment-at-352-auburn-ave-apt-1-buffalo-ny-14213,"$1,350",3,1350.0,1350.0,3.0,3.0
+padmapper.com,52 Locust Street,"Willert Park, Buffalo",https://www.padmapper.com/buildings/p722737/apartments-at-52-locust-st-buffalo-ny-14204,$900,1,900.0,900.0,1.0,1.0
+padmapper.com,Crescent Avenue Apartments,"Parkside, Buffalo",https://www.padmapper.com/buildings/p1127909/crescent-avenue-apartments-at-196-crescent-ave-buffalo-ny-14214,"$1,200–$1,450",1–2,1200.0,1450.0,1.0,2.0
+padmapper.com,49 Crestwood Ave #LOWER,"North Park, Buffalo",https://www.padmapper.com/rentals/20448968p/3-bedroom-1-bath-apartment-at-49-crestwood-ave-buffalo-ny-14216,"$1,525",3,1525.0,1525.0,3.0,3.0
+padmapper.com,664 Auburn Ave #2,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/26673996p/2-bedroom-1-bath-apartment-at-664-auburn-ave-buffalo-ny-14222,"$2,500",2,2500.0,2500.0,2.0,2.0
+padmapper.com,37 Holland Pl,"Masten Park, Buffalo",https://www.padmapper.com/rentals/26673910p/2-bedroom-1-bath-apartment-at-37-holland-pl-buffalo-ny-14209,"$1,500",2,1500.0,1500.0,2.0,2.0
+padmapper.com,788 Columbus Pkwy #7,"Front Park, Buffalo",https://www.padmapper.com/rentals/16816944p/1-bedroom-1-bath-apartment-at-788-columbus-pkwy-buffalo-ny-14213,"$1,125",1,1125.0,1125.0,1.0,1.0
+padmapper.com,36 E Utica St #3B,"Masten Park, Buffalo",https://www.padmapper.com/rentals/24845113p/2-bedroom-2-bath-apartment-at-36-e-utica-st-buffalo-ny-14209,"$2,200",2,2200.0,2200.0,2.0,2.0
+padmapper.com,516 Amherst St #2,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26308519p/1-bedroom-1-bath-apartment-at-516-amherst-st-buffalo-ny-14207,"$1,300",1,1300.0,1300.0,1.0,1.0
+padmapper.com,6 Concord Pl #3,"Buffalo, NY",https://www.padmapper.com/rentals/26600479p/2-bedroom-1-bath-apartment-at-6-concord-pl-buffalo-ny-14226,"$1,025",2,1025.0,1025.0,2.0,2.0
+padmapper.com,204 High St #1,"Medical Park, Buffalo",https://www.padmapper.com/rentals/24845112p/2-bedroom-2-bath-apartment-at-204-high-st-buffalo-ny-14204,"$2,800",2,2800.0,2800.0,2.0,2.0
+padmapper.com,516 Amherst St #1,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26308518p/1-bedroom-1-bath-apartment-at-516-amherst-st-buffalo-ny-14207,"$1,450",1,1450.0,1450.0,1.0,1.0
+padmapper.com,6 Glendale Pl #1,"Delaware Park, Buffalo",https://www.padmapper.com/rentals/24875275p/1-bedroom-1-bath-apartment-at-6-glendale-pl-buffalo-ny-14208,"$1,600",1,1600.0,1600.0,1.0,1.0
+padmapper.com,171 Richmond Ave #6A,"Bryant, Buffalo",https://www.padmapper.com/rentals/26498235p/1-bedroom-1-bath-apartment-at-171-richmond-ave-buffalo-ny-14222,"$2,000",1,2000.0,2000.0,1.0,1.0
+padmapper.com,28 Ayrault Dr,"Buffalo, NY",https://www.padmapper.com/rentals/26478279p/3-bedroom-1-bath-apartment-at-28-ayrault-dr-buffalo-ny-14228,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,9 Roland Ave,"Buffalo, NY",https://www.padmapper.com/rentals/26670885p/2-bedroom-1-bath-apartment-at-9-roland-ave-buffalo-ny-14218,"$1,100",2,1100.0,1100.0,2.0,2.0
+padmapper.com,58 Montrose Ave,"University, Buffalo",https://www.padmapper.com/rentals/26541111p/3-bedroom-1-bath-apartment-at-58-montrose-ave-buffalo-ny-14214,"$2,400",3,2400.0,2400.0,3.0,3.0
+padmapper.com,59 Laurie Lea,"Buffalo, NY",https://www.padmapper.com/rentals/62418364/4-bedroom-2-bath-apartment-at-59-laurie-lea-buffalo-ny-14221,"$3,200",4,3200.0,3200.0,4.0,4.0
+padmapper.com,1080 Elmwood Ave #3,"Forest, Buffalo",https://www.padmapper.com/rentals/23358256p/2-bedroom-1-bath-apartment-at-1080-elmwood-ave-buffalo-ny-14222,"$1,300",2,1300.0,1300.0,2.0,2.0
+padmapper.com,41 Austin St #UPPER,"Black Rock, Buffalo",https://www.padmapper.com/rentals/23358255p/2-bedroom-1-bath-apartment-at-41-austin-st-buffalo-ny-14207,"$1,050",2,1050.0,1050.0,2.0,2.0
+padmapper.com,1250 Center Road,"Buffalo, NY",https://www.padmapper.com/buildings/p1242897/apartments-at-1250-center-rd-buffalo-ny-14224,$995,2,995.0,995.0,2.0,2.0
+padmapper.com,140 NORTH STREET,"Allen, Buffalo",https://www.padmapper.com/buildings/p876553/apartments-at-140-north-st-buffalo-ny-14201,"$1,000–$1,200",1,1000.0,1200.0,1.0,1.0
+padmapper.com,139 Bryant,"Bryant, Buffalo",https://www.padmapper.com/buildings/p327162/apartments-at-139-bryant-st-buffalo-ny-14222,"$1,695",1,1695.0,1695.0,1.0,1.0
+padmapper.com,Brand New Affordable Apartments,"Broadway - Fillmore, Buffalo",https://www.padmapper.com/buildings/p1115060/brand-new-affordable-apartments-at-950-broadway-st-buffalo-ny-14212,"$894–$1,551",Studio–2,894.0,1551.0,0.0,2.0
+padmapper.com,Amherst Gardens,"Starin Central, Buffalo",https://www.padmapper.com/buildings/p280646/amherst-gardens-apartments-at-86-e-amherst-st-buffalo-ny-14214,"$1,671–$1,775",2,1671.0,1775.0,2.0,2.0
+padmapper.com,Black Rock Freight House Lofts,"Black Rock, Buffalo",https://www.padmapper.com/buildings/p1126696/black-rock-freight-house-lofts-apartments-at-68-tonawanda-st-buffalo-ny-14207,"$1,695–$1,875",2,1695.0,1875.0,2.0,2.0
+padmapper.com,507 Niagara Apartments,"Lakeview, Buffalo",https://www.padmapper.com/buildings/p842504/507-niagara-apartments-at-507-niagara-st-buffalo-ny-14201,"$1,349–$1,899",1–2,1349.0,1899.0,1.0,2.0
+padmapper.com,Mayflower Apartments,"Bryant, Buffalo",https://www.padmapper.com/buildings/p322505/mayflower-apartments-at-66-summer-st-buffalo-ny-14209,"$1,150–$1,385",1,1150.0,1385.0,1.0,1.0
+padmapper.com,273 Richmond Avenue,"Bryant, Buffalo",https://www.padmapper.com/buildings/p1075922/apartments-at-273-richmond-ave-buffalo-ny-14222,"$1,399–$1,449",1,1399.0,1449.0,1.0,1.0
+padmapper.com,139 Fordham Dr,"Park Meadow, Buffalo",https://www.padmapper.com/rentals/521827p/3-bedroom-1-bath-apartment-at-139-fordham-dr-buffalo-ny-14216,"$1,700",3,1700.0,1700.0,3.0,3.0
+padmapper.com,24 Clay St,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26667412p/3-bedroom-1-bath-apartment-at-24-clay-st-buffalo-ny-14207,"$1,400",3,1400.0,1400.0,3.0,3.0
+padmapper.com,400 Linwood Avenue,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/buildings/p769365/apartments-at-400-linwood-ave-buffalo-ny-14209,"$1,295–$1,375",1–2,1295.0,1375.0,1.0,2.0
+padmapper.com,200 Hamburg St #UPPER,"First Ward, Buffalo",https://www.padmapper.com/rentals/25991629p/2-bedroom-1-bath-apartment-at-200-hamburg-st-buffalo-ny-14204,"$1,000",2,1000.0,1000.0,2.0,2.0
+padmapper.com,Crescendo Loft Apartments,"Forest, Buffalo",https://www.padmapper.com/buildings/p216457/crescendo-loft-apartments-at-1502-niagara-st-buffalo-ny-14213,"$1,460–$2,249",1–2,1460.0,2249.0,1.0,2.0
+padmapper.com,414 Woodward Ave,"Parkside, Buffalo",https://www.padmapper.com/rentals/26609353p/3-bedroom-1-bath-apartment-at-414-woodward-ave-buffalo-ny-14214,"$1,750",3,1750.0,1750.0,3.0,3.0
+padmapper.com,74 Franklin St #1,"Central Business District, Buffalo",https://www.padmapper.com/rentals/26664609p/1-bedroom-1-bath-apartment-at-74-franklin-st-buffalo-ny-14202,"$2,100",1,2100.0,2100.0,1.0,1.0
+padmapper.com,140 Commonwealth Ave #1,"North Park, Buffalo",https://www.padmapper.com/rentals/26253357p/3-bedroom-1-bath-apartment-at-140-commonwealth-ave-buffalo-ny-14216,"$2,800",3,2800.0,2800.0,3.0,3.0
+padmapper.com,580 Starin,"North Park, Buffalo",https://www.padmapper.com/buildings/p442065/apartments-at-580-starin-ave-buffalo-ny-14216,"$1,350",2,1350.0,1350.0,2.0,2.0
+padmapper.com,95 Inwood Pl Apt 2 #2,"Albright, Buffalo",https://www.padmapper.com/rentals/62174709/3-bedroom-1-bath-apartment-at-95-inwood-pl-apt-2-buffalo-ny-14209,"$1,895",3,1895.0,1895.0,3.0,3.0
+padmapper.com,91 Huntington Ave #5,"Starin Central, Buffalo",https://www.padmapper.com/rentals/26661941p/studio-apartment-at-91-huntington-ave-buffalo-ny-14214,"$2,000",Studio,2000.0,2000.0,0.0,0.0
+padmapper.com,298 Main St,"Central Business District, Buffalo",https://www.padmapper.com/rentals/26360543p/2-bedroom-2-bath-apartment-at-298-main-st-buffalo-ny-14202,"$2,300",2,2300.0,2300.0,2.0,2.0
+padmapper.com,795 Elmwood Avenue,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/buildings/p1424411/apartments-at-795-elmwood-ave-buffalo-ny-14222,"$1,200",1,1200.0,1200.0,1.0,1.0
+padmapper.com,583 Clinton St,"Willert Park, Buffalo",https://www.padmapper.com/rentals/25939725p/1-bedroom-1-bath-apartment-at-583-clinton-st-buffalo-ny-14210,$600,1,600.0,600.0,1.0,1.0
+padmapper.com,185 Potomac Ave Uppr,"Forest, Buffalo",https://www.padmapper.com/rentals/26658789p/3-bedroom-1-bath-apartment-at-185-potomac-ave-uppr-buffalo-ny-14213,"$1,700",3,1700.0,1700.0,3.0,3.0
+padmapper.com,227 Abbott Rd,"Abbott McKinley, Buffalo",https://www.padmapper.com/rentals/26657476p/1-bedroom-1-bath-apartment-at-227-abbott-rd-buffalo-ny-14220,$875,1,875.0,875.0,1.0,1.0
+padmapper.com,1981 Niagara St,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26654274p/2-bedroom-1-bath-apartment-at-1981-niagara-st-buffalo-ny-14207,"$1,200",2,1200.0,1200.0,2.0,2.0
+padmapper.com,80 Watson St,"Emslie, Buffalo",https://www.padmapper.com/rentals/26654275p/2-bedroom-1-bath-apartment-at-80-watson-st-buffalo-ny-14206,"$1,200",2,1200.0,1200.0,2.0,2.0
+padmapper.com,90 North Pearl Street,"Allen, Buffalo",https://www.padmapper.com/buildings/p750604/apartments-at-90-n-pearl-st-buffalo-ny-14202,$900–$995,Studio–1,900.0,995.0,0.0,1.0
+padmapper.com,43 Ullman St #1,"Riverside Park, Buffalo",https://www.padmapper.com/rentals/19131335p/3-bedroom-1-bath-apartment-at-43-ullman-st-buffalo-ny-14207,"$1,200",3,1200.0,1200.0,3.0,3.0
+padmapper.com,28 Tuxedo Pl #UPPER,"Military, Buffalo",https://www.padmapper.com/rentals/18302082p/2-bedroom-1-bath-apartment-at-28-tuxedo-pl-buffalo-ny-14207,"$1,100",2,1100.0,1100.0,2.0,2.0
+padmapper.com,132 Blaine Ave,"Hamlin Park, Buffalo",https://www.padmapper.com/rentals/24025720p/3-bedroom-1-bath-apartment-at-132-blaine-ave-buffalo-ny-14208,"$1,245",3,1245.0,1245.0,3.0,3.0
+padmapper.com,49 Hughes Ave,"Hamlin Park, Buffalo",https://www.padmapper.com/rentals/20907134p/4-bedroom-1-bath-apartment-at-49-hughes-ave-buffalo-ny-14208,"$1,740",4,1740.0,1740.0,4.0,4.0
+padmapper.com,15-19 East Utica St,"Masten Park, Buffalo",https://www.padmapper.com/buildings/p716410/15-19-east-utica-st-apartments-at-19-e-utica-st-buffalo-ny-14209,"$1,300",2,1300.0,1300.0,2.0,2.0
+padmapper.com,252 Ontario,"Riverside Park, Buffalo",https://www.padmapper.com/buildings/p329585/apartments-at-252-ontario-st-buffalo-ny-14207,$750,1,750.0,750.0,1.0,1.0
+padmapper.com,257 Lafayette Avenue,"Grant Ferry, Buffalo",https://www.padmapper.com/buildings/p1129968/apartments-at-257-lafayette-ave-buffalo-ny-14213,"$1,350",2,1350.0,1350.0,2.0,2.0
+padmapper.com,Angle-Tyler Apartments,"University, Buffalo",https://www.padmapper.com/buildings/p1311297/angle-tyler-apartments-at-2-angle-st-buffalo-ny-14214,"$1,175–$1,295",2,1175.0,1295.0,2.0,2.0
+padmapper.com,253 Shirley Avenue,"LaSalle, Buffalo",https://www.padmapper.com/buildings/p276064/apartments-at-253-shirley-ave-buffalo-ny-14215,"$1,500–$1,600",3,1500.0,1600.0,3.0,3.0
+padmapper.com,183 Jewett Parkway,"Parkside, Buffalo",https://www.padmapper.com/buildings/p108503/apartments-at-183-jewett-pkwy-buffalo-ny-14214,$750,Studio,750.0,750.0,0.0,0.0
+padmapper.com,3 Dewitt Street,"Grant Ferry, Buffalo",https://www.padmapper.com/buildings/p888265/apartments-at-3-dewitt-st-buffalo-ny-14213,"$950–$1,000",2,950.0,1000.0,2.0,2.0
+padmapper.com,The Goodyear Mansion & Residences,"Bryant, Buffalo",https://www.padmapper.com/buildings/p1038104/the-goodyear-mansion-residences-apartments-at-888-delaware-ave-buffalo-ny-14209,"$1,350–$1,850",Studio–1,1350.0,1850.0,0.0,1.0
+padmapper.com,The Glenny - 251 Main St.,"Central Business District, Buffalo",https://www.padmapper.com/buildings/p49476/the-glenny-251-main-st-apartments-at-251-main-st-buffalo-ny-14203,"$1,560",1,1560.0,1560.0,1.0,1.0
+padmapper.com,133 Elmwood Avenue,"Allen, Buffalo",https://www.padmapper.com/buildings/p881114/apartments-at-133-elmwood-ave-buffalo-ny-14201,"$1,250",2,1250.0,1250.0,2.0,2.0
+padmapper.com,104 Lewis St,"Babcock, Buffalo",https://www.padmapper.com/buildings/p237990/apartments-at-104-lewis-st-buffalo-ny-14206,$620,1,620.0,620.0,1.0,1.0
+padmapper.com,30 Sunrise Drive,"Buffalo, NY",https://www.padmapper.com/buildings/p1307403/apartments-at-30-sunrise-dr-buffalo-ny-14219,"$1,250",2,1250.0,1250.0,2.0,2.0
+padmapper.com,Cottage Street Lofts,"Lakeview, Buffalo",https://www.padmapper.com/buildings/p724140/cottage-street-lofts-apartments-at-118-cottage-st-buffalo-ny-14201,"$1,495–$1,550",1,1495.0,1550.0,1.0,1.0
+padmapper.com,Days Park Commons,"Allen, Buffalo",https://www.padmapper.com/buildings/p340965/days-park-commons-apartments-at-68-days-park-buffalo-ny-14201,"$1,295–$1,500",2,1295.0,1500.0,2.0,2.0
+padmapper.com,76 Saint James Pl,"Albright, Buffalo",https://www.padmapper.com/rentals/26650760p/3-bedroom-1-bath-apartment-at-76-saint-james-pl-buffalo-ny-14222,"$1,700",3,1700.0,1700.0,3.0,3.0
+padmapper.com,97 Arden Ave,"Kenfield, Buffalo",https://www.padmapper.com/rentals/26650759p/3-bedroom-1-bath-apartment-at-97-arden-ave-buffalo-ny-14215,"$1,400",3,1400.0,1400.0,3.0,3.0
+padmapper.com,Axis 360,"LaSalle, Buffalo",https://www.padmapper.com/buildings/p462446/axis-360-apartments-at-89-lasalle-ave-buffalo-ny-14214,"$1,339",1,1339.0,1339.0,1.0,1.0
+padmapper.com,Elmwood Village Flat,"Forest, Buffalo",https://www.padmapper.com/buildings/p855061/elmwood-village-flat-apartments-at-baynes-st-bird-ave-buffalo-ny-14213,$700,2,700.0,700.0,2.0,2.0
+padmapper.com,Colvin Gardens Apartments,"North Park, Buffalo",https://www.padmapper.com/buildings/p480464/colvin-gardens-apartments-at-601-colvin-ave-buffalo-ny-14216,"$1,095–$1,195",2,1095.0,1195.0,2.0,2.0
+padmapper.com,905 Delaware Apartments,"Bryant, Buffalo",https://www.padmapper.com/buildings/p38635/905-delaware-apartments-at-905-delaware-ave-buffalo-ny-14209,"$1,425–$1,725",2,1425.0,1725.0,2.0,2.0
+padmapper.com,"Vibrant Elmwood Village Living: 1008 Elmwood Ave. Buffalo, NY 14222","Forest, Buffalo",https://www.padmapper.com/buildings/p1000203/vibrant-elmwood-village-living-1008-elmwood-ave-buffalo-ny-14222-apartments-at-1008-elmwood-ave-buffalo-ny-14222,"$1,525",2,1525.0,1525.0,2.0,2.0
+padmapper.com,185 York St Unit 1 #1,"Bryant, Buffalo",https://www.padmapper.com/rentals/62560826/2-bedroom-2-bath-apartment-at-185-york-st-unit-1-buffalo-ny-14213,"$2,100",2,2100.0,2100.0,2.0,2.0
+padmapper.com,2917 Main St,"Starin Central, Buffalo",https://www.padmapper.com/rentals/26375155p/2-bedroom-2-bath-apartment-at-2917-main-st-buffalo-ny-14214,"$1,900",2,1900.0,1900.0,2.0,2.0
+padmapper.com,38 Peck St,"Lovejoy, Buffalo",https://www.padmapper.com/buildings/p1341705/apartments-at-38-peck-st-buffalo-ny-14212,"$1,100",3,1100.0,1100.0,3.0,3.0
+padmapper.com,739 Elmwood Ave #2F,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/26087816p/1-bedroom-1-bath-apartment-at-739-elmwood-ave-buffalo-ny-14222,"$1,295",1,1295.0,1295.0,1.0,1.0
+padmapper.com,17 15th St.,"Front Park, Buffalo",https://www.padmapper.com/buildings/p981916/apartments-at-17-15th-st-buffalo-ny-14213,"$1,200–$1,300",3,1200.0,1300.0,3.0,3.0
+padmapper.com,733 West Delavan,"Albright, Buffalo",https://www.padmapper.com/buildings/p326052/apartments-at-733-w-delavan-ave-buffalo-ny-14222,"$2,585",2,2585.0,2585.0,2.0,2.0
+padmapper.com,Elliott Apartments,"Bryant, Buffalo",https://www.padmapper.com/buildings/p328553/elliott-apartments-at-171-linwood-ave-buffalo-ny-14209,"$1,495",2,1495.0,1495.0,2.0,2.0
+padmapper.com,20 Schuele Ave,"Grider, Buffalo",https://www.padmapper.com/buildings/p1031042/apartments-at-20-schuele-ave-buffalo-ny-14215,"$1,000",3,1000.0,1000.0,3.0,3.0
+padmapper.com,100 York Street,"Front Park, Buffalo",https://www.padmapper.com/buildings/p1133582/apartments-at-100-york-st-buffalo-ny-14213,"$1,250",2,1250.0,1250.0,2.0,2.0
+padmapper.com,387 Forest Ave,"Forest, Buffalo",https://www.padmapper.com/rentals/26642975p/2-bedroom-1-bath-apartment-at-387-forest-ave-buffalo-ny-14213,"$1,600",2,1600.0,1600.0,2.0,2.0
+padmapper.com,Summer Elms,"Bryant, Buffalo",https://www.padmapper.com/buildings/p328552/summer-elms-apartments-at-217-summer-st-buffalo-ny-14222,"$2,100",Studio,2100.0,2100.0,0.0,0.0
+padmapper.com,3920 Ridge Lea Rd #C,"Buffalo, NY",https://www.padmapper.com/rentals/26642755p/2-bedroom-1-bath-apartment-at-3920-ridge-lea-rd-buffalo-ny-14228,"$1,350",2,1350.0,1350.0,2.0,2.0
+padmapper.com,38 Goulding Ave,"Hamlin Park, Buffalo",https://www.padmapper.com/rentals/18255900p/3-bedroom-1-bath-apartment-at-38-goulding-ave-buffalo-ny-14208,"$1,100",3,1100.0,1100.0,3.0,3.0
+padmapper.com,155 Colvin Ave,"North Park, Buffalo",https://www.padmapper.com/rentals/4036594p/3-bedroom-1-bath-apartment-at-155-colvin-ave-buffalo-ny-14216,"$1,700",3,1700.0,1700.0,3.0,3.0
+padmapper.com,5 Rugby Road,"North Park, Buffalo",https://www.padmapper.com/buildings/p1414780/apartments-at-5-rugby-rd-buffalo-ny-14216,$975,Studio,975.0,975.0,0.0,0.0
+padmapper.com,36 Fairfield Street,"Starin Central, Buffalo",https://www.padmapper.com/buildings/1662289/apartments-at-36-buffalo-ny-14214,"$1,600",3,1600.0,1600.0,3.0,3.0
+padmapper.com,86 Hawley Street,"Forest, Buffalo",https://www.padmapper.com/buildings/p1262362/apartments-at-86-hawley-st-buffalo-ny-14213,"$1,250",3,1250.0,1250.0,3.0,3.0
+padmapper.com,132 Lakefront Blvd Unit 105 #105,"Waterfront, Buffalo",https://www.padmapper.com/rentals/25321365p/2-bedroom-2-bath-apartment-at-132-lakefront-blvd-unit-105-buffalo-ny-14202,"$2,885",2,2885.0,2885.0,2.0,2.0
+padmapper.com,202 N Ogden St Unit W #W,"Lovejoy, Buffalo",https://www.padmapper.com/rentals/26639571p/4-bedroom-1-bath-apartment-at-202-n-ogden-st-unit-w-buffalo-ny-14206,"$1,700",4,1700.0,1700.0,4.0,4.0
+padmapper.com,63 63 Claremont Avenue unit: Upper #UPPER,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/62639038/3-bedroom-1-bath-apartment-at-63-63-claremont-avenue-unit-upper-buffalo-ny-14222,"$1,800",3,1800.0,1800.0,3.0,3.0
+padmapper.com,71 Minnesota Ave,"LaSalle, Buffalo",https://www.padmapper.com/rentals/23902238p/3-bedroom-1-bath-apartment-at-71-minnesota-ave-buffalo-ny-14214,"$1,400",3,1400.0,1400.0,3.0,3.0
+padmapper.com,Delaware Ave Apartments,"Park Meadow, Buffalo",https://www.padmapper.com/buildings/p1285413/delaware-ave-apartments-at-1998-delaware-ave-buffalo-ny-14216,"$1,125",1,1125.0,1125.0,1.0,1.0
+padmapper.com,50 Edson St #2,"Cazenovia Park, Buffalo",https://www.padmapper.com/rentals/26638812p/3-bedroom-1-bath-apartment-at-50-edson-st-buffalo-ny-14210,$975,3,975.0,975.0,3.0,3.0
+padmapper.com,346 Connecticut Street,"Front Park, Buffalo",https://www.padmapper.com/buildings/p1133581/apartments-at-346-connecticut-st-buffalo-ny-14213,"$1,195",1,1195.0,1195.0,1.0,1.0
+padmapper.com,DelNord,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/buildings/p321609/delnord-apartments-at-1149-delaware-ave-buffalo-ny-14209,"$1,485–$1,650",1,1485.0,1650.0,1.0,1.0
+padmapper.com,Now Leasing,"Allen, Buffalo",https://www.padmapper.com/buildings/p846236/now-leasing-apartments-at-26-irving-pl-buffalo-ny-14201,"$1,255",1,1255.0,1255.0,1.0,1.0
+padmapper.com,166 Crowley Avenue,"Riverside Park, Buffalo",https://www.padmapper.com/buildings/p888264/apartments-at-166-crowley-ave-buffalo-ny-14207,"$1,000",2,1000.0,1000.0,2.0,2.0
+padmapper.com,1920 Niagara Street,"Black Rock, Buffalo",https://www.padmapper.com/buildings/p630107/apartments-at-1920-niagara-st-buffalo-ny-14207,"$1,199",3,1199.0,1199.0,3.0,3.0
+padmapper.com,The Elmwood Village Apartments,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/buildings/p328765/the-elmwood-village-apartments-at-715-elmwood-ave-buffalo-ny-14222,"$1,750",1,1750.0,1750.0,1.0,1.0
+padmapper.com,107 Herkimer St,"Grant Ferry, Buffalo",https://www.padmapper.com/buildings/p605903/apartments-at-107-herkimer-st-buffalo-ny-14213,"$950–$1,300",2–3,950.0,1300.0,2.0,3.0
+padmapper.com,74 Loepere St,"Broadway - Fillmore, Buffalo",https://www.padmapper.com/rentals/16512525p/2-bedroom-1-bath-apartment-at-74-loepere-st-buffalo-ny-14212,$750,2,750.0,750.0,2.0,2.0
+padmapper.com,408 408 Hoyt Street unit: Upper #UPPER,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/26632370p/3-bedroom-1-bath-apartment-at-408-408-hoyt-street-unit-upper-buffalo-ny-14213,"$1,800",3,1800.0,1800.0,3.0,3.0
+padmapper.com,215 Allen St #2,"Allen, Buffalo",https://www.padmapper.com/rentals/26461236p/3-bedroom-1-bath-apartment-at-215-allen-st-buffalo-ny-14201,"$1,475",3,1475.0,1475.0,3.0,3.0
+padmapper.com,1943 Niagara St #2,"Black Rock, Buffalo",https://www.padmapper.com/rentals/19956097p/3-bedroom-1-bath-apartment-at-1943-niagara-st-buffalo-ny-14207,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,550 Busti Ave #1,"Front Park, Buffalo",https://www.padmapper.com/rentals/18821311p/3-bedroom-2-bath-apartment-at-550-busti-ave-buffalo-ny-14201,"$1,600",3,1600.0,1600.0,3.0,3.0
+padmapper.com,100 Woodward Ave,"Delaware Park, Buffalo",https://www.padmapper.com/rentals/26630095p/1-bedroom-1-bath-apartment-at-100-woodward-ave-buffalo-ny-14214,"$1,275",1,1275.0,1275.0,1.0,1.0
+padmapper.com,638 Hertel Ave,"Military, Buffalo",https://www.padmapper.com/rentals/26580707p/1-bedroom-1-bath-apartment-at-638-hertel-ave-buffalo-ny-14207,"$1,095",1,1095.0,1095.0,1.0,1.0
+padmapper.com,333 Lafayette Ave,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/26629143p/2-bedroom-1-bath-apartment-at-333-lafayette-ave-buffalo-ny-14213,"$1,600",2,1600.0,1600.0,2.0,2.0
+padmapper.com,144 Cottage St #REAR,"Lakeview, Buffalo",https://www.padmapper.com/rentals/26129772p/2-bedroom-1-bath-apartment-at-144-cottage-st-buffalo-ny-14201,"$1,295",2,1295.0,1295.0,2.0,2.0
+padmapper.com,281 Crestwood Ave,"North Park, Buffalo",https://www.padmapper.com/rentals/26628546p/2-bedroom-1-bath-apartment-at-281-crestwood-ave-buffalo-ny-14216,"$1,395",2,1395.0,1395.0,2.0,2.0
+padmapper.com,4256 North St #2,"Buffalo, NY",https://www.padmapper.com/rentals/26628544p/1-bedroom-1-bath-apartment-at-4256-north-st-buffalo-ny-14219,"$1,200",1,1200.0,1200.0,1.0,1.0
+padmapper.com,1115 Delaware Ave Apt 3rd #3rdFL,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/26399903p/3-bedroom-2-bath-apartment-at-1115-delaware-ave-apt-3rd-buffalo-ny-14209,"$2,600",3,2600.0,2600.0,3.0,3.0
+padmapper.com,2099 Niagara St #2,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26295586p/2-bedroom-1-bath-apartment-at-2099-niagara-st-buffalo-ny-14207,"$1,197",2,1197.0,1197.0,2.0,2.0
+padmapper.com,269 Whitney Pl #UPPER,"Lakeview, Buffalo",https://www.padmapper.com/rentals/26238557p/2-bedroom-1-bath-apartment-at-269-whitney-pl-buffalo-ny-14201,"$1,095",2,1095.0,1095.0,2.0,2.0
+padmapper.com,84 10th St #1,"Lakeview, Buffalo",https://www.padmapper.com/rentals/10606762p/3-bedroom-1-bath-apartment-at-84-10th-st-buffalo-ny-14201,$995,3,995.0,995.0,3.0,3.0
+padmapper.com,23 Allen St #304,1 Bathroom Apartment,https://www.padmapper.com/rentals/16718027p/studio-1-bath-apartment-at-23-allen-st-buffalo-ny-14202,$995,Studio,995.0,995.0,0.0,0.0
+padmapper.com,44 Magnolia St,"Buffalo, NY",https://www.padmapper.com/rentals/26444537p/3-bedroom-1-bath-apartment-at-44-magnolia-st-buffalo-ny-14218,"$1,500",3,1500.0,1500.0,3.0,3.0
+padmapper.com,51 Johnson Park Unit Rear #REAR,"Columbus, Buffalo",https://www.padmapper.com/rentals/24742962p/2-bedroom-1-bath-apartment-at-51-johnson-park-unit-rear-buffalo-ny-14201,"$1,450",2,1450.0,1450.0,2.0,2.0
+padmapper.com,89 Johnson Park Unit 4 #4,"Columbus, Buffalo",https://www.padmapper.com/rentals/25046476p/1-bedroom-1-bath-apartment-at-89-johnson-park-unit-4-buffalo-ny-14201,"$1,050",1,1050.0,1050.0,1.0,1.0
+padmapper.com,24 Tracy St Unit A #A,"Central Business District, Buffalo",https://www.padmapper.com/rentals/23818026p/2-bedroom-2-bath-apartment-at-24-tracy-st-unit-a-buffalo-ny-14201,"$1,600",2,1600.0,1600.0,2.0,2.0
+padmapper.com,75 Johnson Park Unit 2 #2,"Columbus, Buffalo",https://www.padmapper.com/rentals/23244194p/2-bedroom-2-bath-apartment-at-75-johnson-park-unit-2-buffalo-ny-14201,"$1,600",2,1600.0,1600.0,2.0,2.0
+padmapper.com,46 Blum Ave,"Military, Buffalo",https://www.padmapper.com/rentals/26408949p/3-bedroom-1-bath-apartment-at-46-blum-ave-buffalo-ny-14216,"$1,500",3,1500.0,1500.0,3.0,3.0
+padmapper.com,244 Virginia St,"Lakeview, Buffalo",https://www.padmapper.com/rentals/26460093p/3-bedroom-1-bath-apartment-at-244-virginia-st-buffalo-ny-14201,"$1,600",3,1600.0,1600.0,3.0,3.0
+padmapper.com,2547 2547 William Street unit: Right #RIGHT,"Kaisertown, Buffalo",https://www.padmapper.com/rentals/26526677p/2-bedroom-1-bath-apartment-at-2547-2547-william-street-unit-right-buffalo-ny-14206,"$1,300",2,1300.0,1300.0,2.0,2.0
+padmapper.com,325 Box Ave,"MLK Park, Buffalo",https://www.padmapper.com/rentals/26650754p/2-bedroom-1-bath-apartment-at-325-box-ave-buffalo-ny-14211,"$1,000",2,1000.0,1000.0,2.0,2.0
+padmapper.com,93 Baynes St #2,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/24947228p/2-bedroom-1-bath-apartment-at-93-baynes-st-buffalo-ny-14213,"$2,000",2,2000.0,2000.0,2.0,2.0
+padmapper.com,68 Prospect Ave Unit 3 #3,"Columbus, Buffalo",https://www.padmapper.com/rentals/23791232p/1-bedroom-1-bath-apartment-at-68-prospect-ave-unit-3-buffalo-ny-14201,"$1,195",1,1195.0,1195.0,1.0,1.0
+padmapper.com,328 15th St #1,"Front Park, Buffalo",https://www.padmapper.com/rentals/26609311p/3-bedroom-1-bath-apartment-at-328-15th-st-buffalo-ny-14213,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,24 Briggs Ave,"Riverside Park, Buffalo",https://www.padmapper.com/rentals/26595576p/2-bedroom-1-bath-apartment-at-24-briggs-ave-buffalo-ny-14207,"$1,325",2,1325.0,1325.0,2.0,2.0
+padmapper.com,63 Oakland Pl #3,"Bryant, Buffalo",https://www.padmapper.com/rentals/26621372p/3-bedroom-2-bath-apartment-at-63-oakland-pl-buffalo-ny-14222,"$3,725",3,3725.0,3725.0,3.0,3.0
+padmapper.com,4256 North St #1,"Buffalo, NY",https://www.padmapper.com/rentals/26599055p/2-bedroom-1-bath-apartment-at-4256-north-st-buffalo-ny-14219,"$1,400",2,1400.0,1400.0,2.0,2.0
+padmapper.com,522 Amherst St #2,"Black Rock, Buffalo",https://www.padmapper.com/rentals/24870911p/1-bedroom-1-bath-apartment-at-522-amherst-st-buffalo-ny-14207,"$1,000",1,1000.0,1000.0,1.0,1.0
+padmapper.com,800 W Ferry St #2AA,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/12918467p/1-bedroom-1-bath-apartment-at-800-w-ferry-st-buffalo-ny-14222,"$1,700",1,1700.0,1700.0,1.0,1.0
+padmapper.com,526 Capen Blvd,"Buffalo, NY",https://www.padmapper.com/rentals/26313143p/3-bedroom-1-bath-apartment-at-526-capen-blvd-buffalo-ny-14226,"$1,900",3,1900.0,1900.0,3.0,3.0
+padmapper.com,36 Kamper Ave,"Cazenovia Park, Buffalo",https://www.padmapper.com/rentals/26602083p/3-bedroom-1-bath-apartment-at-36-kamper-ave-buffalo-ny-14210,"$1,350",3,1350.0,1350.0,3.0,3.0
+padmapper.com,467 Fargo Ave #1,"Front Park, Buffalo",https://www.padmapper.com/rentals/20812484p/1-bedroom-1-bath-apartment-at-467-fargo-ave-buffalo-ny-14213,$900,1,900.0,900.0,1.0,1.0
+padmapper.com,64 Weyand Ave #1,"Cazenovia Park, Buffalo",https://www.padmapper.com/rentals/19196093p/3-bedroom-1-bath-apartment-at-64-weyand-ave-buffalo-ny-14210,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,27 Fargo Ave #1,"Lakeview, Buffalo",https://www.padmapper.com/rentals/26601681p/3-bedroom-1-bath-apartment-at-27-fargo-ave-buffalo-ny-14201,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,144 Cottage St #LOWER,"Lakeview, Buffalo",https://www.padmapper.com/rentals/26600864p/2-bedroom-1-bath-apartment-at-144-cottage-st-buffalo-ny-14201,"$1,275",2,1275.0,1275.0,2.0,2.0
+padmapper.com,50 Getzville Rd,"Buffalo, NY",https://www.padmapper.com/rentals/19207280p/2-bedroom-1-bath-apartment-at-50-getzville-rd-buffalo-ny-14226,"$1,670",2,1670.0,1670.0,2.0,2.0
+padmapper.com,39 Halwill Dr,"Buffalo, NY",https://www.padmapper.com/rentals/9187315p/3-bedroom-1-bath-apartment-at-39-halwill-dr-buffalo-ny-14226,"$2,200",3,2200.0,2200.0,3.0,3.0
+padmapper.com,364 Gibson St,"Broadway - Fillmore, Buffalo",https://www.padmapper.com/rentals/26599318p/2-bedroom-1-bath-apartment-at-364-gibson-st-buffalo-ny-14212,$950,2,950.0,950.0,2.0,2.0
+padmapper.com,282 E Delavan Ave Unit N #N,"Hamlin Park, Buffalo",https://www.padmapper.com/rentals/62578928/3-bedroom-1-bath-apartment-at-282-e-delavan-ave-unit-n-buffalo-ny-14208,"$1,200",3,1200.0,1200.0,3.0,3.0
+padmapper.com,602 West Ave,"Front Park, Buffalo",https://www.padmapper.com/rentals/26599314p/2-bedroom-1-bath-apartment-at-602-west-ave-buffalo-ny-14213,$900,2,900.0,900.0,2.0,2.0
+padmapper.com,7 Robin Rd,"Buffalo, NY",https://www.padmapper.com/rentals/26521400p/3-bedroom-1-bath-apartment-at-7-robin-rd-buffalo-ny-14228,"$2,000",3,2000.0,2000.0,3.0,3.0
+padmapper.com,644 Columbus Pkwy #FL1,"Front Park, Buffalo",https://www.padmapper.com/rentals/22263952p/4-bedroom-1-bath-apartment-at-644-columbus-pkwy-buffalo-ny-14213,"$1,450",4,1450.0,1450.0,4.0,4.0
+padmapper.com,357 Hoyt St #3,"Forest, Buffalo",https://www.padmapper.com/rentals/23904421p/3-bedroom-1-bath-apartment-at-357-hoyt-st-buffalo-ny-14213,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,232 Dewitt St #2,"Forest, Buffalo",https://www.padmapper.com/rentals/26182561p/3-bedroom-1-bath-apartment-at-232-dewitt-st-buffalo-ny-14213,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,2103 Niagara St #1,"Black Rock, Buffalo",https://www.padmapper.com/rentals/25975378p/2-bedroom-1-bath-apartment-at-2103-niagara-st-buffalo-ny-14207,"$1,000",2,1000.0,1000.0,2.0,2.0
+padmapper.com,177 Garner Ave #1,"Forest, Buffalo",https://www.padmapper.com/rentals/18557969p/2-bedroom-1-bath-apartment-at-177-garner-ave-buffalo-ny-14213,"$1,100",2,1100.0,1100.0,2.0,2.0
+padmapper.com,35 Groton Dr Unit G #G,"Buffalo, NY",https://www.padmapper.com/rentals/26066414p/2-bedroom-1-bath-apartment-at-35-groton-dr-unit-g-buffalo-ny-14228,"$1,800",2,1800.0,1800.0,2.0,2.0
+padmapper.com,1704 Abbott Rd,"Buffalo, NY",https://www.padmapper.com/rentals/26593037p/1-bedroom-1-bath-apartment-at-1704-abbott-rd-buffalo-ny-14218,"$1,000",1,1000.0,1000.0,1.0,1.0
+padmapper.com,793 Tifft St,"Triangle, Buffalo",https://www.padmapper.com/rentals/26593032p/3-bedroom-1-bath-apartment-at-793-tifft-st-buffalo-ny-14220,"$1,100",3,1100.0,1100.0,3.0,3.0
+padmapper.com,135 Park St Street,"Lakeview, Buffalo",https://www.padmapper.com/rentals/62570339/3-bedroom-1-bath-apartment-at-135-park-st-street-buffalo-ny-14201,"$1,895",3,1895.0,1895.0,3.0,3.0
+padmapper.com,1589 Center Rd,"Buffalo, NY",https://www.padmapper.com/rentals/26592972p/3-bedroom-2-bath-apartment-at-1589-center-rd-buffalo-ny-14224,"$2,500",3,2500.0,2500.0,3.0,3.0
+padmapper.com,137 Lockwood Ave #LOWER,"South Park, Buffalo",https://www.padmapper.com/rentals/26591878p/2-bedroom-1-bath-apartment-at-137-lockwood-ave-buffalo-ny-14220,"$1,050",2,1050.0,1050.0,2.0,2.0
+padmapper.com,35 Tomcyn Dr,"Buffalo, NY",https://www.padmapper.com/rentals/25819883p/4-bedroom-1-bath-apartment-at-35-tomcyn-dr-buffalo-ny-14221,"$2,350",4,2350.0,2350.0,4.0,4.0
+padmapper.com,148 Northland Ave #1,"Cold Springs, Buffalo",https://www.padmapper.com/rentals/26588274p/3-bedroom-1-bath-apartment-at-148-northland-ave-buffalo-ny-14208,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,148 Northland Ave #2,"Cold Springs, Buffalo",https://www.padmapper.com/rentals/26588275p/3-bedroom-1-bath-apartment-at-148-northland-ave-buffalo-ny-14208,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,32 Elmwood Ave #2,"Allen, Buffalo",https://www.padmapper.com/rentals/11352872p/3-bedroom-1-bath-apartment-at-32-elmwood-ave-buffalo-ny-14201,"$1,500",3,1500.0,1500.0,3.0,3.0
+padmapper.com,11 Bradenham Pl,"Buffalo, NY",https://www.padmapper.com/rentals/62560827/4-bedroom-2-bath-apartment-at-11-bradenham-pl-buffalo-ny-14226,"$3,300",4,3300.0,3300.0,4.0,4.0
+padmapper.com,67 Greenfield Street #3,"Parkside, Buffalo",https://www.padmapper.com/rentals/22156465p/1-bedroom-1-bath-apartment-at-67-greenfield-street-buffalo-ny-14214,"$1,195",1,1195.0,1195.0,1.0,1.0
+padmapper.com,115 Burke Dr,"Kensington, Buffalo",https://www.padmapper.com/rentals/26578678p/3-bedroom-1-bath-apartment-at-115-burke-dr-buffalo-ny-14215,"$1,400",3,1400.0,1400.0,3.0,3.0
+padmapper.com,89 Trinity Pl #UPPER,"Allen, Buffalo",https://www.padmapper.com/rentals/26402242p/2-bedroom-1-bath-apartment-at-89-trinity-pl-buffalo-ny-14201,"$1,600",2,1600.0,1600.0,2.0,2.0
+padmapper.com,226 Longnecker St,"Lovejoy, Buffalo",https://www.padmapper.com/rentals/25830201p/3-bedroom-1-bath-apartment-at-226-longnecker-st-buffalo-ny-14206,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,411 Norwood Ave,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/26493554p/2-bedroom-2-bath-apartment-at-411-norwood-ave-buffalo-ny-14222,"$2,100",2,2100.0,2100.0,2.0,2.0
+padmapper.com,82 Colette Ave,"Buffalo, NY",https://www.padmapper.com/rentals/24782003p/3-bedroom-1-bath-apartment-at-82-colette-ave-buffalo-ny-14227,"$1,400",3,1400.0,1400.0,3.0,3.0
+padmapper.com,62 Tracy St,"Columbus, Buffalo",https://www.padmapper.com/rentals/20674513p/2-bedroom-1-bath-apartment-at-62-tracy-st-buffalo-ny-14201,"$2,250",2,2250.0,2250.0,2.0,2.0
+padmapper.com,142 W Ferry St ##2,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/26564217p/3-bedroom-1-bath-apartment-at-142-w-ferry-st-buffalo-ny-14213,"$1,350",3,1350.0,1350.0,3.0,3.0
+padmapper.com,1685 Hertel Ave #A304,"North Park, Buffalo",https://www.padmapper.com/rentals/26087644p/2-bedroom-2-bath-apartment-at-1685-hertel-ave-buffalo-ny-14216,"$1,800",2,1800.0,1800.0,2.0,2.0
+padmapper.com,19 Richfield Ave #1stFL,"Abbott McKinley, Buffalo",https://www.padmapper.com/rentals/26559787p/3-bedroom-1-bath-apartment-at-19-richfield-ave-buffalo-ny-14220,"$1,495",3,1495.0,1495.0,3.0,3.0
+padmapper.com,20 Marion St #4,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26558004p/2-bedroom-1-bath-apartment-at-20-marion-st-buffalo-ny-14207,"$1,250",2,1250.0,1250.0,2.0,2.0
+padmapper.com,20 Marion St #3,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26558005p/2-bedroom-1-bath-apartment-at-20-marion-st-buffalo-ny-14207,"$1,295",2,1295.0,1295.0,2.0,2.0
+padmapper.com,20 Marion St #6,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26558003p/2-bedroom-1-bath-apartment-at-20-marion-st-buffalo-ny-14207,"$1,250",2,1250.0,1250.0,2.0,2.0
+padmapper.com,160 Courtland Ave #2,"Kenfield, Buffalo",https://www.padmapper.com/rentals/25920236p/2-bedroom-1-bath-apartment-at-160-courtland-ave-buffalo-ny-14215,$925,2,925.0,925.0,2.0,2.0
+padmapper.com,98 Rano St #3,"Riverside Park, Buffalo",https://www.padmapper.com/rentals/26557768p/3-bedroom-1-bath-apartment-at-98-rano-st-buffalo-ny-14207,"$1,250",3,1250.0,1250.0,3.0,3.0
+padmapper.com,3952 Ridge Lea Rd #NA,"Buffalo, NY",https://www.padmapper.com/rentals/26556460p/2-bedroom-1-bath-apartment-at-3952-ridge-lea-rd-buffalo-ny-14228,"$1,500",2,1500.0,1500.0,2.0,2.0
+padmapper.com,378 Florida St,"Hamlin Park, Buffalo",https://www.padmapper.com/rentals/24742275p/3-bedroom-1-bath-apartment-at-378-florida-st-buffalo-ny-14208,"$1,700",3,1700.0,1700.0,3.0,3.0
+padmapper.com,179 Florida St #UPPER,"Hamlin Park, Buffalo",https://www.padmapper.com/rentals/26540443p/3-bedroom-1-bath-apartment-at-179-florida-st-buffalo-ny-14208,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,123 Gibson St,"Broadway - Fillmore, Buffalo",https://www.padmapper.com/rentals/26544600p/3-bedroom-1-bath-apartment-at-123-gibson-st-buffalo-ny-14212,"$1,200",3,1200.0,1200.0,3.0,3.0
+padmapper.com,173 173 Grote Street unit: Upper #UPPER,"Riverside Park, Buffalo",https://www.padmapper.com/rentals/26544599p/2-bedroom-1-bath-apartment-at-173-173-grote-street-unit-upper-buffalo-ny-14207,"$1,200",2,1200.0,1200.0,2.0,2.0
+padmapper.com,40 Krakow St #2,"Kaisertown, Buffalo",https://www.padmapper.com/rentals/9719560p/3-bedroom-1-bath-apartment-at-40-krakow-st-buffalo-ny-14206,"$1,095",3,1095.0,1095.0,3.0,3.0
+padmapper.com,36 Hirschbeck St,"Emerson, Buffalo",https://www.padmapper.com/rentals/62508185/2-bedroom-1-bath-apartment-at-36-hirschbeck-st-buffalo-ny-14212,"$1,025",2,1025.0,1025.0,2.0,2.0
+padmapper.com,118 Rother Ave ##Rear,"Broadway - Fillmore, Buffalo",https://www.padmapper.com/rentals/62508181/2-bedroom-1-bath-apartment-at-118-rother-ave-buffalo-ny-14212,"$1,125",2,1125.0,1125.0,2.0,2.0
+padmapper.com,666 Auburn Ave Unit 1 #1,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/26537715p/4-bedroom-2-bath-apartment-at-666-auburn-ave-unit-1-buffalo-ny-14222,"$3,600",4,3600.0,3600.0,4.0,4.0
+padmapper.com,26 Custer St #2BACK,"LaSalle, Buffalo",https://www.padmapper.com/rentals/23154184p/2-bedroom-1-bath-apartment-at-26-custer-st-buffalo-ny-14214,"$1,300",2,1300.0,1300.0,2.0,2.0
+padmapper.com,367 Connecticut St #2,"Front Park, Buffalo",https://www.padmapper.com/rentals/26448607p/2-bedroom-2-bath-apartment-at-367-connecticut-st-buffalo-ny-14213,"$2,800",2,2800.0,2800.0,2.0,2.0
+padmapper.com,128 Rhode Island St #1,"Front Park, Buffalo",https://www.padmapper.com/rentals/21337016p/2-bedroom-1-bath-apartment-at-128-rhode-island-st-buffalo-ny-14213,"$1,000",2,1000.0,1000.0,2.0,2.0
+padmapper.com,26 Custer St #2,"LaSalle, Buffalo",https://www.padmapper.com/rentals/23323018p/2-bedroom-1-bath-apartment-at-26-custer-st-buffalo-ny-14214,"$1,300",2,1300.0,1300.0,2.0,2.0
+padmapper.com,162 Harvard Pl,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/19140769p/2-bedroom-1-bath-apartment-at-162-harvard-pl-buffalo-ny-14209,"$1,300",2,1300.0,1300.0,2.0,2.0
+padmapper.com,801 West Ave,"Front Park, Buffalo",https://www.padmapper.com/rentals/26444535p/2-bedroom-1-bath-apartment-at-801-west-ave-buffalo-ny-14213,"$1,300",2,1300.0,1300.0,2.0,2.0
+padmapper.com,114 Commonwealth Ave #UPPER,"North Park, Buffalo",https://www.padmapper.com/rentals/26533836p/3-bedroom-1-bath-apartment-at-114-commonwealth-ave-buffalo-ny-14216,"$1,650",3,1650.0,1650.0,3.0,3.0
+padmapper.com,460 Prospect Ave,"Front Park, Buffalo",https://www.padmapper.com/rentals/26528935p/3-bedroom-1-bath-apartment-at-460-prospect-ave-buffalo-ny-14201,"$2,385",3,2385.0,2385.0,3.0,3.0
+padmapper.com,25 Ullman St #2,"Riverside Park, Buffalo",https://www.padmapper.com/rentals/25272888p/3-bedroom-1-bath-apartment-at-25-ullman-st-buffalo-ny-14207,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,175 Freund St,"Schiller Park, Buffalo",https://www.padmapper.com/rentals/25474014p/2-bedroom-1-bath-apartment-at-175-freund-st-buffalo-ny-14215,"$1,000",2,1000.0,1000.0,2.0,2.0
+padmapper.com,160 Rivermist Dr,"Waterfront, Buffalo",https://www.padmapper.com/rentals/6955142p/3-bedroom-3-bath-apartment-at-160-rivermist-dr-buffalo-ny-14202,"$3,680",3,3680.0,3680.0,3.0,3.0
+padmapper.com,20 South St #2,"First Ward, Buffalo",https://www.padmapper.com/rentals/26514483p/2-bedroom-1-bath-apartment-at-20-south-st-buffalo-ny-14204,"$2,400",2,2400.0,2400.0,2.0,2.0
+padmapper.com,236 Bryant St,"Bryant, Buffalo",https://www.padmapper.com/rentals/8337075p/4-bedroom-3-bath-apartment-at-236-bryant-st-buffalo-ny-14222,"$3,000",4,3000.0,3000.0,4.0,4.0
+padmapper.com,359 S Ogden St #UPPER,"Kaisertown, Buffalo",https://www.padmapper.com/rentals/20373975p/2-bedroom-1-bath-apartment-at-359-s-ogden-st-buffalo-ny-14206,"$1,250",2,1250.0,1250.0,2.0,2.0
+padmapper.com,54 Anderson Pl #3,"Front Park, Buffalo",https://www.padmapper.com/rentals/26507042p/2-bedroom-1-bath-apartment-at-54-anderson-pl-buffalo-ny-14222,"$1,000",2,1000.0,1000.0,2.0,2.0
+padmapper.com,245 Adams St #UPPER,"Emslie, Buffalo",https://www.padmapper.com/rentals/26502143p/3-bedroom-1-bath-apartment-at-245-adams-st-buffalo-ny-14206,"$1,095",3,1095.0,1095.0,3.0,3.0
+padmapper.com,2403 Niagara St,"Riverside Park, Buffalo",https://www.padmapper.com/rentals/26444534p/2-bedroom-1-bath-apartment-at-2403-niagara-st-buffalo-ny-14207,"$1,800",2,1800.0,1800.0,2.0,2.0
+padmapper.com,94 Lynette Ln,"Buffalo, NY",https://www.padmapper.com/rentals/21936108p/4-bedroom-2-bath-apartment-at-94-lynette-ln-buffalo-ny-14228,"$4,200",4,4200.0,4200.0,4.0,4.0
+padmapper.com,150 Ontario St,"Riverside Park, Buffalo",https://www.padmapper.com/rentals/26498983p/3-bedroom-1-bath-apartment-at-150-ontario-st-buffalo-ny-14207,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,18 Barone Cir,"Buffalo, NY",https://www.padmapper.com/rentals/25936402p/3-bedroom-1-bath-apartment-at-18-barone-cir-buffalo-ny-14225,"$1,500",3,1500.0,1500.0,3.0,3.0
+padmapper.com,246 Whitney Pl,"Lakeview, Buffalo",https://www.padmapper.com/rentals/23545754p/2-bedroom-1-bath-apartment-at-246-whitney-pl-buffalo-ny-14201,"$1,000",2,1000.0,1000.0,2.0,2.0
+padmapper.com,871 Delaware Ave #15,"Bryant, Buffalo",https://www.padmapper.com/rentals/26332375p/1-bedroom-1-bath-apartment-at-871-delaware-ave-buffalo-ny-14209,"$1,250",1,1250.0,1250.0,1.0,1.0
+padmapper.com,105 Mariner St,"Allen, Buffalo",https://www.padmapper.com/rentals/22468807p/3-bedroom-1-bath-apartment-at-105-mariner-st-buffalo-ny-14201,"$2,195",3,2195.0,2195.0,3.0,3.0
+padmapper.com,227 Efner St,"Lakeview, Buffalo",https://www.padmapper.com/rentals/23248574p/3-bedroom-1-bath-apartment-at-227-efner-st-buffalo-ny-14201,"$1,725",3,1725.0,1725.0,3.0,3.0
+padmapper.com,146 Lancaster Ave,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/25430480p/3-bedroom-1-bath-apartment-at-146-lancaster-ave-buffalo-ny-14222,"$2,000",3,2000.0,2000.0,3.0,3.0
+padmapper.com,56 Reed Ave,"Buffalo, NY",https://www.padmapper.com/rentals/26172280p/3-bedroom-1-bath-apartment-at-56-reed-ave-buffalo-ny-14218,"$1,900",3,1900.0,1900.0,3.0,3.0
+padmapper.com,171 Richmond Ave #1,"Bryant, Buffalo",https://www.padmapper.com/rentals/26469499p/1-bedroom-1-bath-apartment-at-171-richmond-ave-buffalo-ny-14222,"$2,000",1,2000.0,2000.0,1.0,1.0
+padmapper.com,32 Bernhardt Dr Apt 4 #4,"Buffalo, NY",https://www.padmapper.com/rentals/3790042p/3-bedroom-2-bath-apartment-at-32-bernhardt-dr-apt-4-buffalo-ny-14226,"$2,250",3,2250.0,2250.0,3.0,3.0
+padmapper.com,4 Saint Johns Pl,"Allen, Buffalo",https://www.padmapper.com/rentals/21532741p/1-bedroom-1-bath-apartment-at-4-saint-johns-pl-buffalo-ny-14201,"$1,175",1,1175.0,1175.0,1.0,1.0
+padmapper.com,722 Hopkins St,"Tifft, Buffalo",https://www.padmapper.com/rentals/25399788p/3-bedroom-1-bath-apartment-at-722-hopkins-st-buffalo-ny-14220,"$1,200",3,1200.0,1200.0,3.0,3.0
+padmapper.com,375 Hampshire St #LOWER,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/9719556p/3-bedroom-1-bath-apartment-at-375-hampshire-st-buffalo-ny-14213,"$1,200",3,1200.0,1200.0,3.0,3.0
+padmapper.com,68 Peter St,"Black Rock, Buffalo",https://www.padmapper.com/rentals/19142654p/2-bedroom-1-bath-apartment-at-68-peter-st-buffalo-ny-14207,$975,2,975.0,975.0,2.0,2.0
+padmapper.com,769 Columbus Pkwy #NA,"Front Park, Buffalo",https://www.padmapper.com/rentals/19127547p/2-bedroom-1-bath-apartment-at-769-columbus-pkwy-buffalo-ny-14213,"$1,100",2,1100.0,1100.0,2.0,2.0
+padmapper.com,538 Linwood Ave Apt 10 #10,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/26455311p/2-bedroom-1-bath-apartment-at-538-linwood-ave-apt-10-buffalo-ny-14209,"$1,695",2,1695.0,1695.0,2.0,2.0
+padmapper.com,1431 Hertel Ave Unit 1 #1,"North Park, Buffalo",https://www.padmapper.com/rentals/24831884p/3-bedroom-1-bath-apartment-at-1431-hertel-ave-unit-1-buffalo-ny-14216,"$1,600",3,1600.0,1600.0,3.0,3.0
+padmapper.com,309 North St Apt 40 #40,"Bryant, Buffalo",https://www.padmapper.com/rentals/26444538p/2-bedroom-1-bath-apartment-at-309-north-st-apt-40-buffalo-ny-14201,"$1,500",2,1500.0,1500.0,2.0,2.0
+padmapper.com,21 College St,"Allen, Buffalo",https://www.padmapper.com/rentals/14975823p/3-bedroom-1-bath-apartment-at-21-college-st-buffalo-ny-14201,"$1,850",3,1850.0,1850.0,3.0,3.0
+padmapper.com,461 Huntington Ave,"North Park, Buffalo",https://www.padmapper.com/rentals/25390541p/3-bedroom-1-bath-apartment-at-461-huntington-ave-buffalo-ny-14214,"$1,650",3,1650.0,1650.0,3.0,3.0
+padmapper.com,1037 Walden Ave Apt 3 #3,"Buffalo, NY",https://www.padmapper.com/rentals/25089397p/3-bedroom-1-bath-apartment-at-1037-walden-ave-apt-3-buffalo-ny-14211,"$1,350",3,1350.0,1350.0,3.0,3.0
+padmapper.com,58 Tracy St Unit 1 #1,"Columbus, Buffalo",https://www.padmapper.com/rentals/26444532p/2-bedroom-1-bath-apartment-at-58-tracy-st-unit-1-buffalo-ny-14201,"$1,895",2,1895.0,1895.0,2.0,2.0
+padmapper.com,451 Franklin St Apt 2 #2,"Allen, Buffalo",https://www.padmapper.com/rentals/12836346p/1-bedroom-1-bath-apartment-at-451-franklin-st-apt-2-buffalo-ny-14202,"$1,400",1,1400.0,1400.0,1.0,1.0
+padmapper.com,143 Cottage St,"Allen, Buffalo",https://www.padmapper.com/rentals/23951998p/3-bedroom-1-bath-apartment-at-143-cottage-st-buffalo-ny-14201,"$2,050",3,2050.0,2050.0,3.0,3.0
+padmapper.com,1431 Hertel Ave ##1,"North Park, Buffalo",https://www.padmapper.com/rentals/24831884p/3-bedroom-1-bath-apartment-at-1431-hertel-ave-buffalo-ny-14216,"$1,600",3,1600.0,1600.0,3.0,3.0
+padmapper.com,1560 Delaware Ave #1,"Albright, Buffalo",https://www.padmapper.com/rentals/24986628p/3-bedroom-1-bath-apartment-at-1560-delaware-ave-buffalo-ny-14209,"$2,800",3,2800.0,2800.0,3.0,3.0
+padmapper.com,184 14th St,"Front Park, Buffalo",https://www.padmapper.com/rentals/24875283p/4-bedroom-2-bath-apartment-at-184-14th-st-buffalo-ny-14213,"$4,000",4,4000.0,4000.0,4.0,4.0
+padmapper.com,1247 West Ave #1,"Forest, Buffalo",https://www.padmapper.com/rentals/21798337p/3-bedroom-1-bath-apartment-at-1247-west-ave-buffalo-ny-14213,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,1166 Kensington Ave #1,"Kensington, Buffalo",https://www.padmapper.com/rentals/26424131p/3-bedroom-1-bath-apartment-at-1166-kensington-ave-buffalo-ny-14215,"$1,395",3,1395.0,1395.0,3.0,3.0
+padmapper.com,111 Peter St,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26423916p/3-bedroom-1-bath-apartment-at-111-peter-st-buffalo-ny-14207,"$1,250",3,1250.0,1250.0,3.0,3.0
+padmapper.com,3 Rosedale St #LOWER,"Riverside Park, Buffalo",https://www.padmapper.com/rentals/26419142p/2-bedroom-1-bath-apartment-at-3-rosedale-st-buffalo-ny-14207,"$1,195",2,1195.0,1195.0,2.0,2.0
+padmapper.com,309 North St #309,"Bryant, Buffalo",https://www.padmapper.com/rentals/26411903p/2-bedroom-1-bath-apartment-at-309-north-st-buffalo-ny-14201,"$1,455",2,1455.0,1455.0,2.0,2.0
+padmapper.com,854 Niagara St #UPPER,"Front Park, Buffalo",https://www.padmapper.com/rentals/23887958p/3-bedroom-1-bath-apartment-at-854-niagara-st-buffalo-ny-14213,"$1,195",3,1195.0,1195.0,3.0,3.0
+padmapper.com,854 Niagara St #LOWER,"Front Park, Buffalo",https://www.padmapper.com/rentals/18491996p/3-bedroom-1-bath-apartment-at-854-niagara-st-buffalo-ny-14213,"$1,095",3,1095.0,1095.0,3.0,3.0
+padmapper.com,511 Shirley Ave,"Kensington, Buffalo",https://www.padmapper.com/rentals/26410286p/2-bedroom-1-bath-apartment-at-511-shirley-ave-buffalo-ny-14215,$995,2,995.0,995.0,2.0,2.0
+padmapper.com,18 Irving Pl,"Allen, Buffalo",https://www.padmapper.com/rentals/26397573p/2-bedroom-1-bath-apartment-at-18-irving-pl-buffalo-ny-14201,"$1,250",2,1250.0,1250.0,2.0,2.0
+padmapper.com,328 Summer St,"Bryant, Buffalo",https://www.padmapper.com/rentals/26392858p/2-bedroom-1-bath-apartment-at-328-summer-st-buffalo-ny-14222,"$1,100",2,1100.0,1100.0,2.0,2.0
+padmapper.com,294 S Elmwood Ave Apt 5 #5,"Columbus, Buffalo",https://www.padmapper.com/rentals/26392391p/1-bedroom-1-bath-apartment-at-294-s-elmwood-ave-apt-5-buffalo-ny-14201,$925,1,925.0,925.0,1.0,1.0
+padmapper.com,7 Bennett Village Ter,"Leroy, Buffalo",https://www.padmapper.com/rentals/26066413p/3-bedroom-1-bath-apartment-at-7-bennett-village-ter-buffalo-ny-14214,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,41 Ojibwa Cir,"Waterfront, Buffalo",https://www.padmapper.com/rentals/11011428p/3-bedroom-3-bath-apartment-at-41-ojibwa-cir-buffalo-ny-14202,"$4,500",3,4500.0,4500.0,3.0,3.0
+padmapper.com,262 Summer St Unit Rear #REAR,"Bryant, Buffalo",https://www.padmapper.com/rentals/14345291p/2-bedroom-1-bath-apartment-at-262-summer-st-unit-rear-buffalo-ny-14222,"$1,500",2,1500.0,1500.0,2.0,2.0
+padmapper.com,464 W Utica St,"Bryant, Buffalo",https://www.padmapper.com/rentals/19611633p/3-bedroom-1-bath-apartment-at-464-w-utica-st-buffalo-ny-14213,"$1,350",3,1350.0,1350.0,3.0,3.0
+padmapper.com,464 W Utica St #3,"Bryant, Buffalo",https://www.padmapper.com/rentals/23904418p/3-bedroom-1-bath-apartment-at-464-w-utica-st-buffalo-ny-14213,"$1,350",3,1350.0,1350.0,3.0,3.0
+padmapper.com,140 Seymour St,"South Ellicott, Buffalo",https://www.padmapper.com/rentals/26365212p/2-bedroom-1-bath-apartment-at-140-seymour-st-buffalo-ny-14210,"$1,950",2,1950.0,1950.0,2.0,2.0
+padmapper.com,224 Vermont St,"Front Park, Buffalo",https://www.padmapper.com/rentals/26363853p/2-bedroom-1-bath-apartment-at-224-vermont-st-buffalo-ny-14213,"$1,185",2,1185.0,1185.0,2.0,2.0
+padmapper.com,167 Fairgreen Dr,"Buffalo, NY",https://www.padmapper.com/rentals/26360437p/3-bedroom-1-bath-apartment-at-167-fairgreen-dr-buffalo-ny-14228,"$1,700",3,1700.0,1700.0,3.0,3.0
+padmapper.com,39 Glendale Pl #UPPER,"Hamlin Park, Buffalo",https://www.padmapper.com/rentals/8840207p/3-bedroom-1-bath-apartment-at-39-glendale-pl-buffalo-ny-14208,"$1,250",3,1250.0,1250.0,3.0,3.0
+padmapper.com,1022 Hertel Ave,"North Delaware, Buffalo",https://www.padmapper.com/rentals/26358919p/2-bedroom-1-bath-apartment-at-1022-hertel-ave-buffalo-ny-14216,"$1,275",2,1275.0,1275.0,2.0,2.0
+padmapper.com,620 Auburn Ave #2,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/15721545p/3-bedroom-1-bath-apartment-at-620-auburn-ave-buffalo-ny-14222,"$1,725",3,1725.0,1725.0,3.0,3.0
+padmapper.com,66 Woodside Ave,"South Park, Buffalo",https://www.padmapper.com/rentals/26357088p/3-bedroom-1-bath-apartment-at-66-woodside-ave-buffalo-ny-14220,"$2,000",3,2000.0,2000.0,3.0,3.0
+padmapper.com,481 Franklin St Apt 10 #10,"Allen, Buffalo",https://www.padmapper.com/rentals/4702919p/1-bedroom-1-bath-apartment-at-481-franklin-st-apt-10-buffalo-ny-14202,"$1,450",1,1450.0,1450.0,1.0,1.0
+padmapper.com,2015 Genesee St,"Schiller Park, Buffalo",https://www.padmapper.com/rentals/23490143p/4-bedroom-1-bath-apartment-at-2015-genesee-st-buffalo-ny-14211,"$1,750",4,1750.0,1750.0,4.0,4.0
+padmapper.com,44 N Pearl St Apt 5 #5,"Allen, Buffalo",https://www.padmapper.com/rentals/14748403p/3-bedroom-1-bath-apartment-at-44-n-pearl-st-apt-5-buffalo-ny-14202,"$2,400",3,2400.0,2400.0,3.0,3.0
+padmapper.com,105 Grove St #UPPER,"Military, Buffalo",https://www.padmapper.com/rentals/26145372p/2-bedroom-1-bath-apartment-at-105-grove-st-buffalo-ny-14207,"$1,200",2,1200.0,1200.0,2.0,2.0
+padmapper.com,Ava Ln,"Buffalo, NY",https://www.padmapper.com/rentals/62254111/3-bedroom-1-bath-apartment-at-ava-ln-buffalo-ny-14221,"$1,700",3,1700.0,1700.0,3.0,3.0
+padmapper.com,1 Sweet Bay Ln,"Buffalo, NY",https://www.padmapper.com/rentals/26326365p/2-bedroom-2-bath-apartment-at-1-sweet-bay-ln-buffalo-ny-14221,"$2,750",2,2750.0,2750.0,2.0,2.0
+padmapper.com,72 Tracy St Unit 2 #2,"Columbus, Buffalo",https://www.padmapper.com/rentals/26322218p/2-bedroom-1-bath-apartment-at-72-tracy-st-unit-2-buffalo-ny-14201,"$1,550",2,1550.0,1550.0,2.0,2.0
+padmapper.com,41 Parkview Ave #1,"Cazenovia Park, Buffalo",https://www.padmapper.com/rentals/25180691p/3-bedroom-1-bath-apartment-at-41-parkview-ave-buffalo-ny-14210,"$1,200",3,1200.0,1200.0,3.0,3.0
+padmapper.com,70 Humason Ave,"Schiller Park, Buffalo",https://www.padmapper.com/rentals/26318860p/2-bedroom-1-bath-apartment-at-70-humason-ave-buffalo-ny-14211,"$1,000",2,1000.0,1000.0,2.0,2.0
+padmapper.com,2415 Delaware Ave #15,"North Park, Buffalo",https://www.padmapper.com/rentals/25697699p/1-bedroom-1-bath-apartment-at-2415-delaware-ave-buffalo-ny-14216,$950,1,950.0,950.0,1.0,1.0
+padmapper.com,50 Randolph Ave,"Buffalo, NY",https://www.padmapper.com/rentals/26285581p/3-bedroom-1-bath-apartment-at-50-randolph-ave-buffalo-ny-14211,"$1,550",3,1550.0,1550.0,3.0,3.0
+padmapper.com,411 W Ferry St #3,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/26279946p/2-bedroom-1-bath-apartment-at-411-w-ferry-st-buffalo-ny-14213,"$1,100",2,1100.0,1100.0,2.0,2.0
+padmapper.com,381 Fargo Ave #4,"Front Park, Buffalo",https://www.padmapper.com/rentals/26272326p/2-bedroom-1-bath-apartment-at-381-fargo-ave-buffalo-ny-14213,$995,2,995.0,995.0,2.0,2.0
+padmapper.com,60 Englewood Ave,"University, Buffalo",https://www.padmapper.com/rentals/25409993p/4-bedroom-1-bath-apartment-at-60-englewood-ave-buffalo-ny-14214,"$1,650",4,1650.0,1650.0,4.0,4.0
+padmapper.com,706 E Delavan Ave,"Grider, Buffalo",https://www.padmapper.com/rentals/26263675p/3-bedroom-1-bath-apartment-at-706-e-delavan-ave-buffalo-ny-14215,"$1,400",3,1400.0,1400.0,3.0,3.0
+padmapper.com,769 S Ogden St,"Kaisertown, Buffalo",https://www.padmapper.com/rentals/26255537p/2-bedroom-1-bath-apartment-at-769-s-ogden-st-buffalo-ny-14206,$999,2,999.0,999.0,2.0,2.0
+padmapper.com,298 Jersey St,"Front Park, Buffalo",https://www.padmapper.com/rentals/23569192p/3-bedroom-2-bath-apartment-at-298-jersey-st-buffalo-ny-14201,"$3,000",3,3000.0,3000.0,3.0,3.0
+padmapper.com,79 Hemlock Dr,"Buffalo, NY",https://www.padmapper.com/rentals/26239718p/5-bedroom-2-bath-apartment-at-79-hemlock-dr-buffalo-ny-14224,"$3,000",5,3000.0,3000.0,5.0,5.0
+padmapper.com,219 Oxford Ave,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/23424788p/1-bedroom-1-bath-apartment-at-219-oxford-ave-buffalo-ny-14209,"$1,250",1,1250.0,1250.0,1.0,1.0
+padmapper.com,71 Gerald Ave,"Kenfield, Buffalo",https://www.padmapper.com/rentals/26233242p/2-bedroom-1-bath-apartment-at-71-gerald-ave-buffalo-ny-14215,"$1,195",2,1195.0,1195.0,2.0,2.0
+padmapper.com,354 Baynes St #1,"Forest, Buffalo",https://www.padmapper.com/rentals/16664775p/3-bedroom-1-bath-apartment-at-354-baynes-st-buffalo-ny-14213,"$1,550",3,1550.0,1550.0,3.0,3.0
+padmapper.com,77 Johnson Park Unit 8 #8,"Columbus, Buffalo",https://www.padmapper.com/rentals/23446287p/2-bedroom-1-bath-apartment-at-77-johnson-park-unit-8-buffalo-ny-14201,"$1,350",2,1350.0,1350.0,2.0,2.0
+padmapper.com,205 Lisbon Ave,"LaSalle, Buffalo",https://www.padmapper.com/rentals/26225955p/3-bedroom-1-bath-apartment-at-205-lisbon-ave-buffalo-ny-14215,"$1,500",3,1500.0,1500.0,3.0,3.0
+padmapper.com,97 97 Baynes Street unit: Upper #UPPER,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/26225025p/1-bedroom-1-bath-apartment-at-97-97-baynes-street-unit-upper-buffalo-ny-14213,"$1,200",1,1200.0,1200.0,1.0,1.0
+padmapper.com,105 Kenmore Avenue Ext,"Military, Buffalo",https://www.padmapper.com/rentals/26451806p/2-bedroom-1-bath-apartment-at-105-kenmore-avenue-ext-buffalo-ny-14217,"$1,300",2,1300.0,1300.0,2.0,2.0
+padmapper.com,62 Trinity Pl,"Allen, Buffalo",https://www.padmapper.com/rentals/26217215p/3-bedroom-1-bath-apartment-at-62-trinity-pl-buffalo-ny-14201,"$1,850",3,1850.0,1850.0,3.0,3.0
+padmapper.com,58 Trinity Pl Apt 7 #7,1 Bathroom Apartment,https://www.padmapper.com/rentals/20674514p/studio-1-bath-apartment-at-58-trinity-pl-apt-7-buffalo-ny-14201,$850,Studio,850.0,850.0,0.0,0.0
+padmapper.com,558 Breckenridge St,"Grant Ferry, Buffalo",https://www.padmapper.com/rentals/19705275p/2-bedroom-1-bath-apartment-at-558-breckenridge-st-buffalo-ny-14222,"$1,500",2,1500.0,1500.0,2.0,2.0
+padmapper.com,766 Auburn Ave #1,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/25776628p/4-bedroom-2-bath-apartment-at-766-auburn-ave-buffalo-ny-14222,"$3,500",4,3500.0,3500.0,4.0,4.0
+padmapper.com,600 Main St Unit 702 #702,"Central Business District, Buffalo",https://www.padmapper.com/rentals/6976586p/2-bedroom-2-bath-apartment-at-600-main-st-unit-702-buffalo-ny-14202,"$2,800",2,2800.0,2800.0,2.0,2.0
+padmapper.com,130 Pearl St Unit 305 #305,"Central Business District, Buffalo",https://www.padmapper.com/rentals/24997489p/2-bedroom-1-bath-apartment-at-130-pearl-st-unit-305-buffalo-ny-14202,"$1,975",2,1975.0,1975.0,2.0,2.0
+padmapper.com,2273 Delaware Ave #UPPER,"North Delaware, Buffalo",https://www.padmapper.com/rentals/24045915p/3-bedroom-1-bath-apartment-at-2273-delaware-ave-buffalo-ny-14216,"$1,450",3,1450.0,1450.0,3.0,3.0
+padmapper.com,355 S Ogden St,"Kaisertown, Buffalo",https://www.padmapper.com/rentals/26143711p/3-bedroom-1-bath-apartment-at-355-s-ogden-st-buffalo-ny-14206,"$2,200",3,2200.0,2200.0,3.0,3.0
+padmapper.com,307 Summer St,"Bryant, Buffalo",https://www.padmapper.com/rentals/26121088p/2-bedroom-1-bath-apartment-at-307-summer-st-buffalo-ny-14222,"$1,400",2,1400.0,1400.0,2.0,2.0
+padmapper.com,310 E Delavan Ave,"Hamlin Park, Buffalo",https://www.padmapper.com/rentals/8504291p/3-bedroom-1-bath-apartment-at-310-e-delavan-ave-buffalo-ny-14208,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,100 Lincoln Pkwy,"Albright, Buffalo",https://www.padmapper.com/rentals/2050616p/3-bedroom-1-bath-apartment-at-100-lincoln-pkwy-buffalo-ny-14222,"$2,400",3,2400.0,2400.0,3.0,3.0
+padmapper.com,20 Marion St #5,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26097508p/2-bedroom-1-bath-apartment-at-20-marion-st-buffalo-ny-14207,"$1,295",2,1295.0,1295.0,2.0,2.0
+padmapper.com,77 Ashland Ave,"Bryant, Buffalo",https://www.padmapper.com/rentals/25737759p/3-bedroom-2-bath-apartment-at-77-ashland-ave-buffalo-ny-14222,"$3,200",3,3200.0,3200.0,3.0,3.0
+padmapper.com,688 Dick Rd,"Buffalo, NY",https://www.padmapper.com/rentals/13733547p/3-bedroom-1-bath-apartment-at-688-dick-rd-buffalo-ny-14225,"$1,550",3,1550.0,1550.0,3.0,3.0
+padmapper.com,289 Austin St #1,"Black Rock, Buffalo",https://www.padmapper.com/rentals/25286395p/2-bedroom-1-bath-apartment-at-289-austin-st-buffalo-ny-14207,$900,2,900.0,900.0,2.0,2.0
+padmapper.com,186 Bidwell Pkwy Apt 2 #2,"Albright, Buffalo",https://www.padmapper.com/rentals/5455205p/2-bedroom-2-bath-apartment-at-186-bidwell-pkwy-apt-2-buffalo-ny-14222,"$3,400",2,3400.0,3400.0,2.0,2.0
+padmapper.com,156 Lisbon Ave,"LaSalle, Buffalo",https://www.padmapper.com/rentals/24984960p/8-bedroom-2-bath-apartment-at-156-lisbon-ave-buffalo-ny-14214,"$3,200",8,3200.0,3200.0,8.0,8.0
+padmapper.com,59 Lisbon Ave,"LaSalle, Buffalo",https://www.padmapper.com/rentals/26067269p/3-bedroom-1-bath-apartment-at-59-lisbon-ave-buffalo-ny-14214,"$1,250",3,1250.0,1250.0,3.0,3.0
+padmapper.com,59 Knox Ave,"Park Meadow, Buffalo",https://www.padmapper.com/rentals/15697585p/2-bedroom-1-bath-apartment-at-59-knox-ave-buffalo-ny-14216,"$1,600",2,1600.0,1600.0,2.0,2.0
+padmapper.com,411 Dearborn St,"Black Rock, Buffalo",https://www.padmapper.com/rentals/26027944p/4-bedroom-1-bath-apartment-at-411-dearborn-st-buffalo-ny-14207,"$1,350",4,1350.0,1350.0,4.0,4.0
+padmapper.com,272 Lakefront Blvd,"Waterfront, Buffalo",https://www.padmapper.com/rentals/25995811p/3-bedroom-3-bath-apartment-at-272-lakefront-blvd-buffalo-ny-14202,"$7,000",3,7000.0,7000.0,3.0,3.0
+padmapper.com,237 Main St #901,"Central Business District, Buffalo",https://www.padmapper.com/rentals/25993160p/3-bedroom-2-bath-apartment-at-237-main-st-buffalo-ny-14203,"$4,035",3,4035.0,4035.0,3.0,3.0
+padmapper.com,237 Main St #1203,"Central Business District, Buffalo",https://www.padmapper.com/rentals/25993162p/2-bedroom-2-bath-apartment-at-237-main-st-buffalo-ny-14203,"$3,215",2,3215.0,3215.0,2.0,2.0
+padmapper.com,237 Main St #703,"Central Business District, Buffalo",https://www.padmapper.com/rentals/25993159p/2-bedroom-2-bath-apartment-at-237-main-st-buffalo-ny-14203,"$2,840",2,2840.0,2840.0,2.0,2.0
+padmapper.com,522 Franklin St,"Allen, Buffalo",https://www.padmapper.com/rentals/25895061p/2-bedroom-1-bath-apartment-at-522-franklin-st-buffalo-ny-14202,"$1,950",2,1950.0,1950.0,2.0,2.0
+padmapper.com,360 360 Prospect Avenue Lower Rear Apartment #2,"Lakeview, Buffalo",https://www.padmapper.com/rentals/22342802p/2-bedroom-1-bath-apartment-at-360-360-prospect-avenue-lower-rear-apartment-buffalo-ny-14201,"$1,090",2,1090.0,1090.0,2.0,2.0
+padmapper.com,3172 Main St,"LaSalle, Buffalo",https://www.padmapper.com/rentals/25973722p/3-bedroom-1-bath-apartment-at-3172-main-st-buffalo-ny-14214,"$1,500",3,1500.0,1500.0,3.0,3.0
+padmapper.com,107 Hawley St,"Forest, Buffalo",https://www.padmapper.com/rentals/25969469p/3-bedroom-2-bath-apartment-at-107-hawley-st-buffalo-ny-14213,"$1,500",3,1500.0,1500.0,3.0,3.0
+padmapper.com,818 Auburn Ave,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/17037621p/2-bedroom-1-bath-apartment-at-818-auburn-ave-buffalo-ny-14222,"$1,800",2,1800.0,1800.0,2.0,2.0
+padmapper.com,97 Quincy St,"Lovejoy, Buffalo",https://www.padmapper.com/rentals/25969425p/5-bedroom-2-bath-apartment-at-97-quincy-st-buffalo-ny-14212,"$1,495",5,1495.0,1495.0,5.0,5.0
+padmapper.com,127 Hayden St,"Cazenovia Park, Buffalo",https://www.padmapper.com/rentals/17777688p/3-bedroom-1-bath-apartment-at-127-hayden-st-buffalo-ny-14210,"$1,400",3,1400.0,1400.0,3.0,3.0
+padmapper.com,97 Tartan Ln,"Buffalo, NY",https://www.padmapper.com/rentals/25933690p/4-bedroom-2-bath-apartment-at-97-tartan-ln-buffalo-ny-14221,"$4,000",4,4000.0,4000.0,4.0,4.0
+padmapper.com,891 Richmond Ave,"Forest, Buffalo",https://www.padmapper.com/rentals/22790031p/3-bedroom-1-bath-apartment-at-891-richmond-ave-buffalo-ny-14222,"$2,000",3,2000.0,2000.0,3.0,3.0
+padmapper.com,628 Ellicott St,"Willert Park, Buffalo",https://www.padmapper.com/rentals/24408572p/2-bedroom-2-bath-apartment-at-628-ellicott-st-buffalo-ny-14203,"$2,020",2,2020.0,2020.0,2.0,2.0
+padmapper.com,706 706 E Delavan Avenue unit: Lower #LOWER,"Kensington, Buffalo",https://www.padmapper.com/rentals/25901648p/3-bedroom-1-bath-apartment-at-706-706-e-delavan-avenue-unit-lower-buffalo-ny-14215,"$1,400",3,1400.0,1400.0,3.0,3.0
+padmapper.com,18 Abbott Rd Lowr Back,"Triangle, Buffalo",https://www.padmapper.com/rentals/26650753p/1-bedroom-1-bath-apartment-at-18-abbott-rd-lowr-back-buffalo-ny-14220,"$1,400",1,1400.0,1400.0,1.0,1.0
+padmapper.com,131 Kamper Ave,"Cazenovia Park, Buffalo",https://www.padmapper.com/rentals/25898904p/2-bedroom-1-bath-apartment-at-131-kamper-ave-buffalo-ny-14210,"$1,400",2,1400.0,1400.0,2.0,2.0
+padmapper.com,86 Crofton Dr,"Buffalo, NY",https://www.padmapper.com/rentals/23273379p/3-bedroom-2-bath-apartment-at-86-crofton-dr-buffalo-ny-14224,"$5,250",3,5250.0,5250.0,3.0,3.0
+padmapper.com,80 Wescott St #2,"Babcock, Buffalo",https://www.padmapper.com/rentals/25425049p/3-bedroom-1-bath-apartment-at-80-wescott-st-buffalo-ny-14210,"$1,300",3,1300.0,1300.0,3.0,3.0
+padmapper.com,990 Hertel Ave,"North Delaware, Buffalo",https://www.padmapper.com/rentals/25831219p/3-bedroom-1-bath-apartment-at-990-hertel-ave-buffalo-ny-14216,"$1,800",3,1800.0,1800.0,3.0,3.0
+padmapper.com,4867 N Bailey Ave,"Buffalo, NY",https://www.padmapper.com/rentals/25827090p/3-bedroom-1-bath-apartment-at-4867-n-bailey-ave-buffalo-ny-14226,"$2,200",3,2200.0,2200.0,3.0,3.0
+padmapper.com,610 Main St Unit 501,"Central Business District, Buffalo",https://www.padmapper.com/rentals/21447318p/2-bedroom-2-bath-apartment-at-610-main-st-unit-501-buffalo-ny-14202,"$2,800",2,2800.0,2800.0,2.0,2.0
+padmapper.com,1037 Walden Ave Apt 4 #4,"Buffalo, NY",https://www.padmapper.com/rentals/25089398p/2-bedroom-1-bath-apartment-at-1037-walden-ave-apt-4-buffalo-ny-14211,"$1,100",2,1100.0,1100.0,2.0,2.0
+padmapper.com,237 Main St #1602,"Central Business District, Buffalo",https://www.padmapper.com/rentals/25945052p/2-bedroom-2-bath-apartment-at-237-main-st-buffalo-ny-14203,"$2,920",2,2920.0,2920.0,2.0,2.0
+padmapper.com,237 Main St #1604,"Central Business District, Buffalo",https://www.padmapper.com/rentals/25945053p/3-bedroom-2-bath-apartment-at-237-main-st-buffalo-ny-14203,"$3,740",3,3740.0,3740.0,3.0,3.0
+padmapper.com,165 Carmen Rd,"Buffalo, NY",https://www.padmapper.com/rentals/25716333p/3-bedroom-1-bath-apartment-at-165-carmen-rd-buffalo-ny-14226,"$2,200",3,2200.0,2200.0,3.0,3.0
+padmapper.com,30 Nassau Ln,"Buffalo, NY",https://www.padmapper.com/rentals/25696196p/3-bedroom-1-bath-apartment-at-30-nassau-ln-buffalo-ny-14225,"$2,300",3,2300.0,2300.0,3.0,3.0
+padmapper.com,890 W Ferry St,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/25674962p/4-bedroom-2-bath-apartment-at-890-w-ferry-st-buffalo-ny-14209,"$3,300",4,3300.0,3300.0,4.0,4.0
+padmapper.com,2425 Delaware Ave #1,"North Park, Buffalo",https://www.padmapper.com/rentals/24870392p/1-bedroom-1-bath-apartment-at-2425-delaware-ave-buffalo-ny-14216,$950,1,950.0,950.0,1.0,1.0
+padmapper.com,99 Montrose Ave,"University, Buffalo",https://www.padmapper.com/rentals/10396453p/1-bedroom-1-bath-apartment-at-99-montrose-ave-buffalo-ny-14214,$900,1,900.0,900.0,1.0,1.0
+padmapper.com,72 Tracy St Unit 1 #1,"Columbus, Buffalo",https://www.padmapper.com/rentals/26317964p/2-bedroom-1-bath-apartment-at-72-tracy-st-unit-1-buffalo-ny-14201,"$1,500",2,1500.0,1500.0,2.0,2.0
+padmapper.com,305 Bird Ave #3,"Forest, Buffalo",https://www.padmapper.com/rentals/24986606p/3-bedroom-1-bath-apartment-at-305-bird-ave-buffalo-ny-14213,"$2,500",3,2500.0,2500.0,3.0,3.0
+padmapper.com,4865 Main St #1,"Buffalo, NY",https://www.padmapper.com/rentals/24986611p/1-bedroom-1-bath-apartment-at-4865-main-st-buffalo-ny-14226,"$2,800",1,2800.0,2800.0,1.0,1.0
+padmapper.com,44 E Utica St #2B,"Masten Park, Buffalo",https://www.padmapper.com/rentals/24804059p/2-bedroom-2-bath-apartment-at-44-e-utica-st-buffalo-ny-14209,"$2,750",2,2750.0,2750.0,2.0,2.0
+padmapper.com,44 E Utica St #3D,"Masten Park, Buffalo",https://www.padmapper.com/rentals/24986596p/2-bedroom-2-bath-apartment-at-44-e-utica-st-buffalo-ny-14209,"$2,500",2,2500.0,2500.0,2.0,2.0
+padmapper.com,1540 Abbott Rd #1,"Buffalo, NY",https://www.padmapper.com/rentals/25014087p/2-bedroom-1-bath-apartment-at-1540-abbott-rd-buffalo-ny-14218,"$2,000",2,2000.0,2000.0,2.0,2.0
+padmapper.com,1540 Abbott Rd #2,"Buffalo, NY",https://www.padmapper.com/rentals/25240853p/2-bedroom-1-bath-apartment-at-1540-abbott-rd-buffalo-ny-14218,"$2,000",2,2000.0,2000.0,2.0,2.0
+padmapper.com,485 Harlem Rd,"Buffalo, NY",https://www.padmapper.com/rentals/25178201p/3-bedroom-2-bath-apartment-at-485-harlem-rd-buffalo-ny-14224,"$2,500",3,2500.0,2500.0,3.0,3.0
+padmapper.com,298 Skillen St,"Riverside Park, Buffalo",https://www.padmapper.com/rentals/25149289p/3-bedroom-1-bath-apartment-at-298-skillen-st-buffalo-ny-14207,"$2,200",3,2200.0,2200.0,3.0,3.0
+padmapper.com,1927 Seneca St Uppr,"Cazenovia Park, Buffalo",https://www.padmapper.com/rentals/25141417p/3-bedroom-1-bath-apartment-at-1927-seneca-st-uppr-buffalo-ny-14210,"$1,400",3,1400.0,1400.0,3.0,3.0
+padmapper.com,330 Summer St,"Bryant, Buffalo",https://www.padmapper.com/rentals/25106128p/3-bedroom-1-bath-apartment-at-330-summer-st-buffalo-ny-14222,"$1,500",3,1500.0,1500.0,3.0,3.0
+padmapper.com,35 Barry Pl,"Forest, Buffalo",https://www.padmapper.com/rentals/25047160p/2-bedroom-1-bath-apartment-at-35-barry-pl-buffalo-ny-14213,"$1,400",2,1400.0,1400.0,2.0,2.0
+padmapper.com,666 W Ferry St,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/8634391p/3-bedroom-1-bath-apartment-at-666-w-ferry-st-buffalo-ny-14222,"$2,400",3,2400.0,2400.0,3.0,3.0
+padmapper.com,44 E Utica St #2C,"Masten Park, Buffalo",https://www.padmapper.com/rentals/24978223p/2-bedroom-2-bath-apartment-at-44-e-utica-st-buffalo-ny-14209,"$2,500",2,2500.0,2500.0,2.0,2.0
+padmapper.com,340 Bird Ave,"Forest, Buffalo",https://www.padmapper.com/rentals/22955068p/2-bedroom-2-bath-apartment-at-340-bird-ave-buffalo-ny-14213,"$3,300",2,3300.0,3300.0,2.0,2.0
+padmapper.com,71 Chaumont Dr,"Buffalo, NY",https://www.padmapper.com/rentals/24843327p/5-bedroom-2-bath-apartment-at-71-chaumont-dr-buffalo-ny-14221,"$4,000",5,4000.0,4000.0,5.0,5.0
+padmapper.com,247 W Utica St,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/24820414p/1-bedroom-1-bath-apartment-at-247-w-utica-st-buffalo-ny-14222,"$1,200",1,1200.0,1200.0,1.0,1.0
+padmapper.com,333 Elmwood Ave #12,"Bryant, Buffalo",https://www.padmapper.com/rentals/24091503p/1-bedroom-1-bath-apartment-at-333-elmwood-ave-buffalo-ny-14222,$650,1,650.0,650.0,1.0,1.0
+padmapper.com,34 Hilton Blvd,"Buffalo, NY",https://www.padmapper.com/rentals/24218980p/3-bedroom-1-bath-apartment-at-34-hilton-blvd-buffalo-ny-14226,"$2,450",3,2450.0,2450.0,3.0,3.0
+padmapper.com,309 N Park Ave,"North Park, Buffalo",https://www.padmapper.com/rentals/24784347p/3-bedroom-1-bath-apartment-at-309-n-park-ave-buffalo-ny-14216,"$1,750",3,1750.0,1750.0,3.0,3.0
+padmapper.com,67 #1 Harvard Place,"Delaware - West Ferry, Buffalo",https://www.padmapper.com/rentals/59970266/2-bedroom-1-bath-apartment-at-67-buffalo-ny-14209,"$1,800",2,1800.0,1800.0,2.0,2.0
