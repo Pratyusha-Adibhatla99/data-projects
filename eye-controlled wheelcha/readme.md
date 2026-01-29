@@ -1,4 +1,4 @@
-##Eye-Movement Based Electronic Wheelchair
+Eye-Movement Based Electronic Wheelchair
 
 This project is an assistive technology designed for individuals with Quadriplegia, a condition where extreme paralysis leaves eye movement as the primary motor function. We developed a portable, cost-effective system using a Raspberry Pi 3B+ and OpenCV to replace bulky, expensive laptop-based MATLAB setups. The system captures real-time eye movements via a head-mounted IR camera to drive a motorized wheelchair.
 
