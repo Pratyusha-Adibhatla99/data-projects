@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wireless Data Platform</title>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        /* Upload Section */
+        .upload-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .upload-area.drag-over {
+            background: #e8f0ff;
+            border-color: #4858c9;
+        }
+        .file-selected {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: none;
+        }
+        .file-selected.show {
+            display: block;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #059669;
+        }
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        
+        /* Files Section */
+        .files-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .files-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .file-list {
+            display: grid;
+            gap: 15px;
+        }
+        .file-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        .file-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .file-info { flex: 1; }
+        .file-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .file-meta {
+            color: #666;
+            font-size: 0.85em;
+        }
+        .file-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .file-type {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .type-channels {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        .type-timestamps {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        .analyze-btn {
+            background: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+        .analyze-btn:hover {
+            background: #059669;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        .modal-close:hover {
+            color: #333;
+        }
+        .var-list {
+            margin-top: 20px;
+        }
+        .var-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .var-name {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        .var-detail {
+            color: #666;
+            font-size: 0.9em;
+            margin: 3px 0;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .success-msg {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .error-msg {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .warning-msg {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📡 Wireless Research Lab</h1>
+            <p>Data Platform for Channel & Timestamp Analysis</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="value" id="totalFiles">-</div>
+                <div class="label">Total Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="channelsFiles">-</div>
+                <div class="label">Channels Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="timestampsFiles">-</div>
+                <div class="label">Timestamps Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="uploadedFiles">-</div>
+                <div class="label">Uploaded Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="totalSize">-</div>
+                <div class="label">Total Size (MB)</div>
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <h2>📤 Upload New Dataset</h2>
+            <div id="uploadMessage"></div>
+            
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="fileInput" accept=".mat" hidden>
+                <div style="font-size: 3em; margin-bottom: 10px;">📁</div>
+                <p><strong>Drag & drop MAT file here</strong></p>
+                <p style="color: #666; margin: 10px 0;">or</p>
+                <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                    Browse Files
+                </button>
+            </div>
+
+            <div class="file-selected" id="fileSelected">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>Selected:</strong> <span id="selectedFileName">-</span><br>
+                        <span style="color: #666; font-size: 0.9em;">Size: <span id="selectedFileSize">-</span></span>
+                    </div>
+                    <div>
+                        <button class="btn btn-success" onclick="confirmUpload()">
+                            ✓ Upload File
+                        </button>
+                        <button class="btn btn-secondary" onclick="cancelUpload()">
+                            ✗ Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Files Section -->
+        <div class="files-section">
+            <h2>📁 Available Datasets</h2>
+            <div id="fileList" class="file-list">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading files...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analysis Modal -->
+    <div class="modal" id="analysisModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">File Analysis</h2>
+            <div id="modalContent">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing file...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5001';
+        let selectedFile = null;
+        let existingFiles = [];
+
+        // Load stats
+        async function loadStats() {
+            try {
+                const res = await fetch(`${API_BASE}/api/stats`);
+                const data = await res.json();
+                
+                if (data.success) {
+                    document.getElementById('totalFiles').textContent = data.stats.total_files;
+                    document.getElementById('channelsFiles').textContent = data.stats.channels_files;
+                    document.getElementById('timestampsFiles').textContent = data.stats.timestamps_files;
+                    document.getElementById('uploadedFiles').textContent = data.stats.uploaded_files || 0;
+                    document.getElementById('totalSize').textContent = data.stats.total_size_mb.toFixed(2);
+                }
+            } catch (err) {
+                console.error('Error loading stats:', err);
+            }
+        }
+
+        // Load files
+        async function loadFiles() {
+            try {
+                const res = await fetch(`${API_BASE}/api/files`);
+                const data = await res.json();
+                
+                const fileList = document.getElementById('fileList');
+                
+                if (data.success) {
+                    existingFiles = data.files.map(f => f.name);
+                    fileList.innerHTML = '';
+                    
+                    data.files.forEach(file => {
+                        const item = document.createElement('div');
+                        item.className = 'file-item';
+                        
+                        const typeClass = file.type === 'channels' ? 'type-channels' : 'type-timestamps';
+                        const sourceLabel = file.source === 'uploaded' ? ' • 📤 Uploaded' : '';
+                        
+                        item.innerHTML = `
+                            <div class="file-info">
+                                <div class="file-name">${file.name}</div>
+                                <div class="file-meta">${(file.size / 1024).toFixed(2)} KB${sourceLabel}</div>
+                            </div>
+                            <div class="file-actions">
+                                <div class="file-type ${typeClass}">${file.type}</div>
+                                <button class="analyze-btn" onclick="analyzeFile('${file.name}')">🔍 Analyze</button>
+                            </div>
+                        `;
+                        
+                        fileList.appendChild(item);
+                    });
+                } else {
+                    fileList.innerHTML = `<div class="error-msg">Error: ${data.error}</div>`;
+                }
+            } catch (err) {
+                document.getElementById('fileList').innerHTML = 
+                    `<div class="error-msg">Failed to load files!</div>`;
+            }
+        }
+
+        // File selection handlers
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadMessage = document.getElementById('uploadMessage');
+        const fileSelected = document.getElementById('fileSelected');
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            if (e.dataTransfer.files.length) {
+                handleFileSelect(e.dataTransfer.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        function handleFileSelect(file) {
+            uploadMessage.innerHTML = '';
+            
+            if (!file.name.endsWith('.mat')) {
+                uploadMessage.innerHTML = '<div class="error-msg">❌ Only .mat files are allowed!</div>';
+                return;
+            }
+
+            // Check if file already exists
+            if (existingFiles.includes(file.name)) {
+                uploadMessage.innerHTML = `<div class="warning-msg">⚠️ Warning: "${file.name}" already exists. Uploading will create a duplicate.</div>`;
+            }
+
+            selectedFile = file;
+            document.getElementById('selectedFileName').textContent = file.name;
+            document.getElementById('selectedFileSize').textContent = (file.size / 1024).toFixed(2) + ' KB';
+            fileSelected.classList.add('show');
+        }
+
+        function cancelUpload() {
+            selectedFile = null;
+            fileSelected.classList.remove('show');
+            fileInput.value = '';
+            uploadMessage.innerHTML = '';
+        }
+
+        async function confirmUpload() {
+            if (!selectedFile) return;
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            uploadMessage.innerHTML = '<div class="loading"><div class="spinner"></div><p>Uploading ' + selectedFile.name + '...</p></div>';
+            fileSelected.classList.remove('show');
+
+            try {
+                const res = await fetch(`${API_BASE}/api/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await res.json();
+
+                if (data.success) {
+                    uploadMessage.innerHTML = `<div class="success-msg">✅ ${data.filename} uploaded successfully! (${(data.size/1024).toFixed(2)} KB)</div>`;
+                    selectedFile = null;
+                    fileInput.value = '';
+                    loadStats();
+                    loadFiles();
+                    setTimeout(() => { uploadMessage.innerHTML = ''; }, 5000);
+                } else {
+                    uploadMessage.innerHTML = `<div class="error-msg">❌ Upload failed: ${data.error}</div>`;
+                }
+            } catch (err) {
+                console.error('Upload error:', err);
+                uploadMessage.innerHTML = `<div class="error-msg">❌ Upload failed: ${err.message}</div>`;
+            }
+        }
+
+        // Analyze file
+        async function analyzeFile(filename) {
+            document.getElementById('modalTitle').textContent = `Analysis: ${filename}`;
+            document.getElementById('analysisModal').classList.add('active');
+            document.getElementById('modalContent').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing ${filename}...</p>
+                </div>
+            `;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/analyze/${filename}`);
+                const data = await res.json();
+
+                if (data.success) {
+                    let html = `
+                        <h3>📄 File Information</h3>
+                        <div class="var-item">
+                            <div class="var-detail"><strong>Filename:</strong> ${data.metadata.filename}</div>
+                            <div class="var-detail"><strong>Size:</strong> ${(data.metadata.file_size / 1024).toFixed(2)} KB</div>
+                            <div class="var-detail"><strong>Variables:</strong> ${Object.keys(data.metadata.variables).length}</div>
+                        </div>
+                        <h3 style="margin-top: 20px;">📊 Variables Details</h3>
+                        <div class="var-list">
+                    `;
+
+                    for (const [varName, varInfo] of Object.entries(data.metadata.variables)) {
+                        html += `
+                            <div class="var-item">
+                                <div class="var-name">${varName}</div>
+                                <div class="var-detail"><strong>Shape:</strong> ${varInfo.shape.join(' × ')}</div>
+                                <div class="var-detail"><strong>Type:</strong> ${varInfo.dtype}</div>
+                                <div class="var-detail"><strong>Total Elements:</strong> ${varInfo.size.toLocaleString()}</div>
+                                <div class="var-detail"><strong>Dimensions:</strong> ${varInfo.ndim}D array</div>
+                                ${varInfo.min !== undefined ? `
+                                    <div class="var-detail"><strong>Range:</strong> ${varInfo.min.toFixed(6)} to ${varInfo.max.toFixed(6)}</div>
+                                    <div class="var-detail"><strong>Mean:</strong> ${varInfo.mean.toFixed(6)}</div>
+                                ` : ''}
+                            </div>
+                        `;
+                    }
+
+                    html += '</div>';
+                    document.getElementById('modalContent').innerHTML = html;
+                } else {
+                    document.getElementById('modalContent').innerHTML = 
+                        `<div class="error-msg">❌ Error: ${data.error}</div>`;
+                }
+            } catch (err) {
+                document.getElementById('modalContent').innerHTML = 
+                    `<div class="error-msg">❌ Failed to analyze: ${err.message}</div>`;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('analysisModal').classList.remove('active');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+            loadFiles();
+            setInterval(() => {
+                loadStats();
+                loadFiles();
+            }, 30000);
+        });
+    </script>
+</body>
+</html>
