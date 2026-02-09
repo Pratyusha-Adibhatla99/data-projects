@@ -2,9 +2,6 @@ from flask import Flask, jsonify, send_from_directory, request
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os, sys, subprocess, traceback, time, re, threading, atexit
-import sqlite3
-import json
-import hashlib
 
 sys.path.insert(0, os.path.dirname(__file__))
 from mat_processor import WirelessDataProcessor
@@ -18,66 +15,10 @@ app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DATA_DIR     = os.path.join(PROJECT_ROOT, 'channels_release')
 UPLOAD_DIR   = os.path.join(PROJECT_ROOT, 'uploads')
-DATABASE     = os.path.join(PROJECT_ROOT, 'database', 'wireless_data.db')
 ALLOWED_EXTENSIONS = {'mat', 'csv'}
 NOTEBOOK_PORT = 8888
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
-os.makedirs(os.path.dirname(DATABASE), exist_ok=True)
-
-# ─── Database helpers ───────────────────────────────────────
-def get_db():
-    """Get database connection"""
-    conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row
-    return conn
-
-def calculate_file_hash(filepath):
-    """Calculate SHA256 hash of file"""
-    sha256_hash = hashlib.sha256()
-    with open(filepath, "rb") as f:
-        for byte_block in iter(lambda: f.read(4096), b""):
-            sha256_hash.update(byte_block)
-    return sha256_hash.hexdigest()
-
-def save_to_database(filename, filepath, file_type, metadata):
-    """Save file metadata to database"""
-    try:
-        conn = get_db()
-        cursor = conn.cursor()
-        
-        file_size = os.path.getsize(filepath)
-        file_hash = calculate_file_hash(filepath)
-        metadata_json = json.dumps(metadata)
-        
-        # Check if file already exists (by hash to detect duplicates even with different names)
-        cursor.execute("SELECT filename FROM files WHERE file_hash = ?", (file_hash,))
-        existing = cursor.fetchone()
-        
-        if existing:
-            # Update existing entry
-            cursor.execute("""
-                UPDATE files 
-                SET filename = ?, file_type = ?, file_path = ?, 
-                    file_size = ?, metadata = ?, upload_time = CURRENT_TIMESTAMP
-                WHERE file_hash = ?
-            """, (filename, file_type, filepath, file_size, metadata_json, file_hash))
-            print(f"📝 Updated database entry for: {filename}")
-        else:
-            # Insert new entry
-            cursor.execute("""
-                INSERT INTO files (filename, file_type, file_path, file_hash, file_size, metadata)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (filename, file_type, filepath, file_hash, file_size, metadata_json))
-            print(f"💾 Saved to database: {filename}")
-        
-        conn.commit()
-        conn.close()
-        return True
-    except Exception as e:
-        print(f"❌ Database error: {e}")
-        traceback.print_exc()
-        return False
 
 # ─── Jupyter state ──────────────────────────────────────────
 _nb_proc  = None   # subprocess.Popen | None
@@ -184,47 +125,6 @@ def upload_file():
         file.save(filepath)
         size = os.path.getsize(filepath)
         print(f"✅ Uploaded: {filename} ({size} bytes)")
-        
-        # Automatically extract and save metadata
-        ext = get_file_type(filename)
-        try:
-            if ext == 'csv':
-                # Extract CSV metadata
-                metadata = CSVProcessor(filepath).extract_metadata()
-                save_to_database(filename, filepath, 'csv', metadata)
-                print(f"📊 Extracted and saved CSV metadata")
-            else:
-                # Extract MAT metadata
-                processor = WirelessDataProcessor(filepath)
-                data = processor.read_file()
-                metadata = {
-                    'filename': filename,
-                    'file_size': size,
-                    'file_type': 'MAT',
-                    'variables': {}
-                }
-                for vname, vdata in data.items():
-                    info = {
-                        'shape': list(vdata.shape),
-                        'dtype': str(vdata.dtype),
-                        'size': int(vdata.size),
-                        'ndim': int(vdata.ndim)
-                    }
-                    if vdata.dtype.kind in ['i', 'f']:
-                        info.update({
-                            'min': float(vdata.min()),
-                            'max': float(vdata.max()),
-                            'mean': float(vdata.mean())
-                        })
-                    metadata['variables'][vname] = info
-                save_to_database(filename, filepath, 'mat', metadata)
-                print(f"📊 Extracted and saved MAT metadata")
-        except Exception as meta_err:
-            # If metadata extraction fails, still return success for upload
-            # but log the error
-            print(f"⚠️ Metadata extraction failed: {meta_err}")
-            traceback.print_exc()
-        
         return jsonify({'success':True,'message':'File uploaded successfully','filename':filename,'size':size})
     except Exception as e:
         traceback.print_exc()
@@ -237,18 +137,6 @@ def delete_file(filename):
         fp = os.path.join(UPLOAD_DIR, filename)
         if not os.path.exists(fp):
             return jsonify({'success':False,'error':'File not found in uploads'}),404
-        
-        # Also delete from database
-        try:
-            conn = get_db()
-            cursor = conn.cursor()
-            cursor.execute("DELETE FROM files WHERE filename = ?", (filename,))
-            conn.commit()
-            conn.close()
-            print(f"🗑️  Removed from database: {filename}")
-        except Exception as db_err:
-            print(f"⚠️  Could not remove from database: {db_err}")
-        
         os.remove(fp)
         print(f"🗑️  Deleted: {filename}")
         return jsonify({'success':True,'message':f'"{filename}" deleted'})
@@ -264,17 +152,10 @@ def analyze_file(filename):
             filepath = os.path.join(UPLOAD_DIR, filename)
         if not os.path.exists(filepath):
             return jsonify({'success':False,'error':'File not found'})
-        
         ext = get_file_type(filename)
-        
         if ext=='csv':
-            # CSV processing
-            metadata = CSVProcessor(filepath).extract_metadata()
-            # Save to database
-            save_to_database(filename, filepath, 'csv', metadata)
-            return jsonify({'success':True,'metadata':metadata})
-        
-        # MAT processing
+            return jsonify({'success':True,'metadata':CSVProcessor(filepath).extract_metadata()})
+        # MAT
         processor = WirelessDataProcessor(filepath)
         data = processor.read_file()
         metadata = {'filename':filename,'file_size':os.path.getsize(filepath),'file_type':'MAT','variables':{}}
@@ -283,16 +164,12 @@ def analyze_file(filename):
             if vdata.dtype.kind in ['i','f']:
                 info.update({'min':float(vdata.min()),'max':float(vdata.max()),'mean':float(vdata.mean())})
             metadata['variables'][vname] = info
-        
-        # Save to database
-        save_to_database(filename, filepath, 'mat', metadata)
-        
         return jsonify({'success':True,'metadata':metadata})
     except Exception as e:
         traceback.print_exc()
         return jsonify({'success':False,'error':str(e)})
-
 # JUPYTER NOTEBOOK  — launch / status / stop
+
 
 @app.route('/api/notebook/launch', methods=['POST'])
 def launch_notebook():
@@ -388,7 +265,6 @@ if __name__ == '__main__':
     print("=" * 60)
     print(f"📁 Data:      {DATA_DIR}")
     print(f"📤 Uploads:   {UPLOAD_DIR}")
-    print(f"💾 Database:  {DATABASE}")
     print(f"🌐 Browser:   http://localhost:5001")
     print(f"📓 Notebook:  http://localhost:{NOTEBOOK_PORT}  (launch via UI)")
     print(f"📂 Formats:   .mat  .csv")

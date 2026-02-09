@@ -1,3 +1,16 @@
 wireless/channels_release/
 wireless/channels_release.zip
-wireless/database/wireless_data.db
+wireless/database/wireless_data.dbchannels_release/
+uploads/
+database/*.db
+*.zip
+.ipynb_checkpoints/
+__pycache__/
+DOCS/
+channels_release/
+uploads/
+database/*.db
+*.zip
+.ipynb_checkpoints/
+__pycache__/
+DOCS/
