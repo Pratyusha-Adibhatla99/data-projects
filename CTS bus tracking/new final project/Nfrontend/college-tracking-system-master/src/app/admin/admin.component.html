@@ -1,0 +1,23 @@
+<div class="admin">
+    <router-outlet></router-outlet>
+    <div>
+        <p>Admin Menu</p>
+        <div *ngIf="isHome" class="links">
+            <ul>
+                <a><li routerLink=''>Home</li></a>
+                <a><li routerLink='/admin/login'>Admin</li></a>
+                <a><li routerLink='/user/login'>User</li></a>
+                <a><li routerLink='/register'>Registration</li></a>
+            </ul>
+        </div>
+        <div *ngIf="!isHome" class="links">
+            <ul>
+                <a><li routerLink='/admin/home'>Home</li></a>
+                <a><li routerLink='/admin/user'>View Users</li></a>
+                <a><li routerLink='/admin/bus-route'>Add Bus Route</li></a>
+                <a><li routerLink='/admin/bus-tracking'>Track Bus Details</li></a>
+                <a><li (click)="logout()">Logout</li></a>
+            </ul>
+        </div>
+    </div>
+</div>

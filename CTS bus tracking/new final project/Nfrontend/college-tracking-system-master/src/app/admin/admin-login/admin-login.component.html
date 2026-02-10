@@ -1,0 +1,18 @@
+<div class="login">
+    <div>
+        <p>Admin Login</p>
+        <form class="login__form" [formGroup]="formdata">
+            <div class="login__form-inputs">
+                <label for="userName">User Name :</label>
+                <input type="text" class="fortextbox" name="userName" placeholder="Enter Name" formControlName="userName">
+            </div>
+            <div class="login__form-inputs">
+                <label for="passwd">Password :</label>
+                <input type="password" class="fortextbox" name="passwd" placeholder="Enter Password" formControlName="passwd">
+            </div>
+            <div class="login__form-inputs submit">
+                <input type="submit" (click)="login()" class="forsubmit" value="Login">
+            </div>
+        </form>
+    </div>
+</div>

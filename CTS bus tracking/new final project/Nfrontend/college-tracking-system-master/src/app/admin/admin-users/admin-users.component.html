@@ -1,0 +1,27 @@
+<div>
+    <div>
+        <p>View Users & Activate</p>
+        <table>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Status</th>
+                <th>Activate</th>
+                <th>De-Activate</th>
+            </tr>
+            <tr *ngFor="let user of userList">
+                <td>{{user.name}}</td>
+                <td>{{user.emailAddress}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.mobileNumber}}</td>
+                <td>{{user.active ? 'Activated' : 'Waiting'}}</td>
+                <td (click)="setUserActivate(user, true)">Activate</td>
+                <td (click)="setUserActivate(user, false)">De-Activate</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="bus-route">
+    <div>
+        <p>Add Tracking Details</p>
+        <form class="bus-route__form" [formGroup]="formdata">
+            <div class="bus-route__form-inputs">
+                <label for="routeNo">Current Bus Route :</label>
+                <input type="text" class="fortextbox" name="routeNo" placeholder="Enter Route Number" formControlName="routeNo">
+            </div>
+            <div class="bus-route__form-inputs">
+                <label for="source">Current Location :</label>
+                <div class="bus-route__inner-inputs">
+                    <input type="text" class="fortextbox" name="source" placeholder="Enter Source" formControlName="source">
+                    <br>
+                    <input type="text" class="fortextbox" name="sourceLat" placeholder="Enter latitude" formControlName="sourceLat">
+                    <input type="text" class="fortextbox" name="sourcelong" placeholder="Enter longitude" formControlName="sourcelong">
+                </div>
+            </div>
+            <div class="bus-route__form-inputs submit">
+                <input type="submit" (click)="addBusRoute()" class="forsubmit" value="Add">
+            </div>
+        </form>
+    </div>
+</div>

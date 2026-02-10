@@ -1,0 +1,22 @@
+.register {
+    display: flex;
+    justify-content: center;
+    p {
+        font-size: 25px;
+    }
+    &__form {
+        width: 500px;
+        height: 500px;
+        padding-top: 10px;
+    }
+    &__form-inputs {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        pointer-events: none;
+    }
+    &__menu {
+        margin-left: 100px;
+    }
+}

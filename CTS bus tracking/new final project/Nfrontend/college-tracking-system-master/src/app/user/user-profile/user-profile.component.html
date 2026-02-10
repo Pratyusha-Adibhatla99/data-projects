@@ -1,0 +1,30 @@
+<div class="register">
+    <div>
+        <p>User Profile</p>
+        <form class="register__form" [formGroup]="formdata">
+            <div class="register__form-inputs">
+                <label for="name">User Name :</label>
+                <input type="text" class="fortextbox" name="name" placeholder="Enter Name" formControlName="name">
+            </div>
+            <div class="register__form-inputs">
+                <label for="emailid">Email ID :</label>
+                <input type="email" class="fortextbox" name="emailid" placeholder="Enter Email Id" formControlName="emailid">
+            </div>
+            <div class="register__form-inputs">
+                <label for="gender">Gender :</label>
+                <select style="width: 177px" name="cars" formControlName="gender">
+                    <option value="" selected disabled hidden>Select Gender</option>
+                    <option *ngFor="let gender of genderList" value="gender.value">{{gender.viewValue}}</option>
+                  </select>
+            </div>
+            <div class="register__form-inputs">
+                <label for="address">Address :</label>
+                <textarea style="width: 170px; height: 80px;" name="address" formControlName="address"></textarea>
+            </div>
+            <div class="register__form-inputs">
+                <label for="mobileNum">Mobile Number :</label>
+                <input type="text" class="fortextbox" name="mobileNum" placeholder="Enter Mobile Number" formControlName="mobileNum">
+            </div>
+        </form>
+    </div>
+</div>

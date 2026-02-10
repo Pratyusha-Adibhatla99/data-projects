@@ -1,0 +1,21 @@
+<div class="login">
+    <div>
+        <p>Driver Login</p>
+        <form class="login__form" [formGroup]="formdata">
+            <div class="login__form-inputs">
+                <label for="routeNumber">Route Number :</label>
+                <select style="width: 177px" name="cars" formControlName="routeNumber">
+                    <option value="" selected disabled hidden>Select Route</option>
+                    <option *ngFor="let routeNumber of routeNumberList" [value]="routeNumber">{{routeNumber}}</option>
+                  </select>
+            </div>
+            <div class="login__form-inputs">
+                <label for="driverName">Driver Name :</label>
+                <input type="text" class="fortextbox" name="driverName" placeholder="Enter Driver Name" formControlName="driverName">
+            </div>
+            <div class="login__form-inputs submit">
+                <input type="submit" (click)="login()" class="forsubmit" value="Login">
+            </div>
+        </form>
+    </div>
+</div>

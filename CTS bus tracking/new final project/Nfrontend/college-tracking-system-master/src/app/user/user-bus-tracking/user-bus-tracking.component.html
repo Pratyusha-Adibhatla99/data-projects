@@ -1,0 +1,34 @@
+<div class="login">
+    <div>
+        <p>Track Bus</p>
+        <form class="login__form" [formGroup]="formdata">
+            <div class="login__form-inputs">
+                <label for="routeNumber">Select Route :</label>
+                <select style="width: 177px" name="routeNumber" formControlName="routeNumber">
+                    <option value="" selected disabled hidden>Select Route</option>
+                    <option *ngFor="let routeNumber of routeNumberList" [value]="routeNumber">{{routeNumber}}</option>
+                  </select>
+            </div>
+            <div class="login__form-inputs submit">
+                <input type="submit" (click)="track()" class="forsubmit" value="Track">
+            </div>
+        </form>
+    </div>
+    <div *ngIf="isTracking">
+        <p>Track Details</p>
+        <div>
+            <div class="login__form-inputs">
+                <label for="location">Current Location :</label>
+                <input type="text" class="fortextbox" name="location" value="{{busRoute.currentLocation}}">
+            </div>
+            <div class="login__form-inputs">
+                <label for="location_lat">Current Location Latitude:</label>
+                <input type="text" class="fortextbox" name="location_lat" value="{{busRoute.currentLocation_lat}}">
+            </div>
+            <div class="login__form-inputs">
+                <label for="location_long">Current Location Longitude:</label>
+                <input type="text" class="fortextbox" name="location_long"  value="{{busRoute.currentLocation_long}}">
+            </div>
+        </div>
+    </div>
+</div>

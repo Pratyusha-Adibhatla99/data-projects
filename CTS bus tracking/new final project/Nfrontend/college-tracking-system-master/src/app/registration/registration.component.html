@@ -1,0 +1,52 @@
+<div class="register">
+    <div>
+        <p>User Registration</p>
+        <form class="register__form" [formGroup]="formdata">
+            <div class="register__form-inputs">
+                <label for="name">Name :</label>
+                <input type="text" class="fortextbox" name="name" placeholder="Enter Name" formControlName="name">
+            </div>
+            <div class="register__form-inputs">
+                <label for="emailid">Email ID :</label>
+                <input type="email" class="fortextbox" name="emailid" placeholder="Enter Email Id" formControlName="emailid">
+            </div>
+            <div class="register__form-inputs">
+                <label for="passwd">Password :</label>
+                <input type="password" class="fortextbox" name="passwd" placeholder="Enter Password" formControlName="passwd">
+            </div>
+            <div class="register__form-inputs">
+                <label for="dob">Date Of Birth :</label>
+                <input style="width: 172px;" type="date" class="fortextbox" name="dob" placeholder="Enter DOB" formControlName="dob">
+            </div>
+            <div class="register__form-inputs">
+                <label for="gender">Gender :</label>
+                <select style="width: 177px" name="gender" formControlName="gender">
+                    <option value="" selected disabled hidden>Select Gender</option>
+                    <option *ngFor="let gender of genderList" [value]="gender.value">{{gender.viewValue}}</option>
+                  </select>
+            </div>
+            <div class="register__form-inputs">
+                <label for="address">Address :</label>
+                <textarea style="width: 170px; height: 80px;" name="address" formControlName="address"></textarea>
+            </div>
+            <div class="register__form-inputs">
+                <label for="mobileNum">Mobile Number :</label>
+                <input type="text" class="fortextbox" name="mobileNum" placeholder="Enter Mobile Number" formControlName="mobileNum">
+            </div>
+            <div class="register__form-inputs submit">
+                <input type="submit" (click)="submit()" class="forsubmit" value="Register">
+            </div>
+        </form>
+    </div>
+    <div class="register__menu">
+        <p>User Registration</p>
+        <div>
+            <ul>
+                <a><li routerLink=''>Home</li></a>
+                <a><li routerLink='/admin/login'>Admin</li></a>
+                <a><li routerLink='/user/login'>User</li></a>
+                <a><li routerLink='/register'>Registration</li></a>
+            </ul>
+        </div>
+    </div>
+</div>

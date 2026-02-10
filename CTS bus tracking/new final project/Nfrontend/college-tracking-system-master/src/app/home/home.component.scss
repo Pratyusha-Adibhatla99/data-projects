@@ -1,0 +1,18 @@
+.home {
+    display: flex;
+    p {
+        font-size: 25px;
+    }
+    &__menu {
+        margin-left: 100px;
+    }
+    justify-content: space-evenly;
+    .links {
+        line-height: 30px;
+    }
+    li {
+        color: yellow;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}

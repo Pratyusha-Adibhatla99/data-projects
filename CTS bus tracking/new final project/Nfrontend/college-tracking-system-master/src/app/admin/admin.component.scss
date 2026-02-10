@@ -1,0 +1,17 @@
+.admin {
+    display: flex;
+    justify-content: space-evenly;
+    p {
+        font-size: 25px;
+    }
+    .links {
+        line-height: 30px;
+    }
+    li {
+        color: yellow;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+

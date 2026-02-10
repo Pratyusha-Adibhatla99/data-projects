@@ -1,0 +1,10 @@
+.login {
+    display: flex;
+    justify-content: center;
+    p {
+        font-size: 25px;
+    }
+    &__menu {
+        margin-left: 100px;
+    }
+}

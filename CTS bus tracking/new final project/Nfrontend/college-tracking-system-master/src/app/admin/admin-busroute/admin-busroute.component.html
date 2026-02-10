@@ -1,0 +1,40 @@
+<div class="bus-route">
+    <div>
+        <p>Add Bus Route</p>
+        <form class="bus-route__form" [formGroup]="formdata">
+            <div class="bus-route__form-inputs">
+                <label for="routeNo">Route No :</label>
+                <input type="text" class="fortextbox" name="routeNo" placeholder="Enter Route Number" formControlName="routeNo">
+            </div>
+            <div class="bus-route__form-inputs">
+                <label for="busNo">Bus No :</label>
+                <input type="text" class="fortextbox" name="busNo" placeholder="Enter Bus Number" formControlName="busNo">
+            </div>
+            <div class="bus-route__form-inputs">
+                <label for="driverName">Driver Name :</label>
+                <input type="text" class="fortextbox" name="driverName" placeholder="Enter driver Name" formControlName="driverName">
+            </div>
+            <div class="bus-route__form-inputs">
+                <label for="source">Source :</label>
+                <div class="bus-route__inner-inputs">
+                    <input type="text" class="fortextbox" name="source" placeholder="Enter Source" formControlName="source">
+                    <br>
+                    <input type="text" class="fortextbox" name="sourceLat" placeholder="Enter latitude" formControlName="sourceLat">
+                    <input type="text" class="fortextbox" name="sourcelong" placeholder="Enter longitude" formControlName="sourcelong">
+                </div>
+            </div>
+            <div class="bus-route__form-inputs">
+                <label for="destination">Destination :</label>
+                <div class="bus-route__inner-inputs">
+                    <input type="text" class="fortextbox" name="destination" placeholder="Enter Destination" formControlName="destination">
+                    <br>
+                    <input type="text" class="fortextbox" name="destinationLat" placeholder="Enter latitude" formControlName="destinationLat">
+                    <input type="text" class="fortextbox" name="destinationlong" placeholder="Enter longitude" formControlName="destinationlong">
+                </div>
+            </div>
+            <div class="bus-route__form-inputs submit">
+                <input type="submit" (click)="addBusRoute()" class="forsubmit" value="Add">
+            </div>
+        </form>
+    </div>
+</div>
