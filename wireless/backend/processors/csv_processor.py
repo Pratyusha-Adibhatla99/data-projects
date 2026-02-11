@@ -1,14 +1,41 @@
-# Create csv_processor.py
 import pandas as pd
 import numpy as np
 import os
-
 
 class CSVProcessor:
     def __init__(self, filepath):
         self.filepath = filepath
         self.filename = os.path.basename(filepath)
         self.df = None
+
+    # --- THIS IS THE FIX: Method is now INSIDE the class ---
+    def get_metadata(self):
+        """
+        Bridge method: Calls your smart extract_metadata() and formats 
+        it so the Frontend can read it.
+        """
+        try:
+            # 1. Run your existing smart logic
+            full_meta = self.extract_metadata()
+            
+            # 2. Map 'columns' to 'variables' for the frontend
+            variables = {}
+            rows = full_meta.get('num_rows', 0)
+            
+            for col_name, stats in full_meta.get('columns', {}).items():
+                variables[col_name] = {
+                    'shape': (rows,),          # CSV columns are 1D arrays
+                    'dtype': stats['detected_type'] # Use the type you already detected
+                }
+                
+            return {
+                'filename': self.filename,
+                'file_type': 'CSV (Smart Analysis)',
+                'variables': variables
+            }
+        except Exception as e:
+            return {'error': str(e)}
+    # -------------------------------------------------------
 
     def read_file(self):
         for sep in [',', ';', '\t', '|']:
@@ -161,7 +188,6 @@ def _safe_serialize(val):
     if isinstance(val, (np.bool_,)):
         return bool(val)
     return str(val)
-
 
 if __name__ == "__main__":
     import sys, json

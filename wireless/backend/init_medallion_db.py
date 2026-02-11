@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """
 DAY 1: Medallion Architecture Database Schema
-Create Bronze, Silver, Gold layer tables with data lineage tracking
-
-Run: python3 backend/init_medallion_db.py
+Creating Bronze, Silver, Gold layer tables with data lineage trackings
 """
 
 import sqlite3

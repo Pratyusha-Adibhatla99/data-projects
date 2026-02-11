@@ -1,571 +1,374 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Wireless Data Platform</title>
+    <title>Wireless Research Hub</title>
     <meta charset="UTF-8">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container { max-width:1200px; margin:0 auto; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6f8; padding: 20px; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .auth-container { max-width: 400px; margin: 80px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+        .auth-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        .btn { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .btn:hover { background: #0056b3; }
+        .btn-tab { background: transparent; color: #555; border-bottom: 3px solid transparent; border-radius: 0; }
+        .btn-tab.active { border-bottom: 3px solid #007bff; color: #007bff; }
+        
+        .dashboard { display: none; }
+        .upload-box { background: white; padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed #ccc; margin-bottom: 20px; }
+        
+        .file-list { display: grid; gap: 10px; }
+        .file-card { background: white; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        
+        .tag { padding: 4px 8px; border-radius: 12px; font-size: 0.75em; font-weight: bold; text-transform: uppercase; }
+        .tag-lidar { background: #ffebee; color: #c62828; }
+        .tag-wifi { background: #e3f2fd; color: #1565c0; }
+        .tag-matlab { background: #fff3e0; color: #ef6c00; }
 
-        /* Header */
-        .header { background:white; padding:30px; border-radius:15px;
-                  box-shadow:0 10px 30px rgba(0,0,0,.2); margin-bottom:30px; text-align:center; }
-        .header h1 { color:#667eea; font-size:2.5em; margin-bottom:10px; }
+        /* ANALYSIS MODAL */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-box { background: white; padding: 0; border-radius: 12px; width: 60%; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .modal-header { padding: 20px; background: #f8f9fa; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .modal-content { padding: 20px; overflow-y: auto; background: #f4f6f8; }
 
-        /* Stats */
-        .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-                 gap:20px; margin-bottom:30px; }
-        .stat-card { background:white; padding:25px 15px; border-radius:15px;
-                     box-shadow:0 5px 15px rgba(0,0,0,.1); text-align:center; }
-        .stat-card .value { font-size:2.2em; font-weight:bold; color:#667eea; margin-bottom:5px; }
-        .stat-card .label { color:#666; font-size:.85em; }
-
-        /* ── Jupyter Panel ── */
-        .jupyter-panel {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,.2);
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
-        .jupyter-header {
-            background: linear-gradient(135deg, #f97316, #ea580c);
-            padding: 18px 28px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .jupyter-header h2 { color:white; font-size:1.3em; margin:0; }
-        .jupyter-header .nb-status-badge {
-            padding: 5px 14px; border-radius: 20px; font-size:.82em; font-weight:600;
-        }
-        .badge-stopped   { background:rgba(255,255,255,.2); color:white; }
-        .badge-starting  { background:#fbbf24; color:#78350f; animation: pulse 1.4s infinite; }
-        .badge-running   { background:#22c55e; color:white; }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
-
-        .jupyter-body { padding:24px 28px; }
-
-        /* button row */
-        .nb-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:18px; }
-
-        /* open-notebook link */
-        .open-notebook-link {
-            display:none; /* shown only when running */
-            background:#f97316; color:white; text-decoration:none;
-            padding:11px 24px; border-radius:8px; font-weight:600; font-size:.95em;
-            transition: background .2s;
-        }
-        .open-notebook-link:hover { background:#ea580c; }
-        .open-notebook-link.show { display:inline-block; }
-
-        /* drag zone inside jupyter panel */
-        .nb-drop-zone {
-            border: 2px dashed #f97316;
-            border-radius: 10px;
-            padding: 28px;
-            text-align: center;
-            transition: all .3s;
-            background: #fff7ed;
-        }
-        .nb-drop-zone.drag-over { background:#ffedd5; border-color:#dc2626; }
-        .nb-drop-zone p { color:#9a3412; font-size:.88em; margin:6px 0; }
-        .nb-drop-zone .drop-icon { font-size:2em; }
-        .nb-msg { margin-top:10px; min-height:24px; font-size:.85em; }
-
-        /* Upload */
-        .upload-section { background:white; padding:30px; border-radius:15px;
-                          box-shadow:0 10px 30px rgba(0,0,0,.2); margin-bottom:30px; }
-        .upload-area { border:3px dashed #667eea; border-radius:10px; padding:40px;
-                       text-align:center; transition:all .3s; }
-        .upload-area.drag-over { background:#e8f0ff; border-color:#4858c9; }
-        .file-selected { background:#f0f9ff; padding:15px; border-radius:8px; margin:15px 0;
-                         display:none; justify-content:space-between; align-items:center; }
-        .file-selected.show { display:flex; }
-
-        /* Buttons */
-        .btn { padding:12px 28px; border:none; border-radius:8px; font-size:1em;
-               cursor:pointer; font-weight:600; margin:4px; transition:all .2s; }
-        .btn-primary   { background:#667eea; color:white; }
-        .btn-primary:hover   { background:#5568d3; }
-        .btn-success   { background:#10b981; color:white; }
-        .btn-success:hover   { background:#059669; }
-        .btn-secondary { background:#6b7280; color:white; }
-        .btn-secondary:hover { background:#4b5563; }
-        .btn-danger    { background:#ef4444; color:white; padding:8px 14px; font-size:.82em; }
-        .btn-danger:hover    { background:#dc2626; }
-        .btn-orange    { background:#f97316; color:white; }
-        .btn-orange:hover    { background:#ea580c; }
-        .btn-sm        { padding:8px 18px; font-size:.85em; }
-
-        /* File list */
-        .files-section { background:white; padding:30px; border-radius:15px;
-                         box-shadow:0 10px 30px rgba(0,0,0,.2); }
-        .files-section h2 { color:#333; margin-bottom:20px; }
-        .file-list { display:grid; gap:12px; }
-        .file-item { background:#f8f9fa; padding:18px 20px; border-radius:10px;
-                     display:flex; justify-content:space-between; align-items:center; transition:all .2s; }
-        .file-item:hover { transform:translateY(-2px); box-shadow:0 5px 15px rgba(0,0,0,.1); }
-        .file-info { flex:1; }
-        .file-name { font-weight:600; color:#333; margin-bottom:4px; }
-        .file-meta { color:#666; font-size:.82em; }
-        .file-actions { display:flex; gap:8px; align-items:center; }
-
-        .file-type { padding:4px 14px; border-radius:20px; font-size:.8em; font-weight:600; }
-        .type-channels   { background:#e3f2fd; color:#1976d2; }
-        .type-timestamps { background:#f3e5f5; color:#7b1fa2; }
-        .type-csv        { background:#e8f5e9; color:#2e7d32; }
-        .type-mat        { background:#fff3e0; color:#e65100; }
-
-        .analyze-btn { background:#10b981; color:white; padding:8px 14px; border:none;
-                       border-radius:6px; cursor:pointer; font-size:.82em; }
-        .analyze-btn:hover { background:#059669; }
-
-        /* Modal */
-        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-                 background:rgba(0,0,0,.5); z-index:1000; align-items:center; justify-content:center; }
-        .modal.active { display:flex; }
-        .modal-content { background:white; padding:30px; border-radius:15px;
-                         width:90%; max-width:860px; max-height:80vh; overflow-y:auto; position:relative; }
-        .modal-close { position:absolute; top:15px; right:18px; font-size:26px; cursor:pointer; color:#999; }
-        .modal-close:hover { color:#333; }
-        .modal-content h3 { color:#333; margin:20px 0 10px; }
-
-        .info-card { background:#f8f9fa; padding:16px; border-radius:10px; margin-bottom:10px; }
-        .info-card .card-title { font-weight:700; color:#667eea; margin-bottom:10px; font-size:1.05em; }
-        .type-tag { display:inline-block; padding:2px 10px; border-radius:12px; font-size:.75em; font-weight:600; margin-bottom:8px; }
-        .tag-numeric     { background:#e3f2fd; color:#1976d2; }
-        .tag-timestamp   { background:#fff8e1; color:#f57c00; }
-        .tag-categorical { background:#f3e5f5; color:#7b1fa2; }
-        .tag-boolean     { background:#e8f5e9; color:#2e7d32; }
-        .tag-text        { background:#fce4ec; color:#c62828; }
-        .tag-unknown     { background:#eeeeee; color:#616161; }
-
-        .detail-row { display:flex; gap:6px; color:#555; font-size:.88em; margin:4px 0; }
-        .detail-row strong { color:#333; min-width:140px; }
-        .pill-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
-        .pill { background:#eef2ff; color:#4338ca; padding:3px 10px; border-radius:20px; font-size:.8em; }
-        .pill .count { color:#6366f1; font-weight:600; margin-left:4px; }
-        .file-info-box { background:#eef2ff; border-radius:10px; padding:16px 20px; margin-bottom:6px; }
-        .file-info-box .detail-row strong { min-width:120px; }
-        .summary-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
-
-        .success-msg  { background:#d1fae5; color:#065f46; padding:12px; border-radius:8px; margin-bottom:15px; }
-        .error-msg    { background:#ffebee; color:#c62828; padding:12px; border-radius:8px; margin-bottom:15px; }
-        .warning-msg  { background:#fef3c7; color:#92400e; padding:12px; border-radius:8px; margin-bottom:15px; }
-
-        .loading { text-align:center; padding:40px; color:#666; }
-        .spinner { border:3px solid #f3f3f3; border-top:3px solid #667eea; border-radius:50%;
-                   width:40px; height:40px; animation:spin 1s linear infinite; margin:0 auto 20px; }
-        @keyframes spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+        /* METADATA CARDS */
+        .meta-card { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px; overflow: hidden; }
+        .meta-header { background: #e3f2fd; color: #1565c0; padding: 10px 15px; font-weight: bold; font-size: 0.9em; border-bottom: 1px solid #bbdefb; }
+        .meta-body { padding: 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 0.9em; }
+        .meta-label { font-weight: 600; color: #555; }
+        .meta-value { color: #333; font-family: monospace; }
+        
+        /* ADMIN BADGE */
+        .admin-badge { background: #ffd700; color: #000; padding: 2px 8px; border-radius: 10px; font-size: 0.7em; font-weight: bold; margin-left: 8px; vertical-align: middle; }
     </style>
 </head>
 <body>
-<div class="container">
 
-    <!-- Header -->
-    <div class="header">
-        <h1>📡 Wireless Research Lab</h1>
-        <p>Data Platform for Channel &amp; Timestamp Analysis</p>
+<div id="auth-section">
+    <div id="login-form" class="auth-container">
+        <h2>Research Hub Login</h2>
+        <input type="email" id="l-email" class="auth-input" placeholder="Email">
+        <input type="password" id="l-pass" class="auth-input" placeholder="Password">
+        <button class="btn" onclick="login()" style="width:100%">Login</button>
+        <p onclick="toggleAuth()" style="cursor:pointer; color:#007bff; margin-top:15px; font-size:0.9em;">Create an account</p>
     </div>
-
-    <!-- Stats -->
-    <div class="stats">
-        <div class="stat-card"><div class="value" id="totalFiles">-</div><div class="label">Total Files</div></div>
-        <div class="stat-card"><div class="value" id="channelsFiles">-</div><div class="label">Channels</div></div>
-        <div class="stat-card"><div class="value" id="timestampsFiles">-</div><div class="label">Timestamps</div></div>
-        <div class="stat-card"><div class="value" id="csvFiles">-</div><div class="label">CSV Files</div></div>
-        <div class="stat-card"><div class="value" id="uploadedFiles">-</div><div class="label">Uploaded</div></div>
-        <div class="stat-card"><div class="value" id="totalSize">-</div><div class="label">Size (MB)</div></div>
-    </div>
-
-    <!-- ── Jupyter Notebook Panel ── -->
-    <div class="jupyter-panel">
-        <div class="jupyter-header">
-            <h2>📓 Jupyter Notebook</h2>
-            <span class="nb-status-badge badge-stopped" id="nbBadge">Stopped</span>
-        </div>
-        <div class="jupyter-body">
-            <div class="nb-actions">
-                <button class="btn btn-orange btn-sm" id="nbLaunchBtn" onclick="launchNotebook()">▶ Launch Notebook</button>
-                <button class="btn btn-danger btn-sm" id="nbStopBtn" onclick="stopNotebook()" style="display:none">■ Stop</button>
-                <a href="#" class="open-notebook-link" id="nbOpenLink" target="_blank">🔗 Open Notebook</a>
-            </div>
-            <p style="color:#9a3412; font-size:.84em; margin-bottom:14px;">
-                Launches a Jupyter Notebook server rooted at your project folder — <strong>uploads/</strong> and <strong>channels_release/</strong> are directly accessible inside it.
-                You can also drag &amp; drop datasets below to add them instantly.
-            </p>
-            <!-- drag-drop zone for quick upload into notebook workspace -->
-            <div class="nb-drop-zone" id="nbDropZone">
-                <div class="drop-icon">📂</div>
-                <p><strong>Drag &amp; drop .mat or .csv files here</strong></p>
-                <p>They land in <code>uploads/</code> and appear inside Jupyter immediately.</p>
-            </div>
-            <div class="nb-msg" id="nbMsg"></div>
-        </div>
-    </div>
-
-    <!-- Upload -->
-    <div class="upload-section">
-        <h2>📤 Upload New Dataset</h2>
-        <div id="uploadMessage"></div>
-        <div class="upload-area" id="uploadArea">
-            <input type="file" id="fileInput" accept=".mat,.csv" hidden>
-            <div style="font-size:3em;margin-bottom:10px">📁</div>
-            <p><strong>Drag &amp; drop a .mat or .csv file here</strong></p>
-            <p style="color:#666;margin:10px 0">or</p>
-            <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Browse Files</button>
-        </div>
-        <div class="file-selected" id="fileSelected">
-            <div>
-                <strong>Selected:</strong> <span id="selectedFileName">-</span><br>
-                <span style="color:#666;font-size:.9em">Size: <span id="selectedFileSize">-</span></span>
-            </div>
-            <div>
-                <button class="btn btn-success" onclick="confirmUpload()">✓ Upload File</button>
-                <button class="btn btn-secondary" onclick="cancelUpload()">✗ Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- File list -->
-    <div class="files-section">
-        <h2>📁 Available Datasets</h2>
-        <div id="fileList" class="file-list">
-            <div class="loading"><div class="spinner"></div><p>Loading…</p></div>
-        </div>
+    <div id="reg-form" class="auth-container" style="display:none;">
+        <h2>Researcher Registration</h2>
+        <input type="text" id="r-name" class="auth-input" placeholder="Full Name">
+        <input type="text" id="r-inst" class="auth-input" placeholder="Institution">
+        <input type="email" id="r-email" class="auth-input" placeholder="Email">
+        <input type="password" id="r-pass" class="auth-input" placeholder="Password">
+        <button class="btn" onclick="register()" style="width:100%">Register</button>
+        <p onclick="toggleAuth()" style="cursor:pointer; color:#007bff; margin-top:15px; font-size:0.9em;">Back to Login</p>
     </div>
 </div>
 
-<!-- Analysis Modal -->
-<div class="modal" id="analysisModal">
-    <div class="modal-content">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
-        <h2 id="modalTitle">Analysis</h2>
-        <div id="modalContent"></div>
+<div id="dashboard" class="container dashboard">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; padding: 20px 0;">
+    <h1 style="margin:0; color:#2c3e50;">📡 Wireless Research Hub</h1>
+    <div>
+        <span id="user-name" style="margin-right:5px; font-weight:600; color:#555;"></span>
+        <span id="admin-badge" class="admin-badge" style="display:none;">ADMIN</span>
+        
+        <button class="btn" style="background:#28a745; margin-left:10px;" onclick="launchNotebook()">🚀 Jupyter</button>
+        
+        <button class="btn" style="background:#dc3545; margin-left:10px;" onclick="logout()">Logout</button>
+    </div>
+</div>
+    </div>
+
+    <div style="margin-bottom: 20px; border-bottom: 2px solid #e9ecef;">
+        <button class="btn btn-tab active" onclick="loadMyFiles()">📂 My Workspace</button>
+        <button class="btn btn-tab" onclick="loadHub('lidar')">🚗 Global LIDAR</button>
+        <button class="btn btn-tab" onclick="loadHub('wifi')">📶 Global WiFi</button>
+    </div>
+
+    <div class="upload-box" id="uploadArea">
+        <h3 style="margin-top:0;">📤 Upload Dataset</h3>
+        <div style="display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap; margin-bottom:10px;">
+            <input type="text" id="datasetName" class="auth-input" style="width:200px; margin:0;" placeholder="Dataset Name">
+            <label style="display:flex; align-items:center; gap:5px; font-size:0.9em; background:#eee; padding:5px 10px; border-radius:5px; cursor:pointer;">
+                <input type="checkbox" id="folderMode" onchange="toggleFolderMode()"> Upload Folder
+            </label>
+            <input type="file" id="fileInput" multiple style="display:none;" onchange="updateFileName()">
+            <button class="btn" style="background:#6c757d;" onclick="document.getElementById('fileInput').click()">Select Files</button>
+            <button class="btn" onclick="uploadFiles()">Start Upload</button>
+        </div>
+        <p id="fileNameDisplay" style="margin-top:10px; font-size:0.9em; color:#666;"></p>
+        <div id="uploadStatus" style="margin-top:10px; font-weight:bold;"></div>
+    </div>
+
+    <h3 id="listTitle">My Datasets</h3>
+    <div id="fileList" class="file-list"></div>
+</div>
+
+<div id="modal" class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2 style="margin:0;">📊 Dataset Analysis</h2>
+            <button onclick="closeModal()" style="background:none; border:none; font-size:1.5em; cursor:pointer;">&times;</button>
+        </div>
+        <div id="modalContent" class="modal-content"></div>
     </div>
 </div>
 
 <script>
-const API = 'http://localhost:5001';
-let selectedFile = null;
-let existingFiles = [];
-let nbPollTimer = null;
+const API = 'http://localhost:5001/api';
 
-// ─── STATS ──────────────────────────────────────────────
-async function loadStats() {
-    try {
-        const { stats } = await (await fetch(`${API}/api/stats`)).json();
-        document.getElementById('totalFiles').textContent     = stats.total_files;
-        document.getElementById('channelsFiles').textContent  = stats.channels_files;
-        document.getElementById('timestampsFiles').textContent= stats.timestamps_files;
-        document.getElementById('csvFiles').textContent        = stats.csv_files||0;
-        document.getElementById('uploadedFiles').textContent   = stats.uploaded_files||0;
-        document.getElementById('totalSize').textContent       = stats.total_size_mb.toFixed(2);
-    } catch(e){ console.error(e); }
+// --- AUTH ---
+function toggleAuth() {
+    const l = document.getElementById('login-form');
+    const r = document.getElementById('reg-form');
+    l.style.display = l.style.display === 'none' ? 'block' : 'none';
+    r.style.display = r.style.display === 'none' ? 'block' : 'none';
 }
 
-// ─── FILE LIST ──────────────────────────────────────────
-async function loadFiles() {
-    try {
-        const { files } = await (await fetch(`${API}/api/files`)).json();
-        existingFiles = files.map(f=>f.name);
-        const container = document.getElementById('fileList');
-        container.innerHTML = '';
-        files.forEach(file => {
-            const typeClass = {channels:'type-channels',timestamps:'type-timestamps',csv:'type-csv'}[file.type]||'type-mat';
-            const uploadedTag = file.source==='uploaded' ? ' • 📤 Uploaded' : '';
-            const deleteBtn   = file.can_delete
-                ? `<button class="btn btn-danger" onclick="deleteFile('${file.name}')">🗑️</button>` : '';
-            const div = document.createElement('div');
-            div.className = 'file-item';
-            div.innerHTML = `
-                <div class="file-info">
-                    <div class="file-name">${file.name}</div>
-                    <div class="file-meta">${(file.size/1024).toFixed(2)} KB${uploadedTag}</div>
-                </div>
-                <div class="file-actions">
-                    <span class="file-type ${typeClass}">${file.extension.toUpperCase()}</span>
-                    <button class="analyze-btn" onclick="analyzeFile('${file.name}')">🔍 Analyze</button>
-                    ${deleteBtn}
-                </div>`;
-            container.appendChild(div);
-        });
-    } catch(e) {
-        document.getElementById('fileList').innerHTML='<div class="error-msg">Failed to load files.</div>';
+async function login() {
+    const email = document.getElementById('l-email').value;
+    const password = document.getElementById('l-pass').value;
+    const res = await fetch(`${API}/login`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, password})});
+    const data = await res.json();
+    if(data.success) showDashboard(data.user);
+    else alert(data.error);
+}
+
+async function register() {
+    const full_name = document.getElementById('r-name').value;
+    const institution = document.getElementById('r-inst').value;
+    const email = document.getElementById('r-email').value;
+    const password = document.getElementById('r-pass').value;
+    const res = await fetch(`${API}/register`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({full_name, institution, email, password})});
+    const data = await res.json();
+    if(data.success) showDashboard(data.user);
+    else alert(data.error);
+}
+
+async function logout() { await fetch(`${API}/logout`, {method:'POST'}); location.reload(); }
+
+function showDashboard(user) {
+    document.getElementById('auth-section').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('user-name').innerText = user.full_name;
+    
+    // ADMIN CHECK
+    if(user.is_admin) {
+        document.getElementById('admin-badge').style.display = 'inline-block';
     }
+    
+    loadMyFiles();
 }
-
-// ─── UPLOAD (main section) ──────────────────────────────
-const uploadArea   = document.getElementById('uploadArea');
-const fileInput    = document.getElementById('fileInput');
-const uploadMsg    = document.getElementById('uploadMessage');
-const fileSelected = document.getElementById('fileSelected');
-
-uploadArea.addEventListener('dragover',  e=>{ e.preventDefault(); uploadArea.classList.add('drag-over'); });
-uploadArea.addEventListener('dragleave', ()=> uploadArea.classList.remove('drag-over'));
-uploadArea.addEventListener('drop', e=>{
-    e.preventDefault(); uploadArea.classList.remove('drag-over');
-    if(e.dataTransfer.files.length) handleFileSelect(e.dataTransfer.files[0]);
-});
-fileInput.addEventListener('change', e=>{ if(e.target.files.length) handleFileSelect(e.target.files[0]); });
-
-function handleFileSelect(file) {
-    uploadMsg.innerHTML='';
-    if(!file.name.match(/\.(mat|csv)$/i)){
-        uploadMsg.innerHTML='<div class="error-msg">❌ Only .mat and .csv files are allowed.</div>'; return;
-    }
-    if(existingFiles.includes(file.name)){
-        uploadMsg.innerHTML=`<div class="warning-msg">⚠️ "${file.name}" already exists — upload blocked.</div>`; return;
-    }
-    selectedFile = file;
-    document.getElementById('selectedFileName').textContent = file.name;
-    document.getElementById('selectedFileSize').textContent = (file.size/1024).toFixed(2)+' KB';
-    fileSelected.classList.add('show');
-}
-function cancelUpload(){ selectedFile=null; fileSelected.classList.remove('show'); fileInput.value=''; uploadMsg.innerHTML=''; }
-
-async function confirmUpload() {
-    if(!selectedFile) return;
-    const fd = new FormData(); fd.append('file', selectedFile);
-    uploadMsg.innerHTML='<div class="loading"><div class="spinner"></div><p>Uploading…</p></div>';
-    fileSelected.classList.remove('show');
-    try {
-        const data = await (await fetch(`${API}/api/upload`,{method:'POST',body:fd})).json();
-        if(data.success){
-            uploadMsg.innerHTML=`<div class="success-msg">✅ ${data.filename} uploaded! (${(data.size/1024).toFixed(2)} KB)</div>`;
-            selectedFile=null; fileInput.value='';
-            loadStats(); loadFiles();
-            setTimeout(()=> uploadMsg.innerHTML='', 5000);
-        } else {
-            uploadMsg.innerHTML=`<div class="error-msg">❌ ${data.error}</div>`;
-        }
-    } catch(e){ uploadMsg.innerHTML=`<div class="error-msg">❌ ${e.message}</div>`; }
-}
-
-// ─── DELETE ─────────────────────────────────────────────
-async function deleteFile(name){
-    if(!confirm(`Delete "${name}"?`)) return;
-    try {
-        const data = await (await fetch(`${API}/api/delete/${name}`,{method:'DELETE'})).json();
-        if(data.success){
-            uploadMsg.innerHTML=`<div class="success-msg">✅ ${name} deleted.</div>`;
-            loadStats(); loadFiles();
-            setTimeout(()=> uploadMsg.innerHTML='', 3000);
-        } else { uploadMsg.innerHTML=`<div class="error-msg">❌ ${data.error}</div>`; }
-    } catch(e){ uploadMsg.innerHTML=`<div class="error-msg">❌ ${e.message}</div>`; }
-}
-
-// ─── JUPYTER NOTEBOOK ───────────────────────────────────
-const nbBadge      = document.getElementById('nbBadge');
-const nbLaunchBtn  = document.getElementById('nbLaunchBtn');
-const nbStopBtn    = document.getElementById('nbStopBtn');
-const nbOpenLink   = document.getElementById('nbOpenLink');
-const nbMsg        = document.getElementById('nbMsg');
-const nbDropZone   = document.getElementById('nbDropZone');
-
-function setNbUI(status, url) {
-    nbBadge.className = 'nb-status-badge';
-    nbLaunchBtn.style.display = 'inline-block';
-    nbStopBtn.style.display   = 'none';
-    nbOpenLink.classList.remove('show');
-
-    if(status === 'running') {
-        nbBadge.classList.add('badge-running'); nbBadge.textContent = 'Running';
-        nbLaunchBtn.style.display = 'none';
-        nbStopBtn.style.display   = 'inline-block';
-        if(url){ nbOpenLink.href = url; nbOpenLink.classList.add('show'); }
-    } else if(status === 'starting') {
-        nbBadge.classList.add('badge-starting'); nbBadge.textContent = 'Starting…';
-        nbLaunchBtn.style.display = 'none';
-        nbStopBtn.style.display   = 'inline-block';
-    } else {
-        nbBadge.classList.add('badge-stopped'); nbBadge.textContent = 'Stopped';
-    }
-}
-
+// --- JUPYTER LAUNCHER ---
 async function launchNotebook() {
-    nbMsg.innerHTML = '<span style="color:#9a3412">⏳ Launching Jupyter… this may take a few seconds.</span>';
-    nbLaunchBtn.disabled = true;
+    const btn = event.target;
+    const originalText = btn.innerText;
+    btn.innerText = "⏳ Starting...";
+    btn.disabled = true;
+
     try {
-        const data = await (await fetch(`${API}/api/notebook/launch`,{method:'POST'})).json();
-        if(!data.success){ nbMsg.innerHTML=`<div class="error-msg">❌ ${data.error}</div>`; nbLaunchBtn.disabled=false; return; }
-        setNbUI(data.status, data.url);
-        if(data.status === 'running'){
-            nbMsg.innerHTML='<span style="color:#059669">✅ Jupyter is ready. Click "Open Notebook" above.</span>';
+        const res = await fetch(`${API}/notebook/launch`, {method:'POST'});
+        const data = await res.json();
+        
+        if(data.success) {
+            // Open Jupyter in a new tab
+            window.open(data.url, '_blank');
+            btn.innerText = "✅ Running";
         } else {
-            nbMsg.innerHTML='<span style="color:#9a3412">⏳ Jupyter is starting… waiting for it to be ready.</span>';
+            alert("Error launching notebook: " + data.error);
+            btn.innerText = "❌ Failed";
         }
-        startNbPoll();
-    } catch(e){ nbMsg.innerHTML=`<div class="error-msg">❌ ${e.message}</div>`; nbLaunchBtn.disabled=false; }
-}
-
-async function stopNotebook() {
-    try {
-        await fetch(`${API}/api/notebook/stop`,{method:'DELETE'});
-        setNbUI('stopped', null);
-        nbMsg.innerHTML='<span style="color:#666">Jupyter stopped.</span>';
-        stopNbPoll();
-    } catch(e){ nbMsg.innerHTML=`<div class="error-msg">❌ ${e.message}</div>`; }
-}
-
-function startNbPoll() {
-    stopNbPoll();
-    nbPollTimer = setInterval(async ()=>{
-        try {
-            const data = await (await fetch(`${API}/api/notebook/status`)).json();
-            setNbUI(data.status, data.url);
-            if(data.status === 'running' && data.url){
-                nbMsg.innerHTML='<span style="color:#059669">✅ Jupyter is ready. Click "Open Notebook" above.</span>';
-                // slow down polling once running
-                stopNbPoll();
-                nbPollTimer = setInterval(async()=>{
-                    const s = await (await fetch(`${API}/api/notebook/status`)).json();
-                    setNbUI(s.status, s.url);
-                    if(s.status==='stopped') stopNbPoll();
-                }, 10000);
-            }
-            if(data.status === 'stopped'){ stopNbPoll(); nbLaunchBtn.disabled=false; }
-        } catch(e){}
-    }, 2000);
-}
-function stopNbPoll(){ if(nbPollTimer){ clearInterval(nbPollTimer); nbPollTimer=null; } }
-
-// ─── Jupyter panel drag-and-drop (uploads to uploads/) ──
-nbDropZone.addEventListener('dragover',  e=>{ e.preventDefault(); nbDropZone.classList.add('drag-over'); });
-nbDropZone.addEventListener('dragleave', ()=> nbDropZone.classList.remove('drag-over'));
-nbDropZone.addEventListener('drop', async e=>{
-    e.preventDefault(); nbDropZone.classList.remove('drag-over');
-    const files = Array.from(e.dataTransfer.files).filter(f=> f.name.match(/\.(mat|csv)$/i));
-    if(!files.length){ nbMsg.innerHTML='<span style="color:#c62828">Only .mat and .csv files are supported.</span>'; return; }
-    nbMsg.innerHTML='<span style="color:#9a3412">⏳ Uploading…</span>';
-    let ok=0, errors=[];
-    for(const file of files){
-        const fd = new FormData(); fd.append('file', file);
-        try {
-            const data = await (await fetch(`${API}/api/upload`,{method:'POST',body:fd})).json();
-            if(data.success) ok++;
-            else errors.push(`${file.name}: ${data.error}`);
-        } catch(err){ errors.push(`${file.name}: network error`); }
+    } catch(e) {
+        console.error(e);
+        alert("Network Error");
+        btn.innerText = "❌ Error";
     }
-    loadStats(); loadFiles();
-    if(ok && !errors.length){
-        nbMsg.innerHTML=`<span style="color:#059669">✅ ${ok} file${ok>1?'s':''} uploaded — available in Jupyter now.</span>`;
-    } else if(ok){
-        nbMsg.innerHTML=`<span style="color:#059669">✅ ${ok} uploaded.</span> <span style="color:#c62828">${errors.join('; ')}</span>`;
+
+    // Reset button after 3 seconds
+    setTimeout(() => {
+        btn.innerText = originalText;
+        btn.disabled = false;
+    }, 3000);
+}
+
+// --- FOLDER UPLOAD LOGIC ---
+function toggleFolderMode() {
+    const input = document.getElementById('fileInput');
+    const isFolder = document.getElementById('folderMode').checked;
+    
+    // This is the magic attribute that enables folder selection
+    if(isFolder) {
+        input.setAttribute('webkitdirectory', '');
+        input.setAttribute('directory', '');
     } else {
-        nbMsg.innerHTML=`<span style="color:#c62828">❌ ${errors.join('; ')}</span>`;
+        input.removeAttribute('webkitdirectory');
+        input.removeAttribute('directory');
     }
-});
+}
 
-// ─── ANALYZE ────────────────────────────────────────────
-async function analyzeFile(filename) {
-    document.getElementById('modalTitle').textContent = filename;
-    document.getElementById('analysisModal').classList.add('active');
-    document.getElementById('modalContent').innerHTML = '<div class="loading"><div class="spinner"></div><p>Analyzing…</p></div>';
+function updateFileName() {
+    const input = document.getElementById('fileInput');
+    const count = input.files.length;
+    document.getElementById('fileNameDisplay').innerText = count > 0 ? `${count} files selected` : "";
+}
+
+async function uploadFiles() {
+    const input = document.getElementById('fileInput');
+    const datasetName = document.getElementById('datasetName').value || 'Default_Dataset';
+    if(!input.files.length) return alert("Select files first");
+    
+    const fd = new FormData();
+    fd.append('dataset_name', datasetName);
+    for(const file of input.files) fd.append('file', file);
+    
+    document.getElementById('uploadStatus').innerText = "Uploading...";
     try {
-        const { success, metadata, error } = await (await fetch(`${API}/api/analyze/${filename}`)).json();
-        if(!success) throw new Error(error);
-        document.getElementById('modalContent').innerHTML =
-            metadata.file_type==='CSV' ? renderCSV(metadata) : renderMAT(metadata);
-    } catch(e){ document.getElementById('modalContent').innerHTML=`<div class="error-msg">❌ ${e.message}</div>`; }
+        const res = await fetch(`${API}/upload`, {method:'POST', body:fd});
+        const data = await res.json();
+        document.getElementById('uploadStatus').innerText = data.success ? "✅ Upload Success!" : "❌ Error: " + data.error;
+        if(data.success) loadMyFiles();
+    } catch(e) { document.getElementById('uploadStatus').innerText = "❌ Network Error"; }
 }
 
-function renderCSV(m) {
-    let html=`<div class="file-info-box">
-        <div class="detail-row"><strong>Filename</strong>${m.filename}</div>
-        <div class="detail-row"><strong>Size</strong>${(m.file_size/1024).toFixed(2)} KB</div>
-        <div class="detail-row"><strong>Rows</strong>${m.num_rows.toLocaleString()}</div>
-        <div class="detail-row"><strong>Columns</strong>${m.num_columns}</div>
-        <div class="detail-row"><strong>Null cells</strong>${m.total_null_cells} ${m.has_nulls?'⚠️':'✅ none'}</div>
-        <div class="detail-row"><strong>Column types</strong><div class="summary-row">`;
-    for(const[type,count] of Object.entries(m.type_summary))
-        html+=`<span class="type-tag tag-${type}">${type} (${count})</span>`;
-    html+='</div></div></div><h3>📊 Columns</h3>';
+// --- FILES & ANALYSIS ---
+async function loadMyFiles() {
+    document.getElementById('uploadArea').style.display = 'block';
+    const res = await fetch(`${API}/files`);
+    const data = await res.json();
+    renderFiles(data.files, true);
+}
 
-    for(const[colName,col] of Object.entries(m.columns)){
-        html+=`<div class="info-card">
-            <div class="card-title">${colName}</div>
-            <span class="type-tag tag-${col.detected_type}">${col.detected_type}</span>
-            <div class="detail-row"><strong>Raw dtype</strong>${col.dtype}</div>
-            <div class="detail-row"><strong>Total values</strong>${col.total_values.toLocaleString()}</div>
-            <div class="detail-row"><strong>Non-null</strong>${col.non_null_count.toLocaleString()}</div>
-            <div class="detail-row"><strong>Null count</strong>${col.null_count} ${col.null_count>0?'⚠️':'✅'}</div>
-            <div class="detail-row"><strong>Unique values</strong>${col.unique_values.toLocaleString()}</div>`;
-        if(col.detected_type==='numeric') html+=`
-            <div class="detail-row"><strong>Min</strong>${col.min}</div>
-            <div class="detail-row"><strong>Max</strong>${col.max}</div>
-            <div class="detail-row"><strong>Mean</strong>${col.mean}</div>
-            <div class="detail-row"><strong>Median</strong>${col.median}</div>
-            <div class="detail-row"><strong>Std Dev</strong>${col.std}</div>
-            <div class="detail-row"><strong>25th %ile</strong>${col.percentile_25}</div>
-            <div class="detail-row"><strong>75th %ile</strong>${col.percentile_75}</div>`;
-        if(col.detected_type==='timestamp') html+=`
-            <div class="detail-row"><strong>Earliest</strong>${col.min}</div>
-            <div class="detail-row"><strong>Latest</strong>${col.max}</div>
-            ${col.time_range_seconds!=null?`<div class="detail-row"><strong>Range</strong>${col.time_range_seconds.toLocaleString()} seconds</div>`:''}`;
-        if(col.detected_type==='categorical'&&col.top_values){
-            html+=`<div class="detail-row"><strong>Top values</strong></div><div class="pill-row">`;
-            col.top_values.forEach(tv=> html+=`<span class="pill">${tv.value}<span class="count">×${tv.count}</span></span>`);
-            html+='</div>';
-        }
-        if(col.detected_type==='boolean') html+=`
-            <div class="detail-row"><strong>True</strong>${col.true_count}</div>
-            <div class="detail-row"><strong>False</strong>${col.false_count}</div>`;
-        if(col.detected_type==='text') html+=`
-            <div class="detail-row"><strong>Avg length</strong>${col.avg_length} chars</div>
-            <div class="detail-row"><strong>Min length</strong>${col.min_length} chars</div>
-            <div class="detail-row"><strong>Max length</strong>${col.max_length} chars</div>`;
-        if(col.sample_values&&col.sample_values.length){
-            html+=`<div class="detail-row"><strong>Samples</strong></div><div class="pill-row">`;
-            col.sample_values.forEach(v=> html+=`<span class="pill">${v}</span>`);
-            html+='</div>';
-        }
-        html+='</div>';
+async function loadHub(modality) {
+    document.getElementById('uploadArea').style.display = 'none';
+    const res = await fetch(`${API}/silver/hub/${modality}`);
+    const data = await res.json();
+    renderFiles(data.files || [], false);
+}
+
+function renderFiles(files, isMyWorkspace) {
+    const list = document.getElementById('fileList');
+    list.innerHTML = '';
+    
+    if(files.length === 0) {
+        list.innerHTML = '<p style="color:#777; font-style:italic;">No files found.</p>';
+        return;
     }
-    return html;
+
+    // 1. Group files by Dataset Name
+    const groups = {};
+    files.forEach(f => {
+        // Handle cases where dataset name might be missing
+        const dsName = f.dataset || 'Uncategorized';
+        if (!groups[dsName]) groups[dsName] = [];
+        groups[dsName].push(f);
+    });
+
+    // 2. Render Groups (Folders)
+    Object.keys(groups).forEach(datasetName => {
+        const groupFiles = groups[datasetName];
+        
+        // Create Folder Header
+        let folderHTML = `
+            <div style="background:#fff; border:1px solid #ddd; border-radius:8px; margin-bottom:15px; overflow:hidden;">
+                <div style="background:#f8f9fa; padding:10px 15px; font-weight:bold; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+                    <span>📂 ${datasetName} (${groupFiles.length} files)</span>
+                    <span style="font-size:0.8em; color:#666;">${groupFiles[0].upload_time || ''}</span>
+                </div>
+                <div style="padding:10px;">`;
+        
+        // Create File Cards inside Folder
+        groupFiles.forEach(f => {
+            let tagClass = 'tag-matlab';
+            if(f.type === 'lidar') tagClass = 'tag-lidar';
+            if(f.type === 'wifi') tagClass = 'tag-wifi';
+            if(f.type === 'tabular') tagClass = 'tag-wifi'; 
+
+            folderHTML += `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #f1f1f1;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="font-size:1.2em;">📄</span>
+                        <div>
+                            <div style="font-weight:600; font-size:0.95em;">${f.name}</div>
+                            <div style="font-size:0.8em; color:#888;">${(f.size/1024).toFixed(1)} KB</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <span class="tag ${tagClass}">${f.type ? f.type.toUpperCase() : 'FILE'}</span>
+                        <button class="btn" style="padding:4px 10px; font-size:0.8em;" onclick="analyze('${f.name}')">Analyze</button>
+                    </div>
+                </div>`;
+        });
+
+        folderHTML += `</div></div>`;
+        list.innerHTML += folderHTML;
+    });
 }
 
-function renderMAT(m) {
-    let html=`<div class="file-info-box">
-        <div class="detail-row"><strong>Filename</strong>${m.filename}</div>
-        <div class="detail-row"><strong>Size</strong>${(m.file_size/1024).toFixed(2)} KB</div>
-        <div class="detail-row"><strong>Variables</strong>${Object.keys(m.variables).length}</div>
-    </div><h3>📊 Variables</h3>`;
-    for(const[name,v] of Object.entries(m.variables)){
-        html+=`<div class="info-card">
-            <div class="card-title">${name}</div>
-            <div class="detail-row"><strong>Shape</strong>${v.shape.join(' × ')}</div>
-            <div class="detail-row"><strong>Type</strong>${v.dtype}</div>
-            <div class="detail-row"><strong>Elements</strong>${v.size.toLocaleString()}</div>
-            <div class="detail-row"><strong>Dimensions</strong>${v.ndim}D</div>`;
-        if(v.min!==undefined) html+=`
-            <div class="detail-row"><strong>Min</strong>${v.min}</div>
-            <div class="detail-row"><strong>Max</strong>${v.max}</div>
-            <div class="detail-row"><strong>Mean</strong>${v.mean}</div>`;
-        html+='</div>';
+// --- PRETTY ANALYSIS ---
+function cleanDtype(dtype) {
+    // FIX: Detect Complex Numbers
+    if (dtype.includes("('real', '<f8')") && dtype.includes("('imag', '<f8')")) {
+        return "Complex128 (Real + Imaginary)";
     }
-    return html;
+    // Clean other NumPy types
+    if (dtype.includes("int64")) return "Integer (64-bit)";
+    if (dtype.includes("float64")) return "Float (64-bit)";
+    if (dtype.includes("object")) return "Object / String";
+    
+    return dtype; // Return original if no match
 }
 
-function closeModal(){ document.getElementById('analysisModal').classList.remove('active'); }
+async function analyze(filename) {
+    document.getElementById('modal').style.display = 'flex';
+    document.getElementById('modalContent').innerHTML = '<p style="text-align:center;">Loading Metadata...</p>';
+    
+    const res = await fetch(`${API}/analyze/${filename}`);
+    const data = await res.json();
+    
+    if(!data.success) {
+        document.getElementById('modalContent').innerHTML = `<p style="color:red">Error: ${data.error}</p>`;
+        return;
+    }
 
-// ─── INIT ───────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', ()=>{
-    loadStats(); loadFiles();
-    // check notebook status on page load
-    fetch(`${API}/api/notebook/status`).then(r=>r.json()).then(d=>{
-        setNbUI(d.status, d.url);
-        if(d.status==='running'||d.status==='starting') startNbPoll();
-    }).catch(()=>{});
-    setInterval(()=>{ loadStats(); loadFiles(); }, 30000);
-});
+    const m = data.metadata;
+    let html = `
+    <div style="background:white; padding:15px; border-radius:8px; margin-bottom:20px; border-left: 5px solid #007bff;">
+        <h3 style="margin:0 0 10px 0;">${m.filename || filename}</h3>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; font-size:0.9em;">
+            <div><strong>Type:</strong> ${m.file_type || 'Unknown'}</div>
+            <div><strong>Variables:</strong> ${Object.keys(m.variables || {}).length} detected</div>
+        </div>
+    </div>
+    <h4 style="color:#555; margin-bottom:10px;">Variable Breakdown</h4>`;
+    
+    if (m.variables) {
+        Object.keys(m.variables).forEach(varName => {
+            const v = m.variables[varName];
+            const shapeStr = Array.isArray(v.shape) ? v.shape.join(' × ') : v.shape;
+            
+            // USE THE CLEANER HERE
+            const prettyType = cleanDtype(v.dtype); 
+            
+            html += `
+            <div class="meta-card">
+                <div class="meta-header">${varName}</div>
+                <div class="meta-body">
+                    <div><div class="meta-label">Shape</div><div class="meta-value">${shapeStr}</div></div>
+                    <div><div class="meta-label">Data Type</div><div class="meta-value">${prettyType}</div></div>
+                </div>
+            </div>`;
+        });
+    } else {
+        html += '<p>No internal variables detected.</p>';
+    }
+
+    document.getElementById('modalContent').innerHTML = html;
+}
+
+function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
+window.onload = async () => {
+    const res = await fetch(`${API}/current-user`);
+    const data = await res.json();
+    if(data.success) showDashboard(data.user);
+};
 </script>
 </body>
 </html>

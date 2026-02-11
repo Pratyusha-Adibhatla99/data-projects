@@ -1,398 +1,187 @@
-from flask import Flask, jsonify, send_from_directory, request
+from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
-from werkzeug.utils import secure_filename
-import os, sys, subprocess, traceback, time, re, threading, atexit
-import sqlite3
-import json
-import hashlib
-
+from flask_login import login_required, current_user
+from backend.services.bronze_service import BronzeService
+import subprocess, re, time, threading
+import os, sys
+from backend.routes.auth import auth_bp, login_manager
+from backend.processors.mat_processor import WirelessDataProcessor
+from backend.processors.csv_processor import CSVProcessor
+# Add project root to path so we can import processors if needed later
 sys.path.insert(0, os.path.dirname(__file__))
-from mat_processor import WirelessDataProcessor
-from csv_processor import CSVProcessor
+# Note: You can keep csv_processor.py and mat_processor.py where they are for now
 
 app = Flask(__name__, static_folder='../frontend')
-CORS(app)
-app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024
+# Global variables for Jupyter
+_nb_proc = None
+_nb_token = None
+app.config['SECRET_KEY'] = 'dev-secret-key' 
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024 * 1024 # 50GB Limit
 
-# ─── paths ──────────────────────────────────────────────────
+# Initialize Auth
+login_manager.init_app(app)
+login_manager.login_view = 'auth.login'
+app.register_blueprint(auth_bp)
+CORS(app, supports_credentials=True)
+
+# ─── CONFIG & SERVICE INIT ───
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-DATA_DIR     = os.path.join(PROJECT_ROOT, 'channels_release')
-UPLOAD_DIR   = os.path.join(PROJECT_ROOT, 'uploads')
+UPLOAD_ROOT  = os.path.join(PROJECT_ROOT, 'uploads')
 DATABASE     = os.path.join(PROJECT_ROOT, 'database', 'wireless_data.db')
-ALLOWED_EXTENSIONS = {'mat', 'csv'}
-NOTEBOOK_PORT = 8888
 
-os.makedirs(UPLOAD_DIR, exist_ok=True)
-os.makedirs(os.path.dirname(DATABASE), exist_ok=True)
-
-# ─── Database helpers ───────────────────────────────────────
-def get_db():
-    """Get database connection"""
-    conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row
-    return conn
-
-def calculate_file_hash(filepath):
-    """Calculate SHA256 hash of file"""
-    sha256_hash = hashlib.sha256()
-    with open(filepath, "rb") as f:
-        for byte_block in iter(lambda: f.read(4096), b""):
-            sha256_hash.update(byte_block)
-    return sha256_hash.hexdigest()
-
-def save_to_database(filename, filepath, file_type, metadata):
-    """Save file metadata to database"""
-    try:
-        conn = get_db()
-        cursor = conn.cursor()
-        
-        file_size = os.path.getsize(filepath)
-        file_hash = calculate_file_hash(filepath)
-        metadata_json = json.dumps(metadata)
-        
-        # Check if file already exists (by hash to detect duplicates even with different names)
-        cursor.execute("SELECT filename FROM files WHERE file_hash = ?", (file_hash,))
-        existing = cursor.fetchone()
-        
-        if existing:
-            # Update existing entry
-            cursor.execute("""
-                UPDATE files 
-                SET filename = ?, file_type = ?, file_path = ?, 
-                    file_size = ?, metadata = ?, upload_time = CURRENT_TIMESTAMP
-                WHERE file_hash = ?
-            """, (filename, file_type, filepath, file_size, metadata_json, file_hash))
-            print(f"📝 Updated database entry for: {filename}")
-        else:
-            # Insert new entry
-            cursor.execute("""
-                INSERT INTO files (filename, file_type, file_path, file_hash, file_size, metadata)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (filename, file_type, filepath, file_hash, file_size, metadata_json))
-            print(f"💾 Saved to database: {filename}")
-        
-        conn.commit()
-        conn.close()
-        return True
-    except Exception as e:
-        print(f"❌ Database error: {e}")
-        traceback.print_exc()
-        return False
-
-# ─── Jupyter state ──────────────────────────────────────────
-_nb_proc  = None   # subprocess.Popen | None
-_nb_token = None   # extracted token string | None
-
-def _is_nb_running():
-    return _nb_proc is not None and _nb_proc.poll() is None
-
-def _extract_token(text):
-    m = re.search(r'token=([a-f0-9]+)', text)
-    return m.group(1) if m else None
-
-def _kill_notebook():
-    global _nb_proc
-    if _nb_proc and _nb_proc.poll() is None:
-        _nb_proc.terminate()
-        try:
-            _nb_proc.wait(timeout=3)
-        except subprocess.TimeoutExpired:
-            _nb_proc.kill()
-        _nb_proc = None
-
-atexit.register(_kill_notebook)
-
-# ─── helpers ────────────────────────────────────────────────
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def get_file_type(filename):
-    return filename.rsplit('.', 1)[1].lower() if '.' in filename else ''
-
-def get_all_filenames():
-    s = set()
-    if os.path.exists(DATA_DIR):
-        s.update(f for f in os.listdir(DATA_DIR)   if f.endswith(('.mat','.csv')))
-    if os.path.exists(UPLOAD_DIR):
-        s.update(f for f in os.listdir(UPLOAD_DIR) if f.endswith(('.mat','.csv')))
-    return s
-
-# ════════════════════════════════════════════════════════════
-# EXISTING ROUTES (files / stats / upload / delete / analyze)
-# ════════════════════════════════════════════════════════════
+# Initialize the Service Layer
+bronze_service = BronzeService(DATABASE, UPLOAD_ROOT)
 
 @app.route('/')
 def index():
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_file(os.path.join(app.static_folder, 'index.html'))
 
-@app.route('/api/files')
-def list_files():
-    try:
-        data_files   = [f for f in os.listdir(DATA_DIR)   if f.endswith(('.mat','.csv'))] if os.path.exists(DATA_DIR)   else []
-        upload_files = [f for f in os.listdir(UPLOAD_DIR) if f.endswith(('.mat','.csv'))] if os.path.exists(UPLOAD_DIR) else []
-        file_list = []
-        for fname in sorted(data_files):
-            ext = get_file_type(fname)
-            ftype = 'csv' if ext=='csv' else ('channels' if 'channels' in fname else ('timestamps' if 'timestamps' in fname else 'mat'))
-            file_list.append({'name':fname,'size':os.path.getsize(os.path.join(DATA_DIR,fname)),
-                              'type':ftype,'extension':ext,'source':'original','can_delete':False})
-        for fname in sorted(upload_files):
-            ext = get_file_type(fname)
-            ftype = 'csv' if ext=='csv' else ('channels' if 'channels' in fname else ('timestamps' if 'timestamps' in fname else 'mat'))
-            file_list.append({'name':fname,'size':os.path.getsize(os.path.join(UPLOAD_DIR,fname)),
-                              'type':ftype,'extension':ext,'source':'uploaded','can_delete':True})
-        return jsonify({'success':True,'files':file_list,'count':len(file_list)})
-    except Exception as e:
-        traceback.print_exc()
-        return jsonify({'success':False,'error':str(e)})
+# ─── ROUTES ───
 
-@app.route('/api/stats')
-def get_stats():
-    try:
-        data_files   = [f for f in os.listdir(DATA_DIR)   if f.endswith(('.mat','.csv'))] if os.path.exists(DATA_DIR)   else []
-        upload_files = [f for f in os.listdir(UPLOAD_DIR) if f.endswith(('.mat','.csv'))] if os.path.exists(UPLOAD_DIR) else []
-        all_files = data_files + upload_files
-        total_size = sum(os.path.getsize(os.path.join(DATA_DIR,f)) for f in data_files) + \
-                     sum(os.path.getsize(os.path.join(UPLOAD_DIR,f)) for f in upload_files)
-        return jsonify({'success':True,'stats':{
-            'total_files':len(all_files),
-            'channels_files':len([f for f in all_files if 'channels' in f]),
-            'timestamps_files':len([f for f in all_files if 'timestamps' in f]),
-            'csv_files':len([f for f in all_files if f.endswith('.csv')]),
-            'total_size_mb':total_size/(1024*1024),
-            'uploaded_files':len(upload_files)
-        }})
-    except Exception as e:
-        traceback.print_exc()
-        return jsonify({'success':False,'error':str(e)})
-
-@app.route('/api/upload', methods=['POST','OPTIONS'])
+@app.route('/api/upload', methods=['POST'])
+@login_required
 def upload_file():
-    if request.method=='OPTIONS': return '',204
-    try:
-        if 'file' not in request.files:
-            return jsonify({'success':False,'error':'No file provided'}),400
-        file = request.files['file']
-        if file.filename=='':
-            return jsonify({'success':False,'error':'No file selected'}),400
-        if not allowed_file(file.filename):
-            return jsonify({'success':False,'error':'Only .mat and .csv files are allowed'}),400
-        filename = secure_filename(file.filename)
-        if filename in get_all_filenames():
-            return jsonify({'success':False,'error':f'"{filename}" already exists.'}),400
-        filepath = os.path.join(UPLOAD_DIR, filename)
-        file.save(filepath)
-        size = os.path.getsize(filepath)
-        print(f"✅ Uploaded: {filename} ({size} bytes)")
-        
-        # Automatically extract and save metadata
-        ext = get_file_type(filename)
-        try:
-            if ext == 'csv':
-                # Extract CSV metadata
-                metadata = CSVProcessor(filepath).extract_metadata()
-                save_to_database(filename, filepath, 'csv', metadata)
-                print(f"📊 Extracted and saved CSV metadata")
-            else:
-                # Extract MAT metadata
-                processor = WirelessDataProcessor(filepath)
-                data = processor.read_file()
-                metadata = {
-                    'filename': filename,
-                    'file_size': size,
-                    'file_type': 'MAT',
-                    'variables': {}
-                }
-                for vname, vdata in data.items():
-                    info = {
-                        'shape': list(vdata.shape),
-                        'dtype': str(vdata.dtype),
-                        'size': int(vdata.size),
-                        'ndim': int(vdata.ndim)
-                    }
-                    if vdata.dtype.kind in ['i', 'f']:
-                        info.update({
-                            'min': float(vdata.min()),
-                            'max': float(vdata.max()),
-                            'mean': float(vdata.mean())
-                        })
-                    metadata['variables'][vname] = info
-                save_to_database(filename, filepath, 'mat', metadata)
-                print(f"📊 Extracted and saved MAT metadata")
-        except Exception as meta_err:
-            # If metadata extraction fails, still return success for upload
-            # but log the error
-            print(f"⚠️ Metadata extraction failed: {meta_err}")
-            traceback.print_exc()
-        
-        return jsonify({'success':True,'message':'File uploaded successfully','filename':filename,'size':size})
-    except Exception as e:
-        traceback.print_exc()
-        return jsonify({'success':False,'error':str(e)}),500
+    if 'file' not in request.files:
+        return jsonify({'success': False, 'error': 'No file part'}), 400
+    
+    files = request.files.getlist('file')
+    dataset_name = request.form.get('dataset_name', 'Default_Dataset')
+    
+    success_count = 0
+    errors = []
 
-@app.route('/api/delete/<filename>', methods=['DELETE','OPTIONS'])
-def delete_file(filename):
-    if request.method=='OPTIONS': return '',204
-    try:
-        fp = os.path.join(UPLOAD_DIR, filename)
-        if not os.path.exists(fp):
-            return jsonify({'success':False,'error':'File not found in uploads'}),404
-        
-        # Also delete from database
+    for file in files:
+        if file.filename == '': continue
         try:
-            conn = get_db()
-            cursor = conn.cursor()
-            cursor.execute("DELETE FROM files WHERE filename = ?", (filename,))
-            conn.commit()
-            conn.close()
-            print(f"🗑️  Removed from database: {filename}")
-        except Exception as db_err:
-            print(f"⚠️  Could not remove from database: {db_err}")
-        
-        os.remove(fp)
-        print(f"🗑️  Deleted: {filename}")
-        return jsonify({'success':True,'message':f'"{filename}" deleted'})
-    except Exception as e:
-        traceback.print_exc()
-        return jsonify({'success':False,'error':str(e)}),500
+            # Delegate logic to Service
+            success, msg = bronze_service.process_upload(
+                file, dataset_name, current_user.email, current_user.id, current_user.full_name
+            )
+            if success: success_count += 1
+        except Exception as e:
+            print(f"Error uploading {file.filename}: {e}")
+            errors.append(str(e))
+            
+    return jsonify({
+        'success': True, 
+        'message': f'Processed {success_count} files.',
+        'errors': errors
+    })
 
-@app.route('/api/analyze/<filename>')
+@app.route('/api/files', methods=['GET'])
+@login_required
+def list_my_files():
+    try:
+        # Delegate logic to Service
+        raw_files = bronze_service.get_user_files(current_user.id)
+        
+        # Format for Frontend
+        files = []
+        for f in raw_files:
+            files.append({
+                'name': f['filename'],
+                'dataset': f['dataset_name'],
+                'size': f['file_size'],
+                'type': f['modality'],
+                'extension': f['file_extension'],
+                'upload_time': f['upload_time_pst'],
+                'can_delete': True
+            })
+        return jsonify({'success': True, 'files': files})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+# NOTE: Analyze route stays here for now as it uses Processors
+# In Day 4, we can move this to 'analytics_service.py'
+@app.route('/api/analyze/<filename>', methods=['GET'])
+@login_required
 def analyze_file(filename):
     try:
-        filepath = os.path.join(DATA_DIR, filename)
-        if not os.path.exists(filepath):
-            filepath = os.path.join(UPLOAD_DIR, filename)
-        if not os.path.exists(filepath):
-            return jsonify({'success':False,'error':'File not found'})
+        # 1. Use Service to find the file path
+        # (We can use a quick SQL query here or add a helper to the service)
+        conn = bronze_service.get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT file_path, file_extension FROM bronze_files WHERE user_id=? AND filename=?", 
+                       (current_user.id, filename))
+        row = cursor.fetchone()
+        conn.close()
         
-        ext = get_file_type(filename)
+        if not row:
+            return jsonify({'success': False, 'error': 'File not found'}), 404
+            
+        filepath = row['file_path']
+        ext = row['file_extension']
         
-        if ext=='csv':
-            # CSV processing
-            metadata = CSVProcessor(filepath).extract_metadata()
-            # Save to database
-            save_to_database(filename, filepath, 'csv', metadata)
-            return jsonify({'success':True,'metadata':metadata})
-        
-        # MAT processing
-        processor = WirelessDataProcessor(filepath)
-        data = processor.read_file()
-        metadata = {'filename':filename,'file_size':os.path.getsize(filepath),'file_type':'MAT','variables':{}}
-        for vname, vdata in data.items():
-            info = {'shape':list(vdata.shape),'dtype':str(vdata.dtype),'size':int(vdata.size),'ndim':int(vdata.ndim)}
-            if vdata.dtype.kind in ['i','f']:
-                info.update({'min':float(vdata.min()),'max':float(vdata.max()),'mean':float(vdata.mean())})
-            metadata['variables'][vname] = info
-        
-        # Save to database
-        save_to_database(filename, filepath, 'mat', metadata)
-        
-        return jsonify({'success':True,'metadata':metadata})
+        # 2. Use the Processors we imported at the top
+        metadata = {}
+        if ext == 'mat':
+            p = WirelessDataProcessor(filepath)
+            data = p.read_file()
+            # Convert numpy shapes to safe strings for JSON
+            safe_vars = {k: {'shape': v.shape, 'dtype': str(v.dtype)} for k, v in data.items()}
+            metadata = {'filename': filename, 'variables': safe_vars, 'file_type': 'MAT'}
+        elif ext == 'csv':
+            p = CSVProcessor(filepath)
+            metadata = p.get_metadata()
+            
+        return jsonify({'success': True, 'metadata': metadata})
+
     except Exception as e:
-        traceback.print_exc()
-        return jsonify({'success':False,'error':str(e)})
-
-# JUPYTER NOTEBOOK  — launch / status / stop
-
+        return jsonify({'success': False, 'error': str(e)}), 500
+# ─── JUPYTER ROUTES ───
 @app.route('/api/notebook/launch', methods=['POST'])
 def launch_notebook():
     global _nb_proc, _nb_token
-
-    # ── already running? ──
-    if _is_nb_running():
-        return jsonify({'success':True,'status':'running',
-                        'url': f'http://localhost:{NOTEBOOK_PORT}/?token={_nb_token}' if _nb_token else None,
-                        'token':_nb_token})
-
-    cmd = [
-        sys.executable, '-m', 'jupyter', 'notebook',
-        '--port', str(NOTEBOOK_PORT),
-        '--notebook-dir', PROJECT_ROOT,
-        '--no-browser',
-        '--ip', '0.0.0.0',
-        '--log-level', 'INFO'
-    ]
-    print(f"🚀 Launching Jupyter… {' '.join(cmd)}")
-
-    try:
-        _nb_proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                    text=True, cwd=PROJECT_ROOT)
-    except FileNotFoundError:
-        _nb_proc = None
-        return jsonify({'success':False,
-                        'error':'jupyter not installed. Run:  conda activate wireless_env && pip install notebook'}), 500
-
-    # ── wait up to 8s for the token line ──
-    _nb_token = None
-    deadline  = time.time() + 8
-    while time.time() < deadline:
-        line = _nb_proc.stdout.readline()
-        if not line:   # process died
-            break
-        print(f"  [jupyter] {line.rstrip()}")
-        tok = _extract_token(line)
-        if tok:
-            _nb_token = tok
-            print(f"✅ Jupyter ready — token extracted")
-            break
-
-    # ── daemon thread keeps draining stdout (and catches late token) ──
-    def _drain():
-        global _nb_token
-        try:
-            for line in _nb_proc.stdout:
-                print(f"  [jupyter] {line.rstrip()}")
-                if _nb_token is None:
-                    t = _extract_token(line)
-                    if t:
-                        _nb_token = t
-                        print(f"✅ Jupyter token (delayed): {t}")
-        except Exception:
-            pass
-
-    threading.Thread(target=_drain, daemon=True).start()
-
-    if _nb_token:
-        return jsonify({'success':True,'status':'running',
-                        'url':f'http://localhost:{NOTEBOOK_PORT}/?token={_nb_token}','token':_nb_token})
-    # still starting — frontend will poll status
-    return jsonify({'success':True,'status':'starting','url':None,'token':None,
-                    'message':'Jupyter is starting… check status shortly.'})
-
-@app.route('/api/notebook/status')
-def notebook_status():
-    if _is_nb_running():
-        return jsonify({'success':True,'status':'running',
-                        'url':f'http://localhost:{NOTEBOOK_PORT}/?token={_nb_token}' if _nb_token else None,
-                        'token':_nb_token})
-    return jsonify({'success':True,'status':'stopped','url':None,'token':None})
-
-@app.route('/api/notebook/stop', methods=['DELETE'])
-def stop_notebook():
-    global _nb_proc, _nb_token
+    
+    # 1. If already running, return the existing localhost URL
     if _nb_proc and _nb_proc.poll() is None:
-        _nb_proc.terminate()
-        try:
-            _nb_proc.wait(timeout=4)
-        except subprocess.TimeoutExpired:
-            _nb_proc.kill()
-        print("🛑 Jupyter stopped.")
-    _nb_proc  = None
-    _nb_token = None
-    return jsonify({'success':True,'status':'stopped'})
+        if _nb_token:
+            return jsonify({
+                'success': True, 
+                'status': 'running', 
+                'url': f'http://localhost:8888/?token={_nb_token}' # <--- FORCE LOCALHOST
+            })
+        
+    try:
+        # 2. Launch Jupyter (Bind to 0.0.0.0 so it works, but we won't send that IP to browser)
+        cmd = [
+            sys.executable, '-m', 'jupyter', 'notebook', 
+            '--no-browser', 
+            '--port=8888', 
+            f'--notebook-dir={PROJECT_ROOT}', 
+            '--ip=0.0.0.0', 
+            '--allow-root'
+        ]
+        
+        _nb_proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        
+        # 3. Smart Token Reader (Wait up to 5 seconds)
+        start_time = time.time()
+        while time.time() - start_time < 5:
+            line = _nb_proc.stdout.readline()
+            if not line: break
+            
+            # Print to terminal so you can see it too
+            print(f"[Jupyter] {line.strip()}")
+            
+            if 'token=' in line:
+                m = re.search(r'token=([a-f0-9]+)', line)
+                if m: 
+                    _nb_token = m.group(1)
+                    break
+        
+        if _nb_token:
+            return jsonify({
+                'success': True, 
+                'status': 'started', 
+                'url': f'http://localhost:8888/?token={_nb_token}' # <--- FORCE LOCALHOST
+            })
+        else:
+            return jsonify({'success': False, 'error': 'Timed out waiting for Jupyter token'})
 
-# ════════════════════════════════════════════════════════════
+    except Exception as e:
+        print(f"Jupyter Error: {e}")
+        return jsonify({'success': False, 'error': str(e)})
 if __name__ == '__main__':
-    print("\n" + "=" * 60)
-    print("🚀 Wireless Data Platform")
-    print("=" * 60)
-    print(f"📁 Data:      {DATA_DIR}")
-    print(f"📤 Uploads:   {UPLOAD_DIR}")
-    print(f"💾 Database:  {DATABASE}")
-    print(f"🌐 Browser:   http://localhost:5001")
-    print(f"📓 Notebook:  http://localhost:{NOTEBOOK_PORT}  (launch via UI)")
-    print(f"📂 Formats:   .mat  .csv")
-    print(f"📦 Max size:  500 MB")
-    print(f"🔒 Dupes:     blocked")
-    print("=" * 60 + "\n")
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    print("🚀 Wireless Platform (Modular) Running on http://0.0.0.0:5001")
+    app.run(host='0.0.0.0', port=5001, debug=True)
