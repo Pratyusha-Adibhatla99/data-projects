@@ -5,7 +5,7 @@ This repository showcases my expertise in building scalable **Data Engineering p
 
 ## 🚀 Featured Projects
 
-### 1. UCSD Wireless Data Ingestion Framework [(`/wireless`)](./wireless/)
+### 1. UCSD Wireless Data Ingestion Framework [(`/wireless`)](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/wireless)
 **Role:** Research Assistant Data Engineer at UCSD.
 **Framework:** Architected a Python and SQLite-based framework for HDF5, CSV, DAT, and PCD datasets.
 **Automation:** Built batch ETL workflows using Azure Pipelines for automated metadata extraction and schema validation.
