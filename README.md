@@ -5,28 +5,28 @@ This repository showcases my expertise in building scalable **Data Engineering p
 
 ## 🚀 Featured Projects
 
-### 1. UCSD Wireless Data Ingestion Framework (`[/wireless]`)(https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/wireless)
+### 1. UCSD Wireless Data Ingestion Framework ([`/wireless`](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/wireless))
 **Role:** Research Assistant Data Engineer at UCSD.
 **Framework:** Architected a Python and SQLite-based framework for HDF5, CSV, DAT, and PCD datasets.
 **Automation:** Built batch ETL workflows using Azure Pipelines for automated metadata extraction and schema validation.
 **Impact:** Reduced dataset discovery time to under 3 minutes through optimized metadata querie.
 
-### 2. RAG Retrieval System (`[/buffalo_housing_dashboard](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/buffalo_housing_dashboard)`)
+### 2. RAG Retrieval System ([`/buffalo_housing_dashboard`](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/buffalo_housing_dashboard))
 **Role:** Research Assistant Data Engineer at University at Buffalo.
 **Pipeline:** Designed a vector search pipeline to ingest unstructured data including video transcripts and OCR text.
 **Vector Store:** Optimized metadata schemas and refreshed vector indexes in **ChromaDB** to ensure consistency.
 
-### 3. CTS Bus Tracking System (`[/CTS bus tracking/new final project](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/CTS%20bus%20tracking/new%20final%20project)`)
+### 3. CTS Bus Tracking System ([`/CTS bus tracking/new final project`](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/CTS%20bus%20tracking/new%20final%20project))
 **Role:** Programmer Analyst Trainee at Cognizant.
 **Tech Stack:** Built a Spring Boot (Java) and Angular full-stack application.
 **Optimization:** Designed a relational database with REST APIs to handle daily location updates, reducing inconsistent records by 15-20%.
 
-### 4. Eye-Controlled Wheelchair (`[/eye-controlled wheelcha](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/eye-controlled%20wheelcha)`)
+### 4. Eye-Controlled Wheelchair ([`/eye-controlled wheelcha`](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/eye-controlled%20wheelcha))
 * **Concept:** Assistive technology project developed using Raspberry Pi and Python.
 * **Mechanism:** Translates eye/pupil movements into directional motor commands for mobility.
 
 
-### 5. Professional Banking System (`[/banking system](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/banking%20system)`)
+### 5. Professional Banking System ([`/banking system`](https://github.com/Pratyusha-Adibhatla99/data-projects/tree/main/banking%20system))
 **Experience:** Inspired by data support work for Liberty Mutual Insurance.
 **Data Integrity:** Developed SQL queries to update claims and payments data, validating 200-300 transactions per batch.
 **Scale:** Supported production batch jobs processing over 100k transactions per month.
