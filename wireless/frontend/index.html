@@ -4,117 +4,300 @@
     <title>Wireless Research Hub</title>
     <meta charset="UTF-8">
     <style>
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6f8; padding: 20px; color: #333; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f4f6f8;
+            padding: 20px;
+            color: #333;
+        }
+
         .container { max-width: 1200px; margin: 0 auto; }
-        .auth-container { max-width: 400px; margin: 80px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
-        .auth-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
-        .btn { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.2s; }
-        .btn:hover { background: #0056b3; }
-        .btn-tab { background: transparent; color: #555; border-bottom: 3px solid transparent; border-radius: 0; }
+
+        /* ── Auth ─────────────────────────────────── */
+        .auth-container {
+            max-width: 400px; margin: 80px auto;
+            background: white; padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .auth-container h2 { margin-bottom: 20px; color: #2c3e50; }
+        .auth-input {
+            width: 100%; padding: 12px; margin: 8px 0;
+            border: 1px solid #ddd; border-radius: 6px;
+        }
+
+        /* ── Buttons ──────────────────────────────── */
+        .btn {
+            padding: 10px 20px; background: #007bff;
+            color: white; border: none; border-radius: 6px;
+            cursor: pointer; font-weight: 600; transition: 0.2s;
+        }
+        .btn:hover { opacity: 0.85; }
+        .btn-tab {
+            background: transparent; color: #555;
+            border-bottom: 3px solid transparent;
+            border-radius: 0; margin-right: 4px;
+        }
         .btn-tab.active { border-bottom: 3px solid #007bff; color: #007bff; }
-        
+
+        /* ── Dashboard ────────────────────────────── */
         .dashboard { display: none; }
-        .upload-box { background: white; padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed #ccc; margin-bottom: 20px; }
-        
-        .file-list { display: grid; gap: 10px; }
-        .file-card { background: white; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        
-        .tag { padding: 4px 8px; border-radius: 12px; font-size: 0.75em; font-weight: bold; text-transform: uppercase; }
-        .tag-lidar { background: #ffebee; color: #c62828; }
-        .tag-wifi { background: #e3f2fd; color: #1565c0; }
-        .tag-matlab { background: #fff3e0; color: #ef6c00; }
 
-        /* ANALYSIS MODAL */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-box { background: white; padding: 0; border-radius: 12px; width: 60%; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        .modal-header { padding: 20px; background: #f8f9fa; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .modal-content { padding: 20px; overflow-y: auto; background: #f4f6f8; }
+        .topbar {
+            display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 24px;
+            padding: 16px 0; border-bottom: 2px solid #e9ecef;
+        }
+        .topbar h1 { color: #2c3e50; }
 
-        /* METADATA CARDS */
-        .meta-card { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px; overflow: hidden; }
-        .meta-header { background: #e3f2fd; color: #1565c0; padding: 10px 15px; font-weight: bold; font-size: 0.9em; border-bottom: 1px solid #bbdefb; }
-        .meta-body { padding: 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 0.9em; }
-        .meta-label { font-weight: 600; color: #555; }
-        .meta-value { color: #333; font-family: monospace; }
-        
-        /* ADMIN BADGE */
-        .admin-badge { background: #ffd700; color: #000; padding: 2px 8px; border-radius: 10px; font-size: 0.7em; font-weight: bold; margin-left: 8px; vertical-align: middle; }
+        /* ── Upload box ───────────────────────────── */
+        .upload-box {
+            background: white; padding: 24px;
+            border-radius: 12px; text-align: center;
+            border: 2px dashed #ccc; margin-bottom: 24px;
+        }
+        .upload-controls {
+            display: flex; gap: 10px;
+            justify-content: center; align-items: center;
+            flex-wrap: wrap; margin-bottom: 10px;
+        }
+
+        /* ── Folder tree ──────────────────────────── */
+        .folder-block {
+            background: white; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .folder-header {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 18px; cursor: pointer;
+            background: #f0f7ff; border-bottom: 1px solid #dce8f5;
+            user-select: none; transition: background 0.15s;
+        }
+        .folder-header:hover { background: #e3f0ff; }
+        .folder-arrow {
+            font-size: 11px; color: #888;
+            transition: transform 0.2s; flex-shrink: 0;
+        }
+        .folder-arrow.open { transform: rotate(90deg); color: #007bff; }
+        .folder-title { flex: 1; font-weight: 700; color: #1565c0; font-size: 15px; }
+        .folder-pill {
+            background: #007bff; color: white;
+            padding: 2px 10px; border-radius: 12px; font-size: 11px;
+        }
+        .folder-body { display: none; }
+        .folder-body.open { display: block; }
+
+        /* ── File rows ────────────────────────────── */
+        .file-row {
+            display: flex; align-items: center; gap: 12px;
+            padding: 11px 18px 11px 44px;
+            border-top: 1px solid #f0f0f0;
+            transition: background 0.15s;
+        }
+        .file-row:hover { background: #fafcff; }
+        .file-icon { font-size: 16px; flex-shrink: 0; }
+        .file-name {
+            flex: 1; font-size: 13px; font-family: 'Consolas', monospace;
+            color: #333; overflow: hidden; text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .file-size { font-size: 11px; color: #999; min-width: 65px; text-align: right; }
+        .file-time { font-size: 11px; color: #bbb; white-space: nowrap; }
+
+        .ext-badge {
+            font-size: 10px; font-weight: 700; text-transform: uppercase;
+            padding: 2px 8px; border-radius: 10px; flex-shrink: 0;
+        }
+        .ext-csv  { background: #e3f2fd; color: #1565c0; }
+        .ext-mat  { background: #fff3e0; color: #e65100; }
+        .ext-pcd  { background: #fce4ec; color: #ad1457; }
+        .ext-ply  { background: #f3e5f5; color: #6a1b9a; }
+        .ext-other{ background: #f5f5f5; color: #666; }
+
+        .btn-analyze {
+            background: #e3f2fd; color: #1565c0;
+            border: 1px solid #bbdefb; padding: 4px 12px;
+            border-radius: 6px; cursor: pointer; font-size: 11px;
+            font-weight: 600; flex-shrink: 0; transition: 0.15s;
+        }
+        .btn-analyze:hover { background: #1565c0; color: white; }
+
+        /* ── Empty / loading states ───────────────── */
+        .empty-state {
+            text-align: center; padding: 50px 20px; color: #999;
+        }
+        .empty-icon { font-size: 44px; margin-bottom: 10px; }
+
+        /* ── Modal ────────────────────────────────── */
+        .modal-overlay {
+            display: none; position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-box {
+            background: white; border-radius: 12px;
+            width: 65%; max-height: 88vh; overflow: hidden;
+            display: flex; flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .modal-header {
+            padding: 18px 22px; background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h3 { margin: 0; color: #2c3e50; }
+        .modal-close {
+            background: none; border: none;
+            font-size: 22px; cursor: pointer; color: #999;
+        }
+        .modal-close:hover { color: #333; }
+        .modal-body { padding: 20px; overflow-y: auto; background: #f4f6f8; }
+
+        /* ── Analysis cards ───────────────────────── */
+        .analysis-summary {
+            background: white; border-radius: 8px;
+            padding: 16px; margin-bottom: 16px;
+            border-left: 4px solid #007bff;
+            display: flex; gap: 24px; flex-wrap: wrap;
+        }
+        .summary-stat { text-align: center; }
+        .summary-val { font-size: 22px; font-weight: 700; color: #007bff; }
+        .summary-lbl { font-size: 11px; color: #999; text-transform: uppercase; }
+
+        .var-card {
+            background: white; border-radius: 8px;
+            margin-bottom: 10px; overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .var-header {
+            background: #e3f2fd; color: #1565c0;
+            padding: 9px 14px; font-weight: 700;
+            font-size: 13px; font-family: 'Consolas', monospace;
+        }
+        .var-body {
+            padding: 12px 14px;
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 10px; font-size: 12px;
+        }
+        .var-label { font-weight: 600; color: #666; margin-bottom: 2px; }
+        .var-value { font-family: 'Consolas', monospace; color: #333; }
+
+        /* ── Admin badge ──────────────────────────── */
+        .admin-badge {
+            background: #ffd700; color: #000;
+            padding: 2px 8px; border-radius: 10px;
+            font-size: 11px; font-weight: 700; margin-left: 8px;
+        }
+
+        /* ── Toast ────────────────────────────────── */
+        #toast {
+            position: fixed; bottom: 24px; right: 24px;
+            padding: 12px 20px; border-radius: 8px;
+            font-size: 14px; z-index: 9999;
+            opacity: 0; transition: opacity 0.3s;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
 
 <div id="auth-section">
+
     <div id="login-form" class="auth-container">
-        <h2>Research Hub Login</h2>
-        <input type="email" id="l-email" class="auth-input" placeholder="Email">
-        <input type="password" id="l-pass" class="auth-input" placeholder="Password">
-        <button class="btn" onclick="login()" style="width:100%">Login</button>
-        <p onclick="toggleAuth()" style="cursor:pointer; color:#007bff; margin-top:15px; font-size:0.9em;">Create an account</p>
+        <h2>🔬 Research Hub Login</h2>
+        <input type="email"     id="l-email" class="auth-input" placeholder="Email">
+        <input type="password"  id="l-pass"  class="auth-input" placeholder="Password">
+        <button class="btn" onclick="login()" style="width:100%;margin-top:8px">Login</button>
+        <p onclick="toggleAuth()"
+           style="cursor:pointer;color:#007bff;margin-top:16px;font-size:14px">
+            Create an account →
+        </p>
     </div>
-    <div id="reg-form" class="auth-container" style="display:none;">
+
+    <div id="reg-form" class="auth-container" style="display:none">
         <h2>Researcher Registration</h2>
-        <input type="text" id="r-name" class="auth-input" placeholder="Full Name">
-        <input type="text" id="r-inst" class="auth-input" placeholder="Institution">
-        <input type="email" id="r-email" class="auth-input" placeholder="Email">
-        <input type="password" id="r-pass" class="auth-input" placeholder="Password">
-        <button class="btn" onclick="register()" style="width:100%">Register</button>
-        <p onclick="toggleAuth()" style="cursor:pointer; color:#007bff; margin-top:15px; font-size:0.9em;">Back to Login</p>
+        <input type="text"     id="r-name"  class="auth-input" placeholder="Full Name">
+        <input type="text"     id="r-inst"  class="auth-input" placeholder="Institution">
+        <input type="email"    id="r-email" class="auth-input" placeholder="Email">
+        <input type="password" id="r-pass"  class="auth-input" placeholder="Password">
+        <button class="btn" onclick="register()" style="width:100%;margin-top:8px">Register</button>
+        <p onclick="toggleAuth()"
+           style="cursor:pointer;color:#007bff;margin-top:16px;font-size:14px">
+            ← Back to Login
+        </p>
     </div>
+
 </div>
 
 <div id="dashboard" class="container dashboard">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; padding: 20px 0;">
-    <h1 style="margin:0; color:#2c3e50;">📡 Wireless Research Hub</h1>
-    <div>
-        <span id="user-name" style="margin-right:5px; font-weight:600; color:#555;"></span>
-        <span id="admin-badge" class="admin-badge" style="display:none;">ADMIN</span>
-        
-        <button class="btn" style="background:#28a745; margin-left:10px;" onclick="launchNotebook()">🚀 Jupyter</button>
-        
-        <button class="btn" style="background:#dc3545; margin-left:10px;" onclick="logout()">Logout</button>
-    </div>
-</div>
+
+    <div class="topbar">
+        <h1>📡 Wireless Research Hub</h1>
+        <div style="display:flex;align-items:center;gap:10px">
+            <span id="user-name" style="font-weight:600;color:#555"></span>
+            <span id="admin-badge" class="admin-badge" style="display:none">ADMIN</span>
+            <button class="btn" style="background:#28a745" onclick="launchNotebook()">🚀 Jupyter</button>
+            <button class="btn" style="background:#dc3545" onclick="logout()">Logout</button>
+        </div>
     </div>
 
-    <div style="margin-bottom: 20px; border-bottom: 2px solid #e9ecef;">
-        <button class="btn btn-tab active" onclick="loadMyFiles()">📂 My Workspace</button>
-        <button class="btn btn-tab" onclick="loadHub('lidar')">🚗 Global LIDAR</button>
-        <button class="btn btn-tab" onclick="loadHub('wifi')">📶 Global WiFi</button>
+    <div style="margin-bottom:20px;border-bottom:2px solid #e9ecef">
+        <button class="btn btn-tab active" id="tab-my"    onclick="switchTab('my')">📂 My Workspace</button>
+        <button class="btn btn-tab"        id="tab-lidar" onclick="switchTab('lidar')">🚗 Global LIDAR</button>
+        <button class="btn btn-tab"        id="tab-wifi"  onclick="switchTab('wifi')">📶 Global WiFi</button>
     </div>
 
     <div class="upload-box" id="uploadArea">
-        <h3 style="margin-top:0;">📤 Upload Dataset</h3>
-        <div style="display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap; margin-bottom:10px;">
-            <input type="text" id="datasetName" class="auth-input" style="width:200px; margin:0;" placeholder="Dataset Name">
-            <label style="display:flex; align-items:center; gap:5px; font-size:0.9em; background:#eee; padding:5px 10px; border-radius:5px; cursor:pointer;">
-                <input type="checkbox" id="folderMode" onchange="toggleFolderMode()"> Upload Folder
+        <h3 style="margin-bottom:16px">📤 Upload Dataset</h3>
+        <div class="upload-controls">
+            <input type="text" id="datasetName" class="auth-input"
+                   style="width:200px;margin:0" placeholder="Folder / Dataset Name">
+            <label style="display:flex;align-items:center;gap:6px;
+                          background:#eee;padding:8px 12px;border-radius:6px;cursor:pointer">
+                <input type="checkbox" id="folderMode" onchange="toggleFolderMode()">
+                Upload Folder
             </label>
-            <input type="file" id="fileInput" multiple style="display:none;" onchange="updateFileName()">
-            <button class="btn" style="background:#6c757d;" onclick="document.getElementById('fileInput').click()">Select Files</button>
-            <button class="btn" onclick="uploadFiles()">Start Upload</button>
+            <input type="file" id="fileInput" multiple style="display:none"
+                   onchange="updateFileName()">
+            <button class="btn" style="background:#6c757d"
+                    onclick="document.getElementById('fileInput').click()">
+                Select Files
+            </button>
+            <button class="btn" onclick="uploadFiles()">⬆ Upload</button>
         </div>
-        <p id="fileNameDisplay" style="margin-top:10px; font-size:0.9em; color:#666;"></p>
-        <div id="uploadStatus" style="margin-top:10px; font-weight:bold;"></div>
+        <p id="fileNameDisplay" style="margin-top:8px;font-size:13px;color:#888"></p>
+        <div id="uploadStatus" style="margin-top:10px;font-weight:600;font-size:14px"></div>
     </div>
 
-    <h3 id="listTitle">My Datasets</h3>
-    <div id="fileList" class="file-list"></div>
+    <h3 id="listTitle" style="margin-bottom:14px;color:#2c3e50">My Datasets</h3>
+    <div id="fileList"></div>
+
 </div>
 
 <div id="modal" class="modal-overlay">
     <div class="modal-box">
         <div class="modal-header">
-            <h2 style="margin:0;">📊 Dataset Analysis</h2>
-            <button onclick="closeModal()" style="background:none; border:none; font-size:1.5em; cursor:pointer;">&times;</button>
+            <h3>📊 Dataset Analysis</h3>
+            <button class="modal-close" onclick="closeModal()">×</button>
         </div>
-        <div id="modalContent" class="modal-content"></div>
+        <div id="modalContent" class="modal-body"></div>
     </div>
 </div>
 
-<script>
-const API = 'http://localhost:5001/api';
+<div id="toast"></div>
 
-// --- AUTH ---
+<script>
+const API = '';  // same-origin — Flask serves both frontend and API
+
+// ─────────────────────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────────────────────
+
 function toggleAuth() {
     const l = document.getElementById('login-form');
     const r = document.getElementById('reg-form');
@@ -123,251 +306,426 @@ function toggleAuth() {
 }
 
 async function login() {
-    const email = document.getElementById('l-email').value;
+    const email    = document.getElementById('l-email').value;
     const password = document.getElementById('l-pass').value;
-    const res = await fetch(`${API}/login`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, password})});
-    const data = await res.json();
-    if(data.success) showDashboard(data.user);
-    else alert(data.error);
+    try {
+        const res  = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+            credentials: 'include'
+        });
+        const data = await res.json();
+        if (data.success) showDashboard(data.user);
+        else alert(data.error || 'Login failed');
+    } catch (e) {
+        alert('Network error. Is the server running?');
+    }
 }
 
 async function register() {
-    const full_name = document.getElementById('r-name').value;
+    const full_name   = document.getElementById('r-name').value;
     const institution = document.getElementById('r-inst').value;
-    const email = document.getElementById('r-email').value;
-    const password = document.getElementById('r-pass').value;
-    const res = await fetch(`${API}/register`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({full_name, institution, email, password})});
-    const data = await res.json();
-    if(data.success) showDashboard(data.user);
-    else alert(data.error);
+    const email       = document.getElementById('r-email').value;
+    const password    = document.getElementById('r-pass').value;
+    try {
+        const res  = await fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ full_name, institution, email, password }),
+            credentials: 'include'
+        });
+        const data = await res.json();
+        if (data.success) showDashboard(data.user);
+        else alert(data.error || 'Registration failed');
+    } catch (e) {
+        alert('Network error.');
+    }
 }
 
-async function logout() { await fetch(`${API}/logout`, {method:'POST'}); location.reload(); }
+async function logout() {
+    await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+    location.reload();
+}
 
 function showDashboard(user) {
     document.getElementById('auth-section').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('user-name').innerText = user.full_name;
-    
-    // ADMIN CHECK
-    if(user.is_admin) {
+    document.getElementById('dashboard').style.display   = 'block';
+    document.getElementById('user-name').textContent     = user.full_name;
+    if (user.is_admin) {
         document.getElementById('admin-badge').style.display = 'inline-block';
     }
-    
     loadMyFiles();
 }
-// --- JUPYTER LAUNCHER ---
-async function launchNotebook() {
-    const btn = event.target;
-    const originalText = btn.innerText;
-    btn.innerText = "⏳ Starting...";
-    btn.disabled = true;
 
-    try {
-        const res = await fetch(`${API}/notebook/launch`, {method:'POST'});
-        const data = await res.json();
-        
-        if(data.success) {
-            // Open Jupyter in a new tab
-            window.open(data.url, '_blank');
-            btn.innerText = "✅ Running";
-        } else {
-            alert("Error launching notebook: " + data.error);
-            btn.innerText = "❌ Failed";
-        }
-    } catch(e) {
-        console.error(e);
-        alert("Network Error");
-        btn.innerText = "❌ Error";
+// ─────────────────────────────────────────────────────────
+// TABS
+// ─────────────────────────────────────────────────────────
+
+function switchTab(tab) {
+    ['my','lidar','wifi'].forEach(t => {
+        document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+    });
+    if (tab === 'my') {
+        document.getElementById('uploadArea').style.display = 'block';
+        document.getElementById('listTitle').textContent    = 'My Datasets';
+        loadMyFiles();
+    } else {
+        document.getElementById('uploadArea').style.display = 'none';
+        document.getElementById('listTitle').textContent    = tab === 'lidar' ? 'Global LIDAR Hub' : 'Global WiFi Hub';
+        loadHub(tab);
     }
-
-    // Reset button after 3 seconds
-    setTimeout(() => {
-        btn.innerText = originalText;
-        btn.disabled = false;
-    }, 3000);
 }
 
-// --- FOLDER UPLOAD LOGIC ---
+// ─────────────────────────────────────────────────────────
+// JUPYTER
+// ─────────────────────────────────────────────────────────
+
+async function launchNotebook() {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = '⏳ Starting...';
+    btn.disabled = true;
+    try {
+        const res  = await fetch('/api/notebook/launch', { method: 'POST', credentials: 'include' });
+        const data = await res.json();
+        if (data.success) { window.open(data.url, '_blank'); btn.textContent = '✅ Running'; }
+        else { alert('Error: ' + data.error); btn.textContent = '❌ Failed'; }
+    } catch (e) { btn.textContent = '❌ Error'; }
+    setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 3000);
+}
+
+// ─────────────────────────────────────────────────────────
+// UPLOAD
+// ─────────────────────────────────────────────────────────
+
 function toggleFolderMode() {
-    const input = document.getElementById('fileInput');
+    const input    = document.getElementById('fileInput');
     const isFolder = document.getElementById('folderMode').checked;
-    
-    // This is the magic attribute that enables folder selection
-    if(isFolder) {
+    if (isFolder) {
         input.setAttribute('webkitdirectory', '');
         input.setAttribute('directory', '');
     } else {
         input.removeAttribute('webkitdirectory');
         input.removeAttribute('directory');
     }
+    input.value = '';
+    document.getElementById('fileNameDisplay').textContent = '';
 }
 
 function updateFileName() {
-    const input = document.getElementById('fileInput');
-    const count = input.files.length;
-    document.getElementById('fileNameDisplay').innerText = count > 0 ? `${count} files selected` : "";
+    const n = document.getElementById('fileInput').files.length;
+    document.getElementById('fileNameDisplay').textContent =
+        n > 0 ? `${n} file${n > 1 ? 's' : ''} selected` : '';
 }
 
 async function uploadFiles() {
-    const input = document.getElementById('fileInput');
-    const datasetName = document.getElementById('datasetName').value || 'Default_Dataset';
-    if(!input.files.length) return alert("Select files first");
-    
+    const input       = document.getElementById('fileInput');
+    const datasetName = document.getElementById('datasetName').value.trim();
+    const statusEl    = document.getElementById('uploadStatus');
+
+    if (!input.files.length) { alert('Please select files first'); return; }
+
     const fd = new FormData();
-    fd.append('dataset_name', datasetName);
-    for(const file of input.files) fd.append('file', file);
-    
-    document.getElementById('uploadStatus').innerText = "Uploading...";
+    const folderName = input.files[0].webkitRelativePath
+        ? input.files[0].webkitRelativePath.split('/')[0]
+        : datasetName;
+
+    if (folderName) fd.append('dataset_name', folderName);
+
+    for (const file of input.files) fd.append('file', file);
+
+    statusEl.textContent = `⏳ Uploading ${input.files.length} file(s)…`;
+    statusEl.style.color = '#555';
+
     try {
-        const res = await fetch(`${API}/upload`, {method:'POST', body:fd});
+        const res  = await fetch('/api/upload', {
+            method: 'POST',
+            body: fd,
+            credentials: 'include'
+        });
         const data = await res.json();
-        document.getElementById('uploadStatus').innerText = data.success ? "✅ Upload Success!" : "❌ Error: " + data.error;
-        if(data.success) loadMyFiles();
-    } catch(e) { document.getElementById('uploadStatus').innerText = "❌ Network Error"; }
+
+        if (data.success) {
+            statusEl.style.color = '#28a745';
+            statusEl.textContent = `✅ ${data.message || 'Upload successful!'}`;
+            toast('✅ Upload complete — refreshing files…');
+
+            await loadMyFiles();
+
+            input.value = '';
+            document.getElementById('fileNameDisplay').textContent = '';
+            document.getElementById('datasetName').value = '';
+
+        } else {
+            statusEl.style.color = '#dc3545';
+            const errMsg = Array.isArray(data.errors) ? data.errors.join(', ') : (data.error || 'Unknown error');
+            statusEl.textContent = `❌ ${errMsg}`;
+        }
+    } catch (e) {
+        statusEl.style.color = '#dc3545';
+        statusEl.textContent = '❌ Network error. Check server.';
+    }
 }
 
-// --- FILES & ANALYSIS ---
+// ─────────────────────────────────────────────────────────
+// LOAD FILES
+// ─────────────────────────────────────────────────────────
+
 async function loadMyFiles() {
-    document.getElementById('uploadArea').style.display = 'block';
-    const res = await fetch(`${API}/files`);
-    const data = await res.json();
-    renderFiles(data.files, true);
+    const list = document.getElementById('fileList');
+    list.innerHTML = '<div class="empty-state"><div class="empty-icon">⏳</div><div>Loading…</div></div>';
+
+    try {
+        const res  = await fetch('/api/files', { credentials: 'include' });
+        const data = await res.json();
+
+        if (!data.success) {
+            list.innerHTML = `<div class="empty-state" style="color:#c55">
+                Error: ${data.error}</div>`;
+            return;
+        }
+
+        renderFiles(data.files, true);
+
+    } catch (e) {
+        list.innerHTML = `<div class="empty-state" style="color:#c55">
+            Network error: ${e}</div>`;
+    }
 }
 
 async function loadHub(modality) {
-    document.getElementById('uploadArea').style.display = 'none';
-    const res = await fetch(`${API}/silver/hub/${modality}`);
-    const data = await res.json();
-    renderFiles(data.files || [], false);
+    const list = document.getElementById('fileList');
+    list.innerHTML = '<div class="empty-state"><div class="empty-icon">⏳</div><div>Loading…</div></div>';
+    try {
+        const res  = await fetch(`/api/silver/hub/${modality}`, { credentials: 'include' });
+        const data = await res.json();
+        renderFiles(data.files || [], false);
+    } catch (e) {
+        list.innerHTML = `<div class="empty-state" style="color:#c55">Error: ${e}</div>`;
+    }
+}
+
+// ─────────────────────────────────────────────────────────
+// RENDER FILES (AZURE MAPPED)
+// ─────────────────────────────────────────────────────────
+
+const EXT_ICONS = { csv:'📊', mat:'🔬', pcd:'🔵', ply:'🔵', txt:'📄' };
+
+function fmtSize(bytes) {
+    if (!bytes) return '0 B';
+    if (bytes < 1024)        return bytes + ' B';
+    if (bytes < 1048576)     return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(2) + ' MB';
+}
+
+function fmtTime(ts) {
+    if (!ts) return 'Unknown Time';
+    return String(ts).slice(0, 16).replace('T', ' ');
 }
 
 function renderFiles(files, isMyWorkspace) {
     const list = document.getElementById('fileList');
-    list.innerHTML = '';
-    
-    if(files.length === 0) {
-        list.innerHTML = '<p style="color:#777; font-style:italic;">No files found.</p>';
+
+    if (!files || !Array.isArray(files) || files.length === 0) {
+        list.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">📂</div>
+                <div>${isMyWorkspace
+                    ? 'No datasets found. Upload a file or folder above.'
+                    : 'No files in this hub yet.'}</div>
+            </div>`;
         return;
     }
 
-    // 1. Group files by Dataset Name
-    const groups = {};
-    files.forEach(f => {
-        // Handle cases where dataset name might be missing
-        const dsName = f.dataset || 'Uncategorized';
-        if (!groups[dsName]) groups[dsName] = [];
-        groups[dsName].push(f);
-    });
-
-    // 2. Render Groups (Folders)
-    Object.keys(groups).forEach(datasetName => {
-        const groupFiles = groups[datasetName];
-        
-        // Create Folder Header
-        let folderHTML = `
-            <div style="background:#fff; border:1px solid #ddd; border-radius:8px; margin-bottom:15px; overflow:hidden;">
-                <div style="background:#f8f9fa; padding:10px 15px; font-weight:bold; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
-                    <span>📂 ${datasetName} (${groupFiles.length} files)</span>
-                    <span style="font-size:0.8em; color:#666;">${groupFiles[0].upload_time || ''}</span>
-                </div>
-                <div style="padding:10px;">`;
-        
-        // Create File Cards inside Folder
-        groupFiles.forEach(f => {
-            let tagClass = 'tag-matlab';
-            if(f.type === 'lidar') tagClass = 'tag-lidar';
-            if(f.type === 'wifi') tagClass = 'tag-wifi';
-            if(f.type === 'tabular') tagClass = 'tag-wifi'; 
-
-            folderHTML += `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #f1f1f1;">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <span style="font-size:1.2em;">📄</span>
-                        <div>
-                            <div style="font-weight:600; font-size:0.95em;">${f.name}</div>
-                            <div style="font-size:0.8em; color:#888;">${(f.size/1024).toFixed(1)} KB</div>
-                        </div>
-                    </div>
-                    <div style="display:flex; gap:10px; align-items:center;">
-                        <span class="tag ${tagClass}">${f.type ? f.type.toUpperCase() : 'FILE'}</span>
-                        <button class="btn" style="padding:4px 10px; font-size:0.8em;" onclick="analyze('${f.name}')">Analyze</button>
-                    </div>
-                </div>`;
+    try {
+        // Group by folder using the new Azure DB column 'dataset_name'
+        const groups = {};
+        files.forEach(f => {
+            const folder = f.dataset_name || 'Uncategorized';
+            if (!groups[folder]) groups[folder] = [];
+            groups[folder].push(f);
         });
 
-        folderHTML += `</div></div>`;
-        list.innerHTML += folderHTML;
-    });
+        list.innerHTML = Object.entries(groups)
+            .map(([folder, fList]) => renderFolderBlock(folder, fList, isMyWorkspace))
+            .join('');
+
+    } catch (error) {
+        console.error("UI Render Crash:", error);
+        list.innerHTML = `<div style="color:#c55;padding:20px;background:#fdecea;border-radius:8px;">❌ Frontend Error: ${error.message}</div>`;
+    }
 }
 
-// --- PRETTY ANALYSIS ---
-function cleanDtype(dtype) {
-    // FIX: Detect Complex Numbers
-    if (dtype.includes("('real', '<f8')") && dtype.includes("('imag', '<f8')")) {
-        return "Complex128 (Real + Imaginary)";
-    }
-    // Clean other NumPy types
-    if (dtype.includes("int64")) return "Integer (64-bit)";
-    if (dtype.includes("float64")) return "Float (64-bit)";
-    if (dtype.includes("object")) return "Object / String";
-    
-    return dtype; // Return original if no match
-}
+function renderFolderBlock(folder, files, showAnalyze) {
+    const id    = 'f_' + folder.replace(/\W/g, '_');
+    const count = files.length;
 
-async function analyze(filename) {
-    document.getElementById('modal').style.display = 'flex';
-    document.getElementById('modalContent').innerHTML = '<p style="text-align:center;">Loading Metadata...</p>';
-    
-    const res = await fetch(`${API}/analyze/${filename}`);
-    const data = await res.json();
-    
-    if(!data.success) {
-        document.getElementById('modalContent').innerHTML = `<p style="color:red">Error: ${data.error}</p>`;
-        return;
-    }
+    const rows = files.map(f => {
+        // Mapping directly to your new Azure SQL column names
+        const ext      = (f.file_extension || '').toLowerCase();
+        const icon     = EXT_ICONS[ext] || '📄';
+        const fileName = f.filename || 'Unknown';
+        const fileSize = f.file_size || 0;
+        const fileTime = f.upload_time_pst || '';
+        
+        // Ensure the path is safely encoded to send back to Python
+        const safePath = f.file_path ? encodeURIComponent(f.file_path) : '';
 
-    const m = data.metadata;
-    let html = `
-    <div style="background:white; padding:15px; border-radius:8px; margin-bottom:20px; border-left: 5px solid #007bff;">
-        <h3 style="margin:0 0 10px 0;">${m.filename || filename}</h3>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; font-size:0.9em;">
-            <div><strong>Type:</strong> ${m.file_type || 'Unknown'}</div>
-            <div><strong>Variables:</strong> ${Object.keys(m.variables || {}).length} detected</div>
+        return `
+        <div class="file-row">
+            <span class="file-icon">${icon}</span>
+            <span class="file-name" title="${fileName}">${fileName}</span>
+            <span class="ext-badge ext-${ext}">${ext || 'FILE'}</span>
+            <span class="file-size">${fmtSize(fileSize)}</span>
+            <span class="file-time">${fmtTime(fileTime)}</span>
+            ${showAnalyze ? `
+            <button class="btn-analyze"
+                    onclick="analyze('${safePath}', '${ext}')">
+                📊 Analyse
+            </button>` : ''}
+        </div>`;
+    }).join('');
+
+    return `
+    <div class="folder-block">
+        <div class="folder-header" onclick="toggleFolder('${id}')">
+            <span class="folder-arrow" id="arr_${id}">▶</span>
+            <span>📁</span>
+            <span class="folder-title">${folder}</span>
+            <span class="folder-pill">${count} file${count === 1 ? '' : 's'}</span>
         </div>
-    </div>
-    <h4 style="color:#555; margin-bottom:10px;">Variable Breakdown</h4>`;
-    
-    if (m.variables) {
+        <div class="folder-body" id="${id}">
+            ${rows}
+        </div>
+    </div>`;
+}
+
+function toggleFolder(id) {
+    const body  = document.getElementById(id);
+    const arrow = document.getElementById('arr_' + id);
+    const open  = body.classList.contains('open');
+    body.classList.toggle('open', !open);
+    arrow.classList.toggle('open', !open);
+}
+
+// ─────────────────────────────────────────────────────────
+// ANALYSE
+// ─────────────────────────────────────────────────────────
+
+async function analyze(encodedPath, ext) {
+    const modal   = document.getElementById('modal');
+    const content = document.getElementById('modalContent');
+    modal.style.display   = 'flex';
+    content.innerHTML = '<div style="text-align:center;padding:40px;color:#888">⏳ Downloading from Azure & Analysing…</div>';
+
+    try {
+        // Fetch using the safely mapped query parameter ?path=...
+        const res  = await fetch(`/api/analyze?path=${encodedPath}`, { credentials: 'include' });
+        const data = await res.json();
+
+        if (!data.success) {
+            content.innerHTML = `<div style="color:#c55;padding:20px">❌ ${data.error}</div>`;
+            return;
+        }
+
+        content.innerHTML = buildAnalysisHTML(data.metadata, ext);
+
+    } catch (e) {
+        content.innerHTML = `<div style="color:#c55;padding:20px">❌ Error: ${e}</div>`;
+    }
+}
+
+function buildAnalysisHTML(m, ext) {
+    if (!m || m.success === false) {
+        return `<div style="color:#c55;padding:20px">❌ ${m ? m.error : 'No metadata'}</div>`;
+    }
+
+    // ── Summary bar ──
+    let summaryItems = [
+        { val: m.file_type || ext.toUpperCase(), lbl: 'Type' },
+        { val: (m.file_size_mb || 0) + ' MB',    lbl: 'Size' },
+        { val: m.variables ? Object.keys(m.variables).length : 0, lbl: 'Variables' }
+    ];
+
+    let html = `
+    <div class="analysis-summary">
+        ${summaryItems.map(s => `
+        <div class="summary-stat">
+            <div class="summary-val">${s.val}</div>
+            <div class="summary-lbl">${s.lbl}</div>
+        </div>`).join('')}
+    </div>`;
+
+    // ── Unified Variable Breakdown ──
+    if (m.variables && Object.keys(m.variables).length > 0) {
+        html += `<h4 style="margin-bottom:10px;color:#555">Schema Breakdown</h4>`;
+        
         Object.keys(m.variables).forEach(varName => {
             const v = m.variables[varName];
-            const shapeStr = Array.isArray(v.shape) ? v.shape.join(' × ') : v.shape;
-            
-            // USE THE CLEANER HERE
-            const prettyType = cleanDtype(v.dtype); 
+            const shape = Array.isArray(v.shape) ? v.shape.join(' × ') : v.shape;
+            const dtype = cleanDtype(v.dtype || '');
             
             html += `
-            <div class="meta-card">
-                <div class="meta-header">${varName}</div>
-                <div class="meta-body">
-                    <div><div class="meta-label">Shape</div><div class="meta-value">${shapeStr}</div></div>
-                    <div><div class="meta-label">Data Type</div><div class="meta-value">${prettyType}</div></div>
+            <div class="var-card">
+                <div class="var-header">${varName}</div>
+                <div class="var-body">
+                    <div>
+                        <div class="var-label">Shape / Dimensions</div>
+                        <div class="var-value">[${shape}]</div>
+                    </div>
+                    <div>
+                        <div class="var-label">Data Type</div>
+                        <div class="var-value">${dtype}</div>
+                    </div>
                 </div>
             </div>`;
         });
     } else {
-        html += '<p>No internal variables detected.</p>';
+        html += `<div style="color:#888;padding:12px">No detailed breakdown available for this file type.</div>`;
     }
 
-    document.getElementById('modalContent').innerHTML = html;
+    return html;
+}
+
+function cleanDtype(dtype) {
+    if (dtype.includes("('real','<f8')") || dtype.includes("complex")) return 'Complex128';
+    if (dtype.includes('int64'))   return 'Integer (64-bit)';
+    if (dtype.includes('int32'))   return 'Integer (32-bit)';
+    if (dtype.includes('float64')) return 'Float (64-bit)';
+    if (dtype.includes('float32')) return 'Float (32-bit)';
+    if (dtype.includes('object'))  return 'String / Object';
+    return dtype;
 }
 
 function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
+// ─────────────────────────────────────────────────────────
+// TOAST
+// ─────────────────────────────────────────────────────────
+
+function toast(msg, isError = false) {
+    const el = document.getElementById('toast');
+    el.textContent      = msg;
+    el.style.background = isError ? '#fdecea' : '#e8f5e9';
+    el.style.color      = isError ? '#c62828' : '#2e7d32';
+    el.style.border     = `1px solid ${isError ? '#ef9a9a' : '#a5d6a7'}`;
+    el.style.opacity    = '1';
+    setTimeout(() => { el.style.opacity = '0'; }, 3500);
+}
+
+// ─────────────────────────────────────────────────────────
+// AUTO LOGIN CHECK on page load
+// ─────────────────────────────────────────────────────────
+
 window.onload = async () => {
-    const res = await fetch(`${API}/current-user`);
-    const data = await res.json();
-    if(data.success) showDashboard(data.user);
+    try {
+        const res  = await fetch('/api/current-user', { credentials: 'include' });
+        const data = await res.json();
+        if (data.success) showDashboard(data.user);
+    } catch (e) {
+        // Not logged in — show auth form
+    }
 };
 </script>
 </body>

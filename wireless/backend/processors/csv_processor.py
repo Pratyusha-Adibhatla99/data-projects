@@ -1,31 +1,51 @@
 import pandas as pd
 import numpy as np
 import os
+import tempfile
+from azure.storage.blob import BlobServiceClient
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class CSVProcessor:
-    def __init__(self, filepath):
-        self.filepath = filepath
-        self.filename = os.path.basename(filepath)
+    def __init__(self, blob_path):
+        self.blob_path = blob_path # This is now the Azure path (e.g., pratyusha/000004.csv)
+        self.filename = os.path.basename(blob_path)
         self.df = None
+        self.local_temp_path = None
 
-    # --- THIS IS THE FIX: Method is now INSIDE the class ---
-    def get_metadata(self):
-        """
-        Bridge method: Calls your smart extract_metadata() and formats 
-        it so the Frontend can read it.
-        """
-        try:
-            # 1. Run your existing smart logic
-            full_meta = self.extract_metadata()
+    def _download_from_azure(self):
+        """Pulls the file from Azure to a temporary location for Pandas to read."""
+        if not self.local_temp_path:
+            bsc = BlobServiceClient.from_connection_string(os.getenv('AZURE_STORAGE_CONNECTION_STRING'))
+            container_name = os.getenv('BRONZE_CONTAINER_NAME', 'bronze-layer')
+            blob_client = bsc.get_blob_client(container=container_name, blob=self.blob_path)
             
-            # 2. Map 'columns' to 'variables' for the frontend
+            # Create a safe temp file on the Mac
+            temp_dir = tempfile.gettempdir()
+            self.local_temp_path = os.path.join(temp_dir, self.filename)
+            
+            print(f"📥 Downloading {self.filename} from Azure for analysis...")
+            with open(self.local_temp_path, "wb") as f:
+                f.write(blob_client.download_blob().readall())
+
+    def __del__(self):
+        """Automatically cleans up the temp file when analysis is done."""
+        if self.local_temp_path and os.path.exists(self.local_temp_path):
+            os.remove(self.local_temp_path)
+            print(f"🧹 Cleaned up temp file: {self.local_temp_path}")
+
+    def get_metadata(self):
+        """Bridge method for the Frontend."""
+        try:
+            full_meta = self.extract_metadata()
             variables = {}
             rows = full_meta.get('num_rows', 0)
             
             for col_name, stats in full_meta.get('columns', {}).items():
                 variables[col_name] = {
-                    'shape': (rows,),          # CSV columns are 1D arrays
-                    'dtype': stats['detected_type'] # Use the type you already detected
+                    'shape': (rows,),          
+                    'dtype': stats['detected_type'] 
                 }
                 
             return {
@@ -35,20 +55,23 @@ class CSVProcessor:
             }
         except Exception as e:
             return {'error': str(e)}
-    # -------------------------------------------------------
 
     def read_file(self):
+        self._download_from_azure() # Ensure file is downloaded first
+        
         for sep in [',', ';', '\t', '|']:
             try:
-                self.df = pd.read_csv(self.filepath, sep=sep, engine='python')
+                # Use the local_temp_path instead of the old filepath
+                self.df = pd.read_csv(self.local_temp_path, sep=sep, engine='python')
                 if len(self.df.columns) == 1 and sep == ',':
                     continue
                 print(f"✅ Read {self.filename} with separator '{sep}'")
-                print(f"   Shape: {self.df.shape[0]} rows x {self.df.shape[1]} columns")
                 return self.df
             except Exception:
                 continue
         raise ValueError(f"Could not parse {self.filename}")
+
+    # --- YOUR DYNAMIC LOGIC REMAINS EXACTLY THE SAME BELOW THIS LINE ---
 
     @staticmethod
     def _classify_column(series):
@@ -151,7 +174,8 @@ class CSVProcessor:
 
         metadata = {
             'filename': self.filename,
-            'file_size': os.path.getsize(self.filepath),
+            # Use the local temp file to get the correct size
+            'file_size': os.path.getsize(self.local_temp_path), 
             'file_type': 'CSV',
             'num_rows': int(len(self.df)),
             'num_columns': int(len(self.df.columns)),
@@ -172,7 +196,6 @@ class CSVProcessor:
 
         return metadata
 
-
 def _safe_float(val):
     try:
         f = float(val)
@@ -188,12 +211,3 @@ def _safe_serialize(val):
     if isinstance(val, (np.bool_,)):
         return bool(val)
     return str(val)
-
-if __name__ == "__main__":
-    import sys, json
-    if len(sys.argv) < 2:
-        print("Usage: python3 csv_processor.py <path_to_csv>")
-        sys.exit(1)
-    proc = CSVProcessor(sys.argv[1])
-    meta = proc.extract_metadata()
-    print(json.dumps(meta, indent=2, default=str))

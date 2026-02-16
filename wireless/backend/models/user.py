@@ -1,20 +1,11 @@
 from flask_login import UserMixin
+from backend.models.db import db # Updated Import
 
-class User(UserMixin):
-    def __init__(self, id, email, password_hash, full_name, institution=None):
-        self.id = str(id)
-        self.email = email
-        self.password_hash = password_hash
-        self.full_name = full_name
-        self.institution = institution
-
-    @property
-    def is_admin(self):
-        # HARDCODED ADMIN RULE: Only this specific email is Admin
-        return self.email.lower() == 'dineshb@ucsd.edu'
-
-    def get_id(self):
-        return self.id
-        
-    def __repr__(self):
-        return f'<User {self.email} (Admin: {self.is_admin})>'
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
+    full_name = db.Column(db.String(100), nullable=False)
+    institution = db.Column(db.String(100))
+    is_admin = db.Column(db.Boolean, default=False)

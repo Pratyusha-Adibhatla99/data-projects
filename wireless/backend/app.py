@@ -1,42 +1,95 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
-from flask_login import login_required, current_user
-from backend.services.bronze_service import BronzeService
-import subprocess, re, time, threading
-import os, sys
-from backend.routes.auth import auth_bp, login_manager
-from backend.processors.mat_processor import WirelessDataProcessor
-from backend.processors.csv_processor import CSVProcessor
-# Add project root to path so we can import processors if needed later
-sys.path.insert(0, os.path.dirname(__file__))
-# Note: You can keep csv_processor.py and mat_processor.py where they are for now
+from flask_login import LoginManager, login_required, current_user
+from dotenv import load_dotenv
+import os, sys, subprocess, re, time
 
-app = Flask(__name__, static_folder='../frontend')
-# Global variables for Jupyter
+# 1. Import the neutral db instance
+from backend.models.db import db
+
+def create_app():
+    """Application Factory to prevent Circular Imports and RuntimeErrors"""
+    app = Flask(__name__, static_folder='../frontend')
+    load_dotenv()
+
+    # --- CONFIGURATION ---
+    app.config['SECRET_KEY'] = 'dev-secret-key' 
+    app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024 * 1024 # 50GB Limit
+    
+    # Database Logic: Azure vs Local
+    azure_db = os.getenv('DB_CONNECTION_STRING')
+    if azure_db:
+        app.config['SQLALCHEMY_DATABASE_URI'] = azure_db
+        print("✅ CONNECTED TO AZURE SQL")
+    else:
+        PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        local_db_path = os.path.join(PROJECT_ROOT, 'database', 'wireless_data.db')
+        app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{local_db_path}'
+        print("⚠️  USING LOCAL SQLITE")
+
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # --- SESSION SECURITY FIXES (The "Sticky Session" Logic) ---
+    # Inside create_app() in backend/app.py
+    app.config.update(
+    SESSION_COOKIE_NAME='wireless_cloud_session',
+    SESSION_COOKIE_SAMESITE='Lax', # Critical for localhost navigation
+    SESSION_COOKIE_SECURE=False,   # Must be False for http (non-https)
+    SESSION_COOKIE_HTTPONLY=True,
+    REMEMBER_COOKIE_HTTPONLY=True
+)
+
+# Robust CORS to handle pre-flight OPTIONS requests
+    CORS(app, 
+     supports_credentials=True, 
+     origins=["http://localhost:5001", "http://127.0.0.1:5001", "https://0.0.0.1:5001"],
+     allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
+     methods=["GET", "POST", "OPTIONS"])
+    db.init_app(app)
+
+    # --- CORS FIX ---
+    # Moved inside create_app to ensure credentials (cookies) are permitted
+    # Replace the existing CORS line with this:
+    
+
+    # 3. Register Blueprints and Handlers within App Context
+    with app.app_context():
+        from backend.routes.auth import auth_bp, login_manager
+        
+        login_manager.init_app(app)
+        login_manager.login_view = 'auth.login'
+        
+        # API-Friendly Unauthorized Handler (Prevents browser confusion)
+        @login_manager.unauthorized_handler
+        def unauthorized():
+            return jsonify({'success': False, 'error': 'Unauthorized. Please log in.'}), 401
+
+        app.register_blueprint(auth_bp)
+
+    return app
+
+# Instantiate the app
+app = create_app()
+
+# --- SERVICES & GLOBAL VARS ---
 _nb_proc = None
 _nb_token = None
-app.config['SECRET_KEY'] = 'dev-secret-key' 
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024 * 1024 # 50GB Limit
 
-# Initialize Auth
-login_manager.init_app(app)
-login_manager.login_view = 'auth.login'
-app.register_blueprint(auth_bp)
-CORS(app, supports_credentials=True)
+# Initialize BronzeService after app creation
+from backend.services.bronze_service import BronzeService
+from backend.processors.mat_processor import WirelessDataProcessor
+from backend.processors.csv_processor import CSVProcessor
 
-# ─── CONFIG & SERVICE INIT ───
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-UPLOAD_ROOT  = os.path.join(PROJECT_ROOT, 'uploads')
-DATABASE     = os.path.join(PROJECT_ROOT, 'database', 'wireless_data.db')
+# Use the same DB source for the service layer
+DATABASE_SOURCE = os.getenv('DB_CONNECTION_STRING')
+UPLOAD_ROOT = os.path.join(os.path.dirname(__file__), '../uploads')
+bronze_service = BronzeService(DATABASE_SOURCE, UPLOAD_ROOT)
 
-# Initialize the Service Layer
-bronze_service = BronzeService(DATABASE, UPLOAD_ROOT)
+# ─── ROUTES ───
 
 @app.route('/')
 def index():
     return send_file(os.path.join(app.static_folder, 'index.html'))
-
-# ─── ROUTES ───
 
 @app.route('/api/upload', methods=['POST'])
 @login_required
@@ -53,7 +106,6 @@ def upload_file():
     for file in files:
         if file.filename == '': continue
         try:
-            # Delegate logic to Service
             success, msg = bronze_service.process_upload(
                 file, dataset_name, current_user.email, current_user.id, current_user.full_name
             )
@@ -70,118 +122,86 @@ def upload_file():
 
 @app.route('/api/files', methods=['GET'])
 @login_required
-def list_my_files():
+def get_my_files():
     try:
-        # Delegate logic to Service
-        raw_files = bronze_service.get_user_files(current_user.id)
+        # 1. Fetch from the database
+        files = bronze_service.get_user_files(current_user.id)
         
-        # Format for Frontend
-        files = []
-        for f in raw_files:
-            files.append({
-                'name': f['filename'],
-                'dataset': f['dataset_name'],
-                'size': f['file_size'],
-                'type': f['modality'],
-                'extension': f['file_extension'],
-                'upload_time': f['upload_time_pst'],
-                'can_delete': True
-            })
+        # 2. Fix the Datetime Serialization Crash
+        for f in files:
+            # Convert datetime objects to strings so JSON can read them
+            if 'upload_time_pst' in f and f['upload_time_pst']:
+                f['upload_time_pst'] = str(f['upload_time_pst'])
+                
+        # 3. Send safely to frontend
         return jsonify({'success': True, 'files': files})
+        
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+        print(f"Error fetching files: {e}")
+        # Always return a valid 'files' array, even on error, to prevent frontend crashes
+        return jsonify({'success': False, 'error': str(e), 'files': []})
 
-# NOTE: Analyze route stays here for now as it uses Processors
-# In Day 4, we can move this to 'analytics_service.py'
-@app.route('/api/analyze/<filename>', methods=['GET'])
+# ... (rest of your routes)
+# --- IMPORTS FOR ANALYSIS ---
+from backend.processors.pcd_processor import PCDProcessor
+# Assuming you have a mat_processor.py for .mat files
+# from backend.processors.mat_processor import WirelessDataProcessor 
+import tempfile
+
+from flask import request, jsonify
+
+# Notice we removed <filename> from the route path!
+@app.route('/api/analyze', methods=['GET']) 
 @login_required
-def analyze_file(filename):
+def analyze_dataset():
+    """
+    Catches the Azure path from the frontend and routes it to the correct processor.
+    The processor classes now handle their own downloading, analyzing, and cleanup.
+    """
     try:
-        # 1. Use Service to find the file path
-        # (We can use a quick SQL query here or add a helper to the service)
-        conn = bronze_service.get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT file_path, file_extension FROM bronze_files WHERE user_id=? AND filename=?", 
-                       (current_user.id, filename))
-        row = cursor.fetchone()
-        conn.close()
+        # 1. Catch the exact Azure Blob Path sent by the frontend
+        blob_path = request.args.get('path')
         
-        if not row:
-            return jsonify({'success': False, 'error': 'File not found'}), 404
-            
-        filepath = row['file_path']
-        ext = row['file_extension']
-        
-        # 2. Use the Processors we imported at the top
+        if not blob_path:
+            return jsonify({'success': False, 'error': 'No file path provided'})
+
+        # Extract the extension (e.g., 'csv', 'mat', 'pcd')
+        ext = blob_path.rsplit('.', 1)[-1].lower()
         metadata = {}
-        if ext == 'mat':
-            p = WirelessDataProcessor(filepath)
-            data = p.read_file()
-            # Convert numpy shapes to safe strings for JSON
-            safe_vars = {k: {'shape': v.shape, 'dtype': str(v.dtype)} for k, v in data.items()}
-            metadata = {'filename': filename, 'variables': safe_vars, 'file_type': 'MAT'}
-        elif ext == 'csv':
-            p = CSVProcessor(filepath)
-            metadata = p.get_metadata()
+
+        # 2. Route to the correct processor
+        # Pass the Azure blob_path directly to the processor classes
+        if ext == 'csv':
+            from backend.processors.csv_processor import CSVProcessor
+            proc = CSVProcessor(blob_path)
+            metadata = proc.get_metadata()
             
+        elif ext == 'mat':
+            from backend.processors.mat_processor import WirelessDataProcessor
+            proc = WirelessDataProcessor(blob_path)
+            metadata = proc.get_metadata()
+            
+        elif ext == 'pcd':
+            from backend.processors.pcd_processor import PCDProcessor
+            proc = PCDProcessor(blob_path)
+            metadata = proc.get_metadata() 
+            
+        else:
+            return jsonify({"success": False, "error": f"Analysis not supported for .{ext} files"})
+
+        # 3. Check for processor-level errors (like h5py missing)
+        if metadata.get('success') is False or 'error' in metadata:
+            error_msg = metadata.get('error', 'Unknown analysis error')
+            return jsonify({'success': False, 'error': error_msg})
+
+        # 4. Return the glorious metadata to the React frontend
         return jsonify({'success': True, 'metadata': metadata})
 
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
-# ─── JUPYTER ROUTES ───
-@app.route('/api/notebook/launch', methods=['POST'])
-def launch_notebook():
-    global _nb_proc, _nb_token
-    
-    # 1. If already running, return the existing localhost URL
-    if _nb_proc and _nb_proc.poll() is None:
-        if _nb_token:
-            return jsonify({
-                'success': True, 
-                'status': 'running', 
-                'url': f'http://localhost:8888/?token={_nb_token}' # <--- FORCE LOCALHOST
-            })
-        
-    try:
-        # 2. Launch Jupyter (Bind to 0.0.0.0 so it works, but we won't send that IP to browser)
-        cmd = [
-            sys.executable, '-m', 'jupyter', 'notebook', 
-            '--no-browser', 
-            '--port=8888', 
-            f'--notebook-dir={PROJECT_ROOT}', 
-            '--ip=0.0.0.0', 
-            '--allow-root'
-        ]
-        
-        _nb_proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-        
-        # 3. Smart Token Reader (Wait up to 5 seconds)
-        start_time = time.time()
-        while time.time() - start_time < 5:
-            line = _nb_proc.stdout.readline()
-            if not line: break
-            
-            # Print to terminal so you can see it too
-            print(f"[Jupyter] {line.strip()}")
-            
-            if 'token=' in line:
-                m = re.search(r'token=([a-f0-9]+)', line)
-                if m: 
-                    _nb_token = m.group(1)
-                    break
-        
-        if _nb_token:
-            return jsonify({
-                'success': True, 
-                'status': 'started', 
-                'url': f'http://localhost:8888/?token={_nb_token}' # <--- FORCE LOCALHOST
-            })
-        else:
-            return jsonify({'success': False, 'error': 'Timed out waiting for Jupyter token'})
-
-    except Exception as e:
-        print(f"Jupyter Error: {e}")
+        print(f"Analysis Route Error: {e}")
         return jsonify({'success': False, 'error': str(e)})
+    
 if __name__ == '__main__':
-    print("🚀 Wireless Platform (Modular) Running on http://0.0.0.0:5001")
+    print("🚀 Wireless Platform (Cloud-Ready) Running on http://0.0.0.0:5001")
     app.run(host='0.0.0.0', port=5001, debug=True)
+   

@@ -35,7 +35,7 @@ def find_all_databases():
         path = Path(d)
         if path.exists():
             # Look for .db, .sqlite, and files with no extension named '*db*'
-            patterns = ["*.db", "*.sqlite", "*db*"] 
+            patterns = ["*.db", "*.sqlite", "*db*", "*.sqlite3"] 
             
             for pattern in patterns:
                 for file in path.glob(pattern):

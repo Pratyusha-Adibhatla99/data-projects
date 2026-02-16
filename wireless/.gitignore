@@ -14,3 +14,20 @@ database/*.db
 .ipynb_checkpoints/
 __pycache__/
 DOCS/
+# --- IGNORE DATA ---
+uploads/
+database/*.db
+backend/database/*.db
+
+# --- IGNORE PYTHON CACHE ---
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+
+# --- IGNORE ENVIRONMENT ---
+.env
+venv/
+wireless_env/
+.DS_Store
+.vscode/

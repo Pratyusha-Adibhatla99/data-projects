@@ -1,98 +1,236 @@
 import os
-import sqlite3
+import pymssql
+import hashlib
+from azure.storage.blob import BlobServiceClient
 from werkzeug.utils import secure_filename
-from backend.utils.common import get_pst_time, calculate_file_hash, detect_modality
+from backend.utils.common import get_pst_time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class BronzeService:
-    def __init__(self, db_path, upload_root):
-        self.db_path = db_path
-        self.upload_root = upload_root
+
+    def __init__(self, db_source, upload_root):
+        self.upload_root        = upload_root
+        self.connection_string  = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+        self.container_name     = os.getenv('BRONZE_CONTAINER_NAME', 'bronze-layer')
 
     def get_db_connection(self):
-        conn = sqlite3.connect(self.db_path)
-        conn.row_factory = sqlite3.Row
-        return conn
+        return pymssql.connect(
+            server   = os.getenv("AZURE_SQL_SERVER"),
+            user     = os.getenv("AZURE_SQL_USER"),
+            password = os.getenv("AZURE_SQL_PASSWORD"),
+            database = os.getenv("AZURE_SQL_DATABASE"),
+            as_dict  = True
+        )
 
-    def process_upload(self, file_obj, dataset_name, user_email, user_id, user_full_name):
+    def _get_researcher_name(self, user_email, user_full_name):
         """
-        Handles the end-to-end logic of saving a Bronze file.
-        Returns: (Success: bool, Message: str)
+        Get clean first name from full name for folder naming.
+        'Pratyusha Adibhatla' → 'pratyusha'
+        Fallback to email prefix if no full name.
         """
-        # 1. Prepare Paths
-        safe_email = user_email.replace('@', '_').replace('.', '_')
-        safe_dataset = secure_filename(dataset_name)
-        
-        dataset_path = os.path.join(self.upload_root, safe_email, safe_dataset)
-        os.makedirs(dataset_path, exist_ok=True)
+        if user_full_name and user_full_name.strip():
+            first_name = user_full_name.strip().split()[0].lower()
+            # Remove special chars
+            return ''.join(c for c in first_name if c.isalnum())
+        # Fallback: use email prefix
+        return user_email.split('@')[0].lower().replace('.', '_')
 
-        filename = secure_filename(file_obj.filename)
-        filepath = os.path.join(dataset_path, filename)
+    def process_upload(self, file_obj, dataset_name, user_email,
+                       user_id, user_full_name):
+        """
+        Process a single file upload.
 
-        # 2. Save Physical File
-        file_obj.save(filepath, buffer_size=16384)
+        BLOB PATH:  pratyusha/radar0/0001.csv
+        SQL RECORD: filename=0001.csv, researcher=Pratyusha Adibhatla,
+                    blob_path=pratyusha/radar0/0001.csv, upload_time=PST
 
-        # 3. Calculate Metadata
-        file_size = os.path.getsize(filepath)
-        file_hash = calculate_file_hash(filepath)
-        upload_time = get_pst_time()
-        modality = detect_modality(filename)
-        ext = filename.split('.')[-1].lower()
+        dataset_name = the folder name the user chose (e.g. "radar0")
+        This is stored in the DB but NOT shown to user as "Default_Dataset"
+        """
+        filename      = secure_filename(file_obj.filename)
+        upload_time   = get_pst_time()
+        ext           = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'unknown'
+        researcher    = self._get_researcher_name(user_email, user_full_name)
 
-        # 4. Database Transaction
-        conn = self.get_db_connection()
+        # ── Blob path: pratyusha/radar0/0001.csv ─────────────────
+        # If dataset_name is Default_Dataset (no folder chosen),
+        # use researcher name only: pratyusha/0001.csv
+        if dataset_name in ('Default_Dataset', '', None):
+            blob_path    = f"{researcher}/{filename}"
+            display_folder = None   # No folder shown to user
+        else:
+            safe_folder  = secure_filename(dataset_name)
+            blob_path    = f"{researcher}/{safe_folder}/{filename}"
+            display_folder = safe_folder
+
+        # ── 1. Stream to Azure Blob ───────────────────────────────
+        sha256_hash = hashlib.sha256()
+        file_size   = 0
+
+        try:
+            bsc         = BlobServiceClient.from_connection_string(self.connection_string)
+            blob_client = bsc.get_blob_client(
+                container = self.container_name,
+                blob      = blob_path
+            )
+
+            print(f"🚀 Uploading → {blob_path}")
+            file_obj.seek(0)
+
+            def stream_generator():
+                nonlocal file_size
+                while True:
+                    chunk = file_obj.read(4 * 1024 * 1024)  # 4MB chunks
+                    if not chunk:
+                        break
+                    file_size += len(chunk)
+                    sha256_hash.update(chunk)
+                    yield chunk
+
+            blob_client.upload_blob(stream_generator(), overwrite=True)
+            final_hash = sha256_hash.hexdigest()
+            blob_url   = blob_client.url
+
+            print(f"✅ Blob saved: {blob_path} ({file_size/(1024**2):.2f} MB)")
+
+        except Exception as e:
+            print(f"❌ Blob upload failed: {e}")
+            raise
+
+        # ── 2. Record in Azure SQL ────────────────────────────────
+        conn   = self.get_db_connection()
         cursor = conn.cursor()
 
         try:
-            # Check Duplicates
-            cursor.execute("SELECT id FROM bronze_files WHERE user_id=? AND file_hash=?", (user_id, file_hash))
+            # Check duplicate
+            cursor.execute(
+                "SELECT id, filename FROM bronze_files WHERE file_hash = %s",
+                (final_hash,)
+            )
             existing = cursor.fetchone()
-            
             if existing:
-                conn.close()
+                print(f"⚠️  Duplicate: {filename} matches {existing['filename']}")
                 return True, f"Skipped duplicate: {filename}"
 
-            # Insert Metadata (Bronze Files)
-            cursor.execute('''
+            # Insert bronze record
+            cursor.execute("""
                 INSERT INTO bronze_files (
-                    filename, file_path, file_size, file_hash, 
-                    file_extension, modality, user_id, 
-                    dataset_name, dataset_folder, upload_time_pst
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (filename, filepath, file_size, file_hash, ext, modality, user_id, safe_dataset, dataset_path, upload_time))
-            
-            # --- FIX: Insert Lineage (NOW INCLUDES source_dataset) ---
-            bronze_id = cursor.lastrowid
-            cursor.execute('''
+                    filename,
+                    file_path,
+                    file_size,
+                    file_hash,
+                    file_extension,
+                    modality,
+                    user_id,
+                    dataset_name,
+                    dataset_folder,
+                    upload_time_pst,
+                    upload_timezone,
+                    processing_status,
+                    researcher_name,
+                    researcher_email
+                ) VALUES (
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    'PST', 'raw', %s, %s
+                )
+            """, (
+                filename,
+                blob_path,       # pratyusha/radar0/0001.csv
+                file_size,
+                final_hash,
+                ext,
+                ext,             # use extension as modality for now (raw, no renaming)
+                user_id,
+                display_folder or 'root',  # Internal use only
+                blob_path,
+                upload_time,
+                user_full_name,  # 'Pratyusha Adibhatla' - source of truth
+                user_email       # 'pratyusha@ucsd.edu' - source of truth
+            ))
+
+            # Get new ID
+            cursor.execute("SELECT SCOPE_IDENTITY() AS id")
+            bronze_id = cursor.fetchone()['id']
+
+            # Insert lineage - WHO, WHAT, WHEN
+            cursor.execute("""
                 INSERT INTO data_lineage (
-                    bronze_file_id, 
-                    source_dataset,      
-                    source_file_path, 
-                    source_researcher, 
-                    upload_time_pst, 
-                    transformation_type, 
+                    bronze_file_id,
+                    source_dataset,
+                    source_file_path,
+                    source_researcher,
+                    source_researcher_email,
+                    upload_time_pst,
+                    transformation_type,
                     status
-                ) VALUES (?, ?, ?, ?, ?, ?, ?)
-            ''', (bronze_id, safe_dataset, filepath, user_full_name, upload_time, 'ingestion', 'success'))
+                ) VALUES (%s, %s, %s, %s, %s, %s, 'ingestion', 'success')
+            """, (
+                bronze_id,
+                display_folder or 'root',
+                blob_path,
+                user_full_name,
+                user_email,
+                upload_time
+            ))
 
             conn.commit()
-            return True, f"Uploaded {filename}"
+            print(f"✅ SQL recorded: id={bronze_id}, researcher={user_full_name}")
+            return True, f"Uploaded {filename} ({file_size/(1024**2):.2f} MB)"
 
         except Exception as e:
             conn.rollback()
-            # CRITICAL: Re-raise the exception so the Controller knows it failed
-            raise e
+            print(f"❌ SQL insert failed: {e}")
+            raise
         finally:
             conn.close()
-            
+
     def get_user_files(self, user_id):
-        conn = self.get_db_connection()
+        """Get files grouped by folder for the current user"""
+        conn   = self.get_db_connection()
         cursor = conn.cursor()
-        cursor.execute('''
-            SELECT filename, file_size, file_extension, modality, upload_time_pst, dataset_name 
-            FROM bronze_files 
-            WHERE user_id = ? 
+        cursor.execute("""
+            SELECT
+                filename,
+                file_size,
+                file_extension,
+                file_path,
+                dataset_name,
+                upload_time_pst,
+                researcher_name,
+                researcher_email
+            FROM bronze_files
+            WHERE user_id = %s
+              AND is_deleted = 0
             ORDER BY upload_time_pst DESC
-        ''', (user_id,))
-        rows = cursor.fetchall()
+        """, (user_id,))
+        results = cursor.fetchall()
         conn.close()
-        return [dict(row) for row in rows]
+        return results
+
+    def get_all_files_for_admin(self):
+        """Admin view - all researchers' files with full lineage"""
+        conn   = self.get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT
+                b.filename,
+                b.file_size,
+                b.file_path,
+                b.file_extension,
+                b.dataset_name,
+                b.upload_time_pst,
+                b.researcher_name,
+                b.researcher_email,
+                l.transformation_type,
+                l.status
+            FROM bronze_files b
+            LEFT JOIN data_lineage l ON b.id = l.bronze_file_id
+            WHERE b.is_deleted = 0
+            ORDER BY b.upload_time_pst DESC
+        """)
+        results = cursor.fetchall()
+        conn.close()
+        return results
