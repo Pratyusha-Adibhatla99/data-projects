@@ -5,7 +5,7 @@ from datetime import date
 # --- DATABASE CONFIGURATION ---
 DB_CONFIG = {
     'user': 'root',
-    'password': 'Pratyu@123',  # <--- Verify this matches your setup
+    'password': 'YOUR PWD',  # <--- Verify this matches your setup
     'host': 'localhost',
     'database': 'bank_db'
 }
