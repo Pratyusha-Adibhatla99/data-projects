@@ -5,7 +5,6 @@
 **Platform:** Raspberry Pi 3B+ | Python 3 | OpenCV 3.3.0  
 **Developer:** Pratyusha Adibhatla  
 
-http://googleusercontent.com/image_generation_content/0
 
 ## 📌 Project Overview
 This project is an assistive technology designed as a mobility solution for individuals with **Quadriplegia**, a condition where extreme paralysis leaves eye movement as the primary motor function. 
