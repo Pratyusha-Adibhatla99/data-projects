@@ -1,30 +1,44 @@
 # FHIR-Aligned Healthcare Claims Analytics Pipeline
 
-> **Portfolio project demonstrating FHIR R4 parsing, HIPAA Safe Harbor de-identification,
-> cloud data ingestion (Azure), dimensional modeling, and KPI analytics on synthetic healthcare data.**
+> **Portfolio project demonstrating high-volume FHIR R4 parsing, Medallion Architecture (Bronze/Silver/Gold), HIPAA Safe Harbor pseudonymization, OMOP dimensional modeling, and Executive KPI analytics on synthetic healthcare data.**
+
+---
+
+## 📖 Overview
+This project engineers an end-to-end data pipeline to identify which clinical conditions drive the highest financial risk and 30-day hospital readmissions. It processes 15GB of deeply nested FHIR JSON data into a highly optimized Kimball Star Schema, utilizing push-down compute in Azure SQL to feed a zero-latency Power BI executive dashboard.
 
 ---
 
 ## 🏗️ Architecture
 
-```
-Synthea (750 patients)
-  Raw CSV + FHIR R4 JSON
-         ↓
-  Azure Blob Storage          ← Cloud ingestion layer
-  (raw-csv / raw-fhir)
-         ↓
-  Local Python ETL
-  ├── PHI De-identification   ← HIPAA Safe Harbor (18 identifiers)
-  └── FHIR R4 Parser          ← Patient, Encounter, Condition, Observation
-         ↓
-  Azure SQL Database
-  └── Star Schema             ← dim_patient, dim_date, dim_condition,
-                                 dim_encounter_type, fact_claims
-         ↓
-  SQL KPI Analysis            ← 6 analytical queries
-         ↓
-  Power BI Dashboard          ← 5-page recruiter-facing report
+```text
+[ SOURCE: 15GB Raw FHIR JSON ] 
+  (1,774 synthetic patients via Synthea. Highly nested: vitals, claims, demographics)
+           |
+           |  --> Extraction Engine: Python Generator + Vectorized Pandas
+           |  --> Logic: Schema-on-read iteratively parsing patient bundles
+           V
+[ BRONZE: 690MB Parquet Files ] 
+  (Flattened staging layer. 113k encounters, 211k claim lines. Snappy compressed)
+           |
+           |  --> Pipeline Orchestration: Azure Data Factory (ADF)
+           |  --> Logic: Truncate-and-Load, UTC normalization, Spend reconciliation
+           V
+[ SILVER: Azure SQL (OMOP Base Tables) ] 
+  (Strict OMOP Common Data Model storage)
+  - Tables: PERSON (w/ 3-digit zip), VISIT_OCCURRENCE, CONDITION_OCCURRENCE, COST
+           |
+           |  --> Semantic Abstraction: Heavy compute pushed down to SQL engine
+           |  --> Logic: 30-day readmission CTEs, NULLIF defensive SQL
+           V
+[ GOLD: Azure SQL Views (Star Schema) ] 
+  (Kimball dimensional model for BI consumption)
+  - Views: vw_patient_summary, vw_readmissions, vw_claims_with_conditions
+           |
+           |  --> Visualization Engine: Zero-latency BI ingestion
+           |  --> Logic: DAX PERCENTILE.INC for Top 10% high-cost spenders
+           V
+[ PRESENTATION: Power BI Executive Dashboard ] 
 ```
 
 ---
@@ -32,172 +46,102 @@ Synthea (750 patients)
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
-|---|---|
-| Data Generation | Synthea (750 synthetic patients) |
-| Cloud Storage | Azure Blob Storage (LRS, Cool tier) |
-| ETL Language | Python 3.10+ |
-| FHIR Processing | Custom FHIR R4 parser (Patient, Encounter, Condition, Observation) |
-| De-identification | HIPAA Safe Harbor — SHA-256 tokens, date shifting, ZIP truncation |
-| Database | Azure SQL Database (Basic tier, 5 DTU) |
-| Data Model | Star schema (1 fact table, 4 dimension tables) |
-| Analytics | T-SQL — window functions, CTEs, self-joins |
-| Visualization | Power BI Desktop |
-| Orchestration | Python scripts (sequential, local) |
+| --- | --- |
+| **Data Generation** | Synthea (1,774 synthetic patients, 15GB raw JSON) |
+| **ETL Language** | Python 3.10+ (Pandas, vectorized operations, iterators) |
+| **Bronze Storage** | Snappy-compressed Parquet files |
+| **Orchestration** | Azure Data Factory (ADF) |
+| **De-identification** | HIPAA Safe Harbor — SHA-256 tokens, ZIP truncation |
+| **Database (Silver)** | Azure SQL Database (OMOP Common Data Model Base Tables) |
+| **Semantic (Gold)** | Azure SQL Views (Kimball Star Schema) |
+| **Analytics** | T-SQL — CTEs, self-joins, window functions |
+| **Visualization** | Power BI Desktop (DAX logic) |
 
 ---
 
-## ⚡ Key Design Decisions
+## 🚀 How to Run (Usage)
 
-### 1. SHA-256 Tokenization for Patient IDs
-Rather than simply dropping patient IDs (which would break all joins), patient identifiers are replaced with a deterministic SHA-256 hash using a project salt. The same patient ID always produces the same 16-character token, preserving referential integrity across all tables while making re-identification computationally infeasible. A PHI mapping table is stored locally only and is gitignored.
+### 1. Clone the repository and install dependencies:
 
-### 2. Per-Patient Date Shifting (not removal)
-HIPAA Safe Harbor permits year-of-birth and requires removal of most date components. However, clinical usefulness requires that *relative* time relationships be preserved (e.g., "30-day readmission" is meaningless if dates are randomized independently). This pipeline applies a single consistent random offset (±365 days) per patient, maintaining temporal relationships while obscuring real dates.
+```bash
+git clone https://github.com/YOUR_USERNAME/HEALTHCARE-FHIR-PIPELINE.git
+cd HEALTHCARE-FHIR-PIPELINE
+pip install -r requirements.txt
+```
 
-### 3. Star Schema over ODS
-A normalized operational data store would be more faithful to the source system, but a star schema is what analytics tools (Power BI, Tableau, SQL KPIs) work best against. Dimension tables are small and stable; the fact table is optimized for aggregation. This is the same model used in real healthcare data warehouses.
+### 2. Configure Environment Variables:
 
-### 4. Parquet as Intermediate Format
-De-identified CSVs and FHIR-parsed records are saved as Parquet before loading to SQL. Parquet is columnar, typed, and compressed — the industry standard for data lake intermediate storage. It also makes local development faster (Pandas reads Parquet 3–10x faster than CSV).
+Create a `.env` file in the root directory and add your Azure SQL database connection string (ensure this file remains gitignored):
 
-### 5. Azure Basic SQL (not Synapse)
-Synapse Analytics would cost $50+/day. For a 750-patient dataset, Azure SQL Basic (5 DTU, $0.16/day) is more than sufficient and demonstrates cost-aware cloud architecture — a skill that matters in production.
+```plaintext
+AZURE_SQL_CONNECTION_STRING="your_connection_string_here"
+```
 
----
+### 3. Execute the ETL Pipeline:
 
-## 🏥 HIPAA Compliance
+Run the Python extraction and loading scripts in sequence:
 
-This project applies the **HIPAA Safe Harbor** de-identification method (45 CFR §164.514(b)).
+```bash
+python src/03_fhir_parser.py        # Parses 15GB JSON -> 690MB Parquet
+python src/04_upload_to_azure.py    # Orchestrates Blob Storage upload
+python src/05_load_to_sql.py        # Loads Parquet into Azure SQL OMOP tables
+python src/parse_claims.py          # Processes specific financial extraction logic
+```
 
-**All 18 PHI identifiers addressed:**
-- ✅ Names → SHA-256 token
-- ✅ Dates → Per-patient shift ±365 days
-- ✅ Geographic data → ZIP truncated to 3 digits; city removed
-- ✅ Age ≥ 90 → Collapsed to "90+" group
-- ✅ Phone/Email → Regex redaction in free text
-- ✅ SSN, MRN, License → Tokenized or removed
-- ✅ All other unique identifiers → SHA-256 tokens
+### 4. Deploy Semantic Views & Analyze:
 
-See [`docs/hipaa_safeharbor_checklist.md`](docs/hipaa_safeharbor_checklist.md) and [`docs/deidentification_report.md`](docs/deidentification_report.md).
+Execute the SQL scripts against your Azure SQL Database to build the Gold layer and extract KPIs:
 
----
-
-## 📊 FHIR R4 Implementation
-
-The pipeline parses FHIR R4 Bundle resources and extracts:
-
-| Resource Type | Fields Extracted | FHIR URL |
-|---|---|---|
-| Patient | gender, birthDate (year), maritalStatus, language, race/ethnicity | [hl7.org/fhir/patient](https://www.hl7.org/fhir/patient.html) |
-| Encounter | class code, period, reasonCode (SNOMED), status | [hl7.org/fhir/encounter](https://www.hl7.org/fhir/encounter.html) |
-| Condition | SNOMED CT code/display, clinicalStatus, onset/abatement | [hl7.org/fhir/condition](https://www.hl7.org/fhir/condition.html) |
-| Observation | LOINC code, valueQuantity, referenceRange, effectiveDateTime | [hl7.org/fhir/observation](https://www.hl7.org/fhir/observation.html) |
-
-All records tagged with `data_source = "FHIR_R4"` for lineage tracking.
+- Run `sql/06_semantic_views.sql` to generate the Star Schema.
+- Run `sql/07_kpi_analysis.sql` to validate business metrics.
 
 ---
 
-## 📈 KPI Analyses
+## ⚡ Key Engineering Decisions
 
-| KPI | Question Answered | Technique |
-|---|---|---|
-| 1 | Which conditions drive highest claim costs? | GROUP BY + AVG aggregation |
-| 2 | How does encounter volume trend by type? | Time-series GROUP BY |
-| 3 | Who are the top-decile cost patients? | NTILE window function |
-| 4 | Which conditions have the largest coverage gap? | Ratio calculation + CASE tiers |
-| 5 | What is the 30-day readmission proxy rate? | LEAD() self-join pattern |
-| 6 | Executive summary dashboard metrics | Multi-aggregate summary |
+- **Python Generator for 15GB Memory Management:** Avoided out-of-memory crashes by writing a custom Python generator to iterate through patient bundles sequentially, using a schema-on-read approach to output Snappy-compressed Parquet.
+- **Two-Tier Database Architecture:** Separated core storage (OMOP v5.4 tables) from reporting layers (Kimball Star Schema SQL Views) to prevent massive query lag in Power BI.
+- **Push-Down Compute & Defensive SQL:** Handled complex logic (e.g., 30-Day Readmission via self-joining CTEs and `NULLIF` for division-by-zero prevention) directly in the SQL engine to optimize performance.
 
 ---
 
-## 💰 Cloud Cost
+## 📊 Executive KPIs & Business Questions
 
-| Resource | Usage | Cost |
-|---|---|---|
-| Azure Blob Storage | ~200MB CSV + 100 FHIR JSON | ~$0.10 |
-| Azure SQL Basic | 4 days × $0.16/day | ~$0.64 |
-| **Total** | | **~$0.74** |
+| KPI | Business Question | Technical Implementation |
+|-----|-------------------|--------------------------|
+| **Geographic Risk** | Which 3-digit ZIP codes have the highest readmission rate vs total cost? | SQL aggregation (GROUP BY ZIP prefix) + Scatter Plot visualization in Power BI |
+| **Clinical Drivers** | Which clinical conditions drive the highest volume of 30-day readmissions? | T-SQL GROUP BY on CONDITION_OCCURRENCE + Horizontal Bar Chart |
+| **Coverage Gap** | Where does insurance coverage drop off for catastrophic care cases? | DAX `PERCENTILE.INC` logic to identify Top 10% spenders + Stacked Bar visualization |
+| **Readmission Proxy** | What is the true 30-day readmission rate across encounters? | T-SQL CTE using `LEAD()` window function and self-join logic for temporal encounter matching |
 
 ---
 
 ## 🗂️ Repository Structure
 
-```
-healthcare-fhir-pipeline/
+```plaintext
+HEALTHCARE-FHIR-PIPELINE/
 ├── src/
-│   ├── day1_setup_check.py        # Environment validator
-│   ├── day2_blob_ingestion.py     # Azure Blob upload/download
-│   ├── day3_deidentify.py         # HIPAA Safe Harbor de-identification
-│   ├── day4_fhir_parser.py        # FHIR R4 JSON bundle parser
-│   ├── day5_load_to_sql.py        # Star schema creation + data load
-│   ├── day6_kpi_analysis.py       # KPI query runner + Excel export
-│   └── day7_readme_generator.py   # Documentation generator
+│   ├── 03_fhir_parser.py                # Schema-on-read JSON generator
+│   ├── 04_upload_to_azure.py            # Blob storage orchestration
+│   ├── 05_load_to_sql.py                # Parquet to Azure SQL OMOP load
+│   ├── 07_production_scaling.py         # ADF Incremental load config
+│   └── parse_claims.py                  # Financial extraction logic
 ├── sql/
-│   └── day6_kpi_queries.sql       # All 6 KPI queries (raw SQL)
-├── data/
-│   └── sample_output/             # 50-row samples (no PHI)
+│   ├── 06_semantic_views.sql            # Star schema abstraction views
+│   ├── 07_kpi_analysis.sql              # Core KPI queries
+│   └── 08_incremental_load_architecture.sql # High-watermark MERGE logic
 ├── docs/
-│   ├── deidentification_report.md
-│   ├── hipaa_safeharbor_checklist.md
-│   └── data_dictionary.md
+│   ├── data_dictionary.md               # Star schema definitions
+│   └── hipaa_safeharbor_checklist.md    # 45 CFR §164.514(b) compliance
 ├── dashboard/
-│   └── healthcare_dashboard.pdf   # Power BI export
+│   └── 08_healthcare_risk_dashboard.pbix # Power BI Executive Report
 ├── requirements.txt
 ├── .env.example
-└── .gitignore
+└── .gitignore                           # Strict exclusion of data/ and .env
 ```
-
----
-
-## 🚀 How to Run
-
-```bash
-# 1. Clone and install
-git clone https://github.com/YOUR_USERNAME/healthcare-fhir-pipeline
-cd healthcare-fhir-pipeline
-pip install -r requirements.txt
-
-# 2. Configure Azure credentials
-cp .env.example .env
-# Edit .env with your Azure connection strings
-
-# 3. Generate Synthea data
-java -jar synthea-with-dependencies.jar -p 750 \
-  --exporter.fhir.export=true \
-  --exporter.csv.export=true Massachusetts
-mv output/csv/* data/raw_csv/
-mv output/fhir/* data/raw_fhir/
-
-# 4. Run the pipeline (in order)
-python src/day1_setup_check.py
-python src/day2_blob_ingestion.py --upload --download
-python src/day3_deidentify.py
-python src/day4_fhir_parser.py
-python src/day5_load_to_sql.py
-python src/day6_kpi_analysis.py
-```
-
----
-
-## 📋 Sample KPI Output
-
-### KPI 1 — Top Conditions by Average Claim Cost (sample)
-
-| condition_name | total_claims | avg_claim_amount | avg_payer_coverage_pct |
-|---|---|---|---|
-| Viral sinusitis | 2,341 | $487.23 | 82.4% |
-| Normal pregnancy | 1,892 | $12,847.10 | 91.2% |
-| Hypertension | 3,104 | $1,203.45 | 78.6% |
-| Diabetes mellitus type 2 | 1,547 | $2,891.67 | 74.3% |
 
 ---
 
 ## ⚠️ Data Notice
 
-All data in this project is **fully synthetic**, generated by [Synthea](https://github.com/synthetichealth/synthea).
-No real patient data was used. De-identification was applied as a demonstration of HIPAA practices
-on synthetic data — not because the data contains real PHI.
-
----
-
-*Built with Python, Azure, SQL, and Power BI | FHIR R4 | HIPAA Safe Harbor*
+All data in this project is **fully synthetic**, generated by Synthea. No real patient data was processed or stored. De-identification was applied strictly as a demonstration of enterprise HIPAA compliance.
