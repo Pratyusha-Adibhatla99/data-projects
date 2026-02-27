@@ -1,6 +1,6 @@
 # FHIR-Aligned Healthcare Claims Analytics Pipeline
 
-> **Portfolio project demonstrating high-volume FHIR R4 parsing, Medallion Architecture (Bronze/Silver/Gold), HIPAA Safe Harbor pseudonymization, OMOP dimensional modeling, and Executive KPI analytics on synthetic healthcare data.**
+> **Portfolio project demonstrating high-volume FHIR R4 parsing, Medallion Architecture (Bronze/Silver/Gold), OMOP dimensional modeling, and Executive KPI analytics on synthetic healthcare data.**
 
 ---
 
@@ -12,6 +12,7 @@ This project engineers an end-to-end data pipeline to identify which clinical co
 ## 🏗️ Architecture
 
 ```text
+
 [ SOURCE: 15GB Raw FHIR JSON ] 
   (1,774 synthetic patients via Synthea. Highly nested: vitals, claims, demographics)
            |
