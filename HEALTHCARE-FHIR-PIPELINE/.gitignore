@@ -1,0 +1,46 @@
+# Environment & Secrets
+.env
+*.env
+
+# PHI Mapping Table — NEVER commit this
+data/phi_mapping/
+phi_mapping_table.csv
+phi_mapping_table.parquet
+
+# Raw data with PHI (before deidentification)
+data/raw_csv/
+data/raw_fhir/
+data/processed/fhir_parsed/
+daata/processed/kpi_outputs/
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+health
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Azure credentials
+*.publishsettings
+azureProfile.json
+
+# Power BI
+*.pbix
+
+# Logs
+logs/
+*.log
+test.py
+sql/04_create_schema.sql
+.env
+data/
+__pycache__/
+*.pbix
