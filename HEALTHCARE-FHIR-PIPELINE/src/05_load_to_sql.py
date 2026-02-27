@@ -1,8 +1,8 @@
 import os
 import urllib.parse
 import pandas as pd
+import hashlib
 from pathlib import Path
-from datetime import date, timedelta
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import time
@@ -10,8 +10,6 @@ import time
 def get_engine():
     """Uses the official Microsoft ODBC driver and scrubs .env variables"""
     load_dotenv()
-    
-    # .strip().strip('"').strip("'") removes ALL hidden spaces and quote marks!
     SERVER = os.getenv("AZURE_SQL_SERVER").strip().strip('"').strip("'")
     DATABASE = os.getenv("AZURE_SQL_DATABASE").strip().strip('"').strip("'")
     USERNAME = os.getenv("AZURE_SQL_USERNAME").strip().strip('"').strip("'")
@@ -27,97 +25,120 @@ def get_engine():
         "TrustServerCertificate=no;"
         "Connection Timeout=60;"
     )
-    
     params = urllib.parse.quote_plus(conn_str)
     return create_engine(f"mssql+pyodbc:///?odbc_connect={params}", fast_executemany=True)
 
-def load_dim_date(engine):
-    print("── Building dim_date ──")
-    start, end = date(2010, 1, 1), date(2035, 12, 31)
-    dates, cur = [], start
-    while cur <= end:
-        dates.append({
-            "date_key": int(cur.strftime("%Y%m%d")),
-            "full_date": cur.isoformat(),
-            "year": cur.year,
-            "month": cur.month,
-            "day_of_week": cur.isoweekday(),
-            "is_weekend": int(cur.isoweekday() >= 6),
-        })
-        cur += timedelta(days=1)
-    df = pd.DataFrame(dates)
-    df.to_sql("dim_date", con=engine, if_exists="replace", index=False)
-    print(f"  ✓ dim_date: {len(df):,} rows loaded")
+def uuid_to_int(uuid_str):
+    """Deterministically converts a string UUID into a 32-bit OMOP Integer ID"""
+    return int(hashlib.sha256(str(uuid_str).encode('utf-8')).hexdigest(), 16) % (10**9)
 
-def load_dim_patient(engine, local_dir):
-    print("── Building dim_patient ──")
+def load_person(engine, local_dir):
+    print("── Building true OMOP PERSON table ──")
     df = pd.read_parquet(local_dir / "patient_fhir.parquet")
     
-    # Grab the exact columns that exist in your Parquet file
-    dim_df = df[['fhir_patient_id', 'gender', 'birth_year', 'race', 'zip_3digit']].copy()
-    
-    # Rename fhir_patient_id to patient_token to match your Star Schema design
-    dim_df.rename(columns={'fhir_patient_id': 'patient_token'}, inplace=True)
-    
-    dim_df.to_sql("dim_patient", con=engine, if_exists="replace", index=False)
-    print(f"  ✓ dim_patient: {len(dim_df):,} rows loaded")
-    
-def load_dim_condition(engine, local_dir):
-    print("── Building dim_condition ──")
-    df = pd.read_parquet(local_dir / "condition_fhir.parquet")
-    
-    # Your parser already named these perfectly!
-    dim_df = df[['snomed_code', 'snomed_display']].drop_duplicates().dropna()
-    
-    dim_df.to_sql("dim_condition", con=engine, if_exists="replace", index=False)
-    print(f"  ✓ dim_condition: {len(dim_df):,} rows loaded")
+    def map_gender(g):
+        g = str(g).lower()
+        return 8507 if 'male' in g else 8532 if 'female' in g else 0
+        
+    def map_race(r):
+        r = str(r).lower()
+        if 'white' in r: return 8527
+        if 'black' in r: return 8516
+        if 'asian' in r: return 8515
+        return 0
 
-def load_fact_encounter(engine, local_dir):
-    print("── Building fact_encounter ──")
+    person_df = pd.DataFrame()
+    
+    person_df['person_id'] = df['fhir_patient_id'].apply(lambda x: uuid_to_int(str(x).replace('urn:uuid:', '')))
+    
+    person_df['gender_concept_id'] = df['gender'].apply(map_gender)
+    person_df['year_of_birth'] = df['birth_year'].astype(int)
+    person_df['race_concept_id'] = df['race'].apply(map_race)
+    person_df['ethnicity_concept_id'] = 0
+    person_df['person_source_value'] = df['fhir_patient_id']
+    person_df['gender_source_value'] = df['gender']
+    person_df['race_source_value'] = df['race']
+    
+    person_df.to_sql("person", con=engine, if_exists="replace", index=False)
+    print(f"  ✓ person: {len(person_df):,} rows loaded")
+
+def load_visit_occurrence(engine, local_dir):
+    print("── Building true OMOP VISIT_OCCURRENCE table ──")
     df = pd.read_parquet(local_dir / "encounter_fhir.parquet")
     
-    # Create the date_key using your 'start_date' column
-    df['date_key'] = pd.to_datetime(df['start_date']).dt.strftime('%Y%m%d').astype(int)
+    visit_df = pd.DataFrame()
+    visit_df['visit_occurrence_id'] = df['fhir_encounter_id'].apply(uuid_to_int)
+    visit_df['person_id'] = df['fhir_patient_id'].apply(uuid_to_int)
+    visit_df['visit_concept_id'] = 9202 # Standard OMOP Outpatient code
+    visit_df['visit_start_date'] = pd.to_datetime(df['start_date']).dt.date
+    visit_df['visit_end_date'] = visit_df['visit_start_date']
+    visit_df['visit_type_concept_id'] = 32035 # Standard OMOP EHR generation code
+    visit_df['visit_source_value'] = df['fhir_encounter_id']
     
-    # Select the columns based on your exact Parquet output
-    fact_df = df[['fhir_encounter_id', 'fhir_patient_id', 'date_key', 'class_display', 'reason_code', 'reason_display']].copy()
-    
-    # Rename them to fit the Star Schema design
-    fact_df.rename(columns={
-        'fhir_encounter_id': 'encounter_token', 
-        'fhir_patient_id': 'patient_token', 
-        'class_display': 'encounter_type',
-        'reason_display': 'reason_description'
-    }, inplace=True)
-    
-    fact_df.to_sql("fact_encounter", con=engine, if_exists="replace", index=False)
-    print(f"  ✓ fact_encounter: {len(fact_df):,} rows loaded")
+    visit_df.to_sql("visit_occurrence", con=engine, if_exists="replace", index=False)
+    print(f"  ✓ visit_occurrence: {len(visit_df):,} rows loaded")
 
-def load_fact_claims(engine, local_dir):
-    print("── Building fact_claims ──")
+def load_cost(engine, local_dir):
+    print("── Building true OMOP COST table ──")
     df = pd.read_parquet(local_dir / "claims_fhir.parquet")
     
-    # THE FIX: Add utc=True to handle messy healthcare timezones
-    df['date_key'] = pd.to_datetime(df['created'], utc=True).dt.strftime('%Y%m%d').astype(int)
+    cost_df = pd.DataFrame()
+    # Clean the claim ID
+    cost_df['cost_id'] = df['claim_id'].apply(lambda x: uuid_to_int(str(x).replace('urn:uuid:', '')))
     
-    # Map FHIR fields to your SQL Star Schema
-    fact_df = df[['claim_id', 'patient_id', 'date_key', 'total_cost', 'payment_amount']].copy()
-    fact_df.rename(columns={
-        'claim_id': 'claim_token',
-        'patient_id': 'patient_token',
-        'payment_amount': 'payer_coverage'
-    }, inplace=True)
+    # ✅ FIX 1: Strip prefixes so the patient hash perfectly matches the person table
+    cost_df['person_id'] = df['patient_id'].apply(lambda x: uuid_to_int(str(x).replace('urn:uuid:', '')))
     
-    # Add a calculated column for out-of-pocket cost
-    fact_df['patient_out_of_pocket'] = fact_df['total_cost'] - fact_df['payer_coverage']
+    # ✅ FIX 2: Map to encounter_id (not claim_id) so it can join to visit_occurrence
+    cost_df['cost_event_id'] = df['encounter_id'].apply(lambda x: uuid_to_int(str(x).replace('urn:uuid:', ''))) 
+    
+    cost_df['cost_domain_id'] = 'Visit'
+    cost_df['cost_type_concept_id'] = 32814  
+    cost_df['total_charge'] = df['total_cost']
+    cost_df['total_paid'] = df['payment_amount']
+    cost_df['paid_by_patient'] = df['total_cost'] - df['payment_amount']
+    
+    cost_df.to_sql("cost", con=engine, if_exists="replace", index=False)
+    print(f"  ✓ cost: {len(cost_df):,} rows loaded")
+    
+    
+def load_concept(engine, local_dir):
+    print("── Building true OMOP CONCEPT table ──")
+    df = pd.read_parquet(local_dir / "condition_fhir.parquet")
+    
+    # FIX: Only drop rows if the actual code or display name is missing
+    df = df.dropna(subset=['snomed_code', 'snomed_display']).drop_duplicates(subset=['snomed_code'])
+    
+    concept_df = pd.DataFrame()
+    concept_df['concept_id'] = df['snomed_code'].apply(lambda x: uuid_to_int(str(x)))
+    concept_df['concept_name'] = df['snomed_display'].str[:255]
+    concept_df['domain_id'] = 'Condition'
+    concept_df['vocabulary_id'] = 'SNOMED'
+    concept_df['concept_class_id'] = 'Clinical Finding'
+    concept_df['standard_concept'] = 'S'
+    concept_df['concept_code'] = df['snomed_code']
+    
+    concept_df.to_sql("concept", con=engine, if_exists="replace", index=False)
+    print(f"  ✓ concept: {len(concept_df):,} rows loaded")
 
-    fact_df.to_sql("fact_claims", con=engine, if_exists="replace", index=False)
-    print(f"  ✓ fact_claims: {len(fact_df):,} rows loaded")
-
+def load_condition_occurrence(engine, local_dir):
+    print("── Building true OMOP CONDITION_OCCURRENCE table ──")
+    df = pd.read_parquet(local_dir / "condition_fhir.parquet")
     
+    # We must map your parquet columns (fhir_condition_id, fhir_patient_id, snomed_code)
+    # to the OMOP standard names (condition_occurrence_id, person_id, condition_concept_id)
+    cond_occ = pd.DataFrame()
+    cond_occ['condition_occurrence_id'] = df['fhir_condition_id'].apply(uuid_to_int)
+    cond_occ['person_id'] = df['fhir_patient_id'].apply(uuid_to_int)
+    cond_occ['condition_concept_id'] = df['snomed_code'].apply(lambda x: uuid_to_int(str(x)))
+    cond_occ['condition_start_date'] = pd.to_datetime(df['onset_date']).dt.date
+    cond_occ['condition_type_concept_id'] = 32020 
+    cond_occ['condition_source_value'] = df['snomed_code']
     
+    cond_occ.to_sql("condition_occurrence", con=engine, if_exists="replace", index=False)
+    print(f"  ✓ condition_occurrence: {len(cond_occ):,} rows loaded")
 def main():
-    print("=== Azure SQL Star Schema Builder ===")
+    print("=== Azure SQL OMOP Database Builder ===")
     load_dotenv()
     local_dir = Path(os.getenv("LOCAL_PROCESSED_PATH", "data/processed/fhir_parsed"))
     
@@ -128,7 +149,6 @@ def main():
     print("Connecting to Azure SQL...")
     engine = get_engine()
     
-    # Try to wake up the database before loading
     for attempt in range(3):
         try:
             with engine.connect() as conn:
@@ -139,12 +159,12 @@ def main():
             print(f"😴 Database waking up... (Attempt {attempt+1}/3)")
             time.sleep(15)
     
-    load_dim_date(engine)
-    load_dim_patient(engine, local_dir)
-    load_dim_condition(engine, local_dir)
-    load_fact_encounter(engine, local_dir)
-    load_fact_claims(engine, local_dir)
-    print("=== Star Schema Successfully Deployed to Azure! ===")
+    load_person(engine, local_dir)
+    load_visit_occurrence(engine, local_dir)
+    load_cost(engine, local_dir)
+    load_concept(engine, local_dir)
+    load_condition_occurrence(engine, local_dir)
+    print("=== OMOP Tables Successfully Deployed to Azure! ===")
 
 if __name__ == "__main__":
     main()

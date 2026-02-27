@@ -1,19 +1,55 @@
-
---View 1: High-Cost Patients (WORKING)DROP VIEW IF EXISTS vw_high_cost_patients;
-DROP VIEW IF EXISTS vw_high_cost_patients;
+-- View 1: vw_patient_summary
+ALTER VIEW dbo.vw_patient_summary AS
+WITH VisitTotals AS (
+    -- Pre-aggregate visits per patient
+    SELECT 
+        person_id, 
+        COUNT(visit_occurrence_id) AS total_encounters
+    FROM dbo.visit_occurrence
+    GROUP BY person_id
+),
+CostTotals AS (
+    -- Pre-aggregate costs per patient
+    SELECT 
+        person_id, 
+        COUNT(cost_id) AS total_claims,
+        CAST(SUM(ISNULL(total_charge, 0)) AS DECIMAL(18,2)) AS total_spend,
+        CAST(SUM(ISNULL(total_paid, 0)) AS DECIMAL(18,2)) AS total_payer
+    FROM dbo.cost
+    GROUP BY person_id
+)
+-- Join the pre-aggregated 1-to-1 results back to the person table
+SELECT 
+    p.person_id AS patient_token,
+    p.gender_source_value AS gender,
+    p.year_of_birth AS birth_year,
+    p.race_source_value AS race,
+    ISNULL(v.total_encounters, 0) AS total_encounters,
+    ISNULL(c.total_claims, 0) AS total_claims,
+    ISNULL(c.total_spend, 0.00) AS total_spend,
+    ISNULL(c.total_payer, 0.00) AS total_payer
+FROM dbo.person p
+LEFT JOIN VisitTotals v ON p.person_id = v.person_id
+LEFT JOIN CostTotals c ON p.person_id = c.person_id;
+GO
+Select top 10* from [dbo].[vw_patient_summary]
+-- View 2: vw_high_cost_patients
+DROP VIEW IF EXISTS dbo.vw_high_cost_patients;
 GO
 
-CREATE VIEW vw_high_cost_patients AS
+CREATE VIEW dbo.vw_high_cost_patients AS
 WITH patient_totals AS (
     SELECT 
-        REPLACE(fc.patient_token, 'urn:uuid:', '') AS patient_token,
-        COUNT(*) AS claim_count,
-        SUM(fc.total_cost) AS total_spend,
-        SUM(fc.payer_coverage) AS total_payer,
-        SUM(fc.patient_out_of_pocket) AS total_oop
-    FROM fact_claims fc 
-    WHERE fc.total_cost IS NOT NULL 
-    GROUP BY REPLACE(fc.patient_token, 'urn:uuid:', '')
+        p.person_id,
+        COUNT(DISTINCT c.cost_id) AS claim_count,
+        SUM(c.total_charge) AS total_spend,
+        SUM(c.total_paid) AS total_payer,
+        SUM(c.paid_by_patient) AS total_oop
+    FROM dbo.person p
+    JOIN dbo.visit_occurrence vo ON p.person_id = vo.person_id
+    JOIN dbo.cost c ON vo.visit_occurrence_id = c.cost_event_id
+    WHERE c.total_charge IS NOT NULL
+    GROUP BY p.person_id
 ),
 p90 AS (
     SELECT 
@@ -21,113 +57,65 @@ p90 AS (
     FROM patient_totals
 )
 SELECT 
-    pt.patient_token, 
-    dp.gender, 
-    dp.birth_year, 
-    dp.race,
-    dp.zip_3digit,
-    pt.claim_count, 
+    pt.person_id AS patient_token,
+    p.gender_source_value AS gender,
+    p.year_of_birth AS birth_year,
+    p.race_source_value AS race,
+    p.person_source_value AS zip_3digit,
+    pt.claim_count,
     ROUND(pt.total_spend, 2) AS total_spend,
     ROUND(pt.total_payer, 2) AS total_payer_covered,
     ROUND(pt.total_oop, 2) AS total_out_of_pocket,
     ROUND(pt.total_oop / NULLIF(pt.total_spend, 0) * 100, 1) AS patient_burden_pct,
     CASE 
-        WHEN pt.total_spend >= (SELECT TOP 1 threshold FROM p90) 
+        WHEN pt.total_spend >= (SELECT TOP 1 threshold FROM p90)
         THEN 'High Cost (Top 10%)'
         ELSE 'Standard'
     END AS cost_category
 FROM patient_totals pt
 CROSS JOIN (SELECT TOP 1 threshold FROM p90) p9
-JOIN dim_patient dp ON pt.patient_token = dp.patient_token;
+JOIN dbo.person p ON pt.person_id = p.person_id;
 GO
--- Check if dim_patient has any data
-SELECT COUNT(*) FROM dim_patient;
+Select top 10* from [dbo].[vw_high_cost_patients]
 
-
-SELECT TOP 10 * FROM vw_high_cost_patients ORDER BY total_spend DESC;
-
-
-
-
---View 2: Patient Summary (WORKING)
-
-DROP VIEW IF EXISTS vw_patient_summary;
+-- View 3: vw_readmissions (Same as before)
+DROP VIEW IF EXISTS dbo.vw_readmissions;
 GO
 
-CREATE VIEW vw_patient_summary AS
-SELECT 
-    dp.patient_token,
-    dp.gender,
-    dp.birth_year,
-    dp.race,
-    dp.zip_3digit,
-    COUNT(DISTINCT fc.claim_token) AS total_claims,
-    SUM(fc.total_cost) AS total_spend,
-    SUM(fc.payer_coverage) AS total_payer,
-    SUM(fc.patient_out_of_pocket) AS total_oop,
-    AVG(fc.total_cost) AS avg_claim_cost,
-    MIN(dd.full_date) AS first_service_date,
-    MAX(dd.full_date) AS last_service_date
-FROM dim_patient dp
-LEFT JOIN fact_claims fc ON dp.patient_token = REPLACE(fc.patient_token, 'urn:uuid:', '')
-LEFT JOIN dim_date dd ON fc.date_key = dd.date_key
-GROUP BY 
-    dp.patient_token,
-    dp.gender,
-    dp.birth_year,
-    dp.race,
-    dp.zip_3digit;
-GO
-
---TEST
-
-SELECT TOP 10 * FROM vw_patient_summary 
-WHERE total_claims > 0
-ORDER BY total_spend DESC;
-
---View 3. Readmissions 
-
-DROP VIEW IF EXISTS vw_readmissions;
-GO
-
-CREATE VIEW vw_readmissions AS
+CREATE VIEW dbo.vw_readmissions AS
 WITH encounters AS (
     SELECT 
-        fe.encounter_token,
-        REPLACE(fe.patient_token, 'urn:uuid:', '') AS patient_token,
-        fe.date_key,
-        dd.full_date AS encounter_date,
-        dd.year,
-        dd.month,
-        dp.gender,
-        dp.zip_3digit,
-        fe.encounter_type,
-        fe.reason_description
-    FROM fact_encounter fe 
-    JOIN dim_date dd ON fe.date_key = dd.date_key 
-    JOIN dim_patient dp ON REPLACE(fe.patient_token, 'urn:uuid:', '') = dp.patient_token
-    WHERE dd.full_date IS NOT NULL
+        vo.visit_occurrence_id AS first_encounter,
+        vo.person_id AS patient_token,
+        vo.visit_start_date AS first_date,
+        vo.visit_end_date AS discharge_date,
+        YEAR(vo.visit_start_date) AS first_year,
+        MONTH(vo.visit_start_date) AS first_month,
+        p.gender_source_value AS gender,
+        p.person_source_value AS zip_3digit
+    FROM dbo.visit_occurrence vo
+    JOIN dbo.person p ON vo.person_id = p.person_id
+    WHERE vo.visit_start_date IS NOT NULL
 ),
 readmission_pairs AS (
     SELECT 
         a.patient_token,
-        a.encounter_token AS first_encounter, 
-        b.encounter_token AS readmit_encounter,
-        a.encounter_date AS first_date, 
-        b.encounter_date AS readmit_date,
-        DATEDIFF(DAY, CAST(a.encounter_date AS DATE), CAST(b.encounter_date AS DATE)) AS days_between,
-        a.year AS first_year,
-        a.month AS first_month,
+        a.first_encounter,
+        b.first_encounter AS readmit_encounter,
+        a.first_date,
+        b.first_date AS readmit_date,
+        DATEDIFF(DAY, a.discharge_date, b.first_date) AS days_between,
+        a.first_year,
+        a.first_month,
         a.gender,
-        a.zip_3digit,
-        a.reason_description AS first_reason,
-        b.reason_description AS readmit_reason
-    FROM encounters a 
+        a.zip_3digit
+    FROM encounters a
     JOIN encounters b
-        ON a.patient_token = b.patient_token 
-        AND a.encounter_token <> b.encounter_token
-        AND CAST(b.encounter_date AS DATE) > CAST(a.encounter_date AS DATE)
-        AND DATEDIFF(DAY, CAST(a.encounter_date AS DATE), CAST(b.encounter_date AS DATE)) <= 30
+        ON a.patient_token = b.patient_token
+        AND a.first_encounter <> b.first_encounter
+        AND b.first_date > a.discharge_date
+        AND DATEDIFF(DAY, a.discharge_date, b.first_date) <= 30
+        AND DATEDIFF(DAY, a.discharge_date, b.first_date) > 0
 )
 SELECT 
     patient_token,
@@ -140,8 +128,6 @@ SELECT
     first_month,
     gender,
     zip_3digit,
-    first_reason,
-    readmit_reason,
     CASE 
         WHEN days_between <= 7 THEN '0-7 days'
         WHEN days_between <= 14 THEN '8-14 days'
@@ -150,36 +136,25 @@ SELECT
     END AS readmit_window
 FROM readmission_pairs;
 GO
---test
-SELECT TOP 10 * FROM vw_readmissions ORDER BY days_between;
+Select top 10* from [dbo].[vw_readmissions]
 
-
-
---View 4: Claims with Conditions
-
-DROP VIEW IF EXISTS vw_claims_with_conditions;
+-- View 4: Clinical Claims Mapping 
+DROP VIEW IF EXISTS dbo.vw_claims_with_conditions;
 GO
 
-CREATE VIEW vw_claims_with_conditions AS
+CREATE VIEW dbo.vw_claims_with_conditions AS
 SELECT 
-    fc.claim_token,
-    REPLACE(fc.patient_token, 'urn:uuid:', '') AS patient_token,
-    fc.date_key,
-    dd.full_date AS service_date,
-    dd.year,
-    dd.month,
-    fc.total_cost,
-    fc.payer_coverage,
-    fc.patient_out_of_pocket,
-    dp.gender,
-    dp.birth_year,
-    dp.race,
-    dp.zip_3digit,
-    ROUND(fc.payer_coverage / NULLIF(fc.total_cost, 0) * 100, 1) AS coverage_pct
-FROM fact_claims fc
-JOIN dim_date dd ON fc.date_key = dd.date_key
-JOIN dim_patient dp ON REPLACE(fc.patient_token, 'urn:uuid:', '') = dp.patient_token
-WHERE fc.total_cost IS NOT NULL;
+    co.condition_occurrence_id, -- Verified in your schema
+    co.person_id,               -- Verified in your schema
+    co.condition_start_date,    -- Verified in your schema
+    c.concept_name AS condition_name,
+    p.gender_source_value AS gender,
+    p.year_of_birth,
+    p.race_source_value AS race
+FROM dbo.condition_occurrence co
+JOIN dbo.person p ON co.person_id = p.person_id
+JOIN dbo.concept c ON co.condition_concept_id = c.concept_id;
 GO
 
-SELECT TOP 10 * FROM vw_claims_with_conditions ORDER BY total_cost DESC;
+-- Verification
+SELECT TOP 10 * FROM dbo.vw_claims_with_conditions;
