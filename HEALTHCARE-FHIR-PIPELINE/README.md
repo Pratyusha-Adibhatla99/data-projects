@@ -300,7 +300,7 @@ HEALTHCARE-FHIR-PIPELINE/
 
 # 🔐 Data Notice
 
-All data in this project is fully synthetic and generated using **Synthea**.
+All data in this project is fully synthetic and generated using [**Synthea**](https://synthea.mitre.org/).
 
 * No real patient data was processed.
 * No PHI or HIPAA-regulated information is stored.
@@ -320,6 +320,7 @@ All data in this project is fully synthetic and generated using **Synthea**.
 ---
 
 **Author:** Pratyusha Adibhatla
+
 **Focus:** Healthcare Data Engineering | Clinical Risk Analytics | Cloud-Native SQL Architecture
 
 ---
