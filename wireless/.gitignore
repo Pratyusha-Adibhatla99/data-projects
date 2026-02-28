@@ -31,3 +31,21 @@ venv/
 wireless_env/
 .DS_Store
 .vscode/
+# Data and Zips
+*.csv
+*.mat
+*.pcd
+*.zip
+uploads/
+channels_release/
+
+# Environment and Secrets
+.env
+__pycache__/
+.ipynb_checkpoints/
+
+# Temporary Test Scripts
+test_data.py
+fix_lineage.py
+test_auth.py
+app_old.py

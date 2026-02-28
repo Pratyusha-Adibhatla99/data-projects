@@ -3,7 +3,7 @@ import pymssql
 import hashlib
 from azure.storage.blob import BlobServiceClient
 from werkzeug.utils import secure_filename
-from backend.utils.common import get_pst_time
+from datetime import datetime, timezone  # <--import with standard datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -44,28 +44,24 @@ class BronzeService:
 
         BLOB PATH:  pratyusha/radar0/0001.csv
         SQL RECORD: filename=0001.csv, researcher=Pratyusha Adibhatla,
-                    blob_path=pratyusha/radar0/0001.csv, upload_time=PST
-
-        dataset_name = the folder name the user chose (e.g. "radar0")
-        This is stored in the DB but NOT shown to user as "Default_Dataset"
+                    blob_path=pratyusha/radar0/0001.csv, upload_time=UTC
         """
         filename      = secure_filename(file_obj.filename)
-        upload_time   = get_pst_time()
+        # Capture the exact, raw UTC time of ingestion
+        upload_time   = datetime.now(timezone.utc) 
         ext           = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'unknown'
         researcher    = self._get_researcher_name(user_email, user_full_name)
 
-        # ── Blob path: pratyusha/radar0/0001.csv ─────────────────
-        # If dataset_name is Default_Dataset (no folder chosen),
-        # use researcher name only: pratyusha/0001.csv
+        # ── Blob path: pratyusha/radar0/0001.csv
         if dataset_name in ('Default_Dataset', '', None):
             blob_path    = f"{researcher}/{filename}"
-            display_folder = None   # No folder shown to user
+            display_folder = None
         else:
             safe_folder  = secure_filename(dataset_name)
             blob_path    = f"{researcher}/{safe_folder}/{filename}"
             display_folder = safe_folder
 
-        # ── 1. Stream to Azure Blob ───────────────────────────────
+        # ── 1. Stream to Azure Blob 
         sha256_hash = hashlib.sha256()
         file_size   = 0
 
@@ -91,7 +87,6 @@ class BronzeService:
 
             blob_client.upload_blob(stream_generator(), overwrite=True)
             final_hash = sha256_hash.hexdigest()
-            blob_url   = blob_client.url
 
             print(f"✅ Blob saved: {blob_path} ({file_size/(1024**2):.2f} MB)")
 
@@ -99,7 +94,7 @@ class BronzeService:
             print(f"❌ Blob upload failed: {e}")
             raise
 
-        # ── 2. Record in Azure SQL ────────────────────────────────
+        # ── 2. Record in Azure SQL 
         conn   = self.get_db_connection()
         cursor = conn.cursor()
 
@@ -114,7 +109,7 @@ class BronzeService:
                 print(f"⚠️  Duplicate: {filename} matches {existing['filename']}")
                 return True, f"Skipped duplicate: {filename}"
 
-            # Insert bronze record
+            # Insert bronze record using UTC
             cursor.execute("""
                 INSERT INTO bronze_files (
                     filename,
@@ -126,7 +121,7 @@ class BronzeService:
                     user_id,
                     dataset_name,
                     dataset_folder,
-                    upload_time_pst,
+                    upload_time_utc,
                     upload_timezone,
                     processing_status,
                     researcher_name,
@@ -134,28 +129,28 @@ class BronzeService:
                 ) VALUES (
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
-                    'PST', 'raw', %s, %s
+                    'UTC', 'raw', %s, %s
                 )
             """, (
                 filename,
-                blob_path,       # pratyusha/radar0/0001.csv
+                blob_path,
                 file_size,
                 final_hash,
                 ext,
-                ext,             # use extension as modality for now (raw, no renaming)
+                ext,             
                 user_id,
-                display_folder or 'root',  # Internal use only
+                display_folder or 'root',
                 blob_path,
                 upload_time,
-                user_full_name,  # 'Pratyusha Adibhatla' - source of truth
-                user_email       # 'pratyusha@ucsd.edu' - source of truth
+                user_full_name,  
+                user_email       
             ))
 
             # Get new ID
             cursor.execute("SELECT SCOPE_IDENTITY() AS id")
             bronze_id = cursor.fetchone()['id']
 
-            # Insert lineage - WHO, WHAT, WHEN
+            # Insert lineage using UTC
             cursor.execute("""
                 INSERT INTO data_lineage (
                     bronze_file_id,
@@ -163,7 +158,7 @@ class BronzeService:
                     source_file_path,
                     source_researcher,
                     source_researcher_email,
-                    upload_time_pst,
+                    upload_time_utc,
                     transformation_type,
                     status
                 ) VALUES (%s, %s, %s, %s, %s, %s, 'ingestion', 'success')
@@ -198,13 +193,13 @@ class BronzeService:
                 file_extension,
                 file_path,
                 dataset_name,
-                upload_time_pst,
+                upload_time_utc,
                 researcher_name,
                 researcher_email
             FROM bronze_files
             WHERE user_id = %s
               AND is_deleted = 0
-            ORDER BY upload_time_pst DESC
+            ORDER BY upload_time_utc DESC
         """, (user_id,))
         results = cursor.fetchall()
         conn.close()
@@ -221,7 +216,7 @@ class BronzeService:
                 b.file_path,
                 b.file_extension,
                 b.dataset_name,
-                b.upload_time_pst,
+                b.upload_time_utc,
                 b.researcher_name,
                 b.researcher_email,
                 l.transformation_type,
@@ -229,7 +224,7 @@ class BronzeService:
             FROM bronze_files b
             LEFT JOIN data_lineage l ON b.id = l.bronze_file_id
             WHERE b.is_deleted = 0
-            ORDER BY b.upload_time_pst DESC
+            ORDER BY b.upload_time_utc DESC
         """)
         results = cursor.fetchall()
         conn.close()
