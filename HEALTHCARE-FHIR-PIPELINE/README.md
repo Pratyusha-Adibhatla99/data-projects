@@ -67,6 +67,9 @@ V
   [ PRESENTATION: Executive Dashboard ]
 
 ````
+### Data in OMOP format
+![Power BI Dashboard with KPI cards](./assets/OMOP_table_preview.png)
+
 
 ---
 
@@ -215,6 +218,9 @@ Refactored architecture using:
 # 📊 Executive KPIs & DAX Implementation
 
 The Power BI dashboard sits on top of the SQL semantic layer and uses the following measures.
+
+### Sample Power BI Dashboard with KPI cards
+![Power BI Dashboard with KPI cards](./assets/dashboard.png)
 
 ---
 
