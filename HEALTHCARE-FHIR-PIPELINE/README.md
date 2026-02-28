@@ -1,148 +1,322 @@
+
 # FHIR-Aligned Healthcare Claims Analytics Pipeline
 
-> **Portfolio project demonstrating high-volume FHIR R4 parsing, Medallion Architecture (Bronze/Silver/Gold), OMOP dimensional modeling, and Executive KPI analytics on synthetic healthcare data.**
+> **Portfolio project demonstrating raw FHIR R4 parsing, deterministic UUID hashing, strict OMOP v5.4 dimensional modeling, and query optimization for executive KPI analytics.**
 
 ---
 
 ## 📖 Overview
-This project engineers an end-to-end data pipeline to identify which clinical conditions drive the highest financial risk and 30-day hospital readmissions. It processes 15GB of deeply nested FHIR JSON data into a highly optimized Kimball Star Schema, utilizing push-down compute in Azure SQL to feed a zero-latency Power BI executive dashboard.
 
----
+This project engineers an end-to-end healthcare data pipeline that transforms deeply nested **FHIR R4 JSON bundles** into a highly optimized **OMOP v5.4 relational schema** hosted in **Azure SQL**.
 
-## 🏗️ Architecture
+The system is designed to solve real-world healthcare data engineering problems:
 
-```text
+- ❌ Silent join failures from inconsistent UUID formats  
+- ❌ Cartesian product explosions during multi-table joins  
+- ❌ Memory timeouts in BI-facing queries  
+- ❌ Slow executive dashboards due to poor semantic modeling  
 
-[ SOURCE: 15GB Raw FHIR JSON ] 
-  (1,774 synthetic patients via Synthea. Highly nested: vitals, claims, demographics)
-           |
-           |  --> Extraction Engine: Python Generator + Vectorized Pandas
-           |  --> Logic: Schema-on-read iteratively parsing patient bundles
-           V
-[ BRONZE: 690MB Parquet Files ] 
-  (Flattened staging layer. 113k encounters, 211k claim lines. Snappy compressed)
-           |
-           |  --> Pipeline Orchestration: Azure Data Factory (ADF)
-           |  --> Logic: Truncate-and-Load, UTC normalization, Spend reconciliation
-           V
-[ SILVER: Azure SQL (OMOP Base Tables) ] 
-  (Strict OMOP Common Data Model storage)
-  - Tables: PERSON (w/ 3-digit zip), VISIT_OCCURRENCE, CONDITION_OCCURRENCE, COST
-           |
-           |  --> Semantic Abstraction: Heavy compute pushed down to SQL engine
-           |  --> Logic: 30-day readmission CTEs, NULLIF defensive SQL
-           V
-[ GOLD: Azure SQL Views (Star Schema) ] 
-  (Kimball dimensional model for BI consumption)
-  - Views: vw_patient_summary, vw_readmissions, vw_claims_with_conditions
-           |
-           |  --> Visualization Engine: Zero-latency BI ingestion
-           |  --> Logic: DAX PERCENTILE.INC for Top 10% high-cost spenders
-           V
-[ PRESENTATION: Power BI Executive Dashboard ] 
+By pushing heavy compute down to the SQL engine and building a pre-aggregated semantic layer, the final **Power BI executive dashboard** runs with near-zero latency while supporting financial and clinical risk analytics.
+
+
+# 🏗️ Architecture
+
 ```
 
+[ SOURCE: Raw FHIR JSON Data ]
+(Synthetic patient bundles containing nested vitals, claims, encounters, and demographics)
+|
+|  --> Extraction Engine: Python + Pandas
+|  --> Logic: Flatten nested FHIR structures into tabular formats
+V
+[ BRONZE: Parquet Files ]
+(Flattened staging layer)
+
+* patient_fhir.parquet
+* condition_fhir.parquet
+* claims_fhir.parquet
+  |
+  |  --> Transformation Engine: Python ETL (05_load_to_sql.py)
+  |  --> Logic:
+  |        • Deterministic UUID hashing
+  |        • Prefix stripping ('urn:uuid:')
+  |        • OMOP column alignment
+  V
+  [ SILVER: Azure SQL (OMOP v5.4 Base Tables) ]
+  (Strict OMOP Common Data Model implementation)
+* PERSON
+* VISIT_OCCURRENCE
+* CONDITION_OCCURRENCE
+* COST
+* CONCEPT
+  |
+  |  --> Semantic Abstraction Layer
+  |  --> Heavy compute pushed down to SQL engine
+  |  --> CTE-based pre-aggregation
+  V
+  [ GOLD: Azure SQL Views (Semantic Layer) ]
+  (Pre-calculated reporting layer for BI consumption)
+* vw_patient_summary
+* vw_readmissions
+* vw_claims_with_conditions
+* vw_high_cost_patients
+  |
+  |  --> Visualization Engine: Power BI (Import / DirectQuery)
+  |  --> DAX for dynamic thresholding & KPI calculation
+  V
+  [ PRESENTATION: Executive Dashboard ]
+
+````
+
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Tech Stack
 
 | Layer | Technology |
-| --- | --- |
-| **Data Generation** | Synthea (1,774 synthetic patients, 15GB raw JSON) |
-| **ETL Language** | Python 3.10+ (Pandas, vectorized operations, iterators) |
-| **Bronze Storage** | Snappy-compressed Parquet files |
-| **Orchestration** | Azure Data Factory (ADF) |
-| **De-identification** | HIPAA Safe Harbor — SHA-256 tokens, ZIP truncation |
-| **Database (Silver)** | Azure SQL Database (OMOP Common Data Model Base Tables) |
-| **Semantic (Gold)** | Azure SQL Views (Kimball Star Schema) |
-| **Analytics** | T-SQL — CTEs, self-joins, window functions |
-| **Visualization** | Power BI Desktop (DAX logic) |
+|-------|------------|
+| Data Generation | Synthea (Synthetic Patient Data) |
+| ETL Language | Python 3.11 (Pandas, deterministic hashing) |
+| Bronze Storage | Parquet (fastparquet) |
+| Database (Silver) | Azure SQL Database (OMOP v5.4 CDM) |
+| Semantic Layer (Gold) | Azure SQL Views (CTE Pre-Aggregation) |
+| Analytics | T-SQL (Window Functions, Conditional Aggregations) |
+| Visualization | Power BI Desktop (DAX) |
 
 ---
 
-## 🚀 How to Run (Usage)
+# 🚀 How to Run
 
-### 1. Clone the repository and install dependencies:
+## 1️⃣ Clone Repository & Install Dependencies
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/HEALTHCARE-FHIR-PIPELINE.git
-cd HEALTHCARE-FHIR-PIPELINE
+git clone https://github.com/YOUR_USERNAME/data-projects.git
+cd data-projects/HEALTHCARE-FHIR-PIPELINE
 pip install -r requirements.txt
-```
+````
 
-### 2. Configure Environment Variables:
-
-Create a `.env` file in the root directory and add your Azure SQL database connection string (ensure this file remains gitignored):
-
-```plaintext
-AZURE_SQL_CONNECTION_STRING="your_connection_string_here"
-```
-
-### 3. Execute the ETL Pipeline:
-
-Run the Python extraction and loading scripts in sequence:
+Or manually:
 
 ```bash
-python src/03_fhir_parser.py        # Parses 15GB JSON -> 690MB Parquet
-python src/04_upload_to_azure.py    # Orchestrates Blob Storage upload
-python src/05_load_to_sql.py        # Loads Parquet into Azure SQL OMOP tables
-python src/parse_claims.py          # Processes specific financial extraction logic
+pip install pandas pyodbc fastparquet python-dotenv
 ```
 
-### 4. Deploy Semantic Views & Analyze:
+---
 
-Execute the SQL scripts against your Azure SQL Database to build the Gold layer and extract KPIs:
+## 2️⃣ Configure Environment Variables
 
-- Run `sql/06_semantic_views.sql` to generate the Star Schema.
-- Run `sql/07_kpi_analysis.sql` to validate business metrics.
+Create a `.env` file in the project root:
+
+```
+AZURE_SQL_SERVER="your_server.database.windows.net"
+AZURE_SQL_DATABASE="your_db_name"
+AZURE_SQL_USER="your_username"
+AZURE_SQL_PASSWORD="your_password"
+```
+
+⚠️ Never commit your `.env` file.
 
 ---
 
-## ⚡ Key Engineering Decisions
+## 3️⃣ Execute ETL Pipeline
 
-- **Python Generator for 15GB Memory Management:** Avoided out-of-memory crashes by writing a custom Python generator to iterate through patient bundles sequentially, using a schema-on-read approach to output Snappy-compressed Parquet.
-- **Two-Tier Database Architecture:** Separated core storage (OMOP v5.4 tables) from reporting layers (Kimball Star Schema SQL Views) to prevent massive query lag in Power BI.
-- **Push-Down Compute & Defensive SQL:** Handled complex logic (e.g., 30-Day Readmission via self-joining CTEs and `NULLIF` for division-by-zero prevention) directly in the SQL engine to optimize performance.
+```bash
+python3 src/05_load_to_sql.py
+```
 
----
+This script:
 
-## 📊 Executive KPIs & Business Questions
-
-| KPI | Business Question | Technical Implementation |
-|-----|-------------------|--------------------------|
-| **Geographic Risk** | Which 3-digit ZIP codes have the highest readmission rate vs total cost? | SQL aggregation (GROUP BY ZIP prefix) + Scatter Plot visualization in Power BI |
-| **Clinical Drivers** | Which clinical conditions drive the highest volume of 30-day readmissions? | T-SQL GROUP BY on CONDITION_OCCURRENCE + Horizontal Bar Chart |
-| **Coverage Gap** | Where does insurance coverage drop off for catastrophic care cases? | DAX `PERCENTILE.INC` logic to identify Top 10% spenders + Stacked Bar visualization |
-| **Readmission Proxy** | What is the true 30-day readmission rate across encounters? | T-SQL CTE using `LEAD()` window function and self-join logic for temporal encounter matching |
+* Loads Parquet staging data
+* Strips `urn:uuid:` prefixes
+* Applies deterministic hashing
+* Aligns to OMOP v5.4 schema
+* Loads data into Azure SQL
 
 ---
 
-## 🗂️ Repository Structure
+## 4️⃣ Deploy Semantic Views
 
-```plaintext
+Run:
+
+```bash
+# Execute via Azure Data Studio or sqlcmd
+sql/06_semantic_views.sql
+```
+
+This creates optimized reporting views for BI consumption.
+
+---
+
+# ⚡ Key Engineering Decisions & Data Infrastructure Solutions
+
+---
+
+## 1️⃣ Deterministic UUID Hashing
+
+### Problem
+
+FHIR bundles contain inconsistent ID formats:
+
+* `urn:uuid:1234-abc`
+* `1234-abc`
+
+This caused:
+
+* Silent join failures
+* Broken foreign key relationships
+* Inconsistent person linking across claims and encounters
+
+### Solution
+
+Implemented a deterministic hashing strategy in Python:
+
+* Strip `urn:uuid:` prefixes
+* Normalize UUID strings
+* Hash consistently into fixed-length integers
+
+This guaranteed:
+
+* Referential integrity across all OMOP tables
+* Stable joins between PERSON, VISIT_OCCURRENCE, CONDITION_OCCURRENCE, and COST
+* Elimination of silent join mismatches
+
+---
+
+## 2️⃣ Push-Down Compute & Defensive SQL (Eliminating Cartesian Explosions)
+
+### Problem
+
+Initial semantic views joined multiple many-to-many tables directly:
+
+* Encounters × Conditions × Costs
+
+This produced:
+
+* Massive row multiplication
+* Memory timeouts
+* BI query latency
+
+### Solution
+
+Refactored architecture using:
+
+* Common Table Expressions (CTEs)
+* Pre-aggregation to `person_id` grain
+* Window functions for readmission logic
+* Conditional aggregation before final joins
+
+### Result
+
+* Query execution time reduced from timeout → under 1 second
+* Stable Power BI DirectQuery performance
+* Clean patient-level aggregation without duplication
+
+---
+
+# 📊 Executive KPIs & DAX Implementation
+
+The Power BI dashboard sits on top of the SQL semantic layer and uses the following measures.
+
+---
+
+## 💰 Financial Metrics
+
+```DAX
+Total Spend = 
+SUM('vw_patient_summary'[total_spend])
+
+Total Out of Pocket = 
+SUM('vw_patient_summary'[total_oop])
+
+Patient Burden % = 
+DIVIDE(
+    [Total Out of Pocket], 
+    [Total Spend], 
+    0
+)
+```
+
+---
+
+## 📈 Cohort & Operational Metrics
+
+```DAX
+High Cost Patient Count = 
+CALCULATE(
+    COUNT('vw_high_cost_patients'[patient_token]),
+    'vw_high_cost_patients'[cost_category] = "High Cost (Top 10%)"
+)
+
+Total Encounters = 
+SUM('vw_patient_summary'[total_encounters])
+
+30-Day Readmissions = 
+COUNTROWS(
+    FILTER(
+        'vw_readmissions', 
+        'vw_readmissions'[days_between] <= 30 &&
+        'vw_readmissions'[days_between] > 0
+    )
+)
+
+Readmission Rate % = 
+DIVIDE(
+    [30-Day Readmissions], 
+    [Total Encounters], 
+    0
+)
+```
+
+---
+
+# 🗂️ Repository Structure
+
+```
 HEALTHCARE-FHIR-PIPELINE/
 ├── src/
-│   ├── 03_fhir_parser.py                # Schema-on-read JSON generator
-│   ├── 04_upload_to_azure.py            # Blob storage orchestration
-│   ├── 05_load_to_sql.py                # Parquet to Azure SQL OMOP load
-│   ├── 07_production_scaling.py         # ADF Incremental load config
-│   └── parse_claims.py                  # Financial extraction logic
+│   └── 05_load_to_sql.py
+│        # Core ETL: Parquet → Azure SQL OMOP load & deterministic hashing
+│
 ├── sql/
-│   ├── 06_semantic_views.sql            # Star schema abstraction views
-│   ├── 07_kpi_analysis.sql              # Core KPI queries
-│   └── 08_incremental_load_architecture.sql # High-watermark MERGE logic
-├── docs/
-│   ├── data_dictionary.md               # Star schema definitions
-│   └── hipaa_safeharbor_checklist.md    # 45 CFR §164.514(b) compliance
+│   └── 06_semantic_views.sql
+│        # Optimized CTE-based reporting views
+│
 ├── dashboard/
-│   └── 08_healthcare_risk_dashboard.pbix # Power BI Executive Report
+│   └── healthcare_omop_dashboard.pbix
+│        # Executive Power BI report
+│
 ├── requirements.txt
 ├── .env.example
-└── .gitignore                           # Strict exclusion of data/ and .env
+└── .gitignore
+     # Strict exclusion of data/ and .env
 ```
 
 ---
 
-## ⚠️ Data Notice
+# 🔐 Data Notice
 
-All data in this project is **fully synthetic**, generated by Synthea. No real patient data was processed or stored. De-identification was applied strictly as a demonstration of enterprise HIPAA compliance.
+All data in this project is fully synthetic and generated using **Synthea**.
+
+* No real patient data was processed.
+* No PHI or HIPAA-regulated information is stored.
+* This project is strictly for educational and portfolio purposes.
+
+---
+
+# 🎯 What This Project Demonstrates
+
+* Deep understanding of healthcare data standards (FHIR → OMOP)
+* Deterministic ID engineering for referential integrity
+* Performance optimization via SQL push-down compute
+* Defensive query design to prevent row explosions
+* Executive-facing KPI modeling
+* End-to-end ownership: ingestion → modeling → BI
+
+---
+
+**Author:** Pratyusha Adibhatla
+**Focus:** Healthcare Data Engineering | Clinical Risk Analytics | Cloud-Native SQL Architecture
+
+---
+
+```
+```
