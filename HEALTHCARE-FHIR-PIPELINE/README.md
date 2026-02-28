@@ -322,8 +322,3 @@ All data in this project is fully synthetic and generated using [**Synthea**](ht
 **Author:** Pratyusha Adibhatla
 
 **Focus:** Healthcare Data Engineering | Clinical Risk Analytics | Cloud-Native SQL Architecture
-
----
-
-```
-```
