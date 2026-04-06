@@ -3,7 +3,8 @@ import pymssql
 import hashlib
 from azure.storage.blob import BlobServiceClient
 from werkzeug.utils import secure_filename
-from datetime import datetime, timezone  # <--import with standard datetime
+from datetime import datetime
+import tzlocal  # <-- New import for dynamic timezone detection
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -32,27 +33,26 @@ class BronzeService:
         """
         if user_full_name and user_full_name.strip():
             first_name = user_full_name.strip().split()[0].lower()
-            # Remove special chars
             return ''.join(c for c in first_name if c.isalnum())
-        # Fallback: use email prefix
         return user_email.split('@')[0].lower().replace('.', '_')
 
     def process_upload(self, file_obj, dataset_name, user_email,
                        user_id, user_full_name):
         """
         Process a single file upload.
-
-        BLOB PATH:  pratyusha/radar0/0001.csv
-        SQL RECORD: filename=0001.csv, researcher=Pratyusha Adibhatla,
-                    blob_path=pratyusha/radar0/0001.csv, upload_time=UTC
         """
         filename      = secure_filename(file_obj.filename)
-        # Capture the exact, raw UTC time of ingestion
-        upload_time   = datetime.now(timezone.utc) 
+        
+        # ── Capture the RAW local time and timezone ──
+        raw_local_time = datetime.now()
+        try:
+            local_tz_string = str(tzlocal.get_localzone())
+        except:
+            local_tz_string = 'America/New_York'  # Safe fallback 
+            
         ext           = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'unknown'
         researcher    = self._get_researcher_name(user_email, user_full_name)
 
-        # ── Blob path: pratyusha/radar0/0001.csv
         if dataset_name in ('Default_Dataset', '', None):
             blob_path    = f"{researcher}/{filename}"
             display_folder = None
@@ -99,7 +99,6 @@ class BronzeService:
         cursor = conn.cursor()
 
         try:
-            # Check duplicate
             cursor.execute(
                 "SELECT id, filename FROM bronze_files WHERE file_hash = %s",
                 (final_hash,)
@@ -109,7 +108,7 @@ class BronzeService:
                 print(f"⚠️  Duplicate: {filename} matches {existing['filename']}")
                 return True, f"Skipped duplicate: {filename}"
 
-            # Insert bronze record using UTC
+            # ── Insert using the RAW time and dynamic timezone ──
             cursor.execute("""
                 INSERT INTO bronze_files (
                     filename,
@@ -121,7 +120,7 @@ class BronzeService:
                     user_id,
                     dataset_name,
                     dataset_folder,
-                    upload_time_utc,
+                    raw_upload_time,      
                     upload_timezone,
                     processing_status,
                     researcher_name,
@@ -129,7 +128,7 @@ class BronzeService:
                 ) VALUES (
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
-                    'UTC', 'raw', %s, %s
+                    %s, 'raw', %s, %s
                 )
             """, (
                 filename,
@@ -141,16 +140,17 @@ class BronzeService:
                 user_id,
                 display_folder or 'root',
                 blob_path,
-                upload_time,
+                raw_local_time,   # Updated variable
+                local_tz_string,  # Updated variable
                 user_full_name,  
                 user_email       
             ))
 
-            # Get new ID
             cursor.execute("SELECT SCOPE_IDENTITY() AS id")
             bronze_id = cursor.fetchone()['id']
 
-            # Insert lineage using UTC
+            # Note: Assuming you kept the column name 'upload_time_utc' in your data_lineage table, 
+            # we are still passing the raw time into it here.
             cursor.execute("""
                 INSERT INTO data_lineage (
                     bronze_file_id,
@@ -158,7 +158,7 @@ class BronzeService:
                     source_file_path,
                     source_researcher,
                     source_researcher_email,
-                    upload_time_utc,
+                    upload_time_utc,     
                     transformation_type,
                     status
                 ) VALUES (%s, %s, %s, %s, %s, %s, 'ingestion', 'success')
@@ -168,7 +168,7 @@ class BronzeService:
                 blob_path,
                 user_full_name,
                 user_email,
-                upload_time
+                raw_local_time   # Passed raw time to lineage table
             ))
 
             conn.commit()
@@ -183,9 +183,12 @@ class BronzeService:
             conn.close()
 
     def get_user_files(self, user_id):
-        """Get files grouped by folder for the current user"""
         conn   = self.get_db_connection()
         cursor = conn.cursor()
+        
+        # Print to terminal so we can see who we are asking for!
+        print(f"🔍 Searching Azure for files belonging to User ID: {user_id}")
+        
         cursor.execute("""
             SELECT
                 filename,
@@ -194,6 +197,7 @@ class BronzeService:
                 file_path,
                 dataset_name,
                 upload_time_utc,
+                upload_timezone,
                 researcher_name,
                 researcher_email
             FROM bronze_files
@@ -201,12 +205,20 @@ class BronzeService:
               AND is_deleted = 0
             ORDER BY upload_time_utc DESC
         """, (user_id,))
+        
         results = cursor.fetchall()
+        
+        # Grab the column names (e.g., 'filename', 'file_size')
+        dict_results = []
+        for row in results:
+            dict_results.append(dict(row))
+            
+        print(f"📦 Successfully parsed {len(dict_results)} files!")
+        
         conn.close()
-        return results
+        return dict_results
 
     def get_all_files_for_admin(self):
-        """Admin view - all researchers' files with full lineage"""
         conn   = self.get_db_connection()
         cursor = conn.cursor()
         cursor.execute("""
@@ -216,7 +228,8 @@ class BronzeService:
                 b.file_path,
                 b.file_extension,
                 b.dataset_name,
-                b.upload_time_utc,
+                b.raw_upload_time,
+                b.upload_timezone,
                 b.researcher_name,
                 b.researcher_email,
                 l.transformation_type,
@@ -224,7 +237,7 @@ class BronzeService:
             FROM bronze_files b
             LEFT JOIN data_lineage l ON b.id = l.bronze_file_id
             WHERE b.is_deleted = 0
-            ORDER BY b.upload_time_utc DESC
+            ORDER BY b.raw_upload_time DESC
         """)
         results = cursor.fetchall()
         conn.close()

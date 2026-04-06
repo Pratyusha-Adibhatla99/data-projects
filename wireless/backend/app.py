@@ -1,12 +1,22 @@
+import os
+from datetime import datetime, timedelta, timezone
+from azure.storage.blob import generate_blob_sas, BlobSasPermissions
+from sqlalchemy import text
+import sys
+from sqlalchemy import text 
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 from flask_login import LoginManager, login_required, current_user
 from dotenv import load_dotenv
-import os, sys, subprocess, re, time
+import re, time, subprocess
 
 # 1. Import the neutral db instance
 from backend.models.db import db
-
+print("🟢 APP DB ID:", id(db))
 def create_app():
     """Application Factory to prevent Circular Imports and RuntimeErrors"""
     app = Flask(__name__, static_folder='../frontend')
@@ -40,16 +50,17 @@ def create_app():
 )
 
 # Robust CORS to handle pre-flight OPTIONS requests
+   
     CORS(app, 
      supports_credentials=True, 
-     origins=["http://localhost:5001", "http://127.0.0.1:5001", "https://0.0.0.1:5001"],
+     origins=[
+         "http://localhost:5173", 
+         "http://127.0.0.1:5173", 
+         "http://localhost:5001"
+     ],
      allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
      methods=["GET", "POST", "OPTIONS"])
     db.init_app(app)
-
-    # --- CORS FIX ---
-    # Moved inside create_app to ensure credentials (cookies) are permitted
-    # Replace the existing CORS line with this:
     
 
     # 3. Register Blueprints and Handlers within App Context
@@ -120,32 +131,60 @@ def upload_file():
         'errors': errors
     })
 
+
+
 @app.route('/api/files', methods=['GET'])
 @login_required
-def get_my_files():
+def get_files():
     try:
-        # 1. Fetch from the database
-        files = bronze_service.get_user_files(current_user.id)
+        # 1. Fetch YOUR personal upload history (Bronze & Silver)
+        my_query = text("SELECT * FROM bronze_files WHERE user_id = :uid")
+        my_result = db.session.execute(my_query, {"uid": current_user.id}).fetchall()
         
-        # 2. Fix the Datetime Serialization Crash
-        for f in files:
-            # Convert datetime objects to strings so JSON can read them
-            if 'upload_time_pst' in f and f['upload_time_pst']:
-                f['upload_time_pst'] = str(f['upload_time_pst'])
-                
-        # 3. Send safely to frontend
-        return jsonify({'success': True, 'files': files})
+        my_files = []
+        for row in my_result:
+            my_files.append({
+                'id': getattr(row, 'id', 0),
+                'filename': getattr(row, 'filename', 'Unknown'),
+                'file_path': getattr(row, 'file_path', ''),
+                'file_size': getattr(row, 'file_size', 0),
+                'raw_upload_time': str(row.raw_upload_time) if getattr(row, 'raw_upload_time', None) else None,
+                'dataset_name': getattr(row, 'dataset_name', 'Default_Dataset'),
+                'processing_status': getattr(row, 'processing_status', 'unprocessed'),
+                'sensor_type': getattr(row, 'sensor_type', 'Uncategorized')
+            })
+
+        # 2. Fetch the LAB'S global processed data (Only Silver, from EVERYONE)
+        lab_query = text("""
+            SELECT f.*, u.full_name as uploader_name 
+            FROM bronze_files f
+            JOIN users u ON f.user_id = u.id
+            WHERE f.processing_status = 'silver_processed'
+        """)
+        lab_result = db.session.execute(lab_query).fetchall()
+        
+        lab_files = []
+        for row in lab_result:
+            lab_files.append({
+                'id': getattr(row, 'id', 0),
+                'filename': getattr(row, 'filename', 'Unknown'),
+                'file_path': getattr(row, 'file_path', ''),
+                'file_size': getattr(row, 'file_size', 0),
+                'raw_upload_time': str(row.raw_upload_time) if getattr(row, 'raw_upload_time', None) else None,
+                'dataset_name': getattr(row, 'dataset_name', 'Default_Dataset'),
+                'processing_status': getattr(row, 'processing_status', 'silver_processed'),
+                'sensor_type': getattr(row, 'sensor_type', 'Uncategorized'),
+                'uploader_name': getattr(row, 'uploader_name', 'Unknown User') # Tell React who uploaded it!
+            })
+            
+        # Send both lists back to React
+        return jsonify({'success': True, 'my_files': my_files, 'lab_files': lab_files})
         
     except Exception as e:
-        print(f"Error fetching files: {e}")
-        # Always return a valid 'files' array, even on error, to prevent frontend crashes
-        return jsonify({'success': False, 'error': str(e), 'files': []})
-
-# ... (rest of your routes)
+        print(f"❌ CRITICAL SQL ERROR in /api/files: {e}")
+        return jsonify({'success': False, 'error': str(e), 'my_files': [], 'lab_files': []})
 # --- IMPORTS FOR ANALYSIS ---
 from backend.processors.pcd_processor import PCDProcessor
-# Assuming you have a mat_processor.py for .mat files
-# from backend.processors.mat_processor import WirelessDataProcessor 
 import tempfile
 
 from flask import request, jsonify
@@ -200,7 +239,80 @@ def analyze_dataset():
     except Exception as e:
         print(f"Analysis Route Error: {e}")
         return jsonify({'success': False, 'error': str(e)})
-    
+@app.route('/api/download', methods=['GET'])
+@login_required
+def generate_download_link():
+    try:
+        file_path = request.args.get('path')
+        if not file_path:
+            return jsonify({"success": False, "error": "No file path provided"}), 400
+
+        # 1. 🚨 THE UCSD SECURITY GATE 🚨
+        # current_user automatically holds the logged-in user's data!
+        user_email = current_user.email.lower()
+        if not user_email.endswith('@ucsd.edu'):
+            return jsonify({
+                "success": False, 
+                "error": f"Access Denied. {user_email} is not an authorized @ucsd.edu researcher account."
+            }), 403
+
+        # 2. Log the download in Azure SQL using SQLAlchemy
+        try:
+            log_query = text("""
+                INSERT INTO download_logs (user_id, file_path, download_time_utc) 
+                VALUES (:uid, :path, GETUTCDATE())
+            """)
+            db.session.execute(log_query, {"uid": current_user.id, "path": file_path})
+            db.session.commit()
+            print(f"✅ LOG: UCSD User {user_email} downloaded {file_path}")
+        except Exception as log_err:
+            print(f"⚠️ Warning: Could not log download (did you create the table?): {log_err}")
+            db.session.rollback() # Prevent the database from locking up
+
+        # 3. Generate the 1-hour SAS Token for Azure
+        account_name = os.getenv("AZURE_ACCOUNT_NAME") 
+        account_key = os.getenv("AZURE_ACCOUNT_KEY")
+        container_name = "bronze" # Make sure this matches your container!
+
+        sas_token = generate_blob_sas(
+            account_name=account_name,
+            container_name=container_name,
+            blob_name=file_path,
+            account_key=account_key,
+            permission=BlobSasPermissions(read=True),
+            expiry=datetime.now(timezone.utc) + timedelta(hours=1) 
+        )
+
+        sas_url = f"https://{account_name}.blob.core.windows.net/{container_name}/{file_path}?{sas_token}"
+
+        return jsonify({"success": True, "download_url": sas_url})
+
+    except Exception as e:
+        print(f"❌ Download Error: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+from backend.models.user import User # Make sure User is imported!
+
+@app.route('/api/users', methods=['GET'])
+@login_required
+def get_all_users():
+    try:
+        # Fetch all users from the Azure SQL database
+        users = User.query.all()
+        
+        # Package them securely (never send passwords to the frontend!)
+        user_list = [{
+            'id': u.id,
+            'full_name': u.full_name,
+            'email': u.email,
+            'institution': u.institution,
+            'is_admin': getattr(u, 'is_admin', False) 
+        } for u in users]
+        
+        return jsonify({'success': True, 'users': user_list})
+    except Exception as e:
+        print(f"Error fetching users: {e}")
+        return jsonify({'success': False, 'error': 'Database connection failed'}), 500  
 if __name__ == '__main__':
     print("🚀 Wireless Platform (Cloud-Ready) Running on http://0.0.0.0:5001")
     app.run(host='0.0.0.0', port=5001, debug=True)

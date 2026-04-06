@@ -8,20 +8,26 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class CSVProcessor:
-    def __init__(self, blob_path):
-        self.blob_path = blob_path # This is now the Azure path (e.g., pratyusha/000004.csv)
-        self.filename = os.path.basename(blob_path)
+    def __init__(self, file_path):
+        self.file_path = file_path
+        self.filename = os.path.basename(file_path)
         self.df = None
-        self.local_temp_path = None
+        
+        # Smart Pathing: Detect if it's already a local file or an Azure blob path
+        if os.path.exists(self.file_path):
+            self.local_temp_path = self.file_path
+            self.needs_cleanup = False # The app.py Janitor handles cleanup
+        else:
+            self.local_temp_path = None
+            self.needs_cleanup = True  # We will download it, so we must clean it up
 
     def _download_from_azure(self):
         """Pulls the file from Azure to a temporary location for Pandas to read."""
         if not self.local_temp_path:
             bsc = BlobServiceClient.from_connection_string(os.getenv('AZURE_STORAGE_CONNECTION_STRING'))
             container_name = os.getenv('BRONZE_CONTAINER_NAME', 'bronze-layer')
-            blob_client = bsc.get_blob_client(container=container_name, blob=self.blob_path)
+            blob_client = bsc.get_blob_client(container=container_name, blob=self.file_path)
             
-            # Create a safe temp file on the Mac
             temp_dir = tempfile.gettempdir()
             self.local_temp_path = os.path.join(temp_dir, self.filename)
             
@@ -31,9 +37,12 @@ class CSVProcessor:
 
     def __del__(self):
         """Automatically cleans up the temp file when analysis is done."""
-        if self.local_temp_path and os.path.exists(self.local_temp_path):
-            os.remove(self.local_temp_path)
-            print(f"🧹 Cleaned up temp file: {self.local_temp_path}")
+        if getattr(self, 'needs_cleanup', False) and self.local_temp_path and os.path.exists(self.local_temp_path):
+            try:
+                os.remove(self.local_temp_path)
+                print(f"🧹 Cleaned up temp file: {self.local_temp_path}")
+            except Exception:
+                pass
 
     def get_metadata(self):
         """Bridge method for the Frontend."""
@@ -49,19 +58,20 @@ class CSVProcessor:
                 }
                 
             return {
+                'success': True,
                 'filename': self.filename,
                 'file_type': 'CSV (Smart Analysis)',
                 'variables': variables
             }
         except Exception as e:
-            return {'error': str(e)}
+            return {'success': False, 'error': str(e)}
 
     def read_file(self):
-        self._download_from_azure() # Ensure file is downloaded first
+        if not self.local_temp_path:
+            self._download_from_azure() 
         
         for sep in [',', ';', '\t', '|']:
             try:
-                # Use the local_temp_path instead of the old filepath
                 self.df = pd.read_csv(self.local_temp_path, sep=sep, engine='python')
                 if len(self.df.columns) == 1 and sep == ',':
                     continue
@@ -70,8 +80,6 @@ class CSVProcessor:
             except Exception:
                 continue
         raise ValueError(f"Could not parse {self.filename}")
-
-    # --- YOUR DYNAMIC LOGIC REMAINS EXACTLY THE SAME BELOW THIS LINE ---
 
     @staticmethod
     def _classify_column(series):
@@ -92,7 +100,7 @@ class CSVProcessor:
 
         if series.dtype == object:
             try:
-                pd.to_datetime(series.head(20), infer_datetime_format=True)
+                pd.to_datetime(series.head(20), format='mixed', errors='ignore')
                 return 'timestamp'
             except (ValueError, TypeError):
                 pass
@@ -174,7 +182,6 @@ class CSVProcessor:
 
         metadata = {
             'filename': self.filename,
-            # Use the local temp file to get the correct size
             'file_size': os.path.getsize(self.local_temp_path), 
             'file_type': 'CSV',
             'num_rows': int(len(self.df)),
@@ -211,3 +218,9 @@ def _safe_serialize(val):
     if isinstance(val, (np.bool_,)):
         return bool(val)
     return str(val)
+
+# --- HELPER FUNCTION FOR APP.PY ROUTING ---
+def process_csv(file_path):
+    """Wrapper function so app.py can call this easily."""
+    processor = CSVProcessor(file_path)
+    return processor.get_metadata()

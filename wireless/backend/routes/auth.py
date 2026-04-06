@@ -1,9 +1,10 @@
 from flask import Blueprint, request, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user, LoginManager
+from sqlalchemy import text
 from backend.models.db import db 
 from backend.models.user import User
-
+print("🔴 AUTH DB ID:", id(db))
 # Initialize Blueprint and LoginManager
 auth_bp = Blueprint('auth', __name__)
 login_manager = LoginManager()
@@ -33,6 +34,8 @@ def login():
         })
     
     return jsonify({'success': False, 'error': 'Invalid credentials'}), 401
+
+
 
 @auth_bp.route('/api/register', methods=['POST'])
 def register():
