@@ -3,6 +3,8 @@ import type { User, WirelessFile } from '../../Types';
 import { useFiles } from '../../hooks/useFiles';
 import UploadZone from '../Upload/UploadZone';
 import MetadataModal from './MetadataModal';
+// 🔧 NEW FIX 1: Import the API service
+import api from '../../Services/api'; 
 
 interface DashboardProps {
     user: User;
@@ -20,7 +22,6 @@ const UCSD = {
 };
 
 export default function Dashboard({ user, setUser }: DashboardProps) {
-    // 1 & 2: The New Hook Integration
     const { groupedFiles, loading, loadFiles, currentTab } = useFiles();
     const [isLaunchingJupyter, setIsLaunchingJupyter] = useState(false);
     
@@ -41,6 +42,28 @@ export default function Dashboard({ user, setUser }: DashboardProps) {
             window.open('http://localhost:8888/lab', '_blank');
             setIsLaunchingJupyter(false);
         }, 1000);
+    };
+
+    // 🔧 NEW FIX 2: The actual function to hit your Flask backend
+    const handleRealAnalyze = async (file: any) => {
+        try {
+            setAnalyzingFileId(file.id);
+            console.log("Sending request to analyze:", file.file_path);
+            
+            // Call your actual API
+            const response = await api.analyzeFile(file.file_path);
+            
+            // Put the results in the modal state and open it
+            setSelectedMetadata(response); 
+            setSelectedFilename(file.filename);
+            setIsModalOpen(true);
+            
+        } catch (error) {
+            console.error("Failed to analyze file:", error);
+            alert("Error analyzing file. Check the browser console or Flask terminal.");
+        } finally {
+            setAnalyzingFileId(null);
+        }
     };
 
     // --- RENDER ---
@@ -70,7 +93,7 @@ export default function Dashboard({ user, setUser }: DashboardProps) {
             {/* Upload Zone */}
             <UploadZone onUploadSuccess={() => loadFiles(currentTab)} />
 
-            {/* 3. The New Tabs */}
+            {/* Tabs */}
             <div style={{ display: 'flex', gap: '8px', marginTop: '30px', borderBottom: `2px solid ${UCSD.Navy}` }}>
                 <button onClick={() => loadFiles('mydata')} style={tabStyle(currentTab === 'mydata', UCSD.Navy)}>🗂️ My Data (Raw)</button>
                 <button onClick={() => loadFiles('wifi')} style={tabStyle(currentTab === 'wifi', UCSD.Gold)}>📡 WiFi (Silver)</button>
@@ -79,7 +102,7 @@ export default function Dashboard({ user, setUser }: DashboardProps) {
                 <button onClick={() => loadFiles('gold')} style={tabStyle(currentTab === 'gold', UCSD.Teal)}>✨ ML Ready (Gold)</button>
             </div>
 
-            {/* Workspace Area - Drastically simplified because groupedFiles handles the sorting! */}
+            {/* Workspace Area */}
             <div style={{ background: 'white', padding: '24px', border: `1px solid #e2e8f0`, borderTop: 'none', minHeight: '400px' }}>
                 
                 {loading ? ( <p style={emptyStateStyle}>Fetching data from Azure...</p> ) : 
@@ -98,10 +121,13 @@ export default function Dashboard({ user, setUser }: DashboardProps) {
                                 title={currentTab === 'mydata' ? `📁 ${groupName}` : `📅 Uploaded on: ${groupName}`} 
                                 files={fList} 
                                 isSilver={currentTab !== 'mydata'} 
+                                // 🔧 NEW FIX 3: Pass the function down to the FolderBlock
+                                onAnalyze={handleRealAnalyze} 
                                 setAnalyzingFileId={setAnalyzingFileId} 
                                 setIsModalOpen={setIsModalOpen} 
                                 setSelectedMetadata={setSelectedMetadata} 
                                 setSelectedFilename={setSelectedFilename} 
+                                analyzingFileId={analyzingFileId} // Passing this to show a loading state on the button
                             />
                         ))
                 )}
@@ -129,8 +155,8 @@ const tabStyle = (isActive: boolean, activeColor: string) => ({
 
 const emptyStateStyle = { textAlign: 'center' as const, padding: '40px', color: '#64748b', background: '#f8fafc', borderRadius: '8px' };
 
-// Reusable "Folder" Block for grouping files
-const FolderBlock = ({ title, files, isSilver, setAnalyzingFileId, setIsModalOpen, setSelectedMetadata, setSelectedFilename }: any) => (
+// 🔧 NEW FIX 4: Accept the onAnalyze function and analyzingFileId in props
+const FolderBlock = ({ title, files, isSilver, onAnalyze, analyzingFileId }: any) => (
     <div style={{ marginBottom: '24px', border: '1px solid #e2e8f0', borderRadius: '8px', overflow: 'hidden' }}>
         <div style={{ background: UCSD.LightGray, padding: '12px 16px', fontWeight: 'bold', color: UCSD.Navy, borderBottom: '1px solid #e2e8f0' }}>
             {title} <span style={{ marginLeft: '8px', fontSize: '12px', background: '#e2e8f0', padding: '2px 8px', borderRadius: '12px', color: '#64748b' }}>{files.length} items</span>
@@ -156,7 +182,23 @@ const FolderBlock = ({ title, files, isSilver, setAnalyzingFileId, setIsModalOpe
                         </div>
                     </div>
                     <div style={{ display: 'flex', gap: '8px' }}>
-                        <button onClick={() => alert('Connect to Flask API for Analyze')} style={{ cursor: 'pointer', background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '4px', padding: '6px 12px' }}>🔍 Analyze</button>
+                        
+                        {/* 🔧 NEW FIX 5: Wire the button to the function and pass the specific file */}
+                        <button 
+                            onClick={() => onAnalyze(file)} 
+                            disabled={analyzingFileId === file.id}
+                            style={{ 
+                                cursor: analyzingFileId === file.id ? 'wait' : 'pointer', 
+                                background: '#f1f5f9', 
+                                border: '1px solid #cbd5e1', 
+                                borderRadius: '4px', 
+                                padding: '6px 12px',
+                                opacity: analyzingFileId === file.id ? 0.5 : 1
+                            }}
+                        >
+                            {analyzingFileId === file.id ? '⏳ Analyzing...' : '🔍 Analyze'}
+                        </button>
+
                         <button onClick={() => alert('Connect to Flask API for Download')} style={{ cursor: 'pointer', background: '#eff6ff', color: UCSD.Navy, border: `1px solid ${UCSD.Navy}`, borderRadius: '4px', padding: '6px 12px', fontWeight: 'bold' }}>⬇️ Download</button>
                     </div>
                 </div>
